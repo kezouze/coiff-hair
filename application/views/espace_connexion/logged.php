@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connected</title>
+    <link rel="stylesheet" href="/code_igniter_arthur/assets/css/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h3>Bienvenue <?= ucfirst($_SESSION['pseudo']) ?> sur votre espace personnel !</h3>
+        <p>Vous avez <?= (count($all_rdv)) ?> rendez-vous à venir :</p>
+        <ul>
+            <?php foreach ($all_rdv as $rdv) { ?>
+                <div class="ligne">
+                    <li>Le <?= $rdv->date_rendez_vous . ' à ' . $rdv->heure_rendez_vous . '. <br>Détails : ' . $rdv->details_rendez_vous ?></li>
+                    <a href="/code_igniter_arthur/Users/delete_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img class="icone_suppr" src="/code_igniter_arthur/assets/images/supprimer.png" alt="icone_supprimer"></a>
+                </div>
+            <?php } ?>
+        </ul>
+        <?php if ((count($all_rdv)) < 3) { ?>
+            <a href="/code_igniter_arthur/Users/rendez_vous">Prendre un rendez-vous</a>
+        <?php } else { ?>
+            <p>Vous avez atteint le nombre maximum de rendez-vous.</p>
+        <?php } ?>
+        <a style="color:red" href="/code_igniter_arthur/Users/deconnect">Se déconnecter</a>
+    </div>
+</body>
+</html>

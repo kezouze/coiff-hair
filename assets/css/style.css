@@ -1,0 +1,105 @@
+@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300&family=Oswald&display=swap');
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    text-align: center;
+    font-family: 'Comic Neue', sans-serif;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    height:100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    /* background-color: lightgreen; */
+    background: hsla(169, 76%, 48%, 1);
+    background: linear-gradient(90deg, hsla(169, 76%, 48%, 1) 0%, hsla(67, 87%, 82%, 1) 100%);
+    background: -moz-linear-gradient(90deg, hsla(169, 76%, 48%, 1) 0%, hsla(67, 87%, 82%, 1) 100%);
+    background: -webkit-linear-gradient(90deg, hsla(169, 76%, 48%, 1) 0%, hsla(67, 87%, 82%, 1) 100%);
+    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#1ED7B5", endColorstr="#F0F9A7", GradientType=1);
+}
+
+.container {
+    min-width: 500px;
+    height: 500px;
+    /* background-color :rgba(0, 0, 0, 0.3); */
+    background: rgba(252,255,255, 0.4);
+    backdrop-filter: blur(5px);
+    border: 3px solid darkslategray;
+    /* box-shadow: 15px 15px 15px 5px rgba(18, 112, 30, 0.75); */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+h1,
+h2,
+h3,
+h4,
+p,
+i {
+    color: rgb(33, 35, 30);
+}
+
+.error {
+   color : red;
+   height: 18px;
+}
+
+.valid {
+    color:rgb(33, 35, 30);
+    height: 18px;
+}
+
+.info {
+    color: rgb(217, 235, 15);
+    height: 18px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+}
+
+input {
+    width: 200px;
+    height: 30px;
+    border: 2px solid darkslategray;
+}
+
+input[type="submit"] {
+    border: none; 
+    width : 110px;
+    border: 2px solid darkslategray;
+}
+
+#icone {
+    width : 65px;
+}
+
+.icone_suppr {
+    width : 35px;
+}
+
+ul {
+    list-style-position: inside;
+}
+
+.ligne {
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+}
