@@ -34,6 +34,7 @@ class Rendez_vous_model extends CI_Model
             ->from($this->tableName)
             ->where('id_user', $id_user)
             ->order_by('date_rendez_vous', 'ASC')
+            ->order_by('heure_rendez_vous', 'ASC')
             ->get()
             ->result();
         return $query;
