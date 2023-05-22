@@ -19,8 +19,6 @@
             <textarea placeholder="Racontez-nous votre vie.." name="details" cols="29" rows="5"></textarea>
             <input type="submit" value="Réserver">
         </form>
-        <!-- <img id="icone" src="/code_igniter_arthur/assets/images/maintenance.png" alt="maintenance">
-        <h3>En maintenance...</h3> -->
         <?php if (isset($error) || isset($valid)) { ?>
             <p><?= $error ?></p>
             <p><?= $valid ?></p>

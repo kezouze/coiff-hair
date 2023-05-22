@@ -12,14 +12,14 @@
 <body>
     <div class="container">
         <h3>Bienvenue <?= ucfirst($_SESSION['pseudo']) ?> sur votre espace personnel !</h3>
-        <?php if(count($all_rdv) == 0 ) { ?>
+        <?php if (count($all_rdv) == 0) { ?>
             <p>Vous n'avez pas de rendez-vous pour le moment</p>
         <?php } else { ?>
-                    <p>Vous avez <?= (count($all_rdv)) ?> rendez-vous à venir :</p>
-                    <ul>
+            <p>Vous avez <?= (count($all_rdv)) ?> rendez-vous à venir :</p>
+            <ul>
                 <?php foreach ($all_rdv as $rdv) { ?>
                     <div class="ligne">
-                        <li>Le <?= $rdv->date_rendez_vous . ' à ' . $rdv->heure_rendez_vous . '. <br>Détails : ' . $rdv->details_rendez_vous ?></li>
+                        <li>Le <?= date('d-m-Y', strtotime($rdv->date_rendez_vous)) . ' à ' . $rdv->heure_rendez_vous . '. <br>Détails : ' . $rdv->details_rendez_vous ?></li>
                         <a href="/code_igniter_arthur/Users/delete_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img class="icone_suppr" src="/code_igniter_arthur/assets/images/supprimer.png" alt="icone_supprimer"></a>
                     </div>
                 <?php } ?>
@@ -33,4 +33,5 @@
         <a style="color:red" href="/code_igniter_arthur/Users/deconnect">Se déconnecter</a>
     </div>
 </body>
+
 </html>
