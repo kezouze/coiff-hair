@@ -19,7 +19,7 @@
             <ul>
                 <?php foreach ($all_rdv as $rdv) { ?>
                     <div class="ligne">
-                        <li>Le <?= date('d-m-Y', strtotime($rdv->date_rendez_vous)) . ' à ' . $rdv->heure_rendez_vous . '. <br>Détails : ' . $rdv->details_rendez_vous ?></li>
+                        <li>Le <?= date('d/m/Y', strtotime($rdv->date_rendez_vous)) . ' à ' . date('H:i', strtotime($rdv->heure_rendez_vous)) . '. <br>Détails : ' . $rdv->details_rendez_vous ?></li>
                         <a href="/code_igniter_arthur/Users/delete_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img class="icone_suppr" src="/code_igniter_arthur/assets/images/supprimer.png" alt="icone_supprimer"></a>
                     </div>
                 <?php } ?>

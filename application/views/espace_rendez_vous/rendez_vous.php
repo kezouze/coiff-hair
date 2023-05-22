@@ -16,7 +16,7 @@
         <form action="" method="post">
             <input type="date" name="date">
             <input type="time" name="time">
-            <textarea placeholder="Racontez-nous votre vie.." name="details" cols="29" rows="5"></textarea>
+            <textarea placeholder="Racontez-nous votre vie.." maxlength="100" name="details" cols="29" rows="5"></textarea>
             <input type="submit" value="Réserver">
         </form>
         <?php if (isset($error) || isset($valid)) { ?>
