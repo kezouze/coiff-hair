@@ -33,12 +33,14 @@ class Rendez_vous_model extends CI_Model
         $query = $this->db->select('*')
             ->from($this->tableName)
             ->where('id_user', $id_user)
+            ->order_by('date_rendez_vous', 'ASC')
             ->get()
             ->result();
         return $query;
     }
 
-    public function delete_rdv($id_rdv){
+    public function delete_rdv($id_rdv)
+    {
         $this->db->delete($this->tableName, array('id_rendez_vous' => $id_rdv));
     }
 }
