@@ -11,7 +11,7 @@
 
 <body>
     <div class="container">
-        <h3>Bienvenue <?= ucfirst($_SESSION['pseudo']) ?> sur votre espace personnel !</h3>
+        <h3>Bienvenue <?= '<b>' . ucfirst($_SESSION['pseudo']) . '</b>,' ?> sur votre espace personnel !</h3>
         <?php if (count($all_rdv) == 0) { ?>
             <p>Vous n'avez pas de rendez-vous pour le moment</p>
         <?php } else { ?>

@@ -103,3 +103,8 @@ ul {
     justify-content: space-between;
     gap: 25px;
 }
+
+b {
+    font-size: 25px;
+    color: hotpink;
+}
