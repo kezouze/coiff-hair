@@ -25,11 +25,6 @@
         <form action="" method="post">
             <input type="date" name="date" min="<?= $today ?>" max="<?= $aYearLater ?>" value="<?= $today ?>">
             <label for="time">Nous sommes ouverts de 09:00 à 17:30</label>
-
-            <!---------------------- Cela ne va pas pour l'attribut min ------------------------>
-            <!------ <input type="time" name="time" min="09:00" max="$closing" value="10:00"> ----->
-            <!---------------------------------------------------------------------------------->
-
             <select name="time">
                 <option value="09:00">09:00</option>
                 <option value="09:30">09:30</option>
@@ -54,7 +49,7 @@
             <p><?= $error ?></p>
             <p><?= $valid ?></p>
         <?php }
-        // Ajouter un auto-refresh
+        // ajouter un auto-refresh toutes les 10 secondes
         ?>
         <a href="/code_igniter_arthur/Users/logged">Retour</a>
         <a style="color:red" href="/code_igniter_arthur/Users/deconnect">Se déconnecter</a>
