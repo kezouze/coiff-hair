@@ -31,18 +31,21 @@
             <!---------------------------------------------------------------------------------->
 
             <select name="time">
-                <?php
-                $startTime = strtotime('09:00');
-                $endTime = strtotime('17:30');
-
-                while ($startTime <= $endTime) {
-                    $time = date('H:i', $startTime);
-                    // if ($time !== '12:00' && $time !== '12:30') {
-                    echo '<option value="' . $time . '">' . $time . '</option>';
-                    $startTime += 1800; // Ajoute 30 minutes (1800 secondes)
-                    //}
-                }
-                ?>
+                <option value="09:00">09:00</option>
+                <option value="09:30">09:30</option>
+                <option value="10:00">10:00</option>
+                <option value="10:30">10:30</option>
+                <option value="11:00">11:00</option>
+                <option value="11:30">11:30</option>
+                <option value="12:00">12:00</option>
+                <option value="13:30">13:30</option>
+                <option value="14:00">14:00</option>
+                <option value="14:30">14:30</option>
+                <option value="15:00">15:00</option>
+                <option value="15:30">15:30</option>
+                <option value="16:00">16:00</option>
+                <option value="16:30">16:30</option>
+                <option value="17:00">17:00</option>
             </select>
             <textarea placeholder="Racontez-nous votre vie.." maxlength="80" name="details" cols="29" rows="5"></textarea>
             <input type="submit" value="Réserver">
