@@ -11,11 +11,11 @@
 
 <body>
     <div class="container">
-        <h1 style="text-align: center">Bienvenue sur votre espace de connexion !</h1>
+        <h1 style="text-align: center">Bienvenue !</h1>
         <h2>Espace Professionnels</h2>
         <!-- <img id="icone" src="/code_igniter_arthur/assets/images/coiffeur.png" alt="coiffeur"> -->
         <form action="" method="post">
-            <input type="text" name="identifiant" placeholder="Votre identifiant">
+            <input type="text" name="email" placeholder="Votre email">
             <input name="password" placeholder="Mot de passe" type="password">
             <input type="submit" value="Connexion">
         </form>
