@@ -11,8 +11,8 @@
 
 <body>
     <div class="container">
-        <img id="icone" src="/code_igniter_arthur/assets/images/coiffeur.png" alt="coiffeur">
         <h1 style="text-align: center">Bienvenue chez 'Tête en L'Hair' !</h1>
+        <img id="icone" src="/code_igniter_arthur/assets/images/coiffeur.png" alt="coiffeur">
         <h2>Veuillez vous connecter :</h2>
         <form action="" method="post">
             <input type="text" name="identifiant" placeholder="Votre identifiant">
@@ -22,6 +22,7 @@
         <a href="http://[::1]/code_igniter_arthur/Users/forgot_password">Mot de passe oublié ?</a>
         <p class="error"><?= $error ?></p>
         <h4>Ou inscrivez-vous <a href="http://[::1]/code_igniter_arthur/Users/inscription">ici</a> !</h4>
+        <h4><a href="http://[::1]/code_igniter_arthur/Pros">Espace professionnel</a></h4>
     </div>
 </body>
 

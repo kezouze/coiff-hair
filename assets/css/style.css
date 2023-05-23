@@ -26,7 +26,7 @@ body {
 }
 
 .container {
-    min-width: 500px;
+    width: 500px;
     height: 500px;
     /* background-color :rgba(0, 0, 0, 0.3); */
     background: rgba(252,255,255, 0.4);
