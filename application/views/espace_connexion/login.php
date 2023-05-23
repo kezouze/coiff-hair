@@ -11,7 +11,7 @@
 
 <body>
     <div class="container">
-        <h1 style="text-align: center">Bienvenue chez <i>Tête en l'Hair</i> !</h1>
+        <h1 style="text-align: center">Bienvenue chez <i>Va te f'Hair</i> !</h1>
         <img id="icone" src="/code_igniter_arthur/assets/images/coiffeur.png" alt="coiffeur">
         <h2>Veuillez vous connecter :</h2>
         <form action="" method="post">
