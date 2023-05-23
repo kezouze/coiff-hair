@@ -10,13 +10,20 @@
 </head>
 
 <body>
+    <?php
+    $today = date('Y-m-d');
+    $year = 365;
+    $aYearLater = date('Y-m-d', strtotime($today . " + $year days"));
+    $now = date('H:i');
+    $closing = date('17:30');
+    ?>
     <div class="container">
-
         <h2>Nos prochaines disponibilités :</h2>
         <form action="" method="post">
-            <input type="date" name="date">
-            <input type="time" name="time">
-            <textarea placeholder="Racontez-nous votre vie.." maxlength="100" name="details" cols="29" rows="5"></textarea>
+            <input type="date" name="date" min="<?= $today ?>" max="<?= $aYearLater ?>" value="<?= $today ?>">
+            <label for="time">Nous sommes ouverts de 09:00 à 17:30</label>
+            <input type="time" name="time" min="<?= $now ?>" max="<?= $closing ?>" value="10:00">
+            <textarea placeholder="Racontez-nous votre vie.." maxlength="80" name="details" cols="29" rows="5"></textarea>
             <input type="submit" value="Réserver">
         </form>
         <?php if (isset($error) || isset($valid)) { ?>
