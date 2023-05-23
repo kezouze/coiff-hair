@@ -13,14 +13,13 @@
     <div class="container">
         <h1 style="text-align: center">Bienvenue !</h1>
         <h2>Espace Professionnels</h2>
-        <!-- <img id="icone" src="/code_igniter_arthur/assets/images/coiffeur.png" alt="coiffeur"> -->
         <form action="" method="post">
             <input type="text" name="email" placeholder="Votre email">
             <input name="password" placeholder="Mot de passe" type="password">
             <input type="submit" value="Connexion">
         </form>
+        <?= validation_errors(); ?>
         <a href="http://[::1]/code_igniter_arthur/Pros/forgot_password">Mot de passe oublié ?</a>
-        <p class="error"><?= $error ?></p>
         <h4>Ou inscrivez-vous <a href="http://[::1]/code_igniter_arthur/Pros/inscription">ici</a> !</h4>
         <h4><a href="http://[::1]/code_igniter_arthur/Users/">Espace client</a></h4>
     </div>

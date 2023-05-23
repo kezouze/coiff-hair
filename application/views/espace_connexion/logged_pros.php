@@ -1,3 +1,2 @@
-<script>
-    alert('UwU')
-</script>
+<?php
+echo 'lol';
