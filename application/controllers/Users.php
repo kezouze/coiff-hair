@@ -145,6 +145,7 @@ class Users extends CI_Controller
 		redirect('Users');
 	}
 
+	// à adapter en prenant plutôt l'id de l'utilisateur
 	public function forgot_password(/*$code = "" */)
 	{
 		$info['error'] = "";
@@ -184,7 +185,7 @@ class Users extends CI_Controller
 	}
 
 	// On ne devrait pas pouvoir accèder à la page de modif du mot de passe en rentrant de fausse infos
-	public function new_password()
+	public function new_password(/*$code, $email*/)
 	{
 
 		$info['error'] = "";
