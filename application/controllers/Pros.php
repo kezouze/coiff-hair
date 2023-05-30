@@ -23,10 +23,16 @@ class Pros extends CI_Controller
 
     public function logged()
     {
-        $date = date('Y-m-d');
+        $date = date('Y-m-d'); // aujourd'hui 
         $info['all_data'] = $this->Pros_model->get_all_rdv($date);
-        $info['id'] = $info['all_data'][0]->id_user;
+        var_dump($info['all_data']).'<br>';
+        /////////////////////////////////////////////////////////////
+        $info['id'] = $info['all_data'][0]->id_user; // id reste le même ?
+        var_dump($info['id']).'<br>';
+        /////////////////////////////////////////////////////////////
         $info['user'] = $this->Pros_model->get_user($info['id']);
+        var_dump($info['user']).'<br>';
+        /////////////////////////////////////////////////////////////
         $this->load->view('espace_connexion/logged_pros', $info);
     }
 
