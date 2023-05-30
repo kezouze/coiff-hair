@@ -23,6 +23,9 @@ class Pros extends CI_Controller
 
     public function logged()
     {
-        $this->load->view('espace_connexion/logged_pros');
+        $date = date('Y-m-d');
+        $info['all_data'] = $this->Pros_model->get_all_rdv($date);
+        $info['users']
+        $this->load->view('espace_connexion/logged_pros', $info);
     }
 }
