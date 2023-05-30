@@ -15,11 +15,15 @@
         <ul>
         <?php 
             foreach($all_data as $key) { ?>
-                <li>Mme/Mr <?= $key->id_user?> à <?= $key->heure_rendez_vous?> <br>détails : <?= $key->details_rendez_vous?></li>
+                <div class="ligne">
+                <li><?= date('H:i', strtotime($key->heure_rendez_vous))?> : Mme/Mr <?= ucfirst($user[0]->pseudo) ?> 
+                <br>détails : <?= $key->details_rendez_vous?></li>
+                </div>
         <?php
             }
         ?>
         </ul>
+        <a style="color:red" href="/code_igniter_arthur/Pros/deconnect">Se déconnecter</a>
     </div>
 </body>
 </html>

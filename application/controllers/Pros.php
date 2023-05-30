@@ -25,7 +25,14 @@ class Pros extends CI_Controller
     {
         $date = date('Y-m-d');
         $info['all_data'] = $this->Pros_model->get_all_rdv($date);
-        $info['users']
+        $info['id'] = $info['all_data'][0]->id_user;
+        $info['user'] = $this->Pros_model->get_user($info['id']);
         $this->load->view('espace_connexion/logged_pros', $info);
     }
+
+    public function deconnect()
+	{
+		session_destroy();
+		redirect('Pros');
+	}
 }
