@@ -14,12 +14,12 @@
     $today = date('Y-m-d');
     $year = 365;
     $aYearLater = date('Y-m-d', strtotime($today . " + $year days"));
-    $now = date('H:i');
+    // $now = date('H:i'); // à garder ?
     // $closing = date('17:30');
     ?>
     <div class="container">
         <i>
-            <h3>Nous sommes le <?= date('d/m/Y', strtotime($today)) ?> et il est <?= $now ?> </h3>
+            <h3>Nous sommes le <?= date('d/m/Y', strtotime($today)) ?> et il est <span id="horloge" onload="showtime()"></span> </h3>
         </i>
         <h2>Nos prochaines disponibilités :</h2>
         <form action="" method="post">
@@ -54,6 +54,22 @@
         <a href="/code_igniter_arthur/Users/logged">Retour</a>
         <a style="color:red" href="/code_igniter_arthur/Users/deconnect">Se déconnecter</a>
     </div>
+    <script>
+        function showTime(){
+    var date = new Date();
+    var h = date.getHours();
+    var m = date.getMinutes();
+    var s = date.getSeconds();
+    h = (h < 10) ? "0" + h : h;
+    m = (m < 10) ? "0" + m : m;
+    s = (s < 10) ? "0" + s : s;
+    var time = h + ":" + m + ":" + s;
+    document.getElementById("horloge").innerText = time;
+    document.getElementById("horloge").textContent = time;
+    setTimeout(showTime, 1000);
+    }
+    showTime();
+    </script>
 </body>
 
 </html>
