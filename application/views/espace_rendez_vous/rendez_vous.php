@@ -42,7 +42,7 @@
                 <option value="16:30">16:30</option>
                 <option value="17:00">17:00</option>
             </select>
-            <textarea required placeholder="Racontez-nous votre vie.." maxlength="80" name="details" cols="29" rows="5"></textarea>
+            <textarea required placeholder="Renseignez votre nom, prénom puis le but de votre visite" maxlength="80" name="details" cols="29" rows="5"></textarea>
 
             <!-- Le bouton submit doit être désactivé après un seul clic pour éviter les bugs de doublons -->
             <button id="btn_submit" type="submit" onclick="disableBtnSubmit()">Réserver</button>
