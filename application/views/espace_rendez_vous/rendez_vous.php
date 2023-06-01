@@ -29,16 +29,16 @@
         <h2>Nos prochaines disponibilités :</h2>
         <form action="" method="post">
             <input type="date" name="date" min="<?= $tomorrow ?>" max="<?= $aYearLater ?>" value="<?= $tomorrow ?>">
-            <label for="time">Nous sommes ouverts de 09:00 à 17:30</label>
+            <label for="time">Nous sommes ouverts de 09h à 17h30</label>
             <select name="time">
                 <?php foreach($creneaux as $creneau) {
-                    // conditions à rajouter, grosse galère sa mère
-                    // if($creneau > $now) { ?>
+                    // conditions à rajouter, grosse galère sa mère:
+                    // if($date == $today && $creneau > $now) { ?>
                     <option value="<?= $creneau ?>"><?= $creneau ?></option>
                 <?php //} 
                 }?>
             </select>
-            <textarea required placeholder="Renseignez votre nom, prénom puis le but de votre visite" maxlength="80" name="details" cols="29" rows="5"></textarea>
+            <textarea required placeholder="Renseignez votre nom, prénom puis le but de votre visite.." maxlength="80" name="details" cols="29" rows="5"></textarea>
 
             <!-- Le bouton submit devrait être désactivé après un seul clic pour éviter les bugs de doublons. Le required sur input[détails] fait l'affaire pour le moment -->
             <input type="submit" value="Réserver">
