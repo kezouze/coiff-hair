@@ -242,7 +242,7 @@ class Users extends CI_Controller
 				$time = $this->input->post('time');
 				$details = $this->input->post('details');
 				$this->rdvManager->set_new_rendez_vous($info['id_user'], $date, $time, $details);
-				$info['valid'] = "Nous avons bien pris en compte votre demande de rendez-vous";
+				$info['valid'] = "Votre rdv est enregistré, retour à la page précédente..";
 				header('refresh:3; url = http://[::1]/code_igniter_arthur/Users/logged');
 			}
 		}

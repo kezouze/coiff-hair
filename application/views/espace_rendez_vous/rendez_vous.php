@@ -42,37 +42,49 @@
                 <option value="16:30">16:30</option>
                 <option value="17:00">17:00</option>
             </select>
-            <textarea placeholder="Racontez-nous votre vie.." maxlength="80" name="details" cols="29" rows="5"></textarea>
+            <textarea required placeholder="Racontez-nous votre vie.." maxlength="80" name="details" cols="29" rows="5"></textarea>
 
             <!-- Le bouton submit doit être désactivé après un seul clic pour éviter les bugs de doublons -->
-            <input type="submit" value="Réserver">
+            <button id="btn_submit" type="submit" onclick="disableBtnSubmit()">Réserver</button>
             <!---------------------------------------------------------------------------------------------->
-            
+
         </form>
         <?php if (isset($error) || isset($valid)) { ?>
             <p><?= $error ?></p>
             <p><?= $valid ?></p>
-        <?php }
-        // ajouter un auto-refresh toutes les 10 secondes
-        ?>
+        <?php } ?>
         <a href="/code_igniter_arthur/Users/logged">Retour</a>
         <a style="color:red" href="/code_igniter_arthur/Users/deconnect">Se déconnecter</a>
     </div>
     <script>
-        function showTime(){
-    var date = new Date();
-    var h = date.getHours();
-    var m = date.getMinutes();
-    var s = date.getSeconds();
-    h = (h < 10) ? "0" + h : h;
-    m = (m < 10) ? "0" + m : m;
-    s = (s < 10) ? "0" + s : s;
-    var time = h + ":" + m + ":" + s;
-    document.getElementById("horloge").innerText = time;
-    document.getElementById("horloge").textContent = time;
-    setTimeout(showTime, 1000);
+
+    function showTime(){
+        var date = new Date();
+        var h = date.getHours();
+        var m = date.getMinutes();
+        var s = date.getSeconds();
+        h = (h < 10) ? "0" + h : h;
+        m = (m < 10) ? "0" + m : m;
+        s = (s < 10) ? "0" + s : s;
+        var time = h + ":" + m + ":" + s;
+        document.getElementById("horloge").innerText = time;
+        document.getElementById("horloge").textContent = time;
+        setTimeout(showTime, 1000);
     }
     showTime();
+
+    var isButtonClicked = false; 
+
+    // marche pas 
+    function disableBtnSubmit() {
+        if(isButtonClicked) {
+            return false;
+        }
+        btnSubmit = getElementById('btn_submit'); 
+        btnSubmit.disabled = true;
+        isButtonClicked = true; 
+        return true; 
+    }
     </script>
 </body>
 
