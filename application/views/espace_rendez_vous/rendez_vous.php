@@ -43,7 +43,7 @@
             <!-- Le bouton submit devrait être désactivé après un seul clic pour éviter les bugs de doublons. Le required sur input[détails] fait l'affaire pour le moment -->
             <input type="submit" value="Réserver">
             <!---------------------------------------------------------------------------------------------->
-            
+
         </form>
 
         <?php if (isset($error) || isset($valid)) { ?>
@@ -54,20 +54,6 @@
         <a style="color:red" href="/code_igniter_arthur/Users/deconnect">Se déconnecter</a>
     </div>
     <script>
-
-    // var creneaux = [
-    //     "09:00", "09:30", "10:00", "10:30", "11:00", "11h30", "12:00", 
-    //     "13:30", "14:00", "14:30", "15:00", "15h30", "16:00", "16:30", "17:00"
-    // ];
-
-    // var daySelect = document.getElementById('date');
-    // var timeSelect = document.getElementById('time');
-
-    // daySelect.addEventListener("change", function() {
-    //     var day = this.value;
-    //     console.log(day);
-    //     // var time = creneaux[day];
-    // })
 
     function showTime(){
         var date = new Date();
@@ -81,23 +67,8 @@
         document.getElementById("horloge").innerText = time;
         document.getElementById("horloge").textContent = time;
         setTimeout(showTime, 1000);
-
-        // var option = parseInt(document.getElementById('option').value);
-        // console.log(option);
     }
     showTime();
-
-    // marche pas 
-    var isButtonClicked = false; 
-    // function disableBtnSubmit() {
-    //     if(isButtonClicked) {
-    //         return false;
-    //     }
-    //     btnSubmit = getElementById('btn_submit'); 
-    //     btnSubmit.disabled = true;
-    //     isButtonClicked = true; 
-    //     return true; 
-    // }
     </script>
 </body>
 
