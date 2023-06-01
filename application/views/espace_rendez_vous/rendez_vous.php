@@ -43,7 +43,11 @@
                 <option value="17:00">17:00</option>
             </select>
             <textarea placeholder="Racontez-nous votre vie.." maxlength="80" name="details" cols="29" rows="5"></textarea>
+
+            <!-- Le bouton submit doit être désactivé après un seul clic pour éviter les bugs de doublons -->
             <input type="submit" value="Réserver">
+            <!---------------------------------------------------------------------------------------------->
+            
         </form>
         <?php if (isset($error) || isset($valid)) { ?>
             <p><?= $error ?></p>
