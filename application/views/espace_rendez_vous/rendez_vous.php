@@ -12,43 +12,40 @@
 <body>
     <?php
     $today = date('Y-m-d');
+    $one = 1;
+    $tomorrow = date('Y-m-d', strtotime($today. " + $one days"));
     $year = 365;
     $aYearLater = date('Y-m-d', strtotime($today . " + $year days"));
-    // $now = date('H:i'); // à garder ?
-    // $closing = date('17:30');
+    date_default_timezone_set('Europe/Paris');
+    $now = date('H:i');
+    $creneaux = ["09:00", "09:30", "10:00", "10:30", "11:00", "11h30", "12:00", 
+                 "13:30", "14:00", "14:30", "15:00", "15h30", "16:00", "16:30", "17:00"];
     ?>
+
     <div class="container">
         <i>
             <h3>Nous sommes le <span id="date"><?= date('d/m/Y', strtotime($today)) ?><br></span> et il est <span id="horloge" onload="showtime()"></span> </h3>
         </i>
         <h2>Nos prochaines disponibilités :</h2>
         <form action="" method="post">
-            <input type="date" name="date" min="<?= $today ?>" max="<?= $aYearLater ?>" value="<?= $today ?>">
+            <input type="date" name="date" min="<?= $tomorrow ?>" max="<?= $aYearLater ?>" value="<?= $tomorrow ?>">
             <label for="time">Nous sommes ouverts de 09:00 à 17:30</label>
             <select name="time">
-                <option value="09:00">09:00</option>
-                <option value="09:30">09:30</option>
-                <option value="10:00">10:00</option>
-                <option value="10:30">10:30</option>
-                <option value="11:00">11:00</option>
-                <option value="11:30">11:30</option>
-                <option value="12:00">12:00</option>
-                <option value="13:30">13:30</option>
-                <option value="14:00">14:00</option>
-                <option value="14:30">14:30</option>
-                <option value="15:00">15:00</option>
-                <option value="15:30">15:30</option>
-                <option value="16:00">16:00</option>
-                <option value="16:30">16:30</option>
-                <option value="17:00">17:00</option>
+                <?php foreach($creneaux as $creneau) {
+                    // conditions à rajouter, grosse galère sa mère
+                    // if($creneau > $now) { ?>
+                    <option value="<?= $creneau ?>"><?= $creneau ?></option>
+                <?php //} 
+                }?>
             </select>
             <textarea required placeholder="Renseignez votre nom, prénom puis le but de votre visite" maxlength="80" name="details" cols="29" rows="5"></textarea>
 
-            <!-- Le bouton submit doit être désactivé après un seul clic pour éviter les bugs de doublons -->
-            <button id="btn_submit" type="submit" onclick="disableBtnSubmit()">Réserver</button>
+            <!-- Le bouton submit devrait être désactivé après un seul clic pour éviter les bugs de doublons. Le required sur input[détails] fait l'affaire pour le moment -->
+            <input type="submit" value="Réserver">
             <!---------------------------------------------------------------------------------------------->
-
+            
         </form>
+
         <?php if (isset($error) || isset($valid)) { ?>
             <p><?= $error ?></p>
             <p><?= $valid ?></p>
@@ -57,6 +54,20 @@
         <a style="color:red" href="/code_igniter_arthur/Users/deconnect">Se déconnecter</a>
     </div>
     <script>
+
+    // var creneaux = [
+    //     "09:00", "09:30", "10:00", "10:30", "11:00", "11h30", "12:00", 
+    //     "13:30", "14:00", "14:30", "15:00", "15h30", "16:00", "16:30", "17:00"
+    // ];
+
+    // var daySelect = document.getElementById('date');
+    // var timeSelect = document.getElementById('time');
+
+    // daySelect.addEventListener("change", function() {
+    //     var day = this.value;
+    //     console.log(day);
+    //     // var time = creneaux[day];
+    // })
 
     function showTime(){
         var date = new Date();
@@ -70,21 +81,23 @@
         document.getElementById("horloge").innerText = time;
         document.getElementById("horloge").textContent = time;
         setTimeout(showTime, 1000);
+
+        // var option = parseInt(document.getElementById('option').value);
+        // console.log(option);
     }
     showTime();
 
-    var isButtonClicked = false; 
-
     // marche pas 
-    function disableBtnSubmit() {
-        if(isButtonClicked) {
-            return false;
-        }
-        btnSubmit = getElementById('btn_submit'); 
-        btnSubmit.disabled = true;
-        isButtonClicked = true; 
-        return true; 
-    }
+    var isButtonClicked = false; 
+    // function disableBtnSubmit() {
+    //     if(isButtonClicked) {
+    //         return false;
+    //     }
+    //     btnSubmit = getElementById('btn_submit'); 
+    //     btnSubmit.disabled = true;
+    //     isButtonClicked = true; 
+    //     return true; 
+    // }
     </script>
 </body>
 
