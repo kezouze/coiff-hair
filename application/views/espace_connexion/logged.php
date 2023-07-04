@@ -23,8 +23,10 @@ require_once(APPPATH . 'views/includes/head.php');
                 <?php } ?>
             </ul>
         <?php } ?>
-        <?php if ((count($all_rdv)) < 3) { ?>
+        <?php if ((count($all_rdv)) < 1) { ?>
             <a href="/code_igniter_arthur/Users/rendez_vous">Prendre un rendez-vous</a>
+        <?php } else if (count($all_rdv) >= 1 && count($all_rdv) < 3) { ?>
+            <a href="/code_igniter_arthur/Users/rendez_vous">Prendre un autre rendez-vous</a>
         <?php } else { ?>
             <p>Vous avez atteint le nombre maximum de rendez-vous.</p>
         <?php } ?>
