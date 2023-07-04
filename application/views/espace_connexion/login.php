@@ -18,8 +18,8 @@ require_once(APPPATH . 'views/includes/head.php');
         <a href="http://[::1]/code_igniter_arthur/Users/forgot_password">Mot de passe oublié ?</a>
         <p class="error"><?= $error ?></p>
         <hr class="dashed">
-        <h4>Ou <a href="http://[::1]/code_igniter_arthur/Users/inscription">Inscrivez-vous</a> !</h4>
-        <h4><a href="http://[::1]/code_igniter_arthur/Pros">Espace professionnel</a></h4>
+        <h4><a href="http://[::1]/code_igniter_arthur/Users/inscription">Inscrivez-vous</a> !</h4>
+        <!-- <h4><a href="http://[::1]/code_igniter_arthur/Pros">Espace professionnel</a></h4> -->
     </div>
 </body>
 
