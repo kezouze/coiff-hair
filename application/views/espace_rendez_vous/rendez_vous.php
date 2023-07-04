@@ -20,7 +20,7 @@
     $now = date('H:i');
     $creneaux = [
         "09:00", "09:30", "10:00", "10:30", "11:00", "11h30", "12:00",
-        "13:30", "14:00", "14:30", "15:00", "15h30", "16:00", "16:30", "17:00"
+        "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00"
     ];
     ?>
 
@@ -34,7 +34,7 @@
             <label for="time">Nous sommes ouverts de 09h à 17h30</label>
             <select name="time">
                 <?php foreach ($creneaux as $creneau) {
-                    // conditions à rajouter, grosse galère sa mère:
+                    // conditions à rajouter, grosse galère sa mère, aussi dans la partie modif:
                     // if($date == $today && $creneau > $now) { 
                 ?>
                     <option value="<?= $creneau ?>"><?= $creneau ?></option>
