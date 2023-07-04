@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Permet à IE d'interpréter les dernières normes CSS -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Page de Rendez-vous</title>
     <link rel="stylesheet" href="/code_igniter_arthur/assets/css/style.css">
@@ -13,13 +13,15 @@
     <?php
     $today = date('Y-m-d');
     $one = 1;
-    $tomorrow = date('Y-m-d', strtotime($today. " + $one days"));
+    $tomorrow = date('Y-m-d', strtotime($today . " + $one days"));
     $year = 365;
     $aYearLater = date('Y-m-d', strtotime($today . " + $year days"));
     date_default_timezone_set('Europe/Paris');
     $now = date('H:i');
-    $creneaux = ["09:00", "09:30", "10:00", "10:30", "11:00", "11h30", "12:00", 
-                 "13:30", "14:00", "14:30", "15:00", "15h30", "16:00", "16:30", "17:00"];
+    $creneaux = [
+        "09:00", "09:30", "10:00", "10:30", "11:00", "11h30", "12:00",
+        "13:30", "14:00", "14:30", "15:00", "15h30", "16:00", "16:30", "17:00"
+    ];
     ?>
 
     <div class="container">
@@ -31,12 +33,13 @@
             <input type="date" name="date" min="<?= $tomorrow ?>" max="<?= $aYearLater ?>" value="<?= $tomorrow ?>">
             <label for="time">Nous sommes ouverts de 09h à 17h30</label>
             <select name="time">
-                <?php foreach($creneaux as $creneau) {
+                <?php foreach ($creneaux as $creneau) {
                     // conditions à rajouter, grosse galère sa mère:
-                    // if($date == $today && $creneau > $now) { ?>
+                    // if($date == $today && $creneau > $now) { 
+                ?>
                     <option value="<?= $creneau ?>"><?= $creneau ?></option>
                 <?php //} 
-                }?>
+                } ?>
             </select>
             <textarea required placeholder="Renseignez votre nom, prénom puis le but de votre visite.." maxlength="80" name="details" cols="29" rows="5"></textarea>
 
@@ -54,21 +57,20 @@
         <a style="color:red" href="/code_igniter_arthur/Users/deconnect">Se déconnecter</a>
     </div>
     <script>
-
-    function showTime(){
-        var date = new Date();
-        var h = date.getHours();
-        var m = date.getMinutes();
-        var s = date.getSeconds();
-        h = (h < 10) ? "0" + h : h;
-        m = (m < 10) ? "0" + m : m;
-        s = (s < 10) ? "0" + s : s;
-        var time = h + ":" + m + ":" + s;
-        document.getElementById("horloge").innerText = time;
-        document.getElementById("horloge").textContent = time;
-        setTimeout(showTime, 1000);
-    }
-    showTime();
+        function showTime() {
+            var date = new Date();
+            var h = date.getHours();
+            var m = date.getMinutes();
+            var s = date.getSeconds();
+            h = (h < 10) ? "0" + h : h;
+            m = (m < 10) ? "0" + m : m;
+            s = (s < 10) ? "0" + s : s;
+            var time = h + ":" + m + ":" + s;
+            document.getElementById("horloge").innerText = time;
+            document.getElementById("horloge").textContent = time;
+            setTimeout(showTime, 1000);
+        }
+        showTime();
     </script>
 </body>
 

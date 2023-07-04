@@ -255,4 +255,9 @@ class Users extends CI_Controller
 		$this->rdvManager->delete_rdv($_GET['id_rdv']);
 		redirect('/Users');
 	}
+
+	public function modify_rdv()
+	{
+		$this->load->view('espace_rendez_vous/modify_rdv');
+	}
 }

@@ -17,12 +17,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /* background-color: lightgreen; */
-    /* background: hsla(169, 76%, 48%, 1);
-    background: linear-gradient(90deg, hsla(169, 76%, 48%, 1) 0%, hsla(67, 87%, 82%, 1) 100%);
-    background: -moz-linear-gradient(90deg, hsla(169, 76%, 48%, 1) 0%, hsla(67, 87%, 82%, 1) 100%);
-    background: -webkit-linear-gradient(90deg, hsla(169, 76%, 48%, 1) 0%, hsla(67, 87%, 82%, 1) 100%);
-    filter: progid: DXImageTransform.Microsoft.gradient(startColorstr="#1ED7B5", endColorstr="#F0F9A7", GradientType=1); */
     background: url(/code_igniter_arthur/assets/images/coiffeur.jpg) no-repeat center center fixed;
     background-size: cover;
 }
@@ -125,7 +119,8 @@ input[type="submit"] {
     width: 65px;
 }
 
-.icone_suppr {
+.icone_suppr,
+.icone_modif {
     width: 35px;
 }
 
