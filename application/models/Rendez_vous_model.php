@@ -44,4 +44,16 @@ class Rendez_vous_model extends CI_Model
     {
         $this->db->delete($this->tableName, array('id_rendez_vous' => $id_rdv));
     }
+
+    public function modify_rdv($id_rdv, $date, $heure/*, $details*/)
+    {
+        $data = array(
+            'date_rendez_vous' => $date,
+            'heure_rendez_vous' => $heure,
+            // 'id_rdv' => $id_rdv,
+            // 'details_rendez_vous' => $details
+        );
+        $this->db->where('id_rendez_vous', $id_rdv)
+            ->update($this->tableName, $data);
+    }
 }

@@ -255,4 +255,34 @@ class Users extends CI_Controller
 		$this->rdvManager->delete_rdv($_GET['id_rdv']);
 		redirect('/Users');
 	}
+
+	public function modify_rdv()
+	{
+		$info['error'] = "";
+		$info['valid'] = "";
+		$info['id_rdv'] = $_GET['id_rdv'];
+
+		if (isConnected() == false) {
+			redirect('Users');
+		} else {
+			// $this->load->library('form_validation'); // Normalement en autoload
+			$this->load->database(); // Necéssaire ?
+
+			$this->form_validation->set_rules('date', 'Date', 'required');
+			$this->form_validation->set_rules('time', 'Heure', 'required');
+			// $this->form_validation->set_rules('details', 'Détails');
+
+			if ($this->form_validation->run() == false) {
+				$info['error'] = validation_errors();
+			} else {
+				$date = $this->input->post('date');
+				$time = $this->input->post('time');
+				// $details = $this->input->post('details');
+				$this->rdvManager->modify_rdv($info['id_rdv'], $date, $time/*, $details*/);
+				$info['valid'] = "Votre rdv a bien été modifié, retour à la page précédente..";
+				header('refresh:3; url = http://[::1]/code_igniter_arthur/Users/logged');
+			}
+		}
+		$this->load->view('espace_rendez_vous/modifier_rendez_vous', $info);
+	}
 }
