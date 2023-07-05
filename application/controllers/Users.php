@@ -222,10 +222,37 @@ class Users extends CI_Controller
 
 	public function rendez_vous()
 	{
+		// $info['hours'] = $this->rdvManager->getHours();
 		$info['error'] = "";
 		$info['valid'] = "";
+		$info['today'] = date('Y-m-d');
+		$today = date('Y-m-d');
+		$one = 1;
+		$info['one'] = 1;
+		$info['year'] = 365;
+		$info['now'] = date('H:i');
 		$info['id_user'] = $this->rdvManager->get_id_user($_SESSION['pseudo']);
-
+		if(isset($_POST['date']) && isset($_POST['heure'])){
+			$info['date'] = $_POST['date'];
+			$info['heure'] = $_POST['heure'];
+			$info['isAvailable'] = $this->rdvManager->isAvailable($_POST['date'], $_POST['heure']);
+		} else {
+			// $info['date'] = date('Y-m-d');
+			$info['date'] = date('Y-m-d', strtotime($today . " + $one days"));
+			$info['heure'] = date('H:i');
+		}
+		$info['creneaux'] = [
+			"09:00:00", "09:30:00", "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00",
+			"13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00"
+		];
+		// for($i = 0; $i < count($info['creneaux']); $i ++) {
+		// 	if($this->rdvManager->isAvailable($info['date'], $info['creneaux'][$i]) > 0) {
+		// 		$info['creneaux'][$i] = "indisponible";
+		foreach ($info['creneaux'] as &$key) {
+			if ($this->rdvManager->isAvailable($info['date'], $key) > 0) {
+				$key = "indisponible";
+			}
+		}
 		if (isConnected() == false) {
 			redirect('Users');
 		} else {
