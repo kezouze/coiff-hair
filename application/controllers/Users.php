@@ -245,9 +245,6 @@ class Users extends CI_Controller
 			"09:00:00", "09:30:00", "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00",
 			"13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00"
 		];
-		// for($i = 0; $i < count($info['creneaux']); $i ++) {
-		// 	if($this->rdvManager->isAvailable($info['date'], $info['creneaux'][$i]) > 0) {
-		// 		$info['creneaux'][$i] = "indisponible";
 		foreach ($info['creneaux'] as &$key) {
 			if ($this->rdvManager->isAvailable($info['date'], $key) > 0) {
 				$key = "indisponible";

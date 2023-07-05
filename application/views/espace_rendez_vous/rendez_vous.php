@@ -25,7 +25,7 @@ require_once(APPPATH . 'views/includes/head.php');
                     // conditions à rajouter, grosse galère sa mère, aussi dans la partie modif:
                     // if($date == $today && $creneau > $now) { 
                 ?>
-                <?php if($isAvailable == 0) { ?>
+                <?php if($creneau !== "indisponible") { ?>
                     <option value="<?= $creneau ?>"><?= $creneau ?></option>
                 <?php } else { ?>
                     <option value="<?= $creneau ?>" disabled ><?= $creneau ?></option>
