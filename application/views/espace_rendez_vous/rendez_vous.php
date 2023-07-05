@@ -38,7 +38,7 @@ require_once(APPPATH . 'views/includes/head.php');
                 <?php //} 
                 } ?>
             </select>
-            <textarea required placeholder="Renseignez votre nom, prénom puis le but de votre visite.." maxlength="80" name="details" cols="29" rows="5"></textarea>
+            <textarea required placeholder="Renseignez votre nom, prénom puis le but de votre visite.." maxlength="1000" name="details" cols="29" rows="5"></textarea>
 
             <!-- Le bouton submit devrait être désactivé après un seul clic pour éviter les bugs de doublons. Le required sur input[détails] fait l'affaire pour le moment -->
             <input type="submit" value="Réserver">

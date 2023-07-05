@@ -16,9 +16,14 @@ require_once(APPPATH . 'views/includes/head.php');
             <ul>
                 <?php foreach ($all_rdv as $rdv) { ?>
                     <div class="ligne">
-                        <li><i>Le <?= date('d/m/Y', strtotime($rdv->date_rendez_vous)) . ' à ' . date('H:i', strtotime($rdv->heure_rendez_vous)) . '.</i><br>Détails : ' . $rdv->details_rendez_vous ?></li>
+                        <div class="li">
+                        <li><i>Le <?= date('d/m/Y', strtotime($rdv->date_rendez_vous)) . ' à ' . date('H:i', strtotime($rdv->heure_rendez_vous)) . '.</i>
+                        <br><span>Détails : ' . $rdv->details_rendez_vous ?></span></li>
+                        </div>
+                        <div class="icones_container">
                         <a href="/code_igniter_arthur/Users/modify_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img src="/code_igniter_arthur/assets/images/modifier.png" class="icone_modif" alt="modifier"></a>
-                        <a href="/code_igniter_arthur/Users/delete_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img class="icone_suppr" src="/code_igniter_arthur/assets/images/supprimer.png" alt="icone_supprimer"></a>
+                        <a href="/code_igniter_arthur/Users/delete_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img class="icone_suppr" src="/code_igniter_arthur/assets/images/supprimer.png" alt="supprimer"></a>
+                        </div>
                     </div>
                 <?php } ?>
             </ul>
