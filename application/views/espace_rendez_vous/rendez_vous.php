@@ -4,14 +4,10 @@
 <?php
 $title = "Prendre rdv";
 require_once(APPPATH . 'views/includes/head.php');
+date_default_timezone_set('Europe/Paris');
 ?>
 
 <body>
-    <?php
-    $tomorrow = date('Y-m-d', strtotime($today . " + $one days"));
-    $aYearLater = date('Y-m-d', strtotime($today . " + $year days"));
-    date_default_timezone_set('Europe/Paris');
-    ?>
     <div class="container">
         <i>
             <h3>Nous sommes le <span id="date"><?= date('d/m/Y', strtotime($today)) ?><br></span> et il est <span id="horloge" onload="showtime()"></span> </h3>
@@ -22,11 +18,12 @@ require_once(APPPATH . 'views/includes/head.php');
             <label for="time">Nous sommes ouverts de 09h à 17h30</label>
             <select name="time">
                 <?php foreach ($creneaux as $creneau) {
-                    // conditions à rajouter, grosse galère sa mère, aussi dans la partie modif:
+                    // conditions à rajouter, grosse galère, aussi dans la partie modif:
                     // if($date == $today && $creneau > $now) { 
                 ?>
+                <!-- Ça applique sur tous les jours à partir du lendemain -->
                 <?php if($creneau !== "indisponible") { ?>
-                    <option value="<?= $creneau ?>"><?= $creneau ?></option>
+                    <option value="<?= $creneau ?>"><?= substr($creneau,0,5) ?></option>
                 <?php } else { ?>
                     <option value="<?= $creneau ?>" disabled ><?= $creneau ?></option>
                 <?php } 

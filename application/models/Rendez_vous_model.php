@@ -65,11 +65,4 @@ class Rendez_vous_model extends CI_Model
             ->count_all_results();
         return $query;
     }
-
-    public function getHours()
-    {
-        $query = $this->db->select('heure_rendez_vous')->from($this->tableName)->get()->result();
-        var_dump($query);
-    }
-
 }
