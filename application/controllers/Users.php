@@ -136,6 +136,7 @@ class Users extends CI_Controller
 		}
 		$info['id_user'] = $this->rdvManager->get_id_user($_SESSION['pseudo']);
 		$info['all_rdv'] = $this->rdvManager->get_all_rendez_vous($info['id_user']);
+		$info['pseudo'] = $this->usersManager->get_pseudo($info['id_user']);
 		$this->load->view('espace_connexion/logged', $info);
 	}
 

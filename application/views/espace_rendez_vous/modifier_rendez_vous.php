@@ -38,8 +38,8 @@ require_once(APPPATH . 'views/includes/head.php');
             <input type="submit" value="Modifier">
         </form>
         <?php if (isset($error) || isset($valid)) { ?>
-            <p><?= $error ?></p>
-            <p><?= $valid ?></p>
+            <p class="error"><?= $error ?></p>
+            <p class="valid"><?= $valid ?></p>
         <?php } ?>
         <a href="/code_igniter_arthur/Users/logged">Annuler</a>
     </div>

@@ -47,8 +47,8 @@ require_once(APPPATH . 'views/includes/head.php');
         </form>
 
         <?php if (isset($error) || isset($valid)) { ?>
-            <p><?= $error ?></p>
-            <p><?= $valid ?></p>
+            <p class="error"><?= $error ?></p>
+            <p class="valid"><?= $valid ?></p>
         <?php } ?>
         <a href="/code_igniter_arthur/Users/logged">Retour</a>
         <a style="color:red" href="/code_igniter_arthur/Users/deconnect">Se déconnecter</a>

@@ -8,7 +8,7 @@ require_once(APPPATH . 'views/includes/head.php');
 
 <body>
     <div class="container">
-        <h3>Bienvenue <?= '<b>' . ucfirst($_SESSION['pseudo']) . '</b>,' ?> sur votre espace personnel !</h3>
+        <h3>Bienvenue <?= '<b>' . ucfirst($pseudo) . '</b>,' ?> sur votre espace personnel !</h3>
         <?php if (count($all_rdv) == 0) { ?>
             <p>Vous n'avez pas de rendez-vous pour le moment</p>
         <?php } else { ?>
@@ -28,7 +28,7 @@ require_once(APPPATH . 'views/includes/head.php');
         <?php } else if (count($all_rdv) >= 1 && count($all_rdv) < 3) { ?>
             <a href="/code_igniter_arthur/Users/rendez_vous">Prendre un autre rendez-vous</a>
         <?php } else { ?>
-            <p>Vous avez atteint le nombre maximum de rendez-vous.</p>
+            <p class="error">Vous avez atteint le nombre maximum de rendez-vous.</p>
         <?php } ?>
         <a style="color:red" href="/code_igniter_arthur/Users/deconnect">Se déconnecter</a>
     </div>
