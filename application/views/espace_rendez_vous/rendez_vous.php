@@ -19,6 +19,8 @@ require_once(APPPATH . 'views/includes/head.php');
         "09:00", "09:30", "10:00", "10:30", "11:00", "11h30", "12:00",
         "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00"
     ];
+    $creneaux[5] = ""; 
+    var_dump($creneaux);
     ?>
 
     <div class="container">
@@ -34,8 +36,11 @@ require_once(APPPATH . 'views/includes/head.php');
                     // conditions à rajouter, grosse galère sa mère, aussi dans la partie modif:
                     // if($date == $today && $creneau > $now) { 
                 ?>
+                <?php if($creneau_taken == false) { ?>
                     <option value="<?= $creneau ?>"><?= $creneau ?></option>
-                <?php //} 
+                <?php } else { ?>
+                    <option value="<?= $creneau ?>" disabled ><?= $creneau ?></option>
+                <?php } 
                 } ?>
             </select>
             <textarea required placeholder="Renseignez votre nom, prénom puis le but de votre visite.." maxlength="1000" name="details" cols="29" rows="5"></textarea>
@@ -70,5 +75,4 @@ require_once(APPPATH . 'views/includes/head.php');
         showTime();
     </script>
 </body>
-
 </html>
