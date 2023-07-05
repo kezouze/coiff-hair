@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"> <!-- Permet à IE d'interpréter les dernières normes CSS -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page de Rendez-vous</title>
-    <link rel="stylesheet" href="/code_igniter_arthur/assets/css/style.css">
-</head>
+<?php
+$title = "Prendre rdv";
+require_once(APPPATH . 'views/includes/head.php');
+?>
 
 <body>
     <?php

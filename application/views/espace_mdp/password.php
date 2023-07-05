@@ -1,13 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mot de passe oublié</title>
-    <link rel="stylesheet" href="/code_igniter_arthur/assets/css/style.css">
-</head>
+<?php
+$title = "Modifier mdp";
+require_once(APPPATH . 'views/includes/head.php');
+?>
+
 <div class="container">
     <h2>Réinitialisation de votre mot de passe :</h2>
     <form action="" method="post">
