@@ -136,6 +136,7 @@ class Users extends CI_Controller
 		}
 		$info['id_user'] = $this->rdvManager->get_id_user($_SESSION['pseudo']);
 		$info['all_rdv'] = $this->rdvManager->get_all_rendez_vous($info['id_user']);
+		$info['pseudo'] = $this->usersManager->get_pseudo($info['id_user']);
 		$this->load->view('espace_connexion/logged', $info);
 	}
 
@@ -223,12 +224,38 @@ class Users extends CI_Controller
 	{
 		$info['error'] = "";
 		$info['valid'] = "";
+		$info['today'] = date('Y-m-d');
+		$today = $info['today'];
+		$info['one'] = 1;
+		$one = $info['one'];
+		$info['year'] = 365;
+		$year = $info['year'];
+		$info['now'] = date('H:i');
+		$tomorrow = date('Y-m-d', strtotime($today . " + $one days"));
+		$info['tomorrow'] = $tomorrow;
+		$info['aYearLater'] = date('Y-m-d', strtotime($today . " + $year days"));
 		$info['id_user'] = $this->rdvManager->get_id_user($_SESSION['pseudo']);
-
+		
+		if(isset($_POST['date']) && isset($_POST['heure'])){
+			$info['date'] = $_POST['date'];
+			$info['heure'] = $_POST['heure'];
+			$info['isAvailable'] = $this->rdvManager->isAvailable($_POST['date'], $_POST['heure']);
+		} else {
+			$info['date'] = $tomorrow;
+			$info['heure'] = date('H:i');
+		}
+		$info['creneaux'] = [
+			"09:00:00", "09:30:00", "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00",
+			"13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00"
+		];
+		foreach ($info['creneaux'] as &$key) { // Le '&' fait fonctionner le bazar. ???
+			if ($this->rdvManager->isAvailable($info['date'], $key) > 0) {
+				$key = "indisponible";
+			}
+		}
 		if (isConnected() == false) {
 			redirect('Users');
 		} else {
-			// $this->load->library('form_validation'); // Normalement en autoload
 			$this->load->database(); // Necéssaire ?
 
 			$this->form_validation->set_rules('date', 'Date', 'required');

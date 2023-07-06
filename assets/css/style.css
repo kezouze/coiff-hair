@@ -4,7 +4,6 @@
 *::before,
 *::after {
     box-sizing: border-box;
-    text-align: center;
     font-family: 'Comic Neue', sans-serif;
     font-weight: 600;
     margin: 0;
@@ -50,6 +49,12 @@ body {
     border-radius: 12px;
 }
 
+.icones_container {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
 .welcome {
     font-size: 25px;
     margin-right: 8px;
@@ -76,7 +81,7 @@ i {
 }
 
 .valid {
-    color: rgb(33, 35, 30);
+    color: rgb(40, 189, 40);
     height: 18px;
 }
 
@@ -102,6 +107,8 @@ input {
     width: 200px;
     height: 30px;
     border: 2px solid darkslategray;
+    text-align: center;
+    padding: 3px;
     /* border-radius: 12px; */
 
 }
@@ -110,12 +117,16 @@ select {
     width: 75px;
     height: 30px;
     border: 2px solid darkslategray;
+    text-align: center;
+    padding: 3px;
     /* border-radius: 12px; */
 
 }
 
 textarea {
     border: 2px solid darkslategray;
+    text-align: center;
+    padding: 3px;
     /* border-radius: 12px; */
 
 }
@@ -143,10 +154,11 @@ ul {
 }
 
 .ligne {
-    padding: 10px;
+    padding: 10px 15px;
     display: flex;
     justify-content: space-between;
     gap: 25px;
+    align-items: stretch;
 }
 
 b,
@@ -154,4 +166,14 @@ b,
 #horloge {
     font-size: 25px;
     color: hotpink;
+}
+
+.li {
+    overflow: auto;
+    display: flex;
+    flex-direction: column;
+    max-width: 350px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    align-items: stretch;
 }

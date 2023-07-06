@@ -56,4 +56,13 @@ class Rendez_vous_model extends CI_Model
         $this->db->where('id_rendez_vous', $id_rdv)
             ->update($this->tableName, $data);
     }
+
+    public function isAvailable($date, $heure)
+    {
+        $query = $this->db->where('date_rendez_vous', $date)
+            ->where('heure_rendez_vous', $heure)
+            ->from($this->tableName)
+            ->count_all_results();
+        return $query;
+    }
 }
