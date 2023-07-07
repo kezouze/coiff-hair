@@ -8,8 +8,8 @@ require_once(APPPATH . 'views/includes/head.php');
 
 <body>
     <div class="container">
-        <h1 style="text-align: center"><span class="welcome">Bienvenue chez</span><i class="titre">Coiff' Hair !</i></h1>
-        <img id="icone" src="/code_igniter_arthur/assets/images/coiffeur.png" alt="coiffeur">
+        <h1 style="text-align: center"><span class="welcome">Bienvenue chez</h1>
+        <img id="icone" src="/code_igniter_arthur/assets/images/logo2.png" alt="coiffeur">
         <form action="" method="post">
             <input type="text" name="identifiant" placeholder="Votre identifiant">
             <input name="password" placeholder="Mot de passe" type="password">
