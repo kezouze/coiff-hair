@@ -60,19 +60,21 @@ class Users_model extends CI_Model
         return $query;
     }
 
-    public function get_pseudo($id)
+    public function get_first_name($id)
     {
-        $query = $this->db->select('pseudo')
+        $query = $this->db->select('first_name')
             ->where('id', $id)
             ->from($this->tableName)
             ->get()
             ->row();
-        return ($query->pseudo);
+        return ($query->first_name);
     }
 
-    public function add_user($pseudo, $email, $password) // Ajout d'un nouvel utilisateur en bdd 
+    public function add_user($lastName, $firstName, $pseudo, $email, $password) // Ajout d'un nouvel utilisateur en bdd 
     {
         $data = array(
+            'last_name' => $lastName,
+            'first_name' => $firstName,
             'pseudo' => $pseudo,
             'email' => $email,
             'password' => $password

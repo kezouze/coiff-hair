@@ -42,9 +42,29 @@ class Users extends CI_Controller
 		$this->load->database();
 		$info['error'] = "";
 		$info['valid'] = "";
+		$lastName = "";
+		$firstName = "";
 		$pseudo = "";
 		$email = "";
 		$password = "";
+
+		$this->form_validation->set_rules(
+			'last_name',
+			'"Nom"',
+			'required',
+			array(
+				'required' => 'Vous devez remplir le champ %s',
+			)
+		);
+
+		$this->form_validation->set_rules(
+			'first_name',
+			'"Prénom"',
+			'required',
+			array(
+				'required' => 'Vous devez remplir le champ %s',
+			)
+		);
 
 		$this->form_validation->set_rules(
 			'pseudo',
@@ -89,10 +109,12 @@ class Users extends CI_Controller
 		if ($this->form_validation->run() == false) {
 			$info['error'] = validation_errors();
 		} else {
+			$lastName = $this->input->post('last_name');
+			$firstName = $this->input->post('first_name');
 			$pseudo = $this->input->post('pseudo'); // Même chose que $_POST['pseudo']
 			$email = $this->input->post('email');
 			$password = md5($this->input->post('password'));
-			$this->usersManager->add_user($pseudo, $email, $password);
+			$this->usersManager->add_user($lastName, $firstName, $pseudo, $email, $password);
 			$info['valid'] = "Votre compte est bien enregstré ! Redirection à la page d'accueil pour vous connecter...";
 			header('refresh: 3; url=http://localhost/code_igniter_arthur/Users');
 
@@ -109,7 +131,7 @@ class Users extends CI_Controller
 			// } else $info['error'] = "Vous adresse mail est déjà enregistrée, merci de retournez à la page de connexion.";
 			// header('refresh: 3; url=http://localhost/code_igniter_arthur/Users'); // à cause de ça ('^-^)
 		}
-		$this->load->view('espace_inscription/inscription_form_validation', $info);
+		$this->load->view('espace_inscription/inscription', $info);
 	}
 
 	public function logged()
@@ -120,7 +142,7 @@ class Users extends CI_Controller
 		}
 		$info['id_user'] = $this->rdvManager->get_id_user($_SESSION['pseudo']);
 		$info['all_rdv'] = $this->rdvManager->get_all_rendez_vous($info['id_user']);
-		$info['pseudo'] = $this->usersManager->get_pseudo($info['id_user']);
+		$info['first_name'] = $this->usersManager->get_first_name($info['id_user']);
 		$this->load->view('espace_connexion/logged', $info);
 	}
 
