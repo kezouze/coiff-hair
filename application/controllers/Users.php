@@ -14,27 +14,6 @@ class Users extends CI_Controller
 		// On peut aussi mettre les Models en autoload
 	}
 
-	// public function index()
-	// {
-	// 	if (isConnected() == true) {
-	// 		redirect('Users/logged');
-	// 	}
-
-	// 	$info['error'] = "";
-
-	// 	if (isset($_POST["pseudo"]) && isset($_POST["email"]) && isset($_POST["password"])) {
-
-	// 		// on vérifie si il y a bien un tuple correspondant dans la BDD //
-	// 		if ($this->usersManager->cb_users($_POST["pseudo"], $_POST["email"], md5($_POST["password"])) == 1) {
-
-	// 			$_SESSION['pseudo'] = $_POST["pseudo"];
-	// 			redirect('Users/logged');
-	// 		} else $info['error'] = 'Veuillez vérifier votre saisie';
-	// 	}
-
-	// 	$this->load->view('espace_Users/login', $info);
-	// }
-
 	public function index()
 	{
 		if (isConnected() == true) {
@@ -57,38 +36,6 @@ class Users extends CI_Controller
 		$this->load->view('espace_connexion/login', $info);
 	}
 
-	// public function inscription()
-	// {
-	// 	// on initialise les messages d'erreurs à une chaine vide //
-	// 	$info['error'] = "";
-	// 	$info['valid'] = "";
-
-	// 	// on vérifie que les champs sont remplis et ne sont pas une chaine de caractère vide //
-	// 	if (isset($_POST['pseudo']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['confirm_password'])) {
-	// 		if ($_POST['pseudo'] !== "" && isset($_POST['email']) !== "" && $_POST['password'] !== "" && $_POST['confirm_password'] !== "") {
-
-	// 			$pseudo = $_POST['pseudo'];
-	// 			$email = $_POST['email'];
-	// 			$password = md5($_POST['password']);
-
-	// 			// on vérifie que les 2 inputs contiennent la même chose //
-	// 			if ($_POST['password'] === $_POST['confirm_password']) {
-
-	// 				// ajouter une vérif pour voir si il n'y a pas déjà un compte avec ces infos //
-	// 				if ($this->usersManager->cb_users($_POST["pseudo"], $_POST['email'], md5($_POST["password"])) === 0) {
-
-	// 					$this->usersManager->add_user($pseudo, $email, $password);
-	// 					$info['valid'] = 'Nous avons bien ajouté votre compte !
-	//               redirection vers la page d\'accueil pour vous connecter...';
-	// 					header('refresh: 5; url=http://localhost/code_igniter_arthur/Users');
-	// 				} else $info['error'] = 'Vous possédez déjà un compte, veuillez vous rendre sur la page de connexion';
-	// 			} else $info['error'] = 'Vérifier la saisie du mot de passe';
-	// 		} else $info['error'] = 'Veuillez vérifier votre saisie';
-	// 	}
-
-	// 	$this->load->view('espace_inscription/inscription', $info);
-	// }
-
 	public function inscription() // Avec form_validation
 	{
 		$this->load->library('form_validation');
@@ -99,30 +46,67 @@ class Users extends CI_Controller
 		$email = "";
 		$password = "";
 
-		$this->form_validation->set_rules('pseudo', '"Pseudo"', 'required|min_length[4]|max_length[12] | is_unique[users.pseudo]');
-		$this->form_validation->set_rules('email', '"Email"', 'required|valid_email | is_unique[users.email]');
-		$this->form_validation->set_rules('password', '"Mot de passe"', 'required|min_length[6]');
-		$this->form_validation->set_rules('confirm_password', '"Confirmez votre mot de passe"', 'required|matches[password]');
+		$this->form_validation->set_rules(
+			'pseudo',
+			'"Pseudo"',
+			'required|min_length[3]|max_length[12]|is_unique[users.pseudo]',
+			array(
+				'is_unique' => 'Ce pseudo est déjà pris',
+				'required' => 'Vous devez remplir le champ %s',
+				'min_length' => 'Le champ %s doit contenir au moins 3 caractères',
+				'max_length' => 'Le champ %s doit contenir au maximum 12 caractères'
+			)
+		);
+		$this->form_validation->set_rules(
+			'email',
+			'"Email"',
+			'required|valid_email|is_unique[users.email]',
+			array(
+				'required' => 'Vous devez remplir le champ %s',
+				'valid_email' => 'Vous devez saisir une adresse email valide',
+				'is_unique' => 'Cette adresse email est déjà enregistrée'
+			)
+		);
+		$this->form_validation->set_rules(
+			'password',
+			'"Mot de passe"',
+			'required|min_length[6]',
+			array(
+				'required' => 'Vous devez remplir le champ %s',
+				'min_length' => 'Le champ %s doit contenir au moins 6 caractères'
+			)
+		);
+		$this->form_validation->set_rules(
+			'confirm_password',
+			'"Confirmez votre mot de passe"',
+			'required|matches[password]',
+			array(
+				'required' => 'Vous devez remplir le champ %s',
+				'matches' => 'Les mots de passe ne correspondent pas'
+			)
+		);
 
 		if ($this->form_validation->run() == false) {
 			$info['error'] = validation_errors();
 		} else {
-
 			$pseudo = $this->input->post('pseudo'); // Même chose que $_POST['pseudo']
 			$email = $this->input->post('email');
-			$password = $this->input->post('password');
+			$password = md5($this->input->post('password'));
+			$this->usersManager->add_user($pseudo, $email, $password);
+			$info['valid'] = "Votre compte est bien enregstré ! Redirection à la page d'accueil pour vous connecter...";
+			header('refresh: 3; url=http://localhost/code_igniter_arthur/Users');
 
-			if ($this->usersManager->cb_users_email($email) === 0) {
-				if ($this->usersManager->cb_users_pseudo($pseudo) > 0) {
-					$info['error'] = "Désolé, ce pseudo est déjà pris."; // cela redirige vers la page d'accueil, pourquoi ?
-				} else {
-					if ($pseudo !== "" && $email !== "" && $password !== "") {
-						$password = md5($password);
-						$this->usersManager->add_user($pseudo, $email, $password);
-						$info['valid'] = "Nous avons bien ajouté votre compte, veuillez retourner à la page d'accueil pour vous connecter !";
-					}
-				}
-			} else $info['error'] = "Vous adresse mail est déjà enregistrée, merci de retournez à la page de connexion.";
+			// if ($this->usersManager->cb_users_email($email) === 0) {
+			// 	if ($this->usersManager->cb_users_pseudo($pseudo) > 0) {
+			// 		$info['error'] = "Désolé, ce pseudo est déjà pris."; // cela redirige vers la page d'accueil, pourquoi ?
+			// 	} else {
+			// 		if ($pseudo !== "" && $email !== "" && $password !== "") {
+			// 			$password = md5($password);
+			// 			$this->usersManager->add_user($pseudo, $email, $password);
+			// 			$info['valid'] = "Nous avons bien ajouté votre compte, veuillez retourner à la page d'accueil pour vous connecter !";
+			// 		}
+			// 	}
+			// } else $info['error'] = "Vous adresse mail est déjà enregistrée, merci de retournez à la page de connexion.";
 			// header('refresh: 3; url=http://localhost/code_igniter_arthur/Users'); // à cause de ça ('^-^)
 		}
 		$this->load->view('espace_inscription/inscription_form_validation', $info);
@@ -235,8 +219,8 @@ class Users extends CI_Controller
 		$info['tomorrow'] = $tomorrow;
 		$info['aYearLater'] = date('Y-m-d', strtotime($today . " + $year days"));
 		$info['id_user'] = $this->rdvManager->get_id_user($_SESSION['pseudo']);
-		
-		if(isset($_POST['date']) && isset($_POST['heure'])){
+
+		if (isset($_POST['date']) && isset($_POST['heure'])) {
 			$info['date'] = $_POST['date'];
 			$info['heure'] = $_POST['heure'];
 			$info['isAvailable'] = $this->rdvManager->isAvailable($_POST['date'], $_POST['heure']);

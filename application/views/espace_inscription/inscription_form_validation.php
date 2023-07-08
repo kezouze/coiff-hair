@@ -7,9 +7,8 @@ require_once(APPPATH . 'views/includes/head.php');
 ?>
 
 <body>
-    <div class=" container">
+    <div class="container">
         <h1>Bienvenue sur notre page d'inscription !</h1>
-        <h2>Avec Form Validation</h2>
         <form action="" method="post">
             <input placeholder="Votre Pseudo" name="pseudo" type="text">
             <input placeholder="Votre Email" name="email" type="text">
