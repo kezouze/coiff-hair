@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <?php
 $title = "Inscription";
@@ -7,9 +7,11 @@ require_once(APPPATH . 'views/includes/head.php');
 ?>
 
 <body>
-    <div class=" container">
-        <h1>Bienvenue sur notre page d'inscription !</h1>
+    <div class="container">
+        <h1 style="text-align: center">Inscription</h1>
         <form action="" method="post">
+            <input placeholder="Nom" name="last_name" type="text">
+            <input placeholder="Prénom" name="first_name" type="text">
             <input placeholder="Votre Pseudo" name="pseudo" type="text">
             <input placeholder="Votre Email" name="email" type="text">
             <input minlength="6" placeholder="Votre Mot de Passe" name="password" type="password">
@@ -17,9 +19,9 @@ require_once(APPPATH . 'views/includes/head.php');
             <input placeholder="Confirmer Votre MDP" name="confirm_password" type="password">
             <input type="submit" value="Envoyer">
         </form>
-        <p class="error"><?= $error ?></p>
-        <p class="valid"><?= $valid ?></p>
-        <p>Retour à la <a href="http://[::1]/code_igniter_arthur/Users">page de connexion</a></p>
+        <p style="color: red;" class="error"><?= $error ?></p>
+        <p style="color: green;" class="valid"><?= $valid ?></p>
+        <p><a href="http://[::1]/code_igniter_arthur/Users">Retour</a></p>
     </div>
 </body>
 
