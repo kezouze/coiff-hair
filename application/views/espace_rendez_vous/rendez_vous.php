@@ -21,12 +21,12 @@ date_default_timezone_set('Europe/Paris');
                     // conditions à rajouter, grosse galère, aussi dans la partie modif:
                     // if($date == $today && $creneau > $now) { 
                 ?>
-                <!-- Ça applique sur tous les jours à partir du lendemain -->
-                <?php if($creneau !== "indisponible") { ?>
-                    <option value="<?= $creneau ?>"><?= substr($creneau,0,5) ?></option>
-                <?php } else { ?>
-                    <option value="<?= $creneau ?>" disabled ><?= $creneau ?></option>
-                <?php } 
+                    <!-- Ça applique sur tous les jours à partir du lendemain -->
+                    <?php if ($creneau !== "indisponible") { ?>
+                        <option value="<?= $creneau ?>"><?= substr($creneau, 0, 5) ?></option>
+                    <?php } else { ?>
+                        <option value="<?= $creneau ?>" disabled><?= $creneau ?></option>
+                <?php }
                 } ?>
             </select>
             <textarea required placeholder="Renseignez votre nom, prénom puis le but de votre visite.." maxlength="1000" name="details" cols="29" rows="5"></textarea>
@@ -54,7 +54,7 @@ date_default_timezone_set('Europe/Paris');
             h = (h < 10) ? "0" + h : h;
             m = (m < 10) ? "0" + m : m;
             s = (s < 10) ? "0" + s : s;
-            var time = h + ":" + m + ":" + s;
+            var time = h + ":" + m;
             document.getElementById("horloge").innerText = time;
             document.getElementById("horloge").textContent = time;
             setTimeout(showTime, 1000);
@@ -62,4 +62,5 @@ date_default_timezone_set('Europe/Paris');
         showTime();
     </script>
 </body>
+
 </html>
