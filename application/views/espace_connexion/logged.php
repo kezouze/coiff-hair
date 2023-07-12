@@ -8,7 +8,11 @@ require_once(APPPATH . 'views/includes/head.php');
 
 <body>
     <div class="container">
-        <h3>Bienvenue <?= '<b>' . ucfirst($first_name) . '</b>,' ?> sur votre espace personnel !</h3>
+        <?php if ($gender == 'M') { ?>
+            <h3>Bienvenue <?= '<b style="color:blue; font-size:25px;">' . ucfirst($first_name) . '</b>,' ?> sur votre espace personnel !</h3>
+        <?php } else { ?>
+            <h3>Bienvenue <?= '<b style="color:hotpink; font-size:25px">' . ucfirst($first_name) . '</b>,' ?> sur votre espace personnel !</h3>
+        <?php } ?>
         <?php if (count($all_rdv) == 0) { ?>
             <p>Vous n'avez pas de rendez-vous pour le moment</p>
         <?php } else { ?>

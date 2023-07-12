@@ -70,9 +70,10 @@ class Users_model extends CI_Model
         return ($query->first_name);
     }
 
-    public function add_user($lastName, $firstName, $pseudo, $email, $password) // Ajout d'un nouvel utilisateur en bdd 
+    public function add_user($gender, $lastName, $firstName, $pseudo, $email, $password) // Ajout d'un nouvel utilisateur en bdd 
     {
         $data = array(
+            'gender' => $gender,
             'last_name' => $lastName,
             'first_name' => $firstName,
             'pseudo' => $pseudo,
@@ -110,5 +111,15 @@ class Users_model extends CI_Model
         $this->db->set($data)
             ->where('email', $email)
             ->update('users');
+    }
+
+    public function get_gender($id)
+    {
+        $query = $this->db->select('gender')
+            ->where('id', $id)
+            ->from($this->tableName)
+            ->get()
+            ->row();
+        return ($query->gender);
     }
 }
