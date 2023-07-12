@@ -10,7 +10,7 @@ date_default_timezone_set('Europe/Paris');
 <body>
     <div class="container">
         <i>
-            <h3>Nous sommes le <span id="date"><?= date('d/m/Y', strtotime($today)) ?><br></span> et il est <span id="horloge" onload="showtime()"></span> </h3>
+            <h3>Nous sommes le <span id="today"><?= date('d/m/Y', strtotime($today)) ?><br></span> et il est <span id="horloge" onload="showtime()"></span> </h3>
         </i>
         <h2>Nos prochaines disponibilités :</h2>
         <form action="" method="post">
