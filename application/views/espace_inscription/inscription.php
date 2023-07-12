@@ -10,6 +10,10 @@ require_once(APPPATH . 'views/includes/head.php');
     <div class="container">
         <h1 style="text-align: center">Inscription</h1>
         <form action="" method="post">
+            <div class="gender">
+                <input value="M" name="gender" type="radio">Mr</input>
+                <input value="F" name="gender" type="radio">Mme</input>
+            </div>
             <input placeholder="Nom" name="last_name" type="text">
             <input placeholder="Prénom" name="first_name" type="text">
             <input placeholder="Votre Pseudo" name="pseudo" type="text">
