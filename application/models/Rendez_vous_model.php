@@ -65,4 +65,12 @@ class Rendez_vous_model extends CI_Model
             ->count_all_results();
         return $query;
     }
+
+    public function get_nb_rdv($id_user)
+    {
+        $query = $this->db->where('id_user', $id_user)
+            ->from($this->tableName)
+            ->count_all_results();
+        return $query;
+    }
 }

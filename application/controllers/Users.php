@@ -241,6 +241,7 @@ class Users extends CI_Controller
 		$info['tomorrow'] = $tomorrow;
 		$info['aYearLater'] = date('Y-m-d', strtotime($today . " + $year days"));
 		$info['id_user'] = $this->rdvManager->get_id_user($_SESSION['pseudo']);
+		$info['nb_rdv'] = $this->rdvManager->get_nb_rdv($info['id_user']);
 
 		if (isset($_POST['date']) && isset($_POST['heure'])) {
 			$info['date'] = $_POST['date'];
@@ -279,7 +280,11 @@ class Users extends CI_Controller
 				header('refresh:3; url = http://[::1]/code_igniter_arthur/Users/logged');
 			}
 		}
-		$this->load->view('espace_rendez_vous/rendez_vous', $info);
+		if ($info['nb_rdv'] >= 3) {
+			redirect('Users/logged');
+		} else {
+			$this->load->view('espace_rendez_vous/rendez_vous', $info);
+		}
 	}
 
 	public function delete_rdv()
