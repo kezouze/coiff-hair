@@ -129,19 +129,6 @@ class Users extends CI_Controller
 			$this->usersManager->add_user($gender, $lastName, $firstName, $pseudo, $email, $password);
 			$info['valid'] = "Votre compte est bien enregstré ! Redirection à la page d'accueil pour vous connecter...";
 			header('refresh: 3; url=http://localhost/code_igniter_arthur/Users');
-
-			// if ($this->usersManager->cb_users_email($email) === 0) {
-			// 	if ($this->usersManager->cb_users_pseudo($pseudo) > 0) {
-			// 		$info['error'] = "Désolé, ce pseudo est déjà pris."; // cela redirige vers la page d'accueil, pourquoi ?
-			// 	} else {
-			// 		if ($pseudo !== "" && $email !== "" && $password !== "") {
-			// 			$password = md5($password);
-			// 			$this->usersManager->add_user($pseudo, $email, $password);
-			// 			$info['valid'] = "Nous avons bien ajouté votre compte, veuillez retourner à la page d'accueil pour vous connecter !";
-			// 		}
-			// 	}
-			// } else $info['error'] = "Vous adresse mail est déjà enregistrée, merci de retournez à la page de connexion.";
-			// header('refresh: 3; url=http://localhost/code_igniter_arthur/Users'); // à cause de ça ('^-^)
 		}
 		$this->load->view('espace_inscription/inscription', $info);
 	}
@@ -311,7 +298,6 @@ class Users extends CI_Controller
 		if (isConnected() == false) {
 			redirect('Users');
 		} else {
-			// $this->load->library('form_validation'); // Normalement en autoload
 			$this->load->database(); // Necéssaire ?
 
 			$this->form_validation->set_rules('date', 'Date', 'required');
