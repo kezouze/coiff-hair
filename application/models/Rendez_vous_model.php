@@ -4,18 +4,6 @@ class Rendez_vous_model extends CI_Model
 {
     protected $tableName = "rendez_vous";
 
-    // à déplacer dans Users_model ?
-    public function get_id_user($identifiant)
-    {
-        $query = $this->db->select('id')
-            ->where('email', $identifiant)
-            ->or_where('pseudo', $identifiant)
-            ->from('users')
-            ->get()
-            ->row();
-        return ($query->id);
-    }
-
     public function set_new_rendez_vous($id_user, $date, $heure, $details)
     {
         $data = array(
@@ -73,5 +61,15 @@ class Rendez_vous_model extends CI_Model
             ->from($this->tableName)
             ->count_all_results();
         return $query;
+    }
+
+    public function get_time($id_rdv)
+    {
+        $query = $this->db->select('heure_rendez_vous')
+            ->where('id_rendez_vous', $id_rdv)
+            ->from($this->tableName)
+            ->get()
+            ->row();
+        return ($query->heure_rendez_vous);
     }
 }

@@ -49,6 +49,17 @@ class Users_model extends CI_Model
         return $query;
     }
 
+    public function get_id_user($identifiant)
+    {
+        $query = $this->db->select('id')
+            ->where('email', $identifiant)
+            ->or_where('pseudo', $identifiant)
+            ->from('users')
+            ->get()
+            ->row();
+        return ($query->id);
+    }
+
     public function get_user($pseudo, $password)
     {
         $query =  $this->db->select("*")
@@ -121,5 +132,15 @@ class Users_model extends CI_Model
             ->get()
             ->row();
         return ($query->gender);
+    }
+
+    public function get_email($id)
+    {
+        $query = $this->db->select('email')
+            ->where('id', $id)
+            ->from($this->tableName)
+            ->get()
+            ->row();
+        return ($query->email);
     }
 }
