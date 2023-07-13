@@ -141,6 +141,19 @@ class Users extends CI_Controller
 		}
 		$info['id_user'] = $this->rdvManager->get_id_user($_SESSION['pseudo']);
 		$info['all_rdv'] = $this->rdvManager->get_all_rendez_vous($info['id_user']);
+		$info['old_rdv'] = []; // on initialise les tableaux pour éviter une erreur undefined dans la vue
+		$info['next_rdv'] = [];
+
+		foreach ($info['all_rdv'] as $rdv) {
+			if ($rdv->date_rendez_vous < date('Y-m-d')) {
+				$info['old_rdv'][] = $rdv; // on stocke les rdv passés
+				// on supprime les rdv passés
+				// $this->rdvManager->delete_rdv($rdv->id_rendez_vous);
+				// redirect('Users/logged');
+			} else {
+				$info['next_rdv'][] = $rdv; // on stocke les rdv à venir
+			}
+		}
 		$info['first_name'] = $this->usersManager->get_first_name($info['id_user']);
 		$info['gender'] = $this->usersManager->get_gender($info['id_user']);
 		$this->load->view('espace_connexion/logged', $info);
@@ -241,7 +254,7 @@ class Users extends CI_Controller
 		$info['tomorrow'] = $tomorrow;
 		$info['aYearLater'] = date('Y-m-d', strtotime($today . " + $year days"));
 		$info['id_user'] = $this->rdvManager->get_id_user($_SESSION['pseudo']);
-		$info['nb_rdv'] = $this->rdvManager->get_nb_rdv($info['id_user']);
+		$info['nb_rdv'] = $this->rdvManager->get_nb_next_rdv($info['id_user']);
 
 		if (isset($_POST['date']) && isset($_POST['heure'])) {
 			$info['date'] = $_POST['date'];
