@@ -10,7 +10,7 @@ date_default_timezone_set('Europe/Paris');
 <body>
     <div class="container">
         <i>
-            <h3>Nous sommes le <span id="today"><?= date('d/m/Y', strtotime($today)) ?><br></span> et il est <span id="horloge" onload="showtime()"></span> </h3>
+            <h3>Nous sommes le <span id="today"><?= date('d/m/Y', strtotime($today)) ?></span> et il est <span id="horloge" onload="showtime()"></span> </h3>
         </i>
         <h2>Nos prochaines disponibilités :</h2>
         <form action="" method="post">
@@ -29,7 +29,7 @@ date_default_timezone_set('Europe/Paris');
                 <?php }
                 } ?>
             </select>
-            <textarea required placeholder="Renseignez votre nom, prénom puis le but de votre visite.." maxlength="1000" name="details" cols="29" rows="5"></textarea>
+            <textarea required placeholder="Renseignez le but de votre visite :-)" maxlength="1000" name="details" cols="29" rows="5"></textarea>
 
             <!-- Le bouton submit devrait être désactivé après un seul clic pour éviter les bugs de doublons. Le required sur input[détails] fait l'affaire pour le moment -->
             <input type="submit" value="Réserver">
@@ -83,13 +83,8 @@ date_default_timezone_set('Europe/Paris');
                             select.append(option);
                         });
                         select.prop('disabled', false); // Réactiver le select après la mise à jour des options
-                        alert('Success');
                     },
-                    error: function(xhr, status, error) {
-                        alert('Error');
-                        console.log(xhr.statusText);
-                        console.log(xhr.error);
-                    }
+                    error: function(xhr, status, error) {}
                 });
             });
         });
