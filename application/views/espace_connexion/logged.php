@@ -9,12 +9,14 @@ require_once(APPPATH . 'views/includes/head.php');
 <body>
     <div class="container">
         <?php if ($gender == 'M') { ?>
-            <h3>Bienvenue <?= '<b style="color:#00c8ff; font-size:25px;">' . ucfirst($first_name) . '</b>,' ?> sur votre espace personnel !</h3>
+            <h3>Bienvenue <?= '<b style="color:#00c8ff; font-size:25px;">' . ucfirst($first_name) . ' !' . '</b>' ?></h3>
+        <?php } else if ($gender == 'F') { ?>
+            <h3>Bienvenue <?= '<b style="color:hotpink; font-size:25px">' . ucfirst($first_name) . ' !' . '</b>' ?></h3>
         <?php } else { ?>
-            <h3>Bienvenue <?= '<b style="color:hotpink; font-size:25px">' . ucfirst($first_name) . '</b>,' ?> sur votre espace personnel !</h3>
+            <h3>Bienvenue <?= '<b style="color:#3cd070; font-size:25px">' . ucfirst($first_name) . ' !' . '</b>' ?></h3>
         <?php } ?>
         <?php if (count($all_rdv) == 0) { ?>
-            <p>Vous n'avez pas de rendez-vous pour le moment</p>
+            <p>Vous n'avez pas de rendez-vous à venir</p>
         <?php } else { ?>
             <p>Vous avez <?= (count($next_rdv)) ?> rendez-vous à venir :</p>
             <ul>

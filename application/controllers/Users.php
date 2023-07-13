@@ -80,12 +80,11 @@ class Users extends CI_Controller
 		$this->form_validation->set_rules(
 			'pseudo',
 			'"Pseudo"',
-			'required|min_length[3]|max_length[12]|is_unique[users.pseudo]',
+			'required|min_length[3]|is_unique[users.pseudo]',
 			array(
 				'is_unique' => 'Ce pseudo est déjà pris',
 				'required' => 'Vous devez remplir le champ %s',
-				'min_length' => 'Le champ %s doit contenir au moins 3 caractères',
-				'max_length' => 'Le champ %s doit contenir au maximum 12 caractères'
+				'min_length' => 'Le champ %s doit contenir au moins 3 caractères'
 			)
 		);
 		$this->form_validation->set_rules(
@@ -241,6 +240,7 @@ class Users extends CI_Controller
 
 	public function rendez_vous()
 	{
+		// faire le tri là-dedans : 
 		$info['error'] = "";
 		$info['valid'] = "";
 		$info['today'] = date('Y-m-d');
