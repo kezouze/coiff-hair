@@ -276,7 +276,7 @@ class Users extends CI_Controller
 				$time = $this->input->post('time');
 				$details = $this->input->post('details');
 				$this->rdvManager->set_new_rendez_vous($info['id_user'], $date, $time, $details);
-				$info['valid'] = "Votre rdv est enregistré, retour à la page précédente..";
+				$info['valid'] = "Votre rdv est enregistré, retour à la page précédente...";
 				header('refresh:3; url = http://[::1]/code_igniter_arthur/Users/logged');
 			}
 		}
@@ -285,6 +285,26 @@ class Users extends CI_Controller
 		} else {
 			$this->load->view('espace_rendez_vous/rendez_vous', $info);
 		}
+	}
+
+	public function get_available_times()
+	{
+		$selectedDate = $this->input->post('date');
+
+		// Effectuer la logique pour obtenir les créneaux horaires disponibles en fonction de $selectedDate
+		// Par exemple, interroger la base de données ou un autre mécanisme de stockage
+
+		$availableTimes = array(
+			'09:00', '09:30', '10:00', '10:30' // Exemple de créneaux horaires disponibles
+		);
+
+		$response = array(
+			'times' => $availableTimes
+		);
+
+		// Répondre avec les créneaux horaires disponibles au format JSON
+		header('Content-Type: application/json');
+		echo json_encode($response);
 	}
 
 	public function delete_rdv()
