@@ -186,9 +186,9 @@ ul {
 
 .gender {
     display: flex;
-    justify-content: space-between;
     gap: 10px;
-    width: 50%;
+    width: 100%;
+    align-items: flex-end;
 }
 
 .toggleButton {

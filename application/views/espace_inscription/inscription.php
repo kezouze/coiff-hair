@@ -13,6 +13,7 @@ require_once(APPPATH . 'views/includes/head.php');
             <div class="gender">
                 <input value="M" name="gender" type="radio">Mr</input>
                 <input value="F" name="gender" type="radio">Mme</input>
+                <input value="O" name="gender" type="radio">Autre</input>
             </div>
             <input placeholder="Nom" name="last_name" type="text">
             <input placeholder="Prénom" name="first_name" type="text">
