@@ -73,19 +73,22 @@ date_default_timezone_set('Europe/Paris');
                     },
                     dataType: "json",
                     success: function(response) {
-                        // Mettre à jour le contenu du select avec les créneaux horaires disponibles
                         var select = $('#time');
                         select.empty();
                         $.each(response.times, function(index, time) {
-                            select.append($('<option></option>').val(time).text(time));
+                            var option = $('<option></option>').val(time).text(time);
+                            if (time === "indisponible") {
+                                option.prop('disabled', true);
+                            }
+                            select.append(option);
                         });
+                        select.prop('disabled', false); // Réactiver le select après la mise à jour des options
                         alert('Success');
                     },
                     error: function(xhr, status, error) {
-                        // Gérer les erreurs
                         alert('Error');
-                        console.log(xhr.statusText); // not found 
-                        console.log(xhr.error); // undefined
+                        console.log(xhr.statusText);
+                        console.log(xhr.error);
                     }
                 });
             });

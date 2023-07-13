@@ -263,8 +263,7 @@ class Users extends CI_Controller
 		if (isConnected() == false) {
 			redirect('Users');
 		} else {
-			$this->load->database(); // Necéssaire ?
-
+			$this->load->database();
 			$this->form_validation->set_rules('date', 'Date', 'required');
 			$this->form_validation->set_rules('time', 'Heure', 'required');
 			$this->form_validation->set_rules('details', 'Détails');
@@ -290,13 +289,17 @@ class Users extends CI_Controller
 	public function get_available_times()
 	{
 		$selectedDate = $this->input->post('date');
-
-		// Effectuer la logique pour obtenir les créneaux horaires disponibles en fonction de $selectedDate
-		// Par exemple, interroger la base de données ou un autre mécanisme de stockage
-
-		$availableTimes = array(
-			'09:00', '09:30', '10:00', '10:30' // Exemple de créneaux horaires disponibles
-		);
+		$availableTimes = [
+			"09:00:00", "09:30:00", "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00",
+			"13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00"
+		];
+		foreach ($availableTimes as &$key) { // Le '&' fait fonctionner le bazar. ???
+			if ($this->rdvManager->isAvailable($selectedDate, $key) > 0) {
+				$key = "indisponible";
+			} else {
+				$key = substr($key, 0, 5);
+			}
+		}
 
 		$response = array(
 			'times' => $availableTimes
