@@ -263,8 +263,7 @@ class Users extends CI_Controller
 		if (isConnected() == false) {
 			redirect('Users');
 		} else {
-			$this->load->database(); // Necéssaire ?
-
+			$this->load->database();
 			$this->form_validation->set_rules('date', 'Date', 'required');
 			$this->form_validation->set_rules('time', 'Heure', 'required');
 			$this->form_validation->set_rules('details', 'Détails');
@@ -276,7 +275,7 @@ class Users extends CI_Controller
 				$time = $this->input->post('time');
 				$details = $this->input->post('details');
 				$this->rdvManager->set_new_rendez_vous($info['id_user'], $date, $time, $details);
-				$info['valid'] = "Votre rdv est enregistré, retour à la page précédente..";
+				$info['valid'] = "Votre rdv est enregistré, retour à la page précédente...";
 				header('refresh:3; url = http://[::1]/code_igniter_arthur/Users/logged');
 			}
 		}
@@ -285,6 +284,30 @@ class Users extends CI_Controller
 		} else {
 			$this->load->view('espace_rendez_vous/rendez_vous', $info);
 		}
+	}
+
+	public function get_available_times()
+	{
+		$selectedDate = $this->input->post('date');
+		$availableTimes = [
+			"09:00:00", "09:30:00", "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00",
+			"13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00"
+		];
+		foreach ($availableTimes as &$key) { // Le '&' fait fonctionner le bazar. ???
+			if ($this->rdvManager->isAvailable($selectedDate, $key) > 0) {
+				$key = "indisponible";
+			} else {
+				$key = substr($key, 0, 5);
+			}
+		}
+
+		$response = array(
+			'times' => $availableTimes
+		);
+
+		// Répondre avec les créneaux horaires disponibles au format JSON
+		header('Content-Type: application/json');
+		echo json_encode($response);
 	}
 
 	public function delete_rdv()

@@ -14,9 +14,9 @@ date_default_timezone_set('Europe/Paris');
         </i>
         <h2>Nos prochaines disponibilités :</h2>
         <form action="" method="post">
-            <input type="date" name="date" min="<?= $tomorrow ?>" max="<?= $aYearLater ?>" value="<?= $tomorrow ?>">
+            <input id="date" type="date" name="date" min="<?= $tomorrow ?>" max="<?= $aYearLater ?>" value="<?= $tomorrow ?>">
             <label for="time">Nous sommes ouverts de 09h à 17h30</label>
-            <select name="time">
+            <select id="time" name="time">
                 <?php foreach ($creneaux as $creneau) {
                     // conditions à rajouter, grosse galère, aussi dans la partie modif:
                     // if($date == $today && $creneau > $now) { 
@@ -60,6 +60,39 @@ date_default_timezone_set('Europe/Paris');
             setTimeout(showTime, 1000);
         }
         showTime();
+
+        // jQuery est importé dans le head.php
+        $(document).ready(function() {
+            $('#date').change(function() {
+                var selectedDate = $(this).val();
+                $.ajax({
+                    url: "<?php echo base_url('Users/get_available_times'); ?>",
+                    type: "POST",
+                    data: {
+                        date: selectedDate
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        var select = $('#time');
+                        select.empty();
+                        $.each(response.times, function(index, time) {
+                            var option = $('<option></option>').val(time).text(time);
+                            if (time === "indisponible") {
+                                option.prop('disabled', true);
+                            }
+                            select.append(option);
+                        });
+                        select.prop('disabled', false); // Réactiver le select après la mise à jour des options
+                        alert('Success');
+                    },
+                    error: function(xhr, status, error) {
+                        alert('Error');
+                        console.log(xhr.statusText);
+                        console.log(xhr.error);
+                    }
+                });
+            });
+        });
     </script>
 </body>
 

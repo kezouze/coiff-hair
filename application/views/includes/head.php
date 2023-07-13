@@ -5,4 +5,5 @@
     <link rel="stylesheet" href="/code_igniter_arthur/assets/css/style.css">
     <title><?= $title ?></title>
     <link rel="icon" href="/code_igniter_arthur/assets/images/ciseaux.png">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
