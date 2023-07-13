@@ -9,7 +9,7 @@ require_once(APPPATH . 'views/includes/head.php');
 <body>
     <div class="container">
         <?php if ($gender == 'M') { ?>
-            <h3>Bienvenue <?= '<b style="color:blue; font-size:25px;">' . ucfirst($first_name) . '</b>,' ?> sur votre espace personnel !</h3>
+            <h3>Bienvenue <?= '<b style="color:#00c8ff; font-size:25px;">' . ucfirst($first_name) . '</b>,' ?> sur votre espace personnel !</h3>
         <?php } else { ?>
             <h3>Bienvenue <?= '<b style="color:hotpink; font-size:25px">' . ucfirst($first_name) . '</b>,' ?> sur votre espace personnel !</h3>
         <?php } ?>
