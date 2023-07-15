@@ -148,7 +148,7 @@ class Users extends CI_Controller
 		$info['pseudo'] = $_SESSION['pseudo'];
 
 		foreach ($info['all_rdv'] as $rdv) {
-			if ($rdv->date_rendez_vous < date('Y-m-d')) {
+			if ($rdv->date_rendez_vous < date('Y-m-d H:i')) {
 				$info['old_rdv'][] = $rdv; // on stocke les rdv passés
 				// $this->rdvManager->delete_rdv($rdv->id_rendez_vous); // on supprime les rdv passés
 				// redirect('Users/logged');
@@ -270,7 +270,7 @@ class Users extends CI_Controller
 		$tomorrow = date('Y-m-d', strtotime($today . " + $one days"));
 		$info['tomorrow'] = $tomorrow;
 		$info['aYearLater'] = date('Y-m-d', strtotime($today . " + $year days"));
-		$info['id_user'] = $this->rdvManager->get_id_user($_SESSION['pseudo']);
+		$info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
 		$info['nb_rdv'] = $this->rdvManager->get_nb_next_rdv($info['id_user']);
 
 		if (isset($_POST['date']) && isset($_POST['heure'])) {
