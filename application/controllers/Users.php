@@ -138,19 +138,36 @@ class Users extends CI_Controller
 		if (isConnected() == false) {
 			redirect('Users');
 		}
-		$info['id_user'] = $this->rdvManager->get_id_user($_SESSION['pseudo']);
+		$info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
 		$info['all_rdv'] = $this->rdvManager->get_all_rendez_vous($info['id_user']);
 		$info['old_rdv'] = []; // on initialise les tableaux pour éviter une erreur undefined dans la vue
 		$info['next_rdv'] = [];
+		$email = $this->usersManager->get_email($info['id_user']);
+		$firstName = $this->usersManager->get_first_name($info['id_user']);
+		$send = false; // on initialise la variable pour éviter l'envoi de plusieurs mails
+		$info['pseudo'] = $_SESSION['pseudo'];
 
 		foreach ($info['all_rdv'] as $rdv) {
-			if ($rdv->date_rendez_vous < date('Y-m-d')) {
+			if ($rdv->date_rendez_vous < date('Y-m-d H:i')) {
 				$info['old_rdv'][] = $rdv; // on stocke les rdv passés
-				// on supprime les rdv passés
-				// $this->rdvManager->delete_rdv($rdv->id_rendez_vous);
+				// $this->rdvManager->delete_rdv($rdv->id_rendez_vous); // on supprime les rdv passés
 				// redirect('Users/logged');
 			} else {
 				$info['next_rdv'][] = $rdv; // on stocke les rdv à venir
+				// condition pour rappel du rdv 24h avant
+				if ($rdv->date_rendez_vous == date('Y-m-d', strtotime('+1 day')) && $send === false) {
+					$time = $this->rdvManager->get_time($rdv->id_rendez_vous);
+					$this->load->library('email');
+					$this->email->from('trouduc@outil-web.fr', 'Coiff\'Hair');
+					$this->email->to($email);
+					$this->email->subject('Rappel de votre rendez-vous');
+					$this->email->message('Bonjour ' . $firstName . ', 
+						<br>Ceci est un petit message pour vous rappeler votre prochain rendez-vous demain à ' . substr($time, 0, 5) . '. 
+						<br>N\'hésitez pas à nous contacter si besoin, ou modifier / annuler le rendez-vous directement sur votre espace personnel.
+						<br>Cordialement, L\'équipe de Coiff\'Hair :-)');
+					$this->email->send(); // ça envoi à chaque connexion, à voir comment faire pour n'envoyer qu'une fois
+					$send = true;
+				}
 			}
 		}
 		$info['first_name'] = $this->usersManager->get_first_name($info['id_user']);
@@ -253,7 +270,7 @@ class Users extends CI_Controller
 		$tomorrow = date('Y-m-d', strtotime($today . " + $one days"));
 		$info['tomorrow'] = $tomorrow;
 		$info['aYearLater'] = date('Y-m-d', strtotime($today . " + $year days"));
-		$info['id_user'] = $this->rdvManager->get_id_user($_SESSION['pseudo']);
+		$info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
 		$info['nb_rdv'] = $this->rdvManager->get_nb_next_rdv($info['id_user']);
 
 		if (isset($_POST['date']) && isset($_POST['heure'])) {
