@@ -165,7 +165,7 @@ class Users extends CI_Controller
 						<br>Ceci est un petit message pour vous rappeler votre prochain rendez-vous demain à ' . substr($time, 0, 5) . '. 
 						<br>N\'hésitez pas à nous contacter si besoin, ou modifier / annuler le rendez-vous directement sur votre espace personnel.
 						<br>Cordialement, L\'équipe de Coiff\'Hair :-)');
-					$this->email->send(); // ça envoi à chaque connexion, à voir comment faire pour n'envoyer qu'une fois
+					// $this->email->send(); // ça envoi à chaque connexion, à voir comment faire pour n'envoyer qu'une fois
 					$send = true;
 				}
 			}

@@ -14,18 +14,19 @@ date_default_timezone_set('Europe/Paris');
         </i>
         <h2>Nos prochaines disponibilités :</h2>
         <form action="" method="post">
-            <input id="date" type="date" name="date" min="<?= $tomorrow ?>" max="<?= $aYearLater ?>" value="<?= $tomorrow ?>">
+            <input id="date" type="date" name="date" min="<?= $today ?>" max="<?= $aYearLater ?>" value="<?= $today ?>">
             <label for="time">Nous sommes ouverts de 09h à 17h30</label>
             <select id="time" name="time">
                 <?php foreach ($creneaux as $creneau) {
                     // conditions à rajouter, grosse galère, aussi dans la partie modif:
                     // if($date == $today && $creneau > $now) { 
+                    var_dump($creneau);
                 ?>
                     <!-- Ça applique sur tous les jours à partir du lendemain -->
-                    <?php if ($creneau !== "indisponible") { ?>
+                    <?php if ($creneau !== "indisponible" && $creneau > date('H:i:s')) { ?>
                         <option value="<?= $creneau ?>"><?= substr($creneau, 0, 5) ?></option>
                     <?php } else { ?>
-                        <option value="<?= $creneau ?>" disabled><?= $creneau ?></option>
+                        <option value="<?= $creneau ?>" disabled><?= substr($creneau, 0, 5) ?></option>
                 <?php }
                 } ?>
             </select>
