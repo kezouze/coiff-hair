@@ -138,6 +138,7 @@ class Users extends CI_Controller
 		if (isConnected() == false) {
 			redirect('Users');
 		}
+
 		$info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
 		$info['all_rdv'] = $this->rdvManager->get_all_rendez_vous($info['id_user']);
 		$info['old_rdv'] = []; // on initialise les tableaux pour éviter une erreur undefined dans la vue
@@ -257,7 +258,9 @@ class Users extends CI_Controller
 
 	public function rendez_vous()
 	{
-		// faire le tri là-dedans : 
+		// faire le tri là-dedans :
+		date_default_timezone_set('Europe/Paris');
+
 		$info['error'] = "";
 		$info['valid'] = "";
 		$info['today'] = date('Y-m-d');

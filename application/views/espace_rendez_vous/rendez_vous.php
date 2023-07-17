@@ -23,10 +23,10 @@ date_default_timezone_set('Europe/Paris');
                     var_dump($creneau);
                 ?>
                     <!-- Ça applique sur tous les jours à partir du lendemain -->
-                    <?php if ($creneau !== "indisponible" && $creneau > date('H:i:s')) { ?>
+                    <?php if ($creneau !== "indisponible" /*&& $creneau > date('H:i:s')*/) { ?>
                         <option value="<?= $creneau ?>"><?= substr($creneau, 0, 5) ?></option>
                     <?php } else { ?>
-                        <option value="<?= $creneau ?>" disabled><?= substr($creneau, 0, 5) ?></option>
+                        <option value="<?= $creneau ?>" disabled><?= ($creneau) ?></option>
                 <?php }
                 } ?>
             </select>
@@ -62,6 +62,11 @@ date_default_timezone_set('Europe/Paris');
         }
         showTime();
 
+
+        var date = new Date();
+        var h = date.getHours();
+        var m = date.getMinutes();
+        var s = date.getSeconds();
         // jQuery est importé dans le head.php
         $(document).ready(function() {
             $('#date').change(function() {
@@ -78,7 +83,9 @@ date_default_timezone_set('Europe/Paris');
                         select.empty();
                         $.each(response.times, function(index, time) {
                             var option = $('<option></option>').val(time).text(time);
-                            if (time === "indisponible") {
+                            var selectedHour = parseInt(time.substr(0, 2));
+                            var selectedMinutes = parseInt(time.substr(3, 2));
+                            if (time === "indisponible" || time < h || (time === h && time <= m)) { // wink wink
                                 option.prop('disabled', true);
                             }
                             select.append(option);
