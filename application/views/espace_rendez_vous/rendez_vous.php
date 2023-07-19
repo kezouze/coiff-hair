@@ -14,7 +14,7 @@ date_default_timezone_set('Europe/Paris');
         </i>
         <h2>Nos prochaines disponibilités :</h2>
         <form action="" method="post">
-            <input id="date" type="date" name="date" min="<?= $today ?>" max="<?= $aYearLater ?>" value="<?= $today ?>">
+            <input id="date" type="date" name="date" min="<?= $today ?>" max="<?= $aYearLater ?>">
             <label for="time">Nous sommes ouverts de 09h à 17h30</label>
             <select id="time" name="time">
                 <?php foreach ($creneaux as $creneau) {
@@ -74,14 +74,13 @@ date_default_timezone_set('Europe/Paris');
             var day = String(date.getDate()).padStart(2, '0');
             return `${year}-${month}-${day}`;
         }
-
         formattedDate = formatDateToYYYYMMDD(date);
 
         // jQuery est importé dans le head.php
         $(document).ready(function() {
-            $('#date').val(formattedDate); // Sélectionner la date du jour par défaut
+            var selectedDate = formattedDate; // Sélectionner la date du jour par défaut
             $('#date').change(function() {
-                var selectedDate = $(this).val();
+                selectedDate = $(this).val();
                 $.ajax({
                     url: "<?php echo base_url('Users/get_available_times'); ?>",
                     type: "POST",
