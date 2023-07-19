@@ -13,7 +13,6 @@ require_once(APPPATH . 'views/includes/head.php');
     $tomorrow = date('Y-m-d', strtotime($today . " + $one days"));
     $year = 365;
     $aYearLater = date('Y-m-d', strtotime($today . " + $year days"));
-    date_default_timezone_set('Europe/Paris');
     $now = date('H:i');
     $creneaux = [
         "09:00", "09:30", "10:00", "10:30", "11:00", "11h30", "12:00",

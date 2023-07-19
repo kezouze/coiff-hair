@@ -4,7 +4,9 @@
 <?php
 $title = "Votre espace";
 require_once(APPPATH . 'views/includes/head.php');
-date_default_timezone_set('Europe/Paris');
+var_dump($rdvDateTime);
+echo '<br>';
+var_dump($now);
 ?>
 
 <body>
