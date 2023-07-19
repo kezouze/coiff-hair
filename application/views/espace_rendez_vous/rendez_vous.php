@@ -4,7 +4,6 @@
 <?php
 $title = "Prendre rdv";
 require_once(APPPATH . 'views/includes/head.php');
-date_default_timezone_set('Europe/Paris');
 ?>
 
 <body>
@@ -18,12 +17,7 @@ date_default_timezone_set('Europe/Paris');
             <label for="time">Nous sommes ouverts de 09h à 17h30</label>
             <select id="time" name="time">
                 <?php foreach ($creneaux as $creneau) {
-                    // conditions à rajouter, grosse galère, aussi dans la partie modif:
-                    // if($date == $today && $creneau > $now) { 
-                    var_dump($creneau);
-                ?>
-                    <!-- Ça applique sur tous les jours à partir du lendemain -->
-                    <?php if ($creneau !== "indisponible" /*&& $creneau > date('H:i:s')*/) { ?>
+                    if ($creneau !== "indisponible") { ?>
                         <option value="<?= $creneau ?>"><?= substr($creneau, 0, 5) ?></option>
                     <?php } else { ?>
                         <option value="<?= $creneau ?>" disabled><?= ($creneau) ?></option>
@@ -31,11 +25,9 @@ date_default_timezone_set('Europe/Paris');
                 } ?>
             </select>
             <textarea required placeholder="Renseignez le but de votre visite :-)" maxlength="1000" name="details" cols="29" rows="5"></textarea>
-
-            <!-- Le bouton submit devrait être désactivé après un seul clic pour éviter les bugs de doublons. Le required sur input[détails] fait l'affaire pour le moment -->
+            <!-- Le bouton submit devrait être désactivé après un seul clic pour éviter les bugs de doublons. 
+            Le required sur input[détails] fait l'affaire pour le moment -->
             <input type="submit" value="Réserver">
-            <!---------------------------------------------------------------------------------------------->
-
         </form>
 
         <?php if (isset($error) || isset($valid)) { ?>

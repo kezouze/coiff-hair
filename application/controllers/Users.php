@@ -140,20 +140,22 @@ class Users extends CI_Controller
 		}
 
 		$info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
+		$info['pseudo'] = $_SESSION['pseudo'];
 		$info['all_rdv'] = $this->rdvManager->get_all_rendez_vous($info['id_user']);
 		$info['old_rdv'] = []; // on initialise les tableaux pour éviter une erreur undefined dans la vue
 		$info['next_rdv'] = [];
+		// $today = date('Y-m-d');
+		// $now = date('H:i:s');
+		// $info['formattedNow'] = strtotime($now);
+		$info['now'] = time();
 		$email = $this->usersManager->get_email($info['id_user']);
 		$firstName = $this->usersManager->get_first_name($info['id_user']);
 		$send = false; // on initialise la variable pour éviter l'envoi de plusieurs mails
-		$info['pseudo'] = $_SESSION['pseudo'];
 
 		foreach ($info['all_rdv'] as $rdv) {
-			if ($rdv->date_rendez_vous < date('Y-m-d H:i')) {
-				$info['old_rdv'][] = $rdv; // on stocke les rdv passés
-				// $this->rdvManager->delete_rdv($rdv->id_rendez_vous); // on supprime les rdv passés
-				// redirect('Users/logged');
-			} else {
+			// if ($rdv->date_rendez_vous > $today || ($rdv->date_rendez_vous == $today && strtotime($rdv->heure_rendez_vous) > $info['formattedNow'])) {
+			$info['rdvDateTime'] = strtotime($rdv->date_rendez_vous . ' ' . $rdv->heure_rendez_vous);
+			if ($info['rdvDateTime'] > $info['now']) {
 				$info['next_rdv'][] = $rdv; // on stocke les rdv à venir
 				// condition pour rappel du rdv 24h avant
 				if ($rdv->date_rendez_vous == date('Y-m-d', strtotime('+1 day')) && $send === false) {
@@ -169,6 +171,10 @@ class Users extends CI_Controller
 					// $this->email->send(); // ça envoi à chaque connexion, à voir comment faire pour n'envoyer qu'une fois
 					$send = true;
 				}
+			} else {
+				$info['old_rdv'][] = $rdv; // on stocke les rdv passés
+				// $this->rdvManager->delete_rdv($rdv->id_rendez_vous); // on supprime les rdv passés
+				// redirect('Users/logged');
 			}
 		}
 		$info['first_name'] = $this->usersManager->get_first_name($info['id_user']);
@@ -259,8 +265,6 @@ class Users extends CI_Controller
 	public function rendez_vous()
 	{
 		// faire le tri là-dedans :
-		date_default_timezone_set('Europe/Paris');
-
 		$info['error'] = "";
 		$info['valid'] = "";
 		$info['today'] = date('Y-m-d');
@@ -276,20 +280,20 @@ class Users extends CI_Controller
 		$info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
 		$info['nb_rdv'] = $this->rdvManager->get_nb_next_rdv($info['id_user']);
 
-		if (isset($_POST['date']) && isset($_POST['heure'])) {
-			$info['date'] = $_POST['date'];
-			$info['heure'] = $_POST['heure'];
-			$info['isAvailable'] = $this->rdvManager->isAvailable($_POST['date'], $_POST['heure']);
+		if (isset($_POST['date']) && isset($_POST['time'])) {
+			$date = $_POST['date'];
+			$time = $_POST['time'];
+			$isAvailable = $this->rdvManager->isAvailable($date, $time);
 		} else {
-			$info['date'] = $tomorrow;
-			$info['heure'] = date('H:i');
+			$date = $tomorrow;
+			$time = date('H:i');
 		}
 		$info['creneaux'] = [
 			"09:00:00", "09:30:00", "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00",
 			"13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00"
 		];
 		foreach ($info['creneaux'] as &$key) { // Le '&' fait fonctionner le bazar. ???
-			if ($this->rdvManager->isAvailable($info['date'], $key) > 0) {
+			if ($this->rdvManager->isAvailable($date, $key) > 0) {
 				$key = "indisponible";
 			}
 		}
