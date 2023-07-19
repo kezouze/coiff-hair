@@ -67,8 +67,19 @@ date_default_timezone_set('Europe/Paris');
         var h = date.getHours();
         var m = date.getMinutes();
         var s = date.getSeconds();
+
+        function formatDateToYYYYMMDD(date) {
+            var year = date.getFullYear();
+            var month = String(date.getMonth() + 1).padStart(2, '0');
+            var day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        formattedDate = formatDateToYYYYMMDD(date);
+
         // jQuery est importé dans le head.php
         $(document).ready(function() {
+            $('#date').val(formattedDate); // Sélectionner la date du jour par défaut
             $('#date').change(function() {
                 var selectedDate = $(this).val();
                 $.ajax({
@@ -83,12 +94,20 @@ date_default_timezone_set('Europe/Paris');
                         select.empty();
                         $.each(response.times, function(index, time) {
                             var option = $('<option></option>').val(time).text(time);
-                            var selectedHour = parseInt(time.substr(0, 2));
-                            var selectedMinutes = parseInt(time.substr(3, 2));
-                            if (time === "indisponible" || time < h || (time === h && time <= m)) { // wink wink
-                                option.prop('disabled', true);
+                            var Hour = parseInt(time.substr(0, 2));
+                            var Minutes = parseInt(time.substr(3, 2));
+
+                            if (selectedDate === formattedDate) {
+                                if (time === "indisponible" || Hour < h || (Hour === h && Minutes <= m)) { // wink wink
+                                    option.prop('disabled', true);
+                                }
+                                select.append(option);
+                            } else {
+                                if (time === "indisponible") {
+                                    option.prop('disabled', true);
+                                }
+                                select.append(option);
                             }
-                            select.append(option);
                         });
                         select.prop('disabled', false); // Réactiver le select après la mise à jour des options
                     },
