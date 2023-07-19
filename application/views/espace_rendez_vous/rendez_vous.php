@@ -14,18 +14,19 @@ date_default_timezone_set('Europe/Paris');
         </i>
         <h2>Nos prochaines disponibilités :</h2>
         <form action="" method="post">
-            <input id="date" type="date" name="date" min="<?= $tomorrow ?>" max="<?= $aYearLater ?>" value="<?= $tomorrow ?>">
+            <input id="date" type="date" name="date" min="<?= $today ?>" max="<?= $aYearLater ?>">
             <label for="time">Nous sommes ouverts de 09h à 17h30</label>
             <select id="time" name="time">
                 <?php foreach ($creneaux as $creneau) {
                     // conditions à rajouter, grosse galère, aussi dans la partie modif:
                     // if($date == $today && $creneau > $now) { 
+                    var_dump($creneau);
                 ?>
                     <!-- Ça applique sur tous les jours à partir du lendemain -->
-                    <?php if ($creneau !== "indisponible") { ?>
+                    <?php if ($creneau !== "indisponible" /*&& $creneau > date('H:i:s')*/) { ?>
                         <option value="<?= $creneau ?>"><?= substr($creneau, 0, 5) ?></option>
                     <?php } else { ?>
-                        <option value="<?= $creneau ?>" disabled><?= $creneau ?></option>
+                        <option value="<?= $creneau ?>" disabled><?= ($creneau) ?></option>
                 <?php }
                 } ?>
             </select>
@@ -61,10 +62,25 @@ date_default_timezone_set('Europe/Paris');
         }
         showTime();
 
+
+        var date = new Date();
+        var h = date.getHours();
+        var m = date.getMinutes();
+        var s = date.getSeconds();
+
+        function formatDateToYYYYMMDD(date) {
+            var year = date.getFullYear();
+            var month = String(date.getMonth() + 1).padStart(2, '0');
+            var day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+        formattedDate = formatDateToYYYYMMDD(date);
+
         // jQuery est importé dans le head.php
         $(document).ready(function() {
+            var selectedDate = formattedDate; // Sélectionner la date du jour par défaut
             $('#date').change(function() {
-                var selectedDate = $(this).val();
+                selectedDate = $(this).val();
                 $.ajax({
                     url: "<?php echo base_url('Users/get_available_times'); ?>",
                     type: "POST",
@@ -77,10 +93,20 @@ date_default_timezone_set('Europe/Paris');
                         select.empty();
                         $.each(response.times, function(index, time) {
                             var option = $('<option></option>').val(time).text(time);
-                            if (time === "indisponible") {
-                                option.prop('disabled', true);
+                            var Hour = parseInt(time.substr(0, 2));
+                            var Minutes = parseInt(time.substr(3, 2));
+
+                            if (selectedDate === formattedDate) {
+                                if (time === "indisponible" || Hour < h || (Hour === h && Minutes <= m)) { // wink wink
+                                    option.prop('disabled', true);
+                                }
+                                select.append(option);
+                            } else {
+                                if (time === "indisponible") {
+                                    option.prop('disabled', true);
+                                }
+                                select.append(option);
                             }
-                            select.append(option);
                         });
                         select.prop('disabled', false); // Réactiver le select après la mise à jour des options
                     },
