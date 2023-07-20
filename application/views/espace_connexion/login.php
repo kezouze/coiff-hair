@@ -11,7 +11,7 @@ require_once(APPPATH . 'views/includes/head.php');
         <h1 style="text-align: center"><span class="welcome">Bienvenue chez</h1>
         <img id="icone" src="/code_igniter_arthur/assets/images/logo2.png" alt="coiffeur">
         <form action="" method="post">
-            <input type="text" name="identifiant" placeholder="Votre identifiant">
+            <input type="text" name="identifiant" placeholder="Email ou pseudo">
             <input name="password" placeholder="Mot de passe" type="password">
             <input type="submit" value="Connexion">
         </form>

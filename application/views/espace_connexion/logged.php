@@ -43,9 +43,7 @@ require_once(APPPATH . 'views/includes/head.php');
         <?php } else { ?>
             <p class="error">Vous avez atteint le nombre maximum de rendez-vous.</p>
         <?php } ?>
-        <?php if ((count($old_rdv)) < 1) { ?>
-            <p>Vous n'avez pas de rendez-vous passés</p>
-        <?php } else { ?>
+        <?php if ((count($old_rdv)) > 0) { ?>
             <button class="toggleButton" id="toggleButton">Voir mes rendez-vous passés</button>
             <ul>
                 <?php foreach ($old_rdv as $rdv) { ?>
@@ -57,6 +55,9 @@ require_once(APPPATH . 'views/includes/head.php');
                     </div>
                 <?php } ?>
             </ul>
+        <?php } ?>
+        <?php if (count($old_rdv) > 0) { ?>
+            <a style="color:red" href="/code_igniter_arthur/Users/delete_old_rdv">Supprimer les rdv passés</a>
         <?php } ?>
         <a style="color:red" href="/code_igniter_arthur/Users/deconnect">Se déconnecter</a>
     </div>

@@ -57,7 +57,6 @@ body {
 
 .welcome {
     font-size: 25px;
-    margin-right: 8px;
 }
 
 .titre {
@@ -77,12 +76,10 @@ i {
 
 .error {
     color: red;
-    height: 18px;
 }
 
 .valid {
     color: rgb(40, 189, 40);
-    height: 18px;
 }
 
 .info {
@@ -101,7 +98,6 @@ form {
     justify-content: center;
     align-items: center;
     gap: 12px;
-    margin-top: 15px;
 }
 
 input {
