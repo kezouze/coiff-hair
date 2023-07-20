@@ -19,8 +19,6 @@ require_once(APPPATH . 'views/includes/head.php');
                 <?php foreach ($creneaux as $creneau) {
                     if ($creneau !== "indisponible") { ?>
                         <option value="<?= $creneau ?>"><?= substr($creneau, 0, 5) ?></option>
-                    <?php } else { ?>
-                        <option value="<?= $creneau ?>" disabled><?= ($creneau) ?></option>
                 <?php }
                 } ?>
             </select>

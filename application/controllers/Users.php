@@ -155,12 +155,14 @@ class Users extends CI_Controller
 				// condition pour rappel du rdv 24h avant
 				if ($rdv->date_rendez_vous == date('Y-m-d', strtotime('+1 day')) && $this->rdvManager->is_email_send($rdv->id_rendez_vous) == 0) {
 					$time = $this->rdvManager->get_time($rdv->id_rendez_vous);
-					$this->load->library('email');
+					$details = $this->rdvManager->get_details($rdv->id_rendez_vous);
+					// $this->load->library('email'); autoloadé dans config/autoload.php
 					$this->email->from('trouduc@outil-web.fr', 'Coiff\'Hair');
 					$this->email->to($email);
 					$this->email->subject('Rappel de votre rendez-vous');
 					$this->email->message('Bonjour ' . $firstName . ', 
-							<br>Ceci est un petit message pour vous rappeler votre prochain rendez-vous demain à ' . substr($time, 0, 5) . '. 
+							<br>Ceci est un petit message pour vous rappeler votre prochain rendez-vous demain à ' . substr($time, 0, 5) . '.<br>
+							Vous avez rendez-vous pour : <i>' . $details . '</i>.
 							<br>N\'hésitez pas à nous contacter si besoin, ou modifier / annuler le rendez-vous directement sur votre espace personnel.
 							<br>Cordialement, L\'équipe de Coiff\'Hair :-)');
 					$this->email->send();
@@ -355,12 +357,11 @@ class Users extends CI_Controller
 		$info['date'] = $this->rdvManager->get_date($info['id_rdv']);
 		$info['time'] = $this->rdvManager->get_time($info['id_rdv']);
 		$info['today'] = date('Y-m-d');
+		$info['now'] = date('H:i');
 		$today = $info['today'];
-		$info['one'] = 1;
-		$one = $info['one'];
+		$one = 1;
 		$info['year'] = 365;
 		$year = $info['year'];
-		$info['now'] = date('H:i');
 		$tomorrow = date('Y-m-d', strtotime($today . " + $one days"));
 		$info['tomorrow'] = $tomorrow;
 		$info['aYearLater'] = date('Y-m-d', strtotime($today . " + $year days"));
@@ -388,8 +389,7 @@ class Users extends CI_Controller
 		if (isConnected() == false) {
 			redirect('Users');
 		} else {
-			// $this->load->database(); // Necéssaire ?
-
+			$this->load->database();
 			$this->form_validation->set_rules('date', 'Date', 'required');
 			$this->form_validation->set_rules('time', 'Heure', 'required');
 			$this->form_validation->set_rules('details', 'Détails');
@@ -401,6 +401,7 @@ class Users extends CI_Controller
 				$time = $this->input->post('time');
 				$details = $this->input->post('details');
 				$this->rdvManager->modify_rdv($info['id_rdv'], $date, $time, $details);
+				$this->rdvManager->set_email_not_sent($info['id_rdv']);
 				$info['valid'] = "Votre rdv a bien été modifié, retour à la page précédente..";
 				header('refresh:3; url = http://[::1]/code_igniter_arthur/Users/logged');
 			}

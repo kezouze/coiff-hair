@@ -111,4 +111,13 @@ class Rendez_vous_model extends CI_Model
         $this->db->where('id_rendez_vous', $id_rdv)
             ->update($this->tableName, $data);
     }
+
+    public function set_email_not_sent($id_rdv)
+    {
+        $data = array(
+            'rappel' => 0
+        );
+        $this->db->where('id_rendez_vous', $id_rdv)
+            ->update($this->tableName, $data);
+    }
 }
