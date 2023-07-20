@@ -72,4 +72,23 @@ class Rendez_vous_model extends CI_Model
             ->row();
         return ($query->heure_rendez_vous);
     }
+
+    public function is_email_send($id_rdv)
+    {
+        $query = $this->db->select('rappel')
+            ->from($this->tableName)
+            ->where('id_rendez_vous', $id_rdv)
+            ->get()
+            ->row();
+        return ($query->rappel);
+    }
+
+    public function set_email_sent($id_rdv)
+    {
+        $data = array(
+            'rappel' => 1
+        );
+        $this->db->where('id_rendez_vous', $id_rdv)
+            ->update($this->tableName, $data);
+    }
 }

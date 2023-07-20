@@ -4,9 +4,6 @@
 <?php
 $title = "Votre espace";
 require_once(APPPATH . 'views/includes/head.php');
-var_dump($rdvDateTime);
-echo '<br>';
-var_dump($now);
 ?>
 
 <body>

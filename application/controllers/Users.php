@@ -122,7 +122,7 @@ class Users extends CI_Controller
 			$gender = $this->input->post('gender');
 			$lastName = $this->input->post('last_name');
 			$firstName = $this->input->post('first_name');
-			$pseudo = $this->input->post('pseudo'); // Même chose que $_POST['pseudo']
+			$pseudo = $this->input->post('pseudo');
 			$email = $this->input->post('email');
 			$password = md5($this->input->post('password'));
 			$this->usersManager->add_user($gender, $lastName, $firstName, $pseudo, $email, $password);
@@ -144,32 +144,27 @@ class Users extends CI_Controller
 		$info['all_rdv'] = $this->rdvManager->get_all_rendez_vous($info['id_user']);
 		$info['old_rdv'] = []; // on initialise les tableaux pour éviter une erreur undefined dans la vue
 		$info['next_rdv'] = [];
-		// $today = date('Y-m-d');
-		// $now = date('H:i:s');
-		// $info['formattedNow'] = strtotime($now);
 		$info['now'] = time();
 		$email = $this->usersManager->get_email($info['id_user']);
 		$firstName = $this->usersManager->get_first_name($info['id_user']);
-		$send = false; // on initialise la variable pour éviter l'envoi de plusieurs mails
 
 		foreach ($info['all_rdv'] as $rdv) {
-			// if ($rdv->date_rendez_vous > $today || ($rdv->date_rendez_vous == $today && strtotime($rdv->heure_rendez_vous) > $info['formattedNow'])) {
 			$info['rdvDateTime'] = strtotime($rdv->date_rendez_vous . ' ' . $rdv->heure_rendez_vous);
 			if ($info['rdvDateTime'] > $info['now']) {
 				$info['next_rdv'][] = $rdv; // on stocke les rdv à venir
 				// condition pour rappel du rdv 24h avant
-				if ($rdv->date_rendez_vous == date('Y-m-d', strtotime('+1 day')) && $send === false) {
+				if ($rdv->date_rendez_vous == date('Y-m-d', strtotime('+1 day')) && $this->rdvManager->is_email_send($rdv->id_rendez_vous) == 0) {
 					$time = $this->rdvManager->get_time($rdv->id_rendez_vous);
 					$this->load->library('email');
 					$this->email->from('trouduc@outil-web.fr', 'Coiff\'Hair');
 					$this->email->to($email);
 					$this->email->subject('Rappel de votre rendez-vous');
 					$this->email->message('Bonjour ' . $firstName . ', 
-						<br>Ceci est un petit message pour vous rappeler votre prochain rendez-vous demain à ' . substr($time, 0, 5) . '. 
-						<br>N\'hésitez pas à nous contacter si besoin, ou modifier / annuler le rendez-vous directement sur votre espace personnel.
-						<br>Cordialement, L\'équipe de Coiff\'Hair :-)');
-					// $this->email->send(); // ça envoi à chaque connexion, à voir comment faire pour n'envoyer qu'une fois
-					$send = true;
+							<br>Ceci est un petit message pour vous rappeler votre prochain rendez-vous demain à ' . substr($time, 0, 5) . '. 
+							<br>N\'hésitez pas à nous contacter si besoin, ou modifier / annuler le rendez-vous directement sur votre espace personnel.
+							<br>Cordialement, L\'équipe de Coiff\'Hair :-)');
+					$this->email->send();
+					$this->rdvManager->set_email_sent($rdv->id_rendez_vous);
 				}
 			} else {
 				$info['old_rdv'][] = $rdv; // on stocke les rdv passés
@@ -237,8 +232,7 @@ class Users extends CI_Controller
 		$info['email'] = $_GET['email'];
 
 		if (!isset($info['code']) || !isset($info['email'])) {
-			header('Location: http://[::1]/code_igniter_arthur/Users/');
-			//redirection avec redirect() ou html 
+			redirect('Users');
 			exit();
 		} else {
 
