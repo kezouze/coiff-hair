@@ -146,7 +146,9 @@ class Users extends CI_Controller
 		$info['next_rdv'] = [];
 		$info['now'] = time();
 		$email = $this->usersManager->get_email($info['id_user']);
-		$firstName = $this->usersManager->get_first_name($info['id_user']);
+		$info['first_name'] = $this->usersManager->get_first_name($info['id_user']);
+		$firstName = $info['first_name'];
+		$info['gender'] = $this->usersManager->get_gender($info['id_user']);
 
 		foreach ($info['all_rdv'] as $rdv) {
 			$info['rdvDateTime'] = strtotime($rdv->date_rendez_vous . ' ' . $rdv->heure_rendez_vous);
@@ -174,8 +176,6 @@ class Users extends CI_Controller
 				// redirect('Users/logged');
 			}
 		}
-		$info['first_name'] = $this->usersManager->get_first_name($info['id_user']);
-		$info['gender'] = $this->usersManager->get_gender($info['id_user']);
 		$this->load->view('espace_connexion/logged', $info);
 	}
 
@@ -344,9 +344,24 @@ class Users extends CI_Controller
 
 	public function delete_rdv()
 	{
-
 		$this->rdvManager->delete_rdv($_GET['id_rdv']);
 		redirect('/Users');
+	}
+
+	public function delete_old_rdv()
+	{
+		if (isConnected() == false) {
+			redirect('Users');
+		} else {
+			$info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
+			$info['all_rdv'] = $this->rdvManager->get_all_rendez_vous($info['id_user']);
+			foreach ($info['all_rdv'] as $rdv) {
+				if ($rdv->date_rendez_vous < date('Y-m-d') || ($rdv->date_rendez_vous == date('Y-m-d') && $rdv->heure_rendez_vous < date('H:i'))) {
+					$this->rdvManager->delete_rdv($rdv->id_rendez_vous);
+				}
+			}
+			redirect('/Users/logged');
+		}
 	}
 
 	public function modify_rdv()
