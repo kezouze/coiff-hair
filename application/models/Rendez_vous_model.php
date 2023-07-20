@@ -33,13 +33,13 @@ class Rendez_vous_model extends CI_Model
         $this->db->delete($this->tableName, array('id_rendez_vous' => $id_rdv));
     }
 
-    public function modify_rdv($id_rdv, $date, $heure/*, $details*/)
+    public function modify_rdv($id_rdv, $date, $heure, $details)
     {
         $data = array(
             'date_rendez_vous' => $date,
             'heure_rendez_vous' => $heure,
-            // 'id_rdv' => $id_rdv,
-            // 'details_rendez_vous' => $details
+            'id_rendez_vous' => $id_rdv,
+            'details_rendez_vous' => $details
         );
         $this->db->where('id_rendez_vous', $id_rdv)
             ->update($this->tableName, $data);
@@ -63,6 +63,16 @@ class Rendez_vous_model extends CI_Model
         return $query;
     }
 
+    public function get_date($id_rdv)
+    {
+        $query = $this->db->select('date_rendez_vous')
+            ->where('id_rendez_vous', $id_rdv)
+            ->from($this->tableName)
+            ->get()
+            ->row();
+        return ($query->date_rendez_vous);
+    }
+
     public function get_time($id_rdv)
     {
         $query = $this->db->select('heure_rendez_vous')
@@ -71,6 +81,16 @@ class Rendez_vous_model extends CI_Model
             ->get()
             ->row();
         return ($query->heure_rendez_vous);
+    }
+
+    public function get_details($id_rdv)
+    {
+        $query = $this->db->select('details_rendez_vous')
+            ->where('id_rendez_vous', $id_rdv)
+            ->from($this->tableName)
+            ->get()
+            ->row();
+        return ($query->details_rendez_vous);
     }
 
     public function is_email_send($id_rdv)

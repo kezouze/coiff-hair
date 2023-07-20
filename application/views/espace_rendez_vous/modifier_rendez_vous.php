@@ -7,33 +7,26 @@ require_once(APPPATH . 'views/includes/head.php');
 ?>
 
 <body>
-    <?php
-    $today = date('Y-m-d');
-    $one = 1;
-    $tomorrow = date('Y-m-d', strtotime($today . " + $one days"));
-    $year = 365;
-    $aYearLater = date('Y-m-d', strtotime($today . " + $year days"));
-    $now = date('H:i');
-    $creneaux = [
-        "09:00", "09:30", "10:00", "10:30", "11:00", "11h30", "12:00",
-        "13:30", "14:00", "14:30", "15:00", "15:30", "16:00", "16:30", "17:00"
-    ];
-    ?>
     <div class="container">
-        <h3>Modifier votre rendez-vous du ...</h3>
+        <i>
+            <h3>Modifier votre rendez-vous du :<br><b style="color:#ff7f00; font-size:30px;"><?= date('d/m/Y', strtotime($date)) ?></b> à <b style="color:#ff7f00; font-size:30px;"><?= substr($time, 0, 5) ?></b></h3>
+        </i>
         <form action="" method="post">
             <label for="date">Votre nouvelle date :</label>
-            <input type="date" name="date" min="<?= $tomorrow ?>" max="<?= $aYearLater ?>" value="<?= $tomorrow ?>">
+            <input type="date" name="date" min="<?= $tomorrow ?>" max="<?= $aYearLater ?>">
             <label for="time">Nous sommes ouverts de 09h à 17h30</label>
-            <select name="time">
+            <select id="time" name="time" value="<?php $time ?>"><!-- fix this -->
                 <?php foreach ($creneaux as $creneau) {
-                    // conditions à rajouter:
-                    // if($date == $today && $creneau > $now) { 
-                ?>
-                    <option value="<?= $creneau ?>"><?= $creneau ?></option>
-                <?php //} 
+                    if ($creneau !== "indisponible") { ?>
+                        <option value="<?= $creneau ?>"><?= substr($creneau, 0, 5) ?></option>
+                    <?php } else { ?>
+                        <option value="<?= $creneau ?>" disabled><?= ($creneau) ?></option>
+                <?php }
                 } ?>
             </select>
+            <textarea required placeholder="<?= $details ?>" maxlength="1000" name="details" cols="29" rows="5" value="<?= $details ?>"></textarea>
+            <!-- Le bouton submit devrait être désactivé après un seul clic pour éviter les bugs de doublons. 
+            Le required sur input[détails] fait l'affaire pour le moment -->
             <input type="submit" value="Modifier">
         </form>
         <?php if (isset($error) || isset($valid)) { ?>
@@ -43,5 +36,58 @@ require_once(APPPATH . 'views/includes/head.php');
         <a href="/code_igniter_arthur/Users/logged">Annuler</a>
     </div>
 </body>
+<script>
+    var date = new Date();
+    var h = date.getHours();
+    var m = date.getMinutes();
+    var s = date.getSeconds();
+
+    function formatDateToYYYYMMDD(date) {
+        var year = date.getFullYear();
+        var month = String(date.getMonth() + 1).padStart(2, '0');
+        var day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+    formattedDate = formatDateToYYYYMMDD(date);
+
+    // jQuery est importé dans le head.php
+    $(document).ready(function() {
+        var selectedDate = formattedDate; // Sélectionner la date du jour par défaut
+        $('#date').change(function() {
+            selectedDate = $(this).val();
+            $.ajax({
+                url: "<?php echo base_url('Users/get_available_times'); ?>",
+                type: "POST",
+                data: {
+                    date: selectedDate
+                },
+                dataType: "json",
+                success: function(response) {
+                    var select = $('#time');
+                    select.empty();
+                    $.each(response.times, function(index, time) {
+                        var option = $('<option></option>').val(time).text(time);
+                        var Hour = parseInt(time.substr(0, 2));
+                        var Minutes = parseInt(time.substr(3, 2));
+
+                        if (selectedDate === formattedDate) {
+                            if (time === "indisponible" || Hour < h || (Hour === h && Minutes <= m)) { // wink wink
+                                option.prop('disabled', true);
+                            }
+                            select.append(option);
+                        } else {
+                            if (time === "indisponible") {
+                                option.prop('disabled', true);
+                            }
+                            select.append(option);
+                        }
+                    });
+                    select.prop('disabled', false); // Réactiver le select après la mise à jour des options
+                },
+                error: function(xhr, status, error) {}
+            });
+        });
+    });
+</script>
 
 </html>

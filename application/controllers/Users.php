@@ -126,7 +126,7 @@ class Users extends CI_Controller
 			$email = $this->input->post('email');
 			$password = md5($this->input->post('password'));
 			$this->usersManager->add_user($gender, $lastName, $firstName, $pseudo, $email, $password);
-			$info['valid'] = "Votre compte est bien enregstré ! Redirection à la page d'accueil pour vous connecter...";
+			$info['valid'] = "Votre compte est bien enregistré ! Redirection à la page d'accueil pour vous connecter...";
 			header('refresh: 3; url=http://localhost/code_igniter_arthur/Users');
 		}
 		$this->load->view('espace_inscription/inscription', $info);
@@ -277,7 +277,6 @@ class Users extends CI_Controller
 		if (isset($_POST['date']) && isset($_POST['time'])) {
 			$date = $_POST['date'];
 			$time = $_POST['time'];
-			$isAvailable = $this->rdvManager->isAvailable($date, $time);
 		} else {
 			$date = $tomorrow;
 			$time = date('H:i');
@@ -353,23 +352,55 @@ class Users extends CI_Controller
 		$info['error'] = "";
 		$info['valid'] = "";
 		$info['id_rdv'] = $_GET['id_rdv'];
+		$info['date'] = $this->rdvManager->get_date($info['id_rdv']);
+		$info['time'] = $this->rdvManager->get_time($info['id_rdv']);
+		$info['today'] = date('Y-m-d');
+		$today = $info['today'];
+		$info['one'] = 1;
+		$one = $info['one'];
+		$info['year'] = 365;
+		$year = $info['year'];
+		$info['now'] = date('H:i');
+		$tomorrow = date('Y-m-d', strtotime($today . " + $one days"));
+		$info['tomorrow'] = $tomorrow;
+		$info['aYearLater'] = date('Y-m-d', strtotime($today . " + $year days"));
+		$info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
+		$info['details'] = $this->rdvManager->get_details($info['id_rdv']);
+
+		if (isset($_POST['date']) && isset($_POST['time'])) {
+			$date = $_POST['date'];
+			$time = $_POST['time'];
+		} else {
+			$date = $tomorrow;
+			$time = date('H:i');
+		}
+
+		$info['creneaux'] = [
+			"09:00:00", "09:30:00", "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00",
+			"13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00"
+		];
+		foreach ($info['creneaux'] as &$key) { // Le '&' fait fonctionner le bazar. ???
+			if ($this->rdvManager->isAvailable($date, $key) > 0) {
+				$key = "indisponible";
+			}
+		}
 
 		if (isConnected() == false) {
 			redirect('Users');
 		} else {
-			$this->load->database(); // Necéssaire ?
+			// $this->load->database(); // Necéssaire ?
 
 			$this->form_validation->set_rules('date', 'Date', 'required');
 			$this->form_validation->set_rules('time', 'Heure', 'required');
-			// $this->form_validation->set_rules('details', 'Détails');
+			$this->form_validation->set_rules('details', 'Détails');
 
 			if ($this->form_validation->run() == false) {
 				$info['error'] = validation_errors();
 			} else {
 				$date = $this->input->post('date');
 				$time = $this->input->post('time');
-				// $details = $this->input->post('details');
-				$this->rdvManager->modify_rdv($info['id_rdv'], $date, $time/*, $details*/);
+				$details = $this->input->post('details');
+				$this->rdvManager->modify_rdv($info['id_rdv'], $date, $time, $details);
 				$info['valid'] = "Votre rdv a bien été modifié, retour à la page précédente..";
 				header('refresh:3; url = http://[::1]/code_igniter_arthur/Users/logged');
 			}
