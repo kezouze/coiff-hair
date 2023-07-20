@@ -19,8 +19,6 @@ require_once(APPPATH . 'views/includes/head.php');
                 <?php foreach ($creneaux as $creneau) {
                     if ($creneau !== "indisponible") { ?>
                         <option value="<?= $creneau ?>"><?= substr($creneau, 0, 5) ?></option>
-                    <?php } else { ?>
-                        <option value="<?= $creneau ?>" disabled><?= ($creneau) ?></option>
                 <?php }
                 } ?>
             </select>
@@ -29,7 +27,6 @@ require_once(APPPATH . 'views/includes/head.php');
             Le required sur input[détails] fait l'affaire pour le moment -->
             <input type="submit" value="Réserver">
         </form>
-
         <?php if (isset($error) || isset($valid)) { ?>
             <p class="error"><?= $error ?></p>
             <p class="valid"><?= $valid ?></p>
