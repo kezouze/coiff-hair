@@ -155,10 +155,19 @@ ul {
     list-style-position: inside;
 }
 
-.ligne,
+.ligne {
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    gap: 25px;
+    align-items: stretch;
+}
+
 .ligne2 {
     padding: 10px 15px;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     justify-content: space-between;
     gap: 25px;
     align-items: stretch;
@@ -178,6 +187,7 @@ ul {
     text-overflow: ellipsis;
     white-space: nowrap;
     align-items: stretch;
+    list-style-type: none;
 }
 
 .gender {
@@ -188,8 +198,13 @@ ul {
 }
 
 .toggleButton {
-    /* make it transparent but not the text */
-    background-color: transparent;
+    padding: 2px;
+}
 
+.toggleButton:hover {
+    cursor: pointer;
+}
 
+.dateAndTime {
+    font-size: 20px;
 }
