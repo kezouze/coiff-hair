@@ -63,15 +63,7 @@ require_once(APPPATH . 'views/includes/head.php');
     </div>
 </body>
 <script>
-    $(document).ready(function() {
-        $("#toggleButton").click(function() {
-            $(".ligne2").toggle();
-            // on change le texte du bouton :
-            var buttonText = $(".ligne2").is(":visible") ? "Cacher mes rendez-vous passés" : "Voir mes rendez-vous passés";
-            $(this).text(buttonText);
-
-        });
-    });
+    toggleButton();
 </script>
 
 </html>
