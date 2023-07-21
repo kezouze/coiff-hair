@@ -36,12 +36,11 @@ require_once(APPPATH . 'views/includes/head.php');
     </div>
     <!-- Mettre js dans fichier à part -->
     <script>
-        var date = new Date();
-        var h = date.getHours();
-        var m = date.getMinutes();
-        var s = date.getSeconds();
-
         function showTime() {
+            var date = new Date();
+            var h = date.getHours();
+            var m = date.getMinutes();
+            var s = date.getSeconds();
             h = (h < 10) ? "0" + h : h;
             m = (m < 10) ? "0" + m : m;
             s = (s < 10) ? "0" + s : s;
@@ -51,6 +50,12 @@ require_once(APPPATH . 'views/includes/head.php');
             setTimeout(showTime, 1000);
         }
         showTime();
+
+        // si je ne duplique pas, ça bugue 
+        var date = new Date();
+        var h = date.getHours();
+        var m = date.getMinutes();
+        var s = date.getSeconds();
 
         function formatDateToYYYYMMDD(date) {
             var year = date.getFullYear();
@@ -77,11 +82,11 @@ require_once(APPPATH . 'views/includes/head.php');
                         select.empty();
                         $.each(response.times, function(index, time) {
                             var option = $('<option></option>').val(time).text(time);
-                            var Hour = parseInt(time.substr(0, 2));
-                            var Minutes = parseInt(time.substr(3, 2));
+                            var hour = parseInt(time.substr(0, 2));
+                            var minutes = parseInt(time.substr(3, 2));
 
                             if (selectedDate === formattedDate) {
-                                if (time === "indisponible" || Hour < h || (Hour === h && Minutes <= m)) { // wink wink
+                                if (time === "indisponible" || hour < h || (hour === h && minutes <= m)) {
                                     option.prop('disabled', true);
                                 }
                                 select.append(option);
@@ -92,7 +97,7 @@ require_once(APPPATH . 'views/includes/head.php');
                                 select.append(option);
                             }
                         });
-                        select.prop('disabled', false); // Réactiver le select après la mise à jour des options
+                        select.prop('disabled', false);
                     },
                     error: function(xhr, status, error) {}
                 });
