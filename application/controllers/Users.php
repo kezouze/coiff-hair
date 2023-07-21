@@ -283,15 +283,15 @@ class Users extends CI_Controller
 			$date = $tomorrow;
 			$time = date('H:i');
 		}
-		$info['creneaux'] = [
-			"09:00:00", "09:30:00", "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00",
-			"13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00"
-		];
-		foreach ($info['creneaux'] as &$key) { // Le '&' fait fonctionner le bazar. ???
-			if ($this->rdvManager->isAvailable($date, $key) > 0) {
-				$key = "indisponible";
-			}
-		}
+		// $info['creneaux'] = [
+		// 	"09:00:00", "09:30:00", "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00",
+		// 	"13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00"
+		// ];
+		// foreach ($info['creneaux'] as &$key) { // Le '&' fait fonctionner le bazar. ???
+		// 	if ($this->rdvManager->isAvailable($date, $key) > 0) {
+		// 		$key = "indisponible";
+		// 	}
+		// }
 		if (isConnected() == false) {
 			redirect('Users');
 		} else {
@@ -391,15 +391,15 @@ class Users extends CI_Controller
 			$time = date('H:i');
 		}
 
-		$info['creneaux'] = [
-			"09:00:00", "09:30:00", "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00",
-			"13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00"
-		];
-		foreach ($info['creneaux'] as &$key) { // Le '&' fait fonctionner le bazar. ???
-			if ($this->rdvManager->isAvailable($date, $key) > 0) {
-				$key = "indisponible";
-			}
-		}
+		// $info['creneaux'] = [
+		// 	"09:00:00", "09:30:00", "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00",
+		// 	"13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00"
+		// ];
+		// foreach ($info['creneaux'] as &$key) { // Le '&' fait fonctionner le bazar. ???
+		// 	if ($this->rdvManager->isAvailable($date, $key) > 0) {
+		// 		$key = "indisponible";
+		// 	}
+		// }
 
 		if (isConnected() == false) {
 			redirect('Users');
