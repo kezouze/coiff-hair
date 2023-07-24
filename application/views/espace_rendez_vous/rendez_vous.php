@@ -4,6 +4,7 @@
 <?php
 $title = "Prendre rdv";
 require_once(APPPATH . 'views/includes/head.php');
+
 ?>
 
 <body>

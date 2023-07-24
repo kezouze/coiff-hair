@@ -309,11 +309,23 @@ class Users extends CI_Controller
 
 	public function get_available_times()
 	{
+		// $info['error'] = "";
 		$selectedDate = $this->input->post('date');
-		$availableTimes = [
-			"09:00:00", "09:30:00", "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00",
-			"13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00"
-		];
+		$info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
+		$info['nb_today_rdv'] = $this->rdvManager->get_nb_today_rdv($info['id_user']);
+
+		// ça marche seulement pour le jour-même sans prendre en compte les autres jours
+		if ($selectedDate == date('Y-m-d') && $info['nb_today_rdv'] > 0) {
+			$response = array(
+				'times' => ['indisponible']
+			);
+			// $info['error'] = 'Vous avez déjà un rendez-vous ce jour-ci';
+		} else
+
+			$availableTimes = [
+				"09:00:00", "09:30:00", "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00",
+				"13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00"
+			];
 		foreach ($availableTimes as &$key) { // Le '&' fait fonctionner le bazar. ???
 			if ($this->rdvManager->isAvailable($selectedDate, $key) > 0) {
 				$key = "indisponible";

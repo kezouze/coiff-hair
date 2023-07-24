@@ -63,6 +63,15 @@ class Rendez_vous_model extends CI_Model
         return $query;
     }
 
+    public function get_nb_today_rdv($id_user)
+    {
+        $query = $this->db->where('id_user', $id_user)
+            ->where('date_rendez_vous =', date('Y-m-d'))
+            ->from($this->tableName)
+            ->count_all_results();
+        return $query;
+    }
+
     public function get_date($id_rdv)
     {
         $query = $this->db->select('date_rendez_vous')
