@@ -300,7 +300,7 @@ class Users extends CI_Controller
 				header('refresh:3; url = http://[::1]/code_igniter_arthur/Users/logged');
 			}
 		}
-		if ($info['nb_rdv'] >= 3) {
+		if ($info['nb_rdv'] >= 3) { // a modifier pour que ça ne prenne pas en compte les rdv passés
 			redirect('Users/logged');
 		} else {
 			$this->load->view('espace_rendez_vous/rendez_vous', $info);
