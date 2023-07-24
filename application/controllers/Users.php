@@ -27,7 +27,7 @@ class Users extends CI_Controller
 			// on vérifie si il y a bien une ligne correspondant avec les infos données dans la BDD //
 			if ($this->usersManager->cb_users_bis($_POST["identifiant"], md5($_POST["password"])) == 1) {
 
-				$_SESSION['pseudo'] = $_POST["identifiant"];
+				$_SESSION['pseudo'] = trim(htmlspecialchars($_POST["identifiant"]));
 
 				redirect('Users/logged');
 			} else $info['error'] = 'Veuillez vérifier votre saisie';
@@ -53,7 +53,7 @@ class Users extends CI_Controller
 		$this->form_validation->set_rules(
 			'gender',
 			'"Genre"',
-			'required',
+			'trim|required',
 			array(
 				'required' => 'Vous devez remplir le champ %s',
 			)
@@ -62,7 +62,7 @@ class Users extends CI_Controller
 		$this->form_validation->set_rules(
 			'last_name',
 			'"Nom"',
-			'required',
+			'trim|required',
 			array(
 				'required' => 'Vous devez remplir le champ %s',
 			)
@@ -71,7 +71,7 @@ class Users extends CI_Controller
 		$this->form_validation->set_rules(
 			'first_name',
 			'"Prénom"',
-			'required',
+			'trim|required',
 			array(
 				'required' => 'Vous devez remplir le champ %s',
 			)
@@ -80,7 +80,7 @@ class Users extends CI_Controller
 		$this->form_validation->set_rules(
 			'pseudo',
 			'"Pseudo"',
-			'required|min_length[3]|is_unique[users.pseudo]',
+			'trim|required|min_length[3]|is_unique[users.pseudo]',
 			array(
 				'is_unique' => 'Ce pseudo est déjà pris',
 				'required' => 'Vous devez remplir le champ %s',
@@ -90,7 +90,7 @@ class Users extends CI_Controller
 		$this->form_validation->set_rules(
 			'email',
 			'"Email"',
-			'required|valid_email|is_unique[users.email]',
+			'trim|required|valid_email|is_unique[users.email]',
 			array(
 				'required' => 'Vous devez remplir le champ %s',
 				'valid_email' => 'Vous devez saisir une adresse email valide',
@@ -100,7 +100,7 @@ class Users extends CI_Controller
 		$this->form_validation->set_rules(
 			'password',
 			'"Mot de passe"',
-			'required|min_length[6]',
+			'trim|required|min_length[6]',
 			array(
 				'required' => 'Vous devez remplir le champ %s',
 				'min_length' => 'Le champ %s doit contenir au moins 6 caractères'
@@ -109,7 +109,7 @@ class Users extends CI_Controller
 		$this->form_validation->set_rules(
 			'confirm_password',
 			'"Confirmez votre mot de passe"',
-			'required|matches[password]',
+			'trim|required|matches[password]',
 			array(
 				'required' => 'Vous devez remplir le champ %s',
 				'matches' => 'Les mots de passe ne correspondent pas'
@@ -120,14 +120,14 @@ class Users extends CI_Controller
 			$info['error'] = validation_errors();
 		} else {
 			$gender = $this->input->post('gender');
-			$lastName = $this->input->post('last_name');
-			$firstName = $this->input->post('first_name');
-			$pseudo = $this->input->post('pseudo');
-			$email = $this->input->post('email');
+			$lastName = htmlspecialchars($this->input->post('last_name'));
+			$firstName = htmlspecialchars($this->input->post('first_name'));
+			$pseudo = htmlspecialchars($this->input->post('pseudo'));
+			$email = htmlspecialchars($this->input->post('email'));
 			$password = md5($this->input->post('password'));
 			$this->usersManager->add_user($gender, $lastName, $firstName, $pseudo, $email, $password);
 			$info['valid'] = "Votre compte est bien enregistré ! Redirection à la page d'accueil pour vous connecter...";
-			header('refresh: 3; url=http://localhost/code_igniter_arthur/Users');
+			header('refresh: 3; url=http://[::1]/code_igniter_arthur/Users');
 		}
 		$this->load->view('espace_inscription/inscription', $info);
 	}
@@ -285,16 +285,16 @@ class Users extends CI_Controller
 			redirect('Users');
 		} else {
 			$this->load->database();
-			$this->form_validation->set_rules('date', 'Date', 'required');
-			$this->form_validation->set_rules('time', 'Heure', 'required');
-			$this->form_validation->set_rules('details', 'Détails');
+			$this->form_validation->set_rules('date', 'Date', 'trim|required');
+			$this->form_validation->set_rules('time', 'Heure', 'trim|required');
+			$this->form_validation->set_rules('details', 'Détails', 'trim');
 
 			if ($this->form_validation->run() == false) {
 				$info['error'] = validation_errors();
 			} else {
 				$date = $this->input->post('date');
 				$time = $this->input->post('time');
-				$details = $this->input->post('details');
+				$details = htmlspecialchars($this->input->post('details'));
 				$this->rdvManager->set_new_rendez_vous($info['id_user'], $date, $time, $details);
 				$info['valid'] = "Votre rdv est enregistré, retour à la page précédente...";
 				header('refresh:3; url = http://[::1]/code_igniter_arthur/Users/logged');
@@ -396,16 +396,16 @@ class Users extends CI_Controller
 			redirect('Users');
 		} else {
 			$this->load->database();
-			$this->form_validation->set_rules('date', 'Date', 'required');
-			$this->form_validation->set_rules('time', 'Heure', 'required');
-			$this->form_validation->set_rules('details', 'Détails');
+			$this->form_validation->set_rules('date', 'Date', 'trim|required');
+			$this->form_validation->set_rules('time', 'Heure', 'trim|required');
+			$this->form_validation->set_rules('details', 'Détails', 'trim');
 
 			if ($this->form_validation->run() == false) {
 				$info['error'] = validation_errors();
 			} else {
 				$date = $this->input->post('date');
 				$time = $this->input->post('time');
-				$details = $this->input->post('details');
+				$details = htmlspecialchars($this->input->post('details'));
 				$this->rdvManager->modify_rdv($info['id_rdv'], $date, $time, $details);
 				$this->rdvManager->set_email_not_sent($info['id_rdv']);
 				$info['valid'] = "Votre rdv a bien été modifié, retour à la page précédente..";
