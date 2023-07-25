@@ -248,7 +248,7 @@ class Users extends CI_Controller
 						$new_password = $_POST['new_password'];
 						$this->usersManager->change_password($info['email'], md5($new_password));
 						$info['valid'] = 'Nous avons bien modifié votre mot de passe ! Redirection vers la page d\'accueil... ';
-						header('refresh: 4; url=http://localhost/code_igniter_arthur/Users');
+						header('refresh: 4; url=http://[::1]/code_igniter_arthur/Users');
 					} else $info['error'] = "Veuillez vérifier votre saisie";
 				}
 			} else $info['error'] = "Une erreur est survenue";
