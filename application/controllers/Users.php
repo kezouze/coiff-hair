@@ -265,11 +265,15 @@ class Users extends CI_Controller
 		$today = $info['today'];
 		$info['one'] = 1;
 		$one = $info['one'];
+		$seven = 7;
+		$thirtyOne = 31;
 		$info['year'] = 365;
 		$year = $info['year'];
 		$info['now'] = date('H:i');
 		$tomorrow = date('Y-m-d', strtotime($today . " + $one days"));
 		$info['tomorrow'] = $tomorrow;
+		$info['aWeekLater'] = date('Y-m-d', strtotime($today . " + $seven days"));
+		$info['aMonthLater'] = date('Y-m-d', strtotime($today . " + $thirtyOne days"));
 		$info['aYearLater'] = date('Y-m-d', strtotime($today . " + $year days"));
 		$info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
 		$info['nb_rdv'] = $this->rdvManager->get_nb_next_rdv($info['id_user']);
@@ -300,7 +304,7 @@ class Users extends CI_Controller
 				header('refresh:3; url = http://[::1]/code_igniter_arthur/Users/logged');
 			}
 		}
-		if ($info['nb_rdv'] >= 3) { // a modifier pour que ça ne prenne pas en compte les rdv passés
+		if ($info['nb_rdv'] >= 3) {
 			redirect('Users/logged');
 		} else {
 			$this->load->view('espace_rendez_vous/rendez_vous', $info);
@@ -309,25 +313,16 @@ class Users extends CI_Controller
 
 	public function get_available_times()
 	{
-		// $info['error'] = "";
 		$selectedDate = $this->input->post('date');
 		$info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
-		$info['nb_today_rdv'] = $this->rdvManager->get_nb_today_rdv($info['id_user']);
+		$info['nb_today_rdv'] = $this->rdvManager->get_nb_today_rdv($info['id_user'], $selectedDate);
 
-		// ça marche seulement pour le jour-même sans prendre en compte les autres jours
-		if ($selectedDate == date('Y-m-d') && $info['nb_today_rdv'] > 0) {
-			$response = array(
-				'times' => ['indisponible']
-			);
-			// $info['error'] = 'Vous avez déjà un rendez-vous ce jour-ci';
-		} else
-
-			$availableTimes = [
-				"09:00:00", "09:30:00", "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00",
-				"13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00"
-			];
+		$availableTimes = [
+			"09:00:00", "09:30:00", "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00",
+			"13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00"
+		];
 		foreach ($availableTimes as &$key) { // Le '&' fait fonctionner le bazar. ???
-			if ($this->rdvManager->isAvailable($selectedDate, $key) > 0) {
+			if ($this->rdvManager->isAvailable($selectedDate, $key) > 0 && $info['nb_today_rdv'] > 0) {
 				$key = "indisponible";
 			} else {
 				$key = substr($key, 0, 5);
@@ -337,7 +332,6 @@ class Users extends CI_Controller
 		$response = array(
 			'times' => $availableTimes
 		);
-
 		// Répondre avec les créneaux horaires disponibles au format JSON
 		header('Content-Type: application/json');
 		echo json_encode($response);
