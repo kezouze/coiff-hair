@@ -128,7 +128,8 @@ textarea {
 
 }
 
-input[type="submit"] {
+input[type="submit"],
+.inscription {
     width: 110px;
     height: 30px;
     border: 2px solid darkslategray;

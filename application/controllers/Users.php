@@ -326,6 +326,7 @@ class Users extends CI_Controller
 				$key = "indisponible";
 			} else {
 				$key = substr($key, 0, 5);
+				$key = str_replace(':', 'h', $key);
 			}
 		}
 
@@ -366,6 +367,7 @@ class Users extends CI_Controller
 		$info['id_rdv'] = $_GET['id_rdv'];
 		$info['date'] = $this->rdvManager->get_date($info['id_rdv']);
 		$info['time'] = $this->rdvManager->get_time($info['id_rdv']);
+		$info['time'] = str_replace(':', 'h', $info['time']);
 		$info['today'] = date('Y-m-d');
 		$info['now'] = date('H:i');
 		$today = $info['today'];

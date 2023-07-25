@@ -15,10 +15,10 @@ require_once(APPPATH . 'views/includes/head.php');
             <input name="password" placeholder="Mot de passe" type="password">
             <input type="submit" value="Connexion">
         </form>
-        <a href="http://[::1]/code_igniter_arthur/Users/forgot_password">Mot de passe oublié ?</a>
         <p class="error"><?= $error ?></p>
+        <a href="http://[::1]/code_igniter_arthur/Users/forgot_password">Mot de passe oublié ?</a>
+        <button class="inscription"><a href="http://[::1]/code_igniter_arthur/Users/inscription">Inscrivez-vous</a> !</button class="inscription">
         <hr class="dashed">
-        <h4><a href="http://[::1]/code_igniter_arthur/Users/inscription">Inscrivez-vous</a> !</h4>
         <h4><a href="http://[::1]/code_igniter_arthur/Pros">Espace professionnel</a></h4>
     </div>
 </body>
