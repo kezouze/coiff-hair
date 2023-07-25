@@ -24,8 +24,8 @@ require_once(APPPATH . 'views/includes/head.php');
                     if ($rdv->date_rendez_vous >= date('Y-m-d')) { ?>
                         <div class="ligne">
                             <div class="li">
-                                <li><i class="dateAndTime">Le <?= date('d/m/Y', strtotime($rdv->date_rendez_vous)) . ' à ' . date('H:i', strtotime($rdv->heure_rendez_vous)) . '.</i>
-                        <br><span>Détails : ' . $rdv->details_rendez_vous ?></span></li>
+                                <li><i class="dateAndTime">Le <?= date('d/m/Y', strtotime($rdv->date_rendez_vous)) . ' à ' . date('H\hi', strtotime($rdv->heure_rendez_vous)) . '.</i>
+                        <br><span>Détails : ' . $rdv->details_rendez_vous ?>.</span></li>
                             </div>
                             <div class="icones_container">
                                 <a href="/code_igniter_arthur/Users/modify_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img src="/code_igniter_arthur/assets/images/modifier.png" class="icone_modif" alt="modifier"></a>
@@ -49,8 +49,8 @@ require_once(APPPATH . 'views/includes/head.php');
                 <ul>
                     <?php foreach ($old_rdv as $rdv) { ?>
                         <div class="li">
-                            <li><i>Le <?= date('d/m/Y', strtotime($rdv->date_rendez_vous)) . ' à ' . date('H:i', strtotime($rdv->heure_rendez_vous)) ?>.</i>
-                                <br><span>Détails : <?= $rdv->details_rendez_vous ?></span>
+                            <li><i>Le <?= date('d/m/Y', strtotime($rdv->date_rendez_vous)) . ' à ' . date('H\hi', strtotime($rdv->heure_rendez_vous)) ?>.</i>
+                                <br><span>Détails : <?= $rdv->details_rendez_vous ?>.</span>
                             </li>
                             <?php if (count($old_rdv) > 0) { ?>
                         </div>
