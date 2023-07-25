@@ -170,7 +170,7 @@ ul {
     align-items: center;
     justify-content: space-between;
     gap: 25px;
-    align-items: stretch;
+    align-items: center;
 }
 
 #today,
@@ -180,6 +180,7 @@ ul {
 }
 
 .li {
+    padding: 5px 8px;
     overflow: auto;
     display: flex;
     flex-direction: column;

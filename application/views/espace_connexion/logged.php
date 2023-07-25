@@ -45,20 +45,20 @@ require_once(APPPATH . 'views/includes/head.php');
         <?php } ?>
         <?php if ((count($old_rdv)) > 0) { ?>
             <button class="toggleButton" id="toggleButton">Voir mes rendez-vous passés</button>
-            <ul>
-                <?php foreach ($old_rdv as $rdv) { ?>
-                    <div class="ligne2" style="display:none;">
+            <div class="ligne2" style="display:none;">
+                <ul>
+                    <?php foreach ($old_rdv as $rdv) { ?>
                         <div class="li">
                             <li><i>Le <?= date('d/m/Y', strtotime($rdv->date_rendez_vous)) . ' à ' . date('H:i', strtotime($rdv->heure_rendez_vous)) ?>.</i>
                                 <br><span>Détails : <?= $rdv->details_rendez_vous ?></span>
                             </li>
                             <?php if (count($old_rdv) > 0) { ?>
                         </div>
-                        <a style="color:red" href="/code_igniter_arthur/Users/delete_old_rdv">Supprimer les rdv passés</a>
                     <?php } ?>
-                    </div>
                 <?php } ?>
-            </ul>
+                </ul>
+                <a style="color:red" href="/code_igniter_arthur/Users/delete_old_rdv">Supprimer les rdv passés</a>
+            </div>
         <?php } ?>
         <a style="color:red" href="/code_igniter_arthur/Users/deconnect">Se déconnecter</a>
     </div>
