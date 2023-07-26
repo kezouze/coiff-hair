@@ -298,6 +298,7 @@ class Users extends CI_Controller
 			} else {
 				$date = $this->input->post('date');
 				$time = $this->input->post('time');
+				$time = str_replace('h', ':', $time);
 				$details = htmlspecialchars($this->input->post('details'));
 				$this->rdvManager->set_new_rendez_vous($info['id_user'], $date, $time, $details);
 				$info['valid'] = "Votre rdv est enregistré, retour à la page précédente...";
@@ -401,6 +402,7 @@ class Users extends CI_Controller
 			} else {
 				$date = $this->input->post('date');
 				$time = $this->input->post('time');
+				$time = str_replace('h', ':', $time);
 				$details = htmlspecialchars($this->input->post('details'));
 				$this->rdvManager->modify_rdv($info['id_rdv'], $date, $time, $details);
 				$this->rdvManager->set_email_not_sent($info['id_rdv']);
