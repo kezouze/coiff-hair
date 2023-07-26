@@ -143,4 +143,24 @@ class Users_model extends CI_Model
             ->row();
         return ($query->email);
     }
+
+    public function get_nb_conn($id)
+    {
+        $query = $this->db->select('nb_conn')
+            ->where('id', $id)
+            ->from($this->tableName)
+            ->get()
+            ->row();
+        return ($query->nb_conn);
+    }
+
+    public function set_nb_conn($id, $nbConn)
+    {
+        $data = array(
+            'nb_conn' => $nbConn
+        );
+        $this->db->set($data)
+            ->where('id', $id)
+            ->update('users');
+    }
 }

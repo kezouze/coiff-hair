@@ -137,9 +137,15 @@ class Users extends CI_Controller
 		// on appelle la fonction isConnected() qui est dans le dossier helper
 		if (isConnected() == false) {
 			redirect('Users');
+		} else {
+			$info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
 		}
-
-		$info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
+		if (!isset($_SESSION['counted']) || $_SESSION['counted'] == false) {
+			$info['nbConn'] = $this->usersManager->get_nb_conn($info['id_user']);
+			$info['nbConn']++;
+			$this->usersManager->set_nb_conn($info['id_user'], $info['nbConn']);
+			$_SESSION['counted'] = true;
+		}
 		$info['pseudo'] = $_SESSION['pseudo'];
 		$info['all_rdv'] = $this->rdvManager->get_all_rendez_vous($info['id_user']);
 		$info['old_rdv'] = []; // on initialise les tableaux pour éviter une erreur undefined dans la vue
