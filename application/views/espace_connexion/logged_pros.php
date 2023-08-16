@@ -17,8 +17,10 @@
             <?php
             foreach ($all_rdv as $key) { ?>
                 <div class="ligne">
-                    <li><?= date('H\hi', strtotime($key->heure_rendez_vous)) ?> : Mme/Mr <?= $key->last_name . ' ' . $key->first_name ?>
-                        <br>détails : <?= $key->details_rendez_vous ?>
+                    <li><span class="first_line"><?= date('H\hi', strtotime($key->heure_rendez_vous)) ?> : Mme/Mr <?= ucfirst($key->last_name) . ' ' . ucfirst($key->first_name) ?></span>
+                        <i>
+                            <h4><?= $key->details_rendez_vous ?></h4>
+                        </i>
                     </li>
                 </div>
             <?php
