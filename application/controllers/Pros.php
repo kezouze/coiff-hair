@@ -30,6 +30,9 @@ class Pros extends CI_Controller
 
     public function logged()
     {
+        if (isConnected() == false) {
+            redirect('Pros');
+        }
         $date = date('Y-m-d');
         $id = $_SESSION['id']; // null
         $info['all_rdv'] = $this->Pros_model->get_all_rdv($date, $id);
