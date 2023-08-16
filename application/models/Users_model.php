@@ -81,6 +81,16 @@ class Users_model extends CI_Model
         return ($query->first_name);
     }
 
+    public function get_last_name($id)
+    {
+        $query = $this->db->select('last_name')
+            ->where('id', $id)
+            ->from($this->tableName)
+            ->get()
+            ->row();
+        return ($query->last_name);
+    }
+
     public function add_user($gender, $lastName, $firstName, $pseudo, $email, $password) // Ajout d'un nouvel utilisateur en bdd 
     {
         $data = array(

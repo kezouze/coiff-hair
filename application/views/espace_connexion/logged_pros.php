@@ -15,9 +15,9 @@
         <h2>Voici la liste de vos rendez-vous du jour :</h2>
         <ul>
             <?php
-            foreach ($all_data as $key) { ?>
+            foreach ($all_rdv as $key) { ?>
                 <div class="ligne">
-                    <li><?= date('H\hi', strtotime($key->heure_rendez_vous)) ?> : Mme/Mr <?= ucfirst($user[0]->pseudo) ?>
+                    <li><?= date('H\hi', strtotime($key->heure_rendez_vous)) ?> : Mme/Mr <?= $key->last_name . ' ' . $key->first_name ?>
                         <br>détails : <?= $key->details_rendez_vous ?>
                     </li>
                 </div>
