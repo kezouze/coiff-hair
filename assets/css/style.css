@@ -59,6 +59,10 @@ body {
     font-size: 25px;
 }
 
+.first_line {
+    font-size: 20px;
+}
+
 .titre {
     letter-spacing: 2px;
     color: hotpink;

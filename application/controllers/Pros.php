@@ -11,20 +11,28 @@ class Pros extends CI_Controller
             redirect('Pros/logged');
         }
 
-        $this->form_validation->set_rules('email', 'Email', 'required');
-        $this->form_validation->set_rules('password', 'Mot de passe', 'required');
+        $info['error'] = "";
+
+        $this->form_validation->set_rules('email', 'Email', 'trim|required');
+        $this->form_validation->set_rules('password', 'Mot de passe', 'trim|required');
 
         if ($this->form_validation->run() == false) {
-            $this->load->view('espace_connexion/login_pros');
         } else {
-            redirect('Pros/logged');
+            $email = $this->input->post('email');
+            $password = $this->input->post('password');
+            if ($this->Pros_model->cb_pros($email, md5($password)) == 1) {
+                $_SESSION['id'] = $this->Pros_model->get_id($email);
+                redirect('Pros/logged');
+            } else $info['error'] = "Veuillez vérifier votre saisie";
         }
+        $this->load->view('espace_connexion/login_pros', $info);
     }
 
     public function logged()
     {
-        $date = date('Y-m-d'); // aujourd'hui 
-        $info['all_rdv'] = $this->Pros_model->get_all_rdv($date);
+        $date = date('Y-m-d');
+        $id = $_SESSION['id']; // null
+        $info['all_rdv'] = $this->Pros_model->get_all_rdv($date, $id);
         $this->load->view('espace_connexion/logged_pros', $info);
     }
 

@@ -19,6 +19,7 @@
             <input type="submit" value="Connexion">
         </form>
         <?= validation_errors(); ?>
+        <p class="error"><?= $error ?></p>
         <a href="http://[::1]/code_igniter_arthur/Pros/forgot_password">Mot de passe oublié ?</a>
         <h4>Ou inscrivez-vous <a href="http://[::1]/code_igniter_arthur/Pros/inscription">ici</a> !</h4>
         <h4><a href="http://[::1]/code_igniter_arthur/Users/">Espace client</a></h4>
