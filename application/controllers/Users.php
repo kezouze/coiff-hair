@@ -286,17 +286,11 @@ class Users extends CI_Controller
 		$firstName = $this->usersManager->get_first_name($info['id_user']);
 		$info['nb_rdv'] = $this->rdvManager->get_nb_next_rdv($info['id_user']);
 
-		if (isset($_POST['date']) && isset($_POST['time'])) {
-			$date = $_POST['date'];
-			$time = $_POST['time'];
-		} else {
-			$date = $tomorrow;
-			$time = date('H:i');
-		}
 		if (isConnected() == false) {
 			redirect('Users');
 		} else {
 			$this->load->database();
+			$this->form_validation->set_rules('proSelect', 'Salon');
 			$this->form_validation->set_rules('date', 'Date', 'trim|required');
 			$this->form_validation->set_rules('time', 'Heure', 'trim|required');
 			$this->form_validation->set_rules('details', 'Détails', 'trim');
@@ -304,11 +298,12 @@ class Users extends CI_Controller
 			if ($this->form_validation->run() == false) {
 				$info['error'] = validation_errors();
 			} else {
+				$id_pro = $this->input->post('proSelect');
 				$date = $this->input->post('date');
 				$time = $this->input->post('time');
 				$time = str_replace('h', ':', $time);
 				$details = htmlspecialchars($this->input->post('details'));
-				$this->rdvManager->set_new_rendez_vous($info['id_user'], $lastName, $firstName, $date, $time, $details);
+				$this->rdvManager->set_new_rendez_vous($id_pro, $info['id_user'], $lastName, $firstName, $date, $time, $details);
 				$info['valid'] = "Votre rdv est enregistré, retour à la page précédente...";
 				header('refresh:3; url = http://[::1]/code_igniter_arthur/Users/logged');
 			}
