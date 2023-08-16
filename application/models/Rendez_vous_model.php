@@ -4,12 +4,14 @@ class Rendez_vous_model extends CI_Model
 {
     protected $tableName = "rendez_vous";
 
-    public function set_new_rendez_vous($id_user, $date, $heure, $details)
+    public function set_new_rendez_vous($id_user, $lastName, $firstName, $date, $heure, $details)
     {
         $data = array(
             'date_rendez_vous' => $date,
             'heure_rendez_vous' => $heure,
             'id_user' => $id_user,
+            'last_name' => $lastName,
+            'first_name' => $firstName,
             'details_rendez_vous' => $details
         );
 

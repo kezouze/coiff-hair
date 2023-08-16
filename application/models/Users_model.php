@@ -81,6 +81,16 @@ class Users_model extends CI_Model
         return ($query->first_name);
     }
 
+    public function get_last_name($id)
+    {
+        $query = $this->db->select('last_name')
+            ->where('id', $id)
+            ->from($this->tableName)
+            ->get()
+            ->row();
+        return ($query->last_name);
+    }
+
     public function add_user($gender, $lastName, $firstName, $pseudo, $email, $password) // Ajout d'un nouvel utilisateur en bdd 
     {
         $data = array(
@@ -142,5 +152,25 @@ class Users_model extends CI_Model
             ->get()
             ->row();
         return ($query->email);
+    }
+
+    public function get_nb_conn($id)
+    {
+        $query = $this->db->select('nb_conn')
+            ->where('id', $id)
+            ->from($this->tableName)
+            ->get()
+            ->row();
+        return ($query->nb_conn);
+    }
+
+    public function set_nb_conn($id, $nbConn)
+    {
+        $data = array(
+            'nb_conn' => $nbConn
+        );
+        $this->db->set($data)
+            ->where('id', $id)
+            ->update('users');
     }
 }
