@@ -1,13 +1,10 @@
 <!DOCTYPE html>
 <html lang="fr">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="/code_igniter_arthur/assets/css/style.css">
-    <title>Connexion Pros</title>
-</head>
+<?php
+$title = "Connexion Professionnels";
+require_once(APPPATH . 'views/includes/head.php');
+?>
 
 <body>
     <div class="container">

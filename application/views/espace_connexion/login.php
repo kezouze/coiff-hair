@@ -2,7 +2,7 @@
 <html lang="fr">
 
 <?php
-$title = "Connexion";
+$title = "Connexion Clients";
 require_once(APPPATH . 'views/includes/head.php');
 ?>
 

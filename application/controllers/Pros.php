@@ -32,11 +32,12 @@ class Pros extends CI_Controller
     {
         if (isConnected() == false) {
             redirect('Pros');
+        } else {
+            $date = date('Y-m-d');
+            $id = $_SESSION['id'];
+            $info['all_rdv'] = $this->Pros_model->get_all_rdv($date, $id);
+            $this->load->view('espace_connexion/logged_pros', $info);
         }
-        $date = date('Y-m-d');
-        $id = $_SESSION['id']; // null
-        $info['all_rdv'] = $this->Pros_model->get_all_rdv($date, $id);
-        $this->load->view('espace_connexion/logged_pros', $info);
     }
 
     public function deconnect()

@@ -16,7 +16,7 @@ require_once(APPPATH . 'views/includes/head.php');
             <select name="proSelect" id="proSelect">
                 <option value="1">Coiff'Hair</option>
                 <option value="2">Tête en l'Hair</option>
-                <option value="3">Va Te f'Hair</option>
+                <option value="3">Imagin'Hair</option>
             </select>
             <label for="date">Choisissez votre date</label>
             <input id="date" type="date" name="date" min="<?= $today ?>" max="<?= $aYearLater ?>">
