@@ -9,11 +9,11 @@ require_once(APPPATH . 'views/includes/head.php');
 <body>
     <div class="container">
         <?php if ($gender == 'M') { ?>
-            <h3>Bienvenue <?= '<b style="color:#00c8ff; font-size:30px;">' . ucfirst($first_name) . '</b>' . ' !' ?></h3>
+            <h3>Bonjour <?= '<b style="color:#00c8ff; font-size:30px;">' . ucfirst($first_name) . '</b>' . ' !' ?></h3>
         <?php } else if ($gender == 'F') { ?>
-            <h3>Bienvenue <?= '<b style="color:hotpink; font-size:30px">' . ucfirst($first_name) . '</b>' . ' !' ?></h3>
+            <h3>Bonjour <?= '<b style="color:hotpink; font-size:30px">' . ucfirst($first_name) . '</b>' . ' !' ?></h3>
         <?php } else { ?>
-            <h3>Bienvenue <?= '<b style="color:#3cd070; font-size:30px">' . ucfirst($first_name) . '</b>' . ' !' ?></h3>
+            <h3>Bonjour <?= '<b style="color:#3cd070; font-size:30px">' . ucfirst($first_name) . '</b>' . ' !' ?></h3>
         <?php } ?>
         <?php if (count($next_rdv) == 0) { ?>
             <p>Vous n'avez pas de rendez-vous à venir</p>
@@ -39,7 +39,7 @@ require_once(APPPATH . 'views/includes/head.php');
         <?php if ((count($next_rdv)) < 1) { ?>
             <a href="/code_igniter_arthur/Users/rendez_vous">Prendre un rendez-vous</a>
         <?php } else if (count($next_rdv) >= 1 && count($next_rdv) < 3) { ?>
-            <a href="/code_igniter_arthur/Users/rendez_vous">Prendre un autre rendez-vous</a>
+            <button><a href="/code_igniter_arthur/Users/rendez_vous">Prendre un autre rendez-vous</a></button>
         <?php } else { ?>
             <p class="error">Vous avez atteint le nombre maximum de rendez-vous.</p>
         <?php } ?>

@@ -17,7 +17,7 @@ require_once(APPPATH . 'views/includes/head.php');
             <p class="error"><?= $error ?></p>
             <p class="valid"><?= $valid ?></p>
         </form>
-        <p>Retour à la <a href="http://[::1]/code_igniter_arthur/Users">page de connexion</a></p>
+        <button><a href="http://[::1]/code_igniter_arthur/Users">Retour</a></button>
     </div>
 </body>
 

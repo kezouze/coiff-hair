@@ -8,18 +8,20 @@ require_once(APPPATH . 'views/includes/head.php');
 
 <body>
     <div class="container">
-        <h1 style="text-align: center">Bienvenue !</h1>
-        <h2>Espace Professionnels</h2>
+        <h1>Espace Professionnel</h1>
+        <h2 style="text-align: center">Bienvenue !</h2>
         <form action="" method="post">
             <input type="text" name="email" placeholder="Votre email">
             <input name="password" placeholder="Mot de passe" type="password">
             <input type="submit" value="Connexion">
         </form>
-        <?= validation_errors(); ?>
-        <p class="error"><?= $error ?></p>
+        <?php if (isset($error)) { ?>
+            <p class="error"><?= $error ?></p>
+        <?php } ?>
         <a href="http://[::1]/code_igniter_arthur/Pros/forgot_password">Mot de passe oublié ?</a>
-        <h4>Ou inscrivez-vous <a href="http://[::1]/code_igniter_arthur/Pros/inscription">ici</a> !</h4>
-        <h4><a href="http://[::1]/code_igniter_arthur/Users/">Espace client</a></h4>
+        <hr class="dashed">
+        <button class="inscription"><a href="http://[::1]/code_igniter_arthur/Pros/inscription">Inscrivrez-vous</a></button>
+        <button><a href="http://[::1]/code_igniter_arthur/Welcome">Retour</a></button>
     </div>
 </body>
 

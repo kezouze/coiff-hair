@@ -37,7 +37,7 @@ require_once(APPPATH . 'views/includes/head.php');
             <p class="error"><?= $error ?></p>
             <p class="valid"><?= $valid ?></p>
         <?php } ?>
-        <a href="/code_igniter_arthur/Users/logged">Retour</a>
+        <button><a href="http://[::1]/code_igniter_arthur/Users/logged">Retour</a></button>
         <a style="color:red" href="/code_igniter_arthur/Users/deconnect">Se déconnecter</a>
     </div>
     <!--  js dans fichier à part -->
