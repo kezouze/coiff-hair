@@ -4,7 +4,7 @@ session_start();
 
 function isConnected()
 {
-    if (isset($_SESSION['pseudo'])) {
+    if (isset($_SESSION['pseudo']) || isset($_SESSION['id'])) {
         return true;
     } else {
         return false;

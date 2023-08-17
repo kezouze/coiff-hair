@@ -104,13 +104,13 @@ form {
     gap: 12px;
 }
 
-input {
+input,
+#proSelect {
     width: 200px;
     height: 30px;
     border: 2px solid darkslategray;
     text-align: center;
     padding: 3px;
-    /* border-radius: 12px; */
 
 }
 
@@ -120,16 +120,14 @@ select {
     border: 2px solid darkslategray;
     text-align: center;
     padding: 3px;
-    /* border-radius: 12px; */
 
 }
 
 textarea {
     border: 2px solid darkslategray;
-    text-align: center;
+    text-align: left;
     padding: 3px;
-    /* border-radius: 12px; */
-
+    width: 300px;
 }
 
 input[type="submit"],
