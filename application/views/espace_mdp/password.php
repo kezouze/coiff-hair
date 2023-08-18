@@ -7,6 +7,7 @@ require_once(APPPATH . 'views/includes/head.php');
 ?>
 
 <div class="container">
+    <?php include(APPPATH . 'views/includes/small_icon.php'); ?>
     <h2>Réinitialisation de votre mot de passe :</h2>
     <form action="" method="post">
         <input placeholder="Indiquez votre adresse mail" type="email" name="email">

@@ -8,6 +8,7 @@ require_once(APPPATH . 'views/includes/head.php');
 
 <body>
     <div class="container">
+        <?php include(APPPATH . 'views/includes/small_icon.php'); ?>
         <h1>Bienvenue cher professionnel !</h1>
         <h2>Voici la liste de vos rendez-vous du jour :</h2>
         <ul>

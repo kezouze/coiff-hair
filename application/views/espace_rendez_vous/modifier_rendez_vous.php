@@ -8,6 +8,7 @@ require_once(APPPATH . 'views/includes/head.php');
 
 <body>
     <div class="container">
+        <?php include(APPPATH . 'views/includes/small_icon.php'); ?>
         <i>
             <h3>Modifier votre rendez-vous du :<br><b style="color:#ff7f00; font-size:30px;"><?= date('d/m/Y', strtotime($date)) ?></b> à <b style="color:#ff7f00; font-size:30px;"><?= substr($time, 0, 5) ?></b></h3>
         </i>

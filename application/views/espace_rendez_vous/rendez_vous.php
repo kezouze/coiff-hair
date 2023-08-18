@@ -8,6 +8,7 @@ require_once(APPPATH . 'views/includes/head.php');
 
 <body>
     <div class="container">
+        <?php include(APPPATH . 'views/includes/small_icon.php'); ?>
         <i>
             <h3>Nous sommes le <span id="today"><?= date('d/m/Y', strtotime($today)) ?></span> et il est <span id="horloge" onload="showtime()"></span> </h3>
         </i>

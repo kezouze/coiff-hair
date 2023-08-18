@@ -8,7 +8,8 @@ require_once(APPPATH . 'views/includes/head.php');
 
 <body>
     <div class="container">
-        <h1>Espace Professionnel</h1>
+        <?php include(APPPATH . 'views/includes/small_icon.php'); ?>
+        <h1 class="pro">Espace Professionnel</h1>
         <h2 style="text-align: center">Bienvenue !</h2>
         <form action="" method="post">
             <input type="text" name="email" placeholder="Votre email">

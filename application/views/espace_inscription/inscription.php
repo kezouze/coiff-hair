@@ -8,6 +8,7 @@ require_once(APPPATH . 'views/includes/head.php');
 
 <body>
     <div class="container">
+        <?php include(APPPATH . 'views/includes/small_icon.php'); ?>
         <h1 style="text-align: center">Inscription</h1>
         <form action="" method="post">
             <div class="gender">

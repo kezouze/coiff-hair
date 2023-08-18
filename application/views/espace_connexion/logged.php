@@ -8,6 +8,7 @@ require_once(APPPATH . 'views/includes/head.php');
 
 <body>
     <div class="container">
+        <?php include(APPPATH . 'views/includes/small_icon.php'); ?>
         <?php if ($gender == 'M') { ?>
             <h3>Bonjour <?= '<b style="color:#00c8ff; font-size:30px;">' . ucfirst($first_name) . '</b>' . ' !' ?></h3>
         <?php } else if ($gender == 'F') { ?>
