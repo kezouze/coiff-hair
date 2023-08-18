@@ -1,5 +1,11 @@
 @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300&family=Oswald&display=swap');
 
+:root {
+    --container-bg-color: rgba(219, 222, 222, 0.8);
+    --font-color: rgb(33, 35, 30);
+    --primary-color: darkslategray;
+}
+
 *,
 *::before,
 *::after {
@@ -9,6 +15,8 @@
     margin: 0;
     padding: 0;
     text-align: center;
+    text-decoration: none;
+    color: var(--font-color);
 }
 
 body::before {
@@ -34,9 +42,9 @@ body {
 .container {
     width: 550px;
     min-height: 75vh;
-    background: rgba(219, 222, 222, 0.8);
+    background: var(--container-bg-color);
     backdrop-filter: blur(5px);
-    border: 3px solid darkslategray;
+    border: 3px solid var(--primary-color);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -91,7 +99,7 @@ i {
 
 hr {
     width: 80%;
-    border-top: 2px solid darkslategray;
+    border-top: 2px solid var(--primary-color);
 }
 
 form {
@@ -106,7 +114,7 @@ input,
 #proSelect {
     width: 200px;
     height: 30px;
-    border: 2px solid darkslategray;
+    border: 2px solid var(--primary-color);
     padding: 3px;
 
 }
@@ -114,13 +122,13 @@ input,
 select {
     width: 75px;
     height: 30px;
-    border: 2px solid darkslategray;
+    border: 2px solid var(--primary-color);
     padding: 3px;
 
 }
 
 textarea {
-    border: 2px solid darkslategray;
+    border: 2px solid var(--primary-color);
     text-align: left;
     padding: 3px;
     width: 300px;
@@ -130,13 +138,13 @@ input[type="submit"],
 .inscription {
     width: 110px;
     height: 30px;
-    border: 2px solid darkslategray;
+    border: 2px solid var(--primary-color);
 }
 
 input[type="radio"] {
     width: 20px;
     height: 20px;
-    border: 2px solid darkslategray;
+    border: 2px solid var(--primary-color);
 }
 
 .header {
@@ -219,14 +227,21 @@ ul {
     gap: 10px;
     justify-content: center;
     align-items: center;
-    color: darkslategray;
+    color: var(--primary-color);
 }
 
 @media (max-width: 768px) {
+
+    body::before {
+        background-position: -158px center;
+    }
+
     .container {
         width: 100%;
         height: 100vh;
         overflow: hidden;
+        background: rgba(219, 222, 222, 0);
+        border: none;
     }
 
     .ligne {
