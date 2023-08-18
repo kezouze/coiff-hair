@@ -10,7 +10,6 @@ require_once(APPPATH . 'views/includes/head.php');
     <div class="container">
         <?php include(APPPATH . 'views/includes/small_icon.php'); ?>
         <h1 class="client">Espace Client</h1>
-        <h2 style="text-align: center">Bienvenue !</h2>
         <form action="" method="post">
             <input type="text" name="identifiant" placeholder="Email ou pseudo">
             <input name="password" placeholder="Mot de passe" type="password">
