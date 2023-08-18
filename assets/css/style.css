@@ -1,4 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300&family=Oswald&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300&family=Oswald&display=swap'); */
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@300&family=Roboto+Mono&family=Roboto:ital@1&family=Rubik:wght@300&display=swap');
+
+/* @font-face {
+    font-family: 'Porton', sans-serif;
+    src: url(/code_igniter_arthur/assets/fonts/Porton01/porton-regular.otf);
+} */
 
 :root {
     --container-bg-color: #dbdedecc;
@@ -12,7 +18,7 @@
 *::before,
 *::after {
     box-sizing: border-box;
-    font-family: 'Comic Neue', sans-serif;
+    font-family: 'Roboto Mono', sans-serif;
     color: var(--font-color);
     font-weight: 600;
     margin: 0;
@@ -187,6 +193,7 @@ input[type="submit"],
     width: 110px;
     height: 30px;
     border: 2px solid var(--primary-color);
+    font-size: 12px;
 }
 
 input[type="radio"] {
@@ -288,12 +295,6 @@ ul {
 @media (max-width: 912px) {
 
     body::before {
-        content: "";
-        position: fixed;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
         background: url(/code_igniter_arthur/assets/images/background_mobile.jpg) no-repeat center center fixed;
         background-size: cover;
         background-position: 22% center;
@@ -302,9 +303,9 @@ ul {
     .container {
         width: 100%;
         height: 100vh;
-        overflow: hidden;
         background: rgba(219, 222, 222, 0.1);
         border: none;
+        overflow: scroll;
     }
 
     .small-container {
