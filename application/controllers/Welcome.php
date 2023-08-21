@@ -13,4 +13,9 @@ class Welcome extends CI_Controller
         session_destroy();
         redirect('Welcome/');
     }
+
+    public function infos()
+    {
+        $this->load->view('info_salon');
+    }
 }
