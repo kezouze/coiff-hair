@@ -15,7 +15,7 @@ require_once(APPPATH . 'views/includes/head.php');
         <form action="" method="post">
             <label for="proSelect">Choisissez votre salon</label>
             <select name="proSelect" id="proSelect">
-                <option value="1">Coiff'Hair</option>
+                <option value="1">coiffhair</option>
                 <option value="2">Tête en l'Hair</option>
                 <option value="3">Imagin'Hair</option>
             </select>
@@ -38,7 +38,7 @@ require_once(APPPATH . 'views/includes/head.php');
             <p class="error"><?= $error ?></p>
             <p class="valid"><?= $valid ?></p>
         <?php } ?>
-        <button><a href="http://[::1]/code_igniter_arthur/Users/logged">Retour</a></button>
+        <button><a href="http://[::1]/coiffhair/Users/logged">Retour</a></button>
     </div>
     <!--  js dans fichier à part -->
     <script>

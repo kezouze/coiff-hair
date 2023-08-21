@@ -27,7 +27,7 @@ $color = "#a04141";
             }
             ?>
         </ul>
-        <a style="color:#ff033e" href="/code_igniter_arthur/Pros/deconnect">Se déconnecter</a>
+        <a style="color:#ff033e" href="/coiffhair/Pros/deconnect">Se déconnecter</a>
     </div>
 </body>
 

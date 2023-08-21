@@ -32,7 +32,7 @@ require_once(APPPATH . 'views/includes/head.php');
             <p class="error"><?= $error ?></p>
             <p class="valid"><?= $valid ?></p>
         <?php } ?>
-        <a href="/code_igniter_arthur/Users/logged">Annuler</a>
+        <a href="/coiffhair/Users/logged">Annuler</a>
     </div>
 </body>
 <script>

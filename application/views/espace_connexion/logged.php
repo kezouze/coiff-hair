@@ -31,8 +31,8 @@ if ($gender == 'M') {
                         <br><span>Détails : ' . $rdv->details_rendez_vous ?>.</span></li>
                             </div>
                             <div class="icones_container">
-                                <a href="/code_igniter_arthur/Users/modify_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img src="/code_igniter_arthur/assets/images/modifier.png" class="icone_modif" alt="modifier"></a>
-                                <a href="/code_igniter_arthur/Users/delete_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img class="icone_suppr" src="/code_igniter_arthur/assets/images/supprimer.png" alt="supprimer"></a>
+                                <a href="/coiffhair/Users/modify_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img src="/coiffhair/assets/images/modifier.png" class="icone_modif" alt="modifier"></a>
+                                <a href="/coiffhair/Users/delete_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img class="icone_suppr" src="/coiffhair/assets/images/supprimer.png" alt="supprimer"></a>
                             </div>
                         </div>
                 <?php }
@@ -40,9 +40,9 @@ if ($gender == 'M') {
             </ul>
         <?php } ?>
         <?php if ((count($next_rdv)) < 1) { ?>
-            <a class="rdvButton" style="color:white; background-color:<?= $color ?>;" href="/code_igniter_arthur/Users/rendez_vous">Prendre un rendez-vous</a>
+            <a class="rdvButton" style="color:white; background-color:<?= $color ?>;" href="/coiffhair/Users/rendez_vous">Prendre un rendez-vous</a>
         <?php } else if (count($next_rdv) >= 1 && count($next_rdv) < 3) { ?>
-            <a class="rdvButton" style="color:white; background-color:<?= $color ?>;" href="/code_igniter_arthur/Users/rendez_vous">Prendre un autre rendez-vous</a>
+            <a class="rdvButton" style="color:white; background-color:<?= $color ?>;" href="/coiffhair/Users/rendez_vous">Prendre un autre rendez-vous</a>
         <?php } else { ?>
             <p class="error">Vous avez atteint le nombre maximum de rendez-vous.</p>
         <?php } ?>
@@ -64,10 +64,10 @@ if ($gender == 'M') {
                         </div>
                     <?php } ?>
                 </ul>
-                <a style="color:#ff033e" href="/code_igniter_arthur/Users/delete_old_rdv">Supprimer les rdv passés</a>
+                <a style="color:#ff033e" href="/coiffhair/Users/delete_old_rdv">Supprimer les rdv passés</a>
             </div>
         <?php } ?>
-        <a style="color:#ff033e" href="/code_igniter_arthur/Users/deconnect">Se déconnecter</a>
+        <a style="color:#ff033e" href="/coiffhair/Users/deconnect">Se déconnecter</a>
     </div>
 </body>
 <script>

@@ -3,7 +3,7 @@
 
 /* @font-face {
     font-family: 'Porton', sans-serif;
-    src: url(/code_igniter_arthur/assets/fonts/Porton01/porton-regular.otf);
+    src: url(/coiffhair/assets/fonts/Porton01/porton-regular.otf);
 } */
 
 :root {
@@ -34,7 +34,7 @@ body::before {
     right: 0;
     bottom: 0;
     left: 0;
-    background: url(/code_igniter_arthur/assets/images/coiffeur.jpg) no-repeat center center fixed;
+    background: url(/coiffhair/assets/images/coiffeur.jpg) no-repeat center center fixed;
     /* background: url(https://fastly.picsum.photos/id/12/2500/1667.jpg?hmac=Pe3284luVre9ZqNzv1jMFpLihFI6lwq7TPgMSsNXw2w) no-repeat center center fixed; */
     background-size: cover;
 }
@@ -308,7 +308,7 @@ ul {
 @media (max-width: 912px) {
 
     body::before {
-        background: url(/code_igniter_arthur/assets/images/background_mobile.jpg) no-repeat center center fixed;
+        background: url(/coiffhair/assets/images/background_mobile.jpg) no-repeat center center fixed;
         background-size: cover;
         background-position: 22% center;
     }

@@ -18,10 +18,10 @@ require_once(APPPATH . 'views/includes/head.php');
         <?php if (isset($error)) { ?>
             <p class="error"><?= $error ?></p>
         <?php } ?>
-        <a href="http://[::1]/code_igniter_arthur/Pros/forgot_password">Mot de passe oublié ?</a>
+        <a href="http://[::1]/coiffhair/Pros/forgot_password">Mot de passe oublié ?</a>
         <hr class="dashed">
-        <button class="inscription"><a href="http://[::1]/code_igniter_arthur/Pros/inscription">Inscrivez-vous</a></button>
-        <button><a href="http://[::1]/code_igniter_arthur/Welcome">Retour</a></button>
+        <button class="inscription"><a href="http://[::1]/coiffhair/Pros/inscription">Inscrivez-vous</a></button>
+        <button><a href="http://[::1]/coiffhair/Welcome">Retour</a></button>
     </div>
 </body>
 
