@@ -127,7 +127,7 @@ class Users extends CI_Controller
 			$password = md5($this->input->post('password'));
 			$this->usersManager->add_user($gender, $lastName, $firstName, $pseudo, $email, $password);
 			$info['valid'] = "Votre compte est bien enregistré ! Redirection à la page d'accueil pour vous connecter...";
-			header('refresh: 3; url=http://[::1]/code_igniter_arthur/Users');
+			header('refresh: 3; url=http://[::1]/coiffhair/Users');
 		}
 		$this->load->view('espace_inscription/inscription', $info);
 	}
@@ -227,7 +227,7 @@ class Users extends CI_Controller
 				}
 			} else {
 				$info['error'] = 'Une erreur est survenue';
-				header('refresh: 3; url=http://[::1]/code_igniter_arthur/Users');
+				header('refresh: 3; url=http://[::1]/coiffhair/Users');
 			}
 		}
 		$this->load->view('espace_mdp/password', $info);
@@ -259,7 +259,7 @@ class Users extends CI_Controller
 						$new_password = $_POST['new_password'];
 						$this->usersManager->change_password($info['email'], md5($new_password));
 						$info['valid'] = 'Nous avons bien modifié votre mot de passe ! Redirection vers la page d\'accueil... ';
-						header('refresh: 4; url=http://[::1]/code_igniter_arthur/Users');
+						header('refresh: 4; url=http://[::1]/coiffhair/Users');
 					} else $info['error'] = "Veuillez vérifier votre saisie";
 				}
 			} else $info['error'] = "Une erreur est survenue";
@@ -310,7 +310,7 @@ class Users extends CI_Controller
 				$details = htmlspecialchars($this->input->post('details'));
 				$this->rdvManager->set_new_rendez_vous($id_pro, $info['id_user'], $lastName, $firstName, $date, $time, $details);
 				$info['valid'] = "Votre rdv est enregistré, retour à la page précédente...";
-				header('refresh:3; url = http://[::1]/code_igniter_arthur/Users/logged');
+				header('refresh:3; url = http://[::1]/coiffhair/Users/logged');
 			}
 		}
 		if ($info['nb_rdv'] >= 3) {
@@ -415,7 +415,7 @@ class Users extends CI_Controller
 				$this->rdvManager->modify_rdv($info['id_rdv'], $date, $time, $details);
 				$this->rdvManager->set_email_not_sent($info['id_rdv']);
 				$info['valid'] = "Votre rdv a bien été modifié, retour à la page précédente..";
-				header('refresh:3; url = http://[::1]/code_igniter_arthur/Users/logged');
+				header('refresh:3; url = http://[::1]/coiffhair/Users/logged');
 			}
 		}
 		$this->load->view('espace_rendez_vous/modifier_rendez_vous', $info);

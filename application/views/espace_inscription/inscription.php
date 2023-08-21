@@ -27,7 +27,7 @@ require_once(APPPATH . 'views/includes/head.php');
         </form>
         <p style="color: red;" class="error"><?= $error ?></p>
         <p style="color: green;" class="valid"><?= $valid ?></p>
-        <button><a href="http://[::1]/code_igniter_arthur/Users">Retour</a></button>
+        <button><a href="http://[::1]/coiffhair/Users">Retour</a></button>
     </div>
 </body>
 

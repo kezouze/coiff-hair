@@ -34,7 +34,7 @@ function availabilities() {
         $('#date').change(function () {
             selectedDate = $(this).val();
             $.ajax({
-                url: "http://[::1]/code_igniter_arthur/Users/get_available_times",
+                url: "http://[::1]/coiffhair/Users/get_available_times",
                 type: "POST",
                 data: {
                     date: selectedDate

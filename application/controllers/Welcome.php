@@ -16,6 +16,7 @@ class Welcome extends CI_Controller
 
     public function infos()
     {
-        $this->load->view('info_salon');
+        $data['all_data'] = $this->Pros_model->get_all();
+        $this->load->view('info_salon', $data);
     }
 }
