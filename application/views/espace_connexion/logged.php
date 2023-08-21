@@ -50,7 +50,13 @@ if ($gender == 'M') {
             <button style="background-color:white; color:<?= $color ?>" class="toggleButton" id="toggleButton">Voir mes rendez-vous passés</button>
             <div class="ligne2" style="display:none;">
                 <ul>
-                    <?php foreach ($old_rdv as $rdv) { ?>
+                    <?php
+                    // Trier les rendez-vous par ordre décroissant
+                    usort($old_rdv, function ($a, $b) {
+                        return strtotime($b->date_rendez_vous . ' ' . $b->heure_rendez_vous) - strtotime($a->date_rendez_vous . ' ' . $a->heure_rendez_vous);
+                    });
+
+                    foreach ($old_rdv as $rdv) { ?>
                         <div class="li">
                             <li><i>Le <?= date('d/m/Y', strtotime($rdv->date_rendez_vous)) . ' à ' . date('H\hi', strtotime($rdv->heure_rendez_vous)) ?>.</i>
                                 <br><span>Détails : <?= $rdv->details_rendez_vous ?>.</span>
