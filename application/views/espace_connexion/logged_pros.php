@@ -4,28 +4,30 @@
 <?php
 $title = "Votre espace professionnel";
 require_once(APPPATH . 'views/includes/head.php');
+// echo $_SESSION['id']; // Ça n'affiche rien en dehors du container ?
+$color = "#a04141";
 ?>
 
 <body>
     <div class="container">
         <?php include(APPPATH . 'views/includes/small_icon.php'); ?>
-        <h1>Bienvenue cher professionnel !</h1>
-        <h2>Voici la liste de vos rendez-vous du jour :</h2>
+        <h2 style="color:<?= $color ?>;">Bienvenue cher professionnel !</h2>
+        <p>Voici la liste de vos rendez-vous du jour :</p>
         <ul>
             <?php
             foreach ($all_rdv as $key) { ?>
                 <div class="ligne">
-                    <li><span class="first_line"><?= date('H\hi', strtotime($key->heure_rendez_vous)) ?> : Mme/Mr <?= ucfirst($key->last_name) . ' ' . ucfirst($key->first_name) ?></span>
-                        <i>
-                            <h4><?= $key->details_rendez_vous ?></h4>
-                        </i>
-                    </li>
+                    <div class="li">
+                        <li><span class="first_line"><?= date('H\hi', strtotime($key->heure_rendez_vous)) ?> : <?= ucfirst($key->last_name) . ' ' . ucfirst($key->first_name) ?></span>
+                            <p>Détails : <i><?= $key->details_rendez_vous ?></i></p>
+                        </li>
+                    </div>
                 </div>
             <?php
             }
             ?>
         </ul>
-        <a style="color:red" href="/code_igniter_arthur/Pros/deconnect">Se déconnecter</a>
+        <a style="font-size:12px; color:#ff033e" href="/code_igniter_arthur/Users/deconnect">Se déconnecter</a>
     </div>
 </body>
 

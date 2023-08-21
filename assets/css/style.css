@@ -11,7 +11,7 @@
     --font-color: #000;
     --primary-color: #2f4f4f;
     --client-color: #0964cc;
-    --pro-color: #a04141;
+    --pro-color: #b2272e;
 }
 
 *,
@@ -127,11 +127,12 @@ body {
 
 .first_line {
     font-size: 20px;
+    color: var(--pro-color);
 }
 
 .titre {
     letter-spacing: 2px;
-    color: hotpink;
+    color: #ff69b4;
     font-size: 42px;
 }
 
@@ -275,10 +276,6 @@ ul {
     align-items: flex-end;
 }
 
-.toggleButton:hover {
-    cursor: pointer;
-}
-
 .dateAndTime {
     font-size: 20px;
 }
@@ -290,6 +287,16 @@ ul {
     align-items: center;
     color: var(--primary-color);
     margin-top: 20px;
+}
+
+.rdvButton,
+.toggleButton {
+    display: inline-block;
+    padding: 5px 8px;
+    border: none;
+    text-decoration: none;
+    font-size: 12px;
+    cursor: pointer;
 }
 
 @media (max-width: 912px) {
