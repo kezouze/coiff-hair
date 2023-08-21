@@ -223,6 +223,12 @@ input[type="radio"] {
     max-width: 75%;
 }
 
+#icone:hover,
+.small-icon:hover {
+    transform: scale(1.1) rotateX(360deg) rotateY(360deg) rotateZ(360deg);
+    transition: transform 1.5s ease-in-out;
+}
+
 .icone_suppr,
 .icone_modif {
     width: 35px;
