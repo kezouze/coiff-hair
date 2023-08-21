@@ -20,6 +20,7 @@ class Pros extends CI_Controller
             && $this->Pros_model->cb_pros($this->input->post('email'), md5($this->input->post('password'))) == 1
         ) {
             $_SESSION['id'] = $this->Pros_model->get_id($this->input->post('email'));
+            $_SESSION['type'] = "pro";
             redirect('Pros/logged');
         }
 
@@ -29,6 +30,11 @@ class Pros extends CI_Controller
 
     public function logged()
     {
+        if ($_SESSION['type'] !== "pro") {
+            session_destroy();
+            redirect('Pros');
+        }
+
         if (isConnected() == false) {
             redirect('Pros');
         } else {
@@ -42,6 +48,6 @@ class Pros extends CI_Controller
     public function deconnect()
     {
         session_destroy();
-        redirect('Pros');
+        redirect('Welcome');
     }
 }

@@ -28,7 +28,7 @@ class Users extends CI_Controller
 			if ($this->usersManager->cb_users_bis($_POST["identifiant"], md5($_POST["password"])) == 1) {
 
 				$_SESSION['pseudo'] = trim(htmlspecialchars($_POST["identifiant"]));
-
+				$_SESSION['type'] = "client";
 				redirect('Users/logged');
 			} else $info['error'] = 'Veuillez vérifier votre saisie';
 		}
@@ -134,8 +134,12 @@ class Users extends CI_Controller
 
 	public function logged()
 	{
+		if ($_SESSION['type'] !== "client") {
+			session_destroy();
+			redirect('Users');
+		}
 		// on appelle la fonction isConnected() qui est dans le dossier helper
-		if (isConnected() == false) {
+		if (isConnected() == false || $_SESSION['type'] !== "client") {
 			redirect('Users');
 		} else {
 			$info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
@@ -186,7 +190,7 @@ class Users extends CI_Controller
 	public function deconnect()
 	{
 		session_destroy();
-		redirect('Users');
+		redirect('Welcome');
 	}
 
 	// à adapter en prenant plutôt l'id de l'utilisateur

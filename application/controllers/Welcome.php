@@ -7,4 +7,10 @@ class Welcome extends CI_Controller
     {
         $this->load->view('welcome');
     }
+
+    public function deconnect()
+    {
+        session_destroy();
+        redirect('Welcome/');
+    }
 }

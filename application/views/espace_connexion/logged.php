@@ -58,10 +58,10 @@ if ($gender == 'M') {
                         </div>
                     <?php } ?>
                 </ul>
-                <a style="font-size:12px; color:#ff033e" href="/code_igniter_arthur/Users/delete_old_rdv">Supprimer les rdv passés</a>
+                <a style="color:#ff033e" href="/code_igniter_arthur/Users/delete_old_rdv">Supprimer les rdv passés</a>
             </div>
         <?php } ?>
-        <a style="font-size:12px; color:#ff033e" href="/code_igniter_arthur/Users/deconnect">Se déconnecter</a>
+        <a style="color:#ff033e" href="/code_igniter_arthur/Users/deconnect">Se déconnecter</a>
     </div>
 </body>
 <script>
