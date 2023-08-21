@@ -7,7 +7,7 @@ require_once(APPPATH . 'views/includes/head.php');
 ?>
 
 <body>
-
+    <h1>Nos salons</h1>
 </body>
 
 </html>
