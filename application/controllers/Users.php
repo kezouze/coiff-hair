@@ -177,8 +177,9 @@ class Users extends CI_Controller
 							Vous avez rendez-vous pour : <i>' . $details . '</i>.
 							<br>N\'hésitez pas à nous contacter si besoin, ou modifier / annuler le rendez-vous directement sur votre espace personnel.
 							<br>Cordialement, L\'équipe de Coiff\'Hair :-)');
-					$this->email->send();
-					$this->rdvManager->set_email_sent($rdv->id_rendez_vous);
+					// désactivation du mail pour éviter de spammer
+					// $this->email->send();
+					// $this->rdvManager->set_email_sent($rdv->id_rendez_vous);
 				}
 			} else {
 				$info['old_rdv'][] = $rdv; // on stocke les rdv passés
