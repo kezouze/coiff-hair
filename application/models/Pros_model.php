@@ -17,7 +17,9 @@ class Pros_model extends CI_Model
     public function get_all()
     {
         $query = $this->db->select('*')
-            ->from($this->tableName);
+            ->from($this->tableName)
+            ->get()
+            ->result();
         return $query;
     }
 
