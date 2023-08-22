@@ -23,6 +23,16 @@ class Pros_model extends CI_Model
         return $query;
     }
 
+    public function get_all_where_id($id)
+    {
+        $query = $this->db->select('*')
+            ->from($this->tableName)
+            ->where('id_pro', $id)
+            ->get()
+            ->result();
+        return $query;
+    }
+
     public function get_id($email)
     {
         $query = $this->db->select('id_pro')
@@ -52,6 +62,14 @@ class Pros_model extends CI_Model
             ->where('id', $id)
             ->get()
             ->result();
+        return $query;
+    }
+
+    public function set_nb_likes($id)
+    {
+        $query = $this->db->set('likes', 'likes+1', FALSE)
+            ->where('id_pro', $id)
+            ->update($this->tableName);
         return $query;
     }
 }

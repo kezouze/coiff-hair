@@ -270,7 +270,6 @@ input[type="radio"] {
     transition: transform 0.5s ease-in-out;
 }
 
-/* Marche pas */
 .icone_suppr:hover,
 .icone_modif:hover {
     transform: scale(1.5);
@@ -346,6 +345,27 @@ ul {
     cursor: pointer;
 }
 
+.likes {
+    position: absolute;
+    bottom: -25px;
+    right: -25px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 60px;
+    height: 60px;
+    border: 2px solid var(--primary-color);
+    border-radius: 50%;
+    background: var(--primary-color);
+    transition: transform 0.5s ease-in-out;
+}
+
+.likes:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+}
+
 @media (max-width: 912px) {
 
     body::before {
@@ -407,5 +427,20 @@ ul {
 
     .titre {
         font-size: 30px;
+    }
+
+    .icone_previous,
+    .icone_next {
+        display: none;
+    }
+
+    .big_img {
+        width: 100%;
+        height: auto;
+    }
+
+    .likes {
+        bottom: 10px;
+        right: 10px;
     }
 }
