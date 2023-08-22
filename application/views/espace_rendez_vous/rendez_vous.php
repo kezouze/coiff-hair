@@ -38,7 +38,7 @@ require_once(APPPATH . 'views/includes/head.php');
             <p class="error"><?= $error ?></p>
             <p class="valid"><?= $valid ?></p>
         <?php } ?>
-        <button><a href="http://[::1]/coiffhair/Users/logged">Retour</a></button>
+        <a href="http://[::1]/coiffhair/Welcome" class="retour-button" style="background-color:#0964cc">Retour</a>
     </div>
     <!--  js dans fichier à part -->
     <script>

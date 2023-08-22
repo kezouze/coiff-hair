@@ -19,7 +19,7 @@ require_once(APPPATH . 'views/includes/head.php');
         <a href="http://[::1]/coiffhair/Users/forgot_password">Mot de passe oublié ?</a>
         <hr class="dashed">
         <button class="inscription"><a href="http://[::1]/coiffhair/Users/inscription">Inscrivez-vous</a></button class="inscription">
-        <button><a href="http://[::1]/coiffhair/Welcome">Retour</a></button>
+        <a href="http://[::1]/coiffhair/Welcome" class="retour-button" style="background-color:#0964cc">Retour</a>
     </div>
 </body>
 

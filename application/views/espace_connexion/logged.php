@@ -4,13 +4,7 @@
 <?php
 $title = "Votre espace";
 require_once(APPPATH . 'views/includes/head.php');
-if ($gender == 'M') {
-    $color = "#00c8ff";
-} else if ($gender == 'F') {
-    $color = "#ff69b4";
-} else {
-    $color = "#3cd070";
-}
+$color = "#0964cc";
 ?>
 
 <body>
