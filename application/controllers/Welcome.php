@@ -26,7 +26,7 @@ class Welcome extends CI_Controller
         $data['all_data'] = $this->Pros_model->get_all_where_id($_GET['id']);
 
         if (!$data['all_data'] || !is_numeric($data['id']) || $data['id'] < 1) {
-            redirect('404');
+            redirect('/Welcome/quatreCentQuatre');
             return;
         }
 
@@ -51,5 +51,10 @@ class Welcome extends CI_Controller
             exit();
             // header('Location: http://[::1]/coiffhair/Welcome/');
         }
+    }
+
+    public function quatreCentQuatre()
+    {
+        $this->load->view('404');
     }
 }
