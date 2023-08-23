@@ -36,11 +36,20 @@ class Welcome extends CI_Controller
     public function likes()
     {
         $id = $_GET['id'];
-        $this->Pros_model->set_nb_likes($id);
-        $response = array(
-            'likes' => $this->Pros_model->get_all_where_id($id)[0]->likes // Comment ça marche ?
-        );
-        header('Content-Type: application/json');
-        echo json_encode($response);
+
+        if (isConnected() && !isset($_SESSION['liked'])) {
+            $this->Pros_model->set_nb_likes($id);
+            $response = array(
+                'likes' => $this->Pros_model->get_all_where_id($id)[0]->likes // Ça marche somehow
+            );
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            $_SESSION['liked'] = true;
+        } else {
+            // la redirection ne marche pas
+            redirect('Welcome/');
+            exit();
+            // header('Location: http://[::1]/coiffhair/Welcome/');
+        }
     }
 }
