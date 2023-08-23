@@ -79,3 +79,28 @@ function toggleButton() {
         });
     });
 }
+
+function updateLikes() {
+    $(document).ready(function () {
+        $('.likes').on('click', function () {
+            var nbLikes = parseInt(document.getElementById('likes').innerHTML);
+            var id = $(this).data('id')
+            nbLikes++;
+            $.ajax({
+                url: "http://[::1]/coiffhair/Welcome/likes",
+                type: "GET",
+                data: {
+                    id: id
+                },
+                dataType: "json",
+                success: function (response) {
+                    nbLikes = response.likes;
+                    document.getElementById('likes').innerHTML = nbLikes;
+                },
+                error: function (xhr) {
+                    console.log(xhr);
+                }
+            })
+        })
+    })
+}

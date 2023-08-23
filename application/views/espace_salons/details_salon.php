@@ -13,18 +13,22 @@ require_once(APPPATH . 'views/includes/head.php');
         <?php include(APPPATH . 'views/includes/small_icon.php'); ?>
         <?php foreach ($all_data as $key) { ?>
             <h3><?= $key->name; ?></h3>
-            <img src="https://source.unsplash.com/featured/600x400" alt="exemple" class="big_img">
+            <img src="https://source.unsplash.com/featured/576x384" alt="exemple" class="big_img">
             <p><?= $key->email; ?></p>
             <p><?= $key->boss; ?></p>
-            <div id="likes" class="likes">
-                <span>👍🏻</span>
-                <p style="color:white;"><?= $key->likes; ?></p>
-            </div>
+
+            <button data-id="<?= $id; ?>" class="likes" style="background:#2f4f4f; border:none; text-decoration:none;">👍🏻
+                <p id="likes" style="color:white;"><?= $key->likes; ?></p>
+            </button>
+
         <?php } ?>
         <!-- </div> -->
         <!-- <img class="icone_next" src="" alt="Suivant"> -->
         <a href="http://[::1]/coiffhair/Welcome/infos" class="retour-button" style="background-color:#2f4f4f">Retour</a>
     </div>
 </body>
+<script>
+    updateLikes();
+</script>
 
 </html>

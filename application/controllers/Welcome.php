@@ -37,6 +37,10 @@ class Welcome extends CI_Controller
     {
         $id = $_GET['id'];
         $this->Pros_model->set_nb_likes($id);
-        redirect('Welcome/details?id=' . $id);
+        $response = array(
+            'likes' => $this->Pros_model->get_all_where_id($id)[0]->likes // Comment ça marche ?
+        );
+        header('Content-Type: application/json');
+        echo json_encode($response);
     }
 }
