@@ -4,6 +4,7 @@
 <?php
 $title = "Modifier votre rdv";
 $color = "#0964cc";
+$linkTo = "Users";
 require_once(APPPATH . 'views/includes/head.php');
 ?>
 
@@ -32,7 +33,7 @@ require_once(APPPATH . 'views/includes/head.php');
                 <p class="error"><?= $error ?></p>
                 <p class="valid"><?= $valid ?></p>
             <?php } ?>
-            <a href="/coiffhair/Users/logged">Annuler</a>
+            <?php require_once(APPPATH . 'views/includes/footer.php'); ?>
         </div>
     </div>
 </body>

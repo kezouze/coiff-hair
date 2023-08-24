@@ -2,7 +2,7 @@
 <html lang="fr">
 
 <?php
-$title = "Votre espace";
+$title = "Votre Espace";
 $color = "#0964cc";
 $linkTo = "Welcome";
 require_once(APPPATH . 'views/includes/head.php');
@@ -16,7 +16,7 @@ require_once(APPPATH . 'views/includes/head.php');
             <?php if (count($next_rdv) == 0) { ?>
                 <p>Vous n'avez pas de rendez-vous à venir</p>
             <?php } else { ?>
-                <p>Vous avez <?= (count($next_rdv)) ?> rendez-vous à venir :</p>
+                <p>Vous avez <span style="font-size:2rem;color:<?= $color ?>"><?= (count($next_rdv)) ?></span> rendez-vous à venir :</p>
                 <ul>
                     <?php foreach ($next_rdv as $rdv) {
                         if ($rdv->date_rendez_vous >= date('Y-m-d')) { ?>

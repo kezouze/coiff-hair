@@ -72,4 +72,16 @@ class Pros_model extends CI_Model
             ->update($this->tableName);
         return $query;
     }
+
+    public function set_pro()
+    {
+        $data = array(
+            'name' => $this->input->post('name'),
+            'boss' => $this->input->post('boss'),
+            'email' => $this->input->post('email'),
+            'password' => md5($this->input->post('password')),
+            'likes' => 0
+        );
+        $this->db->insert($this->tableName, $data);
+    }
 }

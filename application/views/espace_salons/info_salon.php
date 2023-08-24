@@ -15,7 +15,7 @@ require_once(APPPATH . 'views/includes/head.php');
         <?php foreach ($all_data as $key) { ?>
             <div class="card">
                 <h3><?= $key->name; ?></h3>
-                <a href="http://[::1]/coiffhair/Welcome/details?id=<?= $key->id_pro ?>&&name=<?= $key->name ?>"><img src="https://source.unsplash.com/featured/300x200" alt="exemple"></a>
+                <a href="http://[::1]/coiffhair/Welcome/details?id=<?= $key->id_pro ?>"><img src="https://source.unsplash.com/featured/300x200" alt="exemple"></a>
                 <p><?= $key->email; ?></p>
             </div>
         <?php } ?>
