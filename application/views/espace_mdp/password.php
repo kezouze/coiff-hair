@@ -3,20 +3,24 @@
 
 <?php
 $title = "Modifier mdp";
+$color = "#0964cc";
+$linkTo = "Users";
 require_once(APPPATH . 'views/includes/head.php');
 ?>
 
-<div class="container">
-    <?php include(APPPATH . 'views/includes/small_icon.php'); ?>
-    <h2>Réinitialisation de votre mot de passe :</h2>
-    <form action="" method="post">
-        <input placeholder="Indiquez votre adresse mail" type="email" name="email">
-        <input type="submit" value="Envoyer">
-    </form>
-    <p class="error"><?= $error ?></p>
-    <p class="valid"><?= $valid ?></p>
+<div class="blur">
+    <?php include(APPPATH . 'views/includes/header.php'); ?>
+    <div class="content">
+        <h2>Réinitialisation de votre mot de passe :</h2>
+        <form action="" method="post">
+            <input placeholder="Indiquez votre adresse mail" type="email" name="email">
+            <input type="submit" value="Envoyer">
+        </form>
+        <p class="error"><?= $error ?></p>
+        <p class="valid"><?= $valid ?></p>
+        <?php include(APPPATH . 'views/includes/footer.php'); ?>
 
-    <button><a href="http://[::1]/coiffhair/Users">Retour</a></button>
+    </div>
 </div>
 
 <body>

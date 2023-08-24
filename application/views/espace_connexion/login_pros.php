@@ -2,14 +2,14 @@
 <html lang="fr">
 
 <?php
-$title = "Connexion Professionnels";
+$title = "Connexion Pros";
+$color = "#b2272e";
 require_once(APPPATH . 'views/includes/head.php');
 ?>
 
 <body>
     <div class="container">
-        <?php include(APPPATH . 'views/includes/small_icon.php'); ?>
-        <h1 class="pro">Espace Professionnel</h1>
+        <?php require_once(APPPATH . 'views/includes/header.php'); ?>
         <form action="" method="post">
             <input type="text" name="email" placeholder="Votre email">
             <input name="password" placeholder="Mot de passe" type="password">

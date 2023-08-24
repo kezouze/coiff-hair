@@ -23,6 +23,7 @@ class Welcome extends CI_Controller
     public function details()
     {
         $data['id'] = $_GET['id'];
+        $data['name'] = $_GET['name'];
         $data['all_data'] = $this->Pros_model->get_all_where_id($_GET['id']);
 
         if (!$data['all_data'] || !is_numeric($data['id']) || $data['id'] < 1) {

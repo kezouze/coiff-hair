@@ -12,7 +12,7 @@ require_once(APPPATH . 'views/includes/head.php');
         <div class="small-container">
             <?php if (!isset($_SESSION['type'])) { ?>
                 <a href="http://[::1]/coiffhair/Welcome/infos" class="infos infos-button">Voir nos salons</a>
-                <h3>Connexion:</h3>
+                <h3>Connexion / Inscription:</h3>
                 <div class="buttons">
                     <a href="http://[::1]/coiffhair/Users" class="client client-button">Client</a>
                     <a href="http://[::1]/coiffhair/Pros" class="pro pro-button">Pro</a>

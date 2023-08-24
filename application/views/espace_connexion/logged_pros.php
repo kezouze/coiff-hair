@@ -3,9 +3,8 @@
 
 <?php
 $title = "Votre espace professionnel";
+$color = "#b2272e";
 require_once(APPPATH . 'views/includes/head.php');
-// echo $_SESSION['id']; // Ça n'affiche rien en dehors du container ?
-$color = "#a04141";
 ?>
 
 <body>
