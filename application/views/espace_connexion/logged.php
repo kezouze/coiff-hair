@@ -35,14 +35,15 @@ require_once(APPPATH . 'views/includes/head.php');
                 </ul>
             <?php } ?>
             <?php if ((count($next_rdv)) < 1) { ?>
-                <a class="rdvButton" style="color:white; background-color:<?= $color ?>;" href="/coiffhair/Users/rendez_vous">Prendre un rendez-vous</a>
+                <a class="button" href="/coiffhair/Users/rendez_vous">Prendre un rendez-vous</a>
             <?php } else if (count($next_rdv) >= 1 && count($next_rdv) < 3) { ?>
-                <a class="rdvButton" style="color:white; background-color:<?= $color ?>;" href="/coiffhair/Users/rendez_vous">Prendre un autre rendez-vous</a>
+                <a class="button" href="/coiffhair/Users/rendez_vous">Prendre un autre rendez-vous</a>
             <?php } else { ?>
                 <p class="error">Vous avez atteint le nombre maximum de rendez-vous.</p>
             <?php } ?>
             <?php if ((count($old_rdv)) > 0) { ?>
-                <button style="background-color:white; color:<?= $color ?>" class="toggleButton" id="toggleButton">Voir mes rendez-vous passés</button>
+                <hr>
+                <a style="background-color:white; color:<?= $color ?>" class="toggleButton button" id="toggleButton">Voir mes rendez-vous passés</a>
                 <div class="ligne2" style="display:none;">
                     <ul>
                         <?php

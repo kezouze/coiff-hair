@@ -282,15 +282,17 @@ class Users extends CI_Controller
 		$lastName = $this->usersManager->get_last_name($info['id_user']);
 		$firstName = $this->usersManager->get_first_name($info['id_user']);
 		$info['nb_rdv'] = $this->rdvManager->get_nb_next_rdv($info['id_user']);
+		// $info['salons'] = array_column($this->Pros_model->get_all(), 'name'); // Très pratique !
+		$info['salons'] = $this->Pros_model->get_all();
 
 		if (isConnected() == false) {
 			redirect('Users');
 		} else {
 			$this->load->database();
-			$this->form_validation->set_rules('proSelect', 'Salon');
+			$this->form_validation->set_rules('proSelect', 'Salon', 'trim|required');
 			$this->form_validation->set_rules('date', 'Date', 'trim|required');
 			$this->form_validation->set_rules('time', 'Heure', 'trim|required');
-			$this->form_validation->set_rules('details', 'Détails', 'trim');
+			$this->form_validation->set_rules('details', 'Détails', 'trim|required|max_length[1000]');
 
 			if ($this->form_validation->run() == false) {
 				$info['error'] = validation_errors();
@@ -310,6 +312,58 @@ class Users extends CI_Controller
 		} else {
 			$this->load->view('espace_rendez_vous/rendez_vous', $info);
 		}
+	}
+
+	public function modify_rdv()
+	{
+		$info['error'] = "";
+		$info['valid'] = "";
+		$info['id_rdv'] = $_GET['id_rdv'];
+		$info['date'] = $this->rdvManager->get_date($info['id_rdv']);
+		$info['time'] = $this->rdvManager->get_time($info['id_rdv']);
+		$info['time'] = str_replace(':', 'h', $info['time']);
+		$info['today'] = date('Y-m-d');
+		$info['now'] = date('H:i');
+		$today = $info['today'];
+		$one = 1;
+		$info['year'] = 365;
+		$year = $info['year'];
+		$tomorrow = date('Y-m-d', strtotime($today . " + $one days"));
+		$info['tomorrow'] = $tomorrow;
+		$info['aYearLater'] = date('Y-m-d', strtotime($today . " + $year days"));
+		$info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
+		$info['details'] = $this->rdvManager->get_details($info['id_rdv']);
+
+		if (isset($_POST['date']) && isset($_POST['time'])) {
+			$date = $_POST['date'];
+			$time = $_POST['time'];
+		} else {
+			$date = $tomorrow;
+			$time = date('H:i');
+		}
+
+		if (isConnected() == false) {
+			redirect('Users');
+		} else {
+			$this->load->database();
+			$this->form_validation->set_rules('date', 'Date', 'trim|required');
+			$this->form_validation->set_rules('time', 'Heure', 'trim|required');
+			$this->form_validation->set_rules('details', 'Détails', 'trim|required|max_length[1000]');
+
+			if ($this->form_validation->run() == false) {
+				$info['error'] = validation_errors();
+			} else {
+				$date = $this->input->post('date');
+				$time = $this->input->post('time');
+				$time = str_replace('h', ':', $time);
+				$details = htmlspecialchars($this->input->post('details'));
+				$this->rdvManager->modify_rdv($info['id_rdv'], $date, $time, $details);
+				$this->rdvManager->set_email_not_sent($info['id_rdv']);
+				$info['valid'] = "Votre rdv a bien été modifié, retour à la page précédente..";
+				header('refresh:3; url = http://[::1]/coiffhair/Users/logged');
+			}
+		}
+		$this->load->view('espace_rendez_vous/modifier_rendez_vous', $info);
 	}
 
 	public function get_available_times()
@@ -359,57 +413,5 @@ class Users extends CI_Controller
 			}
 			redirect('/Users/logged');
 		}
-	}
-
-	public function modify_rdv()
-	{
-		$info['error'] = "";
-		$info['valid'] = "";
-		$info['id_rdv'] = $_GET['id_rdv'];
-		$info['date'] = $this->rdvManager->get_date($info['id_rdv']);
-		$info['time'] = $this->rdvManager->get_time($info['id_rdv']);
-		$info['time'] = str_replace(':', 'h', $info['time']);
-		$info['today'] = date('Y-m-d');
-		$info['now'] = date('H:i');
-		$today = $info['today'];
-		$one = 1;
-		$info['year'] = 365;
-		$year = $info['year'];
-		$tomorrow = date('Y-m-d', strtotime($today . " + $one days"));
-		$info['tomorrow'] = $tomorrow;
-		$info['aYearLater'] = date('Y-m-d', strtotime($today . " + $year days"));
-		$info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
-		$info['details'] = $this->rdvManager->get_details($info['id_rdv']);
-
-		if (isset($_POST['date']) && isset($_POST['time'])) {
-			$date = $_POST['date'];
-			$time = $_POST['time'];
-		} else {
-			$date = $tomorrow;
-			$time = date('H:i');
-		}
-
-		if (isConnected() == false) {
-			redirect('Users');
-		} else {
-			$this->load->database();
-			$this->form_validation->set_rules('date', 'Date', 'trim|required');
-			$this->form_validation->set_rules('time', 'Heure', 'trim|required');
-			$this->form_validation->set_rules('details', 'Détails', 'trim');
-
-			if ($this->form_validation->run() == false) {
-				$info['error'] = validation_errors();
-			} else {
-				$date = $this->input->post('date');
-				$time = $this->input->post('time');
-				$time = str_replace('h', ':', $time);
-				$details = htmlspecialchars($this->input->post('details'));
-				$this->rdvManager->modify_rdv($info['id_rdv'], $date, $time, $details);
-				$this->rdvManager->set_email_not_sent($info['id_rdv']);
-				$info['valid'] = "Votre rdv a bien été modifié, retour à la page précédente..";
-				header('refresh:3; url = http://[::1]/coiffhair/Users/logged');
-			}
-		}
-		$this->load->view('espace_rendez_vous/modifier_rendez_vous', $info);
 	}
 }

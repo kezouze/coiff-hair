@@ -18,16 +18,16 @@ require_once(APPPATH . 'views/includes/head.php');
                 <input id="date" type="date" name="date" min="<?= $today ?>" max="<?= $aYearLater ?>">
                 <label for="time">Nous sommes ouverts de 09h à 17h30</label>
                 <select id="time" name="time">
-                    <?php foreach ($creneaux as $creneau) {
-                        if ($creneau !== "indisponible") { ?>
-                            <option value="<?= $creneau ?>"><?= substr($creneau, 0, 5) ?></option>
-                    <?php }
-                    } ?>
+                    <option>🕙</option>
+                    <?php foreach ($creneaux as $creneau) { ?>
+                        <option value="<?= $creneau ?>"><?= substr($creneau, 0, 5) ?></option>
+                    <?php } ?>
                 </select>
+                <label for="details">Modifier si besoin le but de votre visite</label>
                 <textarea required maxlength="1000" name="details" cols="29" rows="5"><?= $details ?></textarea>
                 <!-- Le bouton submit devrait être désactivé après un seul clic pour éviter les bugs de doublons. 
             Le required sur input[détails] fait l'affaire pour le moment -->
-                <input type="submit" value="Modifier">
+                <input class="button" type="submit" value="Modifier">
             </form>
             <?php if (isset($error) || isset($valid)) { ?>
                 <p class="error"><?= $error ?></p>

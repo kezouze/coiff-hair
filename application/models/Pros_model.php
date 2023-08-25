@@ -16,16 +16,16 @@ class Pros_model extends CI_Model
 
     public function get_all()
     {
-        $query = $this->db->select('*')
+        $query = $this->db->select('id_pro, name, boss, email, likes')
             ->from($this->tableName)
             ->get()
-            ->result();
+            ->result(); // retourne un tableau d'objets
         return $query;
     }
 
     public function get_all_where_id($id)
     {
-        $query = $this->db->select('*')
+        $query = $this->db->select('id_pro, name, boss, email, likes')
             ->from($this->tableName)
             ->where('id_pro', $id)
             ->get()

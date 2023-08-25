@@ -14,7 +14,7 @@ require_once(APPPATH . 'views/includes/head.php');
     <div class="blur">
         <?php include(APPPATH . 'views/includes/header.php'); ?>
         <?php foreach ($all_data as $key) { ?>
-            <img src="https://source.unsplash.com/featured/576x384" alt="exemple" class="big_img">
+            <img src="https://source.unsplash.com/random/576x384?hair" alt="exemple" class="big_img">
             <p><?= $key->email; ?></p>
             <p><?= $key->boss; ?></p>
 
