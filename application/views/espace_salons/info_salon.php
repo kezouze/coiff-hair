@@ -14,9 +14,10 @@ require_once(APPPATH . 'views/includes/head.php');
         <span class="topGap"></span>
         <?php foreach ($all_data as $key) { ?>
             <div class="card">
-                <h3><?= $key->name; ?></h3>
+                <h2><?= $key->name; ?></h2>
                 <a href="http://[::1]/coiffhair/Welcome/details?id=<?= $key->id_pro ?>"><img src="https://source.unsplash.com/featured/300x200" alt="exemple"></a>
                 <p><?= $key->email; ?></p>
+                <p><?= $key->boss; ?></p>
             </div>
         <?php } ?>
         <span class="bottomGap"></span>

@@ -30,7 +30,7 @@ class Users extends CI_Controller
 				$_SESSION['pseudo'] = trim(htmlspecialchars($_POST["identifiant"]));
 				$_SESSION['type'] = "client";
 				redirect('Users/logged');
-			} else $info['error'] = 'Veuillez vérifier votre saisie';
+			} else $info['error'] = 'Erreur de saisie';
 		}
 
 		$this->load->view('espace_connexion/login', $info);
@@ -53,66 +53,58 @@ class Users extends CI_Controller
 		$this->form_validation->set_rules(
 			'gender',
 			'"Genre"',
-			'trim|required',
-			array(
-				'required' => 'Vous devez remplir le champ %s',
-			)
+			'trim',
+			// Ancienne façon : 
+			// 'trim|required',
+			// array(
+			// 	'required' => 'Vous devez remplir le champ %s',
+			// )
 		);
 
 		$this->form_validation->set_rules(
 			'last_name',
 			'"Nom"',
-			'trim|required',
-			array(
-				'required' => 'Vous devez remplir le champ %s',
-			)
+			'trim'
 		);
 
 		$this->form_validation->set_rules(
 			'first_name',
 			'"Prénom"',
-			'trim|required',
-			array(
-				'required' => 'Vous devez remplir le champ %s',
-			)
+			'trim'
 		);
 
 		$this->form_validation->set_rules(
 			'pseudo',
 			'"Pseudo"',
-			'trim|required|min_length[3]|is_unique[users.pseudo]',
+			'trim|min_length[3]|is_unique[users.pseudo]',
 			array(
-				'is_unique' => 'Ce pseudo est déjà pris',
-				'required' => 'Vous devez remplir le champ %s',
-				'min_length' => 'Le champ %s doit contenir au moins 3 caractères'
+				'is_unique' => 'Ce pseudo est déjà pris.',
+				'min_length' => 'Le champ %s doit contenir au moins 3 caractères.'
 			)
 		);
 		$this->form_validation->set_rules(
 			'email',
 			'"Email"',
-			'trim|required|valid_email|is_unique[users.email]',
+			'trim|valid_email|is_unique[users.email]',
 			array(
-				'required' => 'Vous devez remplir le champ %s',
-				'valid_email' => 'Vous devez saisir une adresse email valide',
-				'is_unique' => 'Cette adresse email est déjà enregistrée'
+				'valid_email' => 'Vous devez saisir une adresse email valide.',
+				'is_unique' => 'Cette adresse email est déjà enregistrée.'
 			)
 		);
 		$this->form_validation->set_rules(
 			'password',
 			'"Mot de passe"',
-			'trim|required|min_length[6]',
+			'trim|min_length[6]',
 			array(
-				'required' => 'Vous devez remplir le champ %s',
-				'min_length' => 'Le champ %s doit contenir au moins 6 caractères'
+				'min_length' => 'Le champ %s doit contenir au moins 6 caractères.'
 			)
 		);
 		$this->form_validation->set_rules(
 			'confirm_password',
 			'"Confirmez votre mot de passe"',
-			'trim|required|matches[password]',
+			'trim|matches[password]',
 			array(
-				'required' => 'Vous devez remplir le champ %s',
-				'matches' => 'Les mots de passe ne correspondent pas'
+				'matches' => 'Les mots de passe ne correspondent pas.'
 			)
 		);
 
@@ -205,7 +197,7 @@ class Users extends CI_Controller
 			$result = $this->usersManager->cb_users_password($_POST['email']);
 
 			if ($result == 0) {
-				$info['error'] = "Veuillez vérifier votre saisie";
+				$info['error'] = "Erreur de saisie";
 			} else if ($result == 1) {
 
 				$email = $_POST['email'];
@@ -260,7 +252,7 @@ class Users extends CI_Controller
 						$this->usersManager->change_password($info['email'], md5($new_password));
 						$info['valid'] = 'Nous avons bien modifié votre mot de passe ! Redirection vers la page d\'accueil... ';
 						header('refresh: 4; url=http://[::1]/coiffhair/Users');
-					} else $info['error'] = "Veuillez vérifier votre saisie";
+					} else $info['error'] = "Erreur de saisie";
 				}
 			} else $info['error'] = "Une erreur est survenue";
 			$this->load->view('espace_mdp/new_password', $info);

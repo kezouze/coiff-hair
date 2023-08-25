@@ -19,7 +19,7 @@ require_once(APPPATH . 'views/includes/head.php');
                 <input name="password" placeholder="Mot de passe" type="password">
                 <i>6 caractères minimum</i>
                 <input name="passwordConf" placeholder="Confirmer mdp" type="password">
-                <input type="submit" value="Envoyer">
+                <input style="background:<?= $color ?>" class="button" type="submit" value="Envoyer">
                 <div class="info" style="height:18px">
                     <?php if ($error) { ?>
                         <p class="error"><?= $error ?></p>

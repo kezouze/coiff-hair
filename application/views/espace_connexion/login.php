@@ -15,11 +15,12 @@ require_once(APPPATH . 'views/includes/head.php');
             <form action="" method="post">
                 <input type="text" name="identifiant" placeholder="Email ou pseudo">
                 <input name="password" placeholder="Mot de passe" type="password">
-                <input type="submit" value="Connexion">
+                <input class="button" type="submit" value="Connexion">
             </form>
             <p class="error"><?= $error ?></p>
             <a href="http://[::1]/coiffhair/Users/forgot_password">Mot de passe oublié ?</a>
-            <button class="inscription"><a href="http://[::1]/coiffhair/Users/inscription">Inscrivez-vous</a></button>
+            <hr>
+            <a class="button" href="http://[::1]/coiffhair/Users/inscription">Inscrivez-vous</a>
             <?php require_once(APPPATH . 'views/includes/footer.php'); ?>
         </div>
     </div>

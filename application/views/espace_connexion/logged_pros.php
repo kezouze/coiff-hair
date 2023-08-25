@@ -12,23 +12,27 @@ require_once(APPPATH . 'views/includes/head.php');
     <div class="blur">
         <?php include(APPPATH . 'views/includes/header.php'); ?>
         <div class="content">
-            <h2>Voici la liste de vos rendez-vous du jour :</h2>
-            <ul>
-                <?php
-                foreach ($all_rdv as $key) { ?>
-                    <div class="ligne">
-                        <div class="li">
-                            <li><span class="first_line"><?= date('H\hi', strtotime($key->heure_rendez_vous)) ?> : <?= ucfirst($key->last_name) . ' ' . ucfirst($key->first_name) ?></span>
-                                <p>Détails : <i><?= $key->details_rendez_vous ?></i></p>
-                            </li>
+            <?php if (count($all_rdv) < 1) { ?>
+                <h2>Vous n'avez pas de rendez-vous aujourd'hui.</h2>
+            <?php } else { ?>
+                <h2>Voici la liste de vos rendez-vous du jour :</h2>
+                <ul>
+                    <?php
+                    foreach ($all_rdv as $key) { ?>
+                        <div class="ligne">
+                            <div class="li">
+                                <li><span class="first_line"><?= date('H\hi', strtotime($key->heure_rendez_vous)) ?> : <?= ucfirst($key->last_name) . ' ' . ucfirst($key->first_name) ?></span>
+                                    <p>Détails : <i><?= $key->details_rendez_vous ?></i></p>
+                                </li>
+                            </div>
                         </div>
-                    </div>
                 <?php
+                    }
                 }
                 ?>
-            </ul>
-            <a style="color:#ff033e" href="/coiffhair/Pros/deconnect">Se déconnecter</a>
-            <?php include(APPPATH . 'views/includes/footer.php'); ?>
+                </ul>
+                <a style="color:#ff033e" href="/coiffhair/Pros/deconnect">Se déconnecter</a>
+                <?php include(APPPATH . 'views/includes/footer.php'); ?>
         </div>
     </div>
 </body>

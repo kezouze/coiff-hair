@@ -13,7 +13,7 @@ class Pros extends CI_Controller
         $this->form_validation->set_rules('email', 'Email', 'trim|required');
         $this->form_validation->set_rules('password', 'Mot de passe', 'trim|required');
 
-        $info['error'] = $this->form_validation->run() ? "Veuillez vérifier votre saisie" : "";
+        $info['error'] = $this->form_validation->run() ? "Erreur de saisie" : "";
 
         if (
             $this->form_validation->run()
@@ -63,7 +63,7 @@ class Pros extends CI_Controller
         $this->form_validation->set_rules('passwordConf', 'Confirmation du mot de passe', 'trim|required|matches[password]');
         if ($this->form_validation->run() == false) {
             if (!empty($_POST)) {
-                $info['error'] = "Veuillez vérifier votre saisie";
+                $info['error'] = "Erreur de saisie";
             }
         } else {
             $this->Pros_model->set_pro();
