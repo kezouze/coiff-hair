@@ -13,7 +13,7 @@ require_once(APPPATH . 'views/includes/head.php');
         <?php require_once(APPPATH . 'views/includes/header.php'); ?>
         <div class="content">
             <form action="" method="post">
-                <input type="text" name="identifiant" placeholder="Email ou pseudo">
+                <input type="text" name="identifiant" placeholder="Email ou pseudo" value="<?= set_value('identifiant') ?>">
                 <input name="password" placeholder="Mot de passe" type="password">
                 <input class="button" type="submit" value="Connexion">
             </form>

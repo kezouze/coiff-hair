@@ -56,9 +56,9 @@ class Users extends CI_Controller
 			'trim',
 			// Ancienne façon : 
 			'trim|required',
-			// array(
-			// 	'required' => 'Vous devez remplir le champ %s',
-			// )
+			array(
+				'required' => 'Champ %s obligatoire',
+			)
 		);
 
 		$this->form_validation->set_rules(

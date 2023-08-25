@@ -41,6 +41,7 @@ class Pros extends CI_Controller
             $date = date('Y-m-d');
             $id = $_SESSION['id'];
             $info['infos'] = $this->Pros_model->get_all_where_id($_SESSION['id']);
+            $_SESSION['name'] = $info['infos'][0]->name;
             $info['all_rdv'] = $this->Pros_model->get_all_rdv($date, $id);
             $this->load->view('espace_connexion/logged_pros', $info);
         }
@@ -90,5 +91,69 @@ class Pros extends CI_Controller
             header('refresh: 3; url=http://[::1]/coiffhair/Pros');
         }
         $this->load->view('espace_inscription/inscription_pros', $info);
+    }
+
+    public function updateInfos()
+    {
+        if (isConnected() == false) {
+            redirect('Pros');
+        } else {
+            $data['infos'] = $this->Pros_model->get_all_where_id($_SESSION['id']);
+            $this->load->view('espace_pro/update_infos', $data);
+        }
+    }
+
+    public function informations()
+    {
+        if (isConnected() == false) {
+            redirect('Pros');
+        } else {
+            $this->load->view('espace_pro/informations');
+        }
+    }
+
+    public function presentation()
+    {
+        if (isConnected() == false) {
+            redirect('Pros');
+        } else {
+            $this->load->view('espace_pro/presentation');
+        }
+    }
+
+    public function photos()
+    {
+        if (isConnected() == false) {
+            redirect('Pros');
+        } else {
+            $this->load->view('espace_pro/photos');
+        }
+    }
+
+    public function horaires()
+    {
+        if (isConnected() == false) {
+            redirect('Pros');
+        } else {
+            $this->load->view('espace_pro/horaires');
+        }
+    }
+
+    public function services()
+    {
+        if (isConnected() == false) {
+            redirect('Pros');
+        } else {
+            $this->load->view('espace_pro/services');
+        }
+    }
+
+    public function produits()
+    {
+        if (isConnected() == false) {
+            redirect('Pros');
+        } else {
+            $this->load->view('espace_pro/produits');
+        }
     }
 }

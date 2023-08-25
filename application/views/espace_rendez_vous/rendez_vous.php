@@ -31,7 +31,7 @@ require_once(APPPATH . 'views/includes/head.php');
                     <?php } ?>
                 </select>
                 <label for="details">Renseignez le but de votre visite :)</label>
-                <textarea placeholder="..." name="details" cols="29" rows="5"></textarea>
+                <textarea placeholder="..." name="details" cols="29" rows="5" value="..."></textarea>
                 <input class="button" type="submit" value="Réserver">
             </form>
             <?php if (isset($error) || isset($valid)) { ?>

@@ -13,7 +13,7 @@ require_once(APPPATH . 'views/includes/head.php');
         <?php require_once(APPPATH . 'views/includes/header.php'); ?>
         <div class="content">
             <form action="" method="post">
-                <input required type="text" name="email" placeholder="Votre email">
+                <input required type="text" name="email" placeholder="Votre email" value="<?= set_value('email') ?>">
                 <input required name="password" placeholder="Mot de passe" type="password">
                 <input style="background:<?= $color ?>" class="button" type="submit" value="Connexion">
             </form>
