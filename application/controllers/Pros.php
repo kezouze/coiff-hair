@@ -58,12 +58,31 @@ class Pros extends CI_Controller
         $info['valid'] = "";
         $this->form_validation->set_rules('name', 'Nom du salon', 'trim|required');
         $this->form_validation->set_rules('boss', 'Responsable', 'trim|required');
-        $this->form_validation->set_rules('email', 'Adresse email', 'trim|required|valid_email|is_unique[pros.email]');
-        $this->form_validation->set_rules('password', 'Mot de passe', 'trim|required|min_length[6]');
-        $this->form_validation->set_rules('passwordConf', 'Confirmation du mot de passe', 'trim|required|matches[password]');
+        $this->form_validation->set_rules(
+            'email',
+            'Adresse email',
+            'trim|required|valid_email|is_unique[pros.email]',
+            array('is_unique' => 'Cet email est déjà utilisé', 'valid_email' => 'Veuillez saisir un email valide')
+        );
+        $this->form_validation->set_rules(
+            'password',
+            '"Mot de passe"',
+            'trim|min_length[6]',
+            array(
+                'min_length' => 'Le champ %s doit contenir au moins 6 caractères.'
+            )
+        );
+        $this->form_validation->set_rules(
+            'passwordConf',
+            '"Confirmez votre mot de passe"',
+            'trim|matches[password]',
+            array(
+                'matches' => 'Les mots de passe ne correspondent pas.'
+            )
+        );
         if ($this->form_validation->run() == false) {
             if (!empty($_POST)) {
-                $info['error'] = "Erreur de saisie";
+                $info['error'] = validation_errors();
             }
         } else {
             $this->Pros_model->set_pro();

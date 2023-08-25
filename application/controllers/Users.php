@@ -55,7 +55,7 @@ class Users extends CI_Controller
 			'"Genre"',
 			'trim',
 			// Ancienne façon : 
-			// 'trim|required',
+			'trim|required',
 			// array(
 			// 	'required' => 'Vous devez remplir le champ %s',
 			// )

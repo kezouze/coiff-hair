@@ -5,6 +5,7 @@
 $title = $infos[0]->name;
 $color = "#b2272e";
 $linkTo = "Welcome";
+$add = '<a class="button secret" style="display:none; background:' . $color . '">Mettre à jour vos infos</a>';
 require_once(APPPATH . 'views/includes/head.php');
 ?>
 
@@ -15,7 +16,7 @@ require_once(APPPATH . 'views/includes/head.php');
             <?php if (count($all_rdv) < 1) { ?>
                 <h2>Vous n'avez pas de rendez-vous aujourd'hui.</h2>
             <?php } else { ?>
-                <h2>Voici la liste de vos rendez-vous du jour :</h2>
+                <h2>Vos rendez-vous du <?= date('d/m/y'); ?> </h2>
                 <ul>
                     <?php
                     foreach ($all_rdv as $key) { ?>
@@ -36,5 +37,10 @@ require_once(APPPATH . 'views/includes/head.php');
         </div>
     </div>
 </body>
+<script>
+    $(document).ready(function() {
+        $('.secret').show();
+    });
+</script>
 
 </html>
