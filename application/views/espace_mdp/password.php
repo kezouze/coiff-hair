@@ -18,9 +18,8 @@ require_once(APPPATH . 'views/includes/head.php');
         </form>
         <p class="error"><?= $error ?></p>
         <p class="valid"><?= $valid ?></p>
-        <?php include(APPPATH . 'views/includes/footer.php'); ?>
-
     </div>
+    <?php include(APPPATH . 'views/includes/footer.php'); ?>
 </div>
 
 <body>

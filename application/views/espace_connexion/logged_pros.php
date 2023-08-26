@@ -33,9 +33,9 @@ require_once(APPPATH . 'views/includes/head.php');
                 </ul>
                 <hr>
                 <a href="http://[::1]/coiffhair/Pros/updateInfos" class="button" style="background:<?= $color ?>">Mettez à jour vos infos</a>
-                <a style="color:#ff033e" href="/coiffhair/Pros/deconnect">Se déconnecter</a>
-                <?php include(APPPATH . 'views/includes/footer.php'); ?>
+                <a href="http://[::1]/coiffhair/Welcome/details?id=<?= $_SESSION['id'] ?>" class="button" style="background:<?= $color ?>">Voir votre page</a>
         </div>
+        <?php include(APPPATH . 'views/includes/footer.php'); ?>
     </div>
 </body>
 

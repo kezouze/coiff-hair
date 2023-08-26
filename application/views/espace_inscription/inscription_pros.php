@@ -33,8 +33,8 @@ require_once(APPPATH . 'views/includes/head.php');
                     ?>
                 </span>
             </form>
-            <?php require_once(APPPATH . 'views/includes/footer.php'); ?>
         </div>
+        <?php require_once(APPPATH . 'views/includes/footer.php'); ?>
     </div>
 </body>
 

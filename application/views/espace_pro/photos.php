@@ -12,8 +12,8 @@ require_once(APPPATH . 'views/includes/head.php');
     <div class="blur">
         <?php include(APPPATH . 'views/includes/header.php'); ?>
         <div class="content">
-            <?php include(APPPATH . 'views/includes/footer.php'); ?>
         </div>
+        <?php include(APPPATH . 'views/includes/footer.php'); ?>
     </div>
 </body>
 

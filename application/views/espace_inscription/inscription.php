@@ -39,11 +39,8 @@ require_once(APPPATH . 'views/includes/head.php');
                 }
                 ?>
             </span>
-            <!-- <p class="error"></p>
-            <p class="valid"></p> -->
-            <?php require_once(APPPATH . 'views/includes/footer.php'); ?>
-
         </div>
+        <?php require_once(APPPATH . 'views/includes/footer.php'); ?>
     </div>
 </body>
 

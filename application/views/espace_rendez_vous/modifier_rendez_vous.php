@@ -33,8 +33,8 @@ require_once(APPPATH . 'views/includes/head.php');
                 <p class="error"><?= $error ?></p>
                 <p class="valid"><?= $valid ?></p>
             <?php } ?>
-            <?php require_once(APPPATH . 'views/includes/footer.php'); ?>
         </div>
+        <?php require_once(APPPATH . 'views/includes/footer.php'); ?>
     </div>
 </body>
 <script>

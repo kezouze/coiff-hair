@@ -63,10 +63,8 @@ require_once(APPPATH . 'views/includes/head.php');
                     <a style="color:#ff033e" href="/coiffhair/Users/delete_old_rdv">Supprimer les rdv passés</a>
                 </div>
             <?php } ?>
-            <a style="color:#ff033e" href="/coiffhair/Users/deconnect">Se déconnecter</a>
         </div>
         <?php require_once(APPPATH . 'views/includes/footer.php') ?>
-
     </div>
 </body>
 <script>

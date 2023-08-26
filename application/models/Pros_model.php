@@ -84,4 +84,17 @@ class Pros_model extends CI_Model
         );
         $this->db->insert($this->tableName, $data);
     }
+
+    public function set_pro_infos($id)
+    {
+        $data = array(
+            'address' => $this->input->post('address'),
+            'postal_code' => $this->input->post('postal_code'),
+            'city' => ($this->input->post('city')),
+            'telephone' => ($this->input->post('telephone')),
+            'email' => $this->input->post('email'),
+        );
+        $this->db->where('id_pro', $id)
+            ->update($this->tableName, $data);
+    }
 }

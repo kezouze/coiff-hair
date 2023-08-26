@@ -13,16 +13,18 @@ require_once(APPPATH . 'views/includes/head.php');
     <!-- <img class="icone_previous" src="" alt="Précédent"> -->
     <div class="blur">
         <?php include(APPPATH . 'views/includes/header.php'); ?>
-        <?php foreach ($all_data as $key) { ?>
-            <img src="https://source.unsplash.com/random/576x384?hair" alt="exemple" class="big_img">
-            <p><?= $key->email; ?></p>
-            <p><?= $key->boss; ?></p>
+        <div class="content">
+            <?php foreach ($all_data as $key) { ?>
+                <img src="https://source.unsplash.com/random/576x384?hair" alt="Photo du salon" class="big_img">
+                <p><?= $key->email; ?></p>
+                <p><?= $key->boss; ?></p>
 
-            <button data-id="<?= $id; ?>" class="likes" style="background:#2f4f4f; border:none; text-decoration:none;">👍🏻
-                <p id="likes" style="color:white;"><?= $key->likes; ?></p>
-            </button>
+                <button data-id="<?= $id; ?>" class="likes" style="background:#2f4f4f; border:none; text-decoration:none;">👍🏻
+                    <p id="likes" style="color:white;"><?= $key->likes; ?></p>
+                </button>
 
-        <?php } ?>
+            <?php } ?>
+        </div>
         <?php include(APPPATH . 'views/includes/footer.php'); ?>
         <!-- <img class="icone_next" src="" alt="Suivant"> -->
         <!-- </div> -->

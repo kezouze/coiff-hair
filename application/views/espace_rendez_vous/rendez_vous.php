@@ -42,8 +42,8 @@ require_once(APPPATH . 'views/includes/head.php');
                     <p><?= $valid ?></p>
                 </span>
             <?php } ?>
-            <?php require_once(APPPATH . 'views/includes/footer.php'); ?>
         </div>
+        <?php require_once(APPPATH . 'views/includes/footer.php'); ?>
     </div>
     <!--  js dans fichier à part -->
     <script>

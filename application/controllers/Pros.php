@@ -1,7 +1,8 @@
 <?php
 
 defined('BASEPATH') or exit('No direct script access allowed');
-
+$info['error'] = "";
+$info['valid'] = "";
 class Pros extends CI_Controller
 {
     public function index()
@@ -108,7 +109,25 @@ class Pros extends CI_Controller
         if (isConnected() == false) {
             redirect('Pros');
         } else {
-            $this->load->view('espace_pro/informations');
+
+            $info['error'] = "";
+            $info['valid'] = "";
+            $this->form_validation->set_rules('address', 'Adresse', 'trim|required');
+            $this->form_validation->set_rules('postal_code', 'Code postal', 'trim|required|numeric');
+            $this->form_validation->set_rules('city', 'Ville', 'trim|required');
+            $this->form_validation->set_rules('telephone', 'Téléphone', 'trim|required|numeric|min_length[10]|max_length[10]');
+            $this->form_validation->set_rules('email', 'Adresse email', 'trim|required|valid_email');
+            $info['email'] = $this->Pros_model->get_all($_SESSION['id'])[0]->email;
+            if ($this->form_validation->run() == false) {
+                if (!empty($_POST)) {
+                    $info['error'] = validation_errors();
+                }
+            } else {
+                $this->Pros_model->set_pro_infos($_SESSION['id']);
+                $info['valid'] = "Votre modifications ont bien été prise en compte";
+                header('refresh: 3; url=http://[::1]/coiffhair/Pros/updateInfos');
+            }
+            $this->load->view('espace_pro/informations', $info);
         }
     }
 

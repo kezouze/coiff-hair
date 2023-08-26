@@ -21,8 +21,8 @@ require_once(APPPATH . 'views/includes/head.php');
             <a href="http://[::1]/coiffhair/Users/forgot_password">Mot de passe oublié ?</a>
             <hr>
             <a class="button" href="http://[::1]/coiffhair/Users/inscription">Inscrivez-vous</a>
-            <?php require_once(APPPATH . 'views/includes/footer.php'); ?>
         </div>
+        <?php require_once(APPPATH . 'views/includes/footer.php'); ?>
     </div>
 </body>
 
