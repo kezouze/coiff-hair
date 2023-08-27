@@ -8,7 +8,7 @@ require_once(APPPATH . 'views/includes/head.php');
 
 <body>
     <div class="header">
-        <img id="icone" src="/coiffhair/assets/images/logo2.png" alt="coiffeur">
+        <img id="big-icone" src="/coiffhair/assets/images/logo2.png" alt="coiffeur">
         <div class="small-container">
             <?php if (!isset($_SESSION['type'])) { ?>
                 <a href="http://[::1]/coiffhair/Welcome/infos" class="infos infos-button">Voir nos salons</a>

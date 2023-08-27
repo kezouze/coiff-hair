@@ -25,7 +25,7 @@ class Pros_model extends CI_Model
 
     public function get_all_where_id($id)
     {
-        $query = $this->db->select('id_pro, name, boss, email, likes')
+        $query = $this->db->select('id_pro, name, telephone, email, likes, address, postal_code, city')
             ->from($this->tableName)
             ->where('id_pro', $id)
             ->get()
