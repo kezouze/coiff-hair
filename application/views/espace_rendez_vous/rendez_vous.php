@@ -16,10 +16,14 @@ require_once(APPPATH . 'views/includes/head.php');
             <form action="" method="post">
                 <label for="proSelect">Choisissez votre Salon</label>
                 <select id="proSelect" name="proSelect">
-                    <option>✂️</option>
-                    <?php foreach ($salons as $salon) { ?>
-                        <option value="<?= $salon->id_pro ?>"><?= $salon->name ?></option>
-                    <?php } ?>
+                    <?php if (isset($_GET['id'])) { ?>
+                        <option value="<?= $_GET['id'] ?>"><?= $_GET['name'] ?></option>
+                    <?php } else { ?>
+                        <option disabled selected>✂️</option>
+                        <?php foreach ($salons as $salon) { ?>
+                            <option value="<?= $salon->id_pro ?>"><?= $salon->name ?></option>
+                    <?php }
+                    } ?>
                 </select>
                 <label for="date">Choisissez votre date</label>
                 <input id="date" type="date" name="date" min="<?= $today ?>" max="<?= $aYearLater ?>">

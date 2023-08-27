@@ -4,7 +4,10 @@
 <?php
 $title = "Salon " . $name;
 $color = "#2f4f4f";
-$linkTo = "Welcome/infos";
+if (isset($_SESSION['type']) && $_SESSION['type'] == "pro") {
+    $linkTo = "Pros";
+} else
+    $linkTo = "Welcome/infos";
 require_once(APPPATH . 'views/includes/head.php');
 ?>
 
@@ -22,7 +25,7 @@ require_once(APPPATH . 'views/includes/head.php');
                 <button data-id="<?= $id; ?>" class="likes" style="background:#2f4f4f; border:none; text-decoration:none;">👍🏻
                     <p id="likes" style="color:white;"><?= $key->likes; ?></p>
                 </button>
-
+                <a href="http://[::1]/coiffhair/Users/rendez_vous?id=<?= $key->id_pro ?>&name=<?= $key->name ?>" style="background:<?= $color ?>" class="button">Réserver</a>
             <?php } ?>
         </div>
         <?php include(APPPATH . 'views/includes/footer.php'); ?>

@@ -368,7 +368,7 @@ class Users extends CI_Controller
 
 	public function get_available_times()
 	{
-		$selectedPro = $this->input->post('pro'); // il fallait utiliser le nom du tableau data de la requête ajax
+		$selectedPro = $this->input->post('pro'); // il fallait utiliser le nom du tableau data de la requête ajax *FACEPALM*
 		$selectedDate = $this->input->post('date');
 		$info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
 		// $info['nb_today_rdv'] = $this->rdvManager->get_nb_today_rdv($info['id_user'], $selectedDate);
