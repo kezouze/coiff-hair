@@ -15,8 +15,8 @@ require_once(APPPATH . 'views/includes/head.php');
             <h3>Nous sommes le <span id="today"><?= date('d/m/Y', strtotime($today)) ?></span> et il est <span id="horloge" onload="showtime()"></span> </h3>
             <form action="" method="post">
                 <label for="proSelect">Choisissez votre Salon</label>
-                <select name="proSelect" id="proSelect">
-                    <option disabled selected>✂️</option>
+                <select id="proSelect" name="proSelect">
+                    <option>✂️</option>
                     <?php foreach ($salons as $salon) { ?>
                         <option value="<?= $salon->id_pro ?>"><?= $salon->name ?></option>
                     <?php } ?>
@@ -31,7 +31,7 @@ require_once(APPPATH . 'views/includes/head.php');
                     <?php } ?>
                 </select>
                 <label for="details">Renseignez le but de votre visite :)</label>
-                <textarea placeholder="..." name="details" cols="29" rows="5" value="..."></textarea>
+                <textarea placeholder="..." id="details" name="details" cols="29" rows="5" value="..."></textarea>
                 <input class="button" type="submit" value="Réserver">
             </form>
             <?php if (isset($error) || isset($valid)) { ?>
