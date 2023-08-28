@@ -13,7 +13,7 @@ require_once(APPPATH . 'views/includes/head.php');
         <?php include(APPPATH . 'views/includes/header.php'); ?>
         <div class="content">
             <form action="" method="post">
-                <textarea placeholder="Écrivez une description de votre établissement" type="text" name="description"></textarea>
+                <textarea placeholder="Écrivez une description de votre établissement" type="text" name="description"><?= $description ?></textarea>
                 <input class="button" style="background:<?= $color ?>" type="submit" value="Envoyer">
             </form>
             <?php require(APPPATH . 'views/includes/error_valid_messages.php'); ?>

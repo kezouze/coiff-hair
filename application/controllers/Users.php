@@ -206,7 +206,7 @@ class Users extends CI_Controller
 				$this->usersManager->secret_code($code, $email);
 
 				$this->load->library('email');
-				$this->email->from('trouduc@outil-web.fr', 'Vincent');
+				$this->email->from('projet-pro@outil-web.fr', 'Coiffhair');
 				$this->email->to($email);
 				$this->email->subject('Réinitialisation de votre mot de passe');
 				$this->email->message('Veuillez cliquer sur ce lien pour réinitialiser votre mot de passe : ' . anchor(base_url() . 'Users/new_password' . '?code=' . $code . '&email=' . $email));

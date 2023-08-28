@@ -117,7 +117,7 @@ class Pros extends CI_Controller
             $this->form_validation->set_rules('city', 'Ville', 'trim|required');
             $this->form_validation->set_rules('telephone', 'Téléphone', 'trim|required|numeric|min_length[10]|max_length[10]');
             $this->form_validation->set_rules('email', 'Adresse email', 'trim|required|valid_email');
-            $info['email'] = $this->Pros_model->get_all($_SESSION['id'])[0]->email;
+            $info['email'] = $this->Pros_model->get_all_where_id($_SESSION['id'])[0]->email;
             if ($this->form_validation->run() == false) {
                 if (!empty($_POST)) {
                     $info['error'] = validation_errors();
@@ -138,6 +138,7 @@ class Pros extends CI_Controller
         } else {
             $info['error'] = "";
             $info['valid'] = "";
+            $info['description'] = $this->Pros_model->get_all_where_id($_SESSION['id'])[0]->description;;
             $this->form_validation->set_rules('description', 'Description', 'trim|required');
             if ($this->form_validation->run() == false) {
                 if (!empty($_POST)) {
@@ -157,7 +158,24 @@ class Pros extends CI_Controller
         if (isConnected() == false) {
             redirect('Pros');
         } else {
-            $this->load->view('espace_pro/photos');
+            $info['error'] = "";
+            $info['valid'] = "";
+            $config['upload_path'] = './uploads/';
+            $config['allowed_types'] = 'jpg|png|jpeg';
+            $config['max_size'] = 10000000; // 10Mo
+            $config['max_width'] = 7680;
+            $config['max_height'] = 7680;
+            $config['file_name'] = $_SESSION['id'] . '_' . date('YmdHis') . '_' . uniqid() . '.jpg';
+            $this->load->library('upload', $config);
+            if (!$this->upload->do_upload('photo')) {
+                $info['error'] = $this->upload->display_errors();
+            } else {
+                $data = array('upload_data' => $this->upload->data());
+                $this->Pros_model->set_pro_photo($_SESSION['id'], $config['file_name']);
+                $info['valid'] = "Votre photo a bien été ajoutée";
+                header('refresh: 3; url=http://[::1]/coiffhair/Pros/updateInfos');
+            }
+            $this->load->view('espace_pro/photos', $info);
         }
     }
 

@@ -144,13 +144,13 @@ body {
     padding: 0 20px;
 }
 
-.left,
-.right {
-    width: 50%;
+.left {
+    min-width: 60%;
 }
 
 .right {
     padding: 0 20px;
+    max-width: 40%;
 }
 
 .small-container {

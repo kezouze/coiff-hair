@@ -23,7 +23,11 @@ require_once(APPPATH . 'views/includes/head.php');
         <div class="details_content">
             <?php foreach ($all_data as $key) { ?>
                 <div class="left">
-                    <img src="https://source.unsplash.com/random/576x384?hair" alt="Photo du salon" class="big_img">
+                    <?php if ($key->photo !== "") { ?>
+                        <img src="<?= base_url('uploads/' . $key->photo) ?>" class="big_img" alt="Photo du salon">
+                    <?php } else { ?>
+                        <img src="https://source.unsplash.com/random/600x400?hair" class="big_img" alt="Photo du salon">
+                    <?php } ?>
                 </div>
                 <div class="right">
                     <p><?= substr($key->description, 0, 150) ?>...</p>
