@@ -149,6 +149,10 @@ body {
     width: 50%;
 }
 
+.right {
+    padding: 0 20px;
+}
+
 .small-container {
     background: var(--container-bg-color);
     backdrop-filter: blur(3px);
@@ -218,6 +222,7 @@ select {
 textarea {
     text-align: left;
     width: 300px;
+    min-height: 100px
 }
 
 input[type="submit"] {
@@ -243,6 +248,8 @@ input[type="radio"] {
 }
 
 .pages_header {
+    position: sticky;
+    top: 0;
     width: 100%;
     display: flex;
     align-items: center;
@@ -343,9 +350,9 @@ ul {
     align-items: center;
     width: 60px;
     height: 60px;
-    border: 2px solid var(--primary-color);
     border-radius: 50%;
     background: var(--primary-color);
+    text-decoration: none;
     transition: transform 0.3s ease-in-out;
 }
 
@@ -457,5 +464,6 @@ hr {
     .left,
     .right {
         width: 100%;
+        margin: 0 8px;
     }
 }

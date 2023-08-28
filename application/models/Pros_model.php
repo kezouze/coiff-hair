@@ -25,7 +25,7 @@ class Pros_model extends CI_Model
 
     public function get_all_where_id($id)
     {
-        $query = $this->db->select('id_pro, name, telephone, email, likes, address, postal_code, city')
+        $query = $this->db->select('id_pro, name, telephone, email, likes, address, postal_code, city, description')
             ->from($this->tableName)
             ->where('id_pro', $id)
             ->get()
@@ -93,6 +93,15 @@ class Pros_model extends CI_Model
             'city' => ($this->input->post('city')),
             'telephone' => ($this->input->post('telephone')),
             'email' => $this->input->post('email'),
+        );
+        $this->db->where('id_pro', $id)
+            ->update($this->tableName, $data);
+    }
+
+    public function set_pro_presentation($id)
+    {
+        $data = array(
+            'description' => $this->input->post('description'),
         );
         $this->db->where('id_pro', $id)
             ->update($this->tableName, $data);

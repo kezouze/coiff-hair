@@ -25,6 +25,7 @@ class Welcome extends CI_Controller
         $data['id'] = $_GET['id'];
         $data['all_data'] = $this->Pros_model->get_all_where_id($_GET['id']);
         $data['name'] = $data['all_data'][0]->name;
+        $data['likes'] = $data['all_data'][0]->likes;
 
         if (!$data['all_data'] || !is_numeric($data['id']) || $data['id'] < 1 || !$data['name']) {
             redirect('/Welcome/quatreCentQuatre');

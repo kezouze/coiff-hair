@@ -16,8 +16,7 @@ require_once(APPPATH . 'views/includes/head.php');
             <a style="background:<?= $color ?>;" class="button btn-update-infos" href="http://[::1]/coiffhair/Pros/presentation">Présentation</a>
             <a style="background:<?= $color ?>;" class="button btn-update-infos" href="http://[::1]/coiffhair/Pros/photos">Photos</a>
             <a style="background:<?= $color ?>;" class="button btn-update-infos" href="http://[::1]/coiffhair/Pros/horaires">Horaires</a>
-            <a style="background:<?= $color ?>;" class="button btn-update-infos" href="http://[::1]/coiffhair/Pros/services">Services</a>
-            <a style="background:<?= $color ?>;" class="button btn-update-infos" href="http://[::1]/coiffhair/Pros/produits">Produits</a>
+            <a style="background:<?= $color ?>;" class="button btn-update-infos" href="http://[::1]/coiffhair/Pros/prestations">Prestations</a>
         </div>
         <?php include(APPPATH . 'views/includes/footer.php'); ?>
     </div>

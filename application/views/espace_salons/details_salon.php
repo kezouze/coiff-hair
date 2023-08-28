@@ -6,8 +6,12 @@ $title = $name;
 $color = "#2f4f4f";
 if (isset($_SESSION['type']) && $_SESSION['type'] == "pro") {
     $linkTo = "Pros";
-} else
+} else {
     $linkTo = "Welcome/infos";
+}
+$add = '<button data-id="' . $id . '" class="likes">👍🏻
+        <p id="likes" style="color:white;">' . $likes . '</p>
+    </button>';
 require_once(APPPATH . 'views/includes/head.php');
 ?>
 
@@ -22,13 +26,13 @@ require_once(APPPATH . 'views/includes/head.php');
                     <img src="https://source.unsplash.com/random/576x384?hair" alt="Photo du salon" class="big_img">
                 </div>
                 <div class="right">
+                    <p><?= substr($key->description, 0, 150) ?>...</p>
+                    <hr>
                     <p><?= $key->address ?></p>
                     <p><?= $key->postal_code; ?> <?= $key->city ?></p>
-                    <p><?= $key->email; ?></p>
                     <p><?= $key->telephone; ?></p>
-                    <button data-id="<?= $id; ?>" class="likes" style="background:#2f4f4f; border:none; text-decoration:none;">👍🏻
-                        <p id="likes" style="color:white;"><?= $key->likes; ?></p>
-                    </button>
+                    <p><?= $key->email; ?></p>
+                    <hr>
                     <a href="http://[::1]/coiffhair/Users/rendez_vous?id=<?= $key->id_pro ?>&name=<?= $key->name ?>" style="background:<?= $color ?>" class="button">Réserver</a>
                 <?php } ?>
                 </div>

@@ -2,7 +2,7 @@
 <html lang="en">
 
 <?php
-$title = "Renseigner / modifier vos services";
+$title = "Renseigner / modifier vos prestations";
 $color = "#b2272e";
 $linkTo = "Pros/updateInfos";
 require_once(APPPATH . 'views/includes/head.php');

@@ -136,7 +136,19 @@ class Pros extends CI_Controller
         if (isConnected() == false) {
             redirect('Pros');
         } else {
-            $this->load->view('espace_pro/presentation');
+            $info['error'] = "";
+            $info['valid'] = "";
+            $this->form_validation->set_rules('description', 'Description', 'trim|required');
+            if ($this->form_validation->run() == false) {
+                if (!empty($_POST)) {
+                    $info['error'] = validation_errors();
+                }
+            } else {
+                $this->Pros_model->set_pro_presentation($_SESSION['id']);
+                $info['valid'] = "Votre modifications ont bien été prise en compte";
+                header('refresh: 3; url=http://[::1]/coiffhair/Pros/updateInfos');
+            }
+            $this->load->view('espace_pro/presentation', $info);
         }
     }
 
@@ -158,21 +170,12 @@ class Pros extends CI_Controller
         }
     }
 
-    public function services()
+    public function prestations()
     {
         if (isConnected() == false) {
             redirect('Pros');
         } else {
-            $this->load->view('espace_pro/services');
-        }
-    }
-
-    public function produits()
-    {
-        if (isConnected() == false) {
-            redirect('Pros');
-        } else {
-            $this->load->view('espace_pro/produits');
+            $this->load->view('espace_pro/prestations');
         }
     }
 }
