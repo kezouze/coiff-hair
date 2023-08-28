@@ -21,23 +21,25 @@ require_once(APPPATH . 'views/includes/head.php');
     <div class="blur">
         <?php include(APPPATH . 'views/includes/header.php'); ?>
         <div class="details_content">
-            <?php foreach ($all_data as $key) { ?>
+            <?php foreach ($all_data as $data) { ?>
                 <div class="left">
-                    <?php if ($key->photo !== "") { ?>
-                        <img src="<?= base_url('uploads/' . $key->photo) ?>" class="big_img" alt="Photo du salon">
+                    <!-- <?php var_dump($data->photos) ?> -->
+                    <?php if ($data->photos !== "null") { // Pourquoi ce format bizarre ? 
+                    ?>
+                        <img src="<?= base_url('uploads/' . substr($data->photos, 2, 34)) ?>" class="big_img" alt="Photo du salon">
                     <?php } else { ?>
                         <img src="https://source.unsplash.com/random/600x400?hair" class="big_img" alt="Photo du salon">
                     <?php } ?>
                 </div>
                 <div class="right">
-                    <p><?= substr($key->description, 0, 150) ?>...</p>
+                    <p><?= substr($data->description, 0, 150) ?>...</p>
                     <hr>
-                    <p><?= $key->address ?></p>
-                    <p><?= $key->postal_code; ?> <?= $key->city ?></p>
-                    <p><?= $key->telephone; ?></p>
-                    <p><?= $key->email; ?></p>
+                    <p><?= $data->address ?></p>
+                    <p><?= $data->postal_code; ?> <?= $data->city ?></p>
+                    <p><?= $data->telephone; ?></p>
+                    <p><?= $data->email; ?></p>
                     <hr>
-                    <a href="http://[::1]/coiffhair/Users/rendez_vous?id=<?= $key->id_pro ?>&name=<?= $key->name ?>" style="background:<?= $color ?>" class="button">Réserver</a>
+                    <a href="http://[::1]/coiffhair/Users/rendez_vous?id=<?= $data->id_pro ?>&name=<?= $data->name ?>" style="background:<?= $color ?>" class="button">Réserver</a>
                 <?php } ?>
                 </div>
         </div>

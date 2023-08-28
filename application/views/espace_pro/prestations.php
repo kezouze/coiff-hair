@@ -2,7 +2,7 @@
 <html lang="en">
 
 <?php
-$title = "Renseigner / modifier vos prestations";
+$title = $_SESSION['name'];
 $color = "#b2272e";
 $linkTo = "Pros/updateInfos";
 require_once(APPPATH . 'views/includes/head.php');
@@ -12,6 +12,7 @@ require_once(APPPATH . 'views/includes/head.php');
     <div class="blur">
         <?php include(APPPATH . 'views/includes/header.php'); ?>
         <div class="content">
+            <h2>Renseignez / modifiez vos prestations</h2>
         </div>
         <?php include(APPPATH . 'views/includes/footer.php'); ?>
     </div>

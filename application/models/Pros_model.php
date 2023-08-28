@@ -16,7 +16,7 @@ class Pros_model extends CI_Model
 
     public function get_all()
     {
-        $query = $this->db->select('id_pro, name, boss, email, likes')
+        $query = $this->db->select('id_pro, name, telephone, email, likes, address, postal_code, city, description, photos, boss')
             ->from($this->tableName)
             ->get()
             ->result(); // retourne un tableau d'objets
@@ -25,7 +25,7 @@ class Pros_model extends CI_Model
 
     public function get_all_where_id($id)
     {
-        $query = $this->db->select('id_pro, name, telephone, email, likes, address, postal_code, city, description, photo')
+        $query = $this->db->select('id_pro, name, telephone, email, likes, address, postal_code, city, description, photos, boss')
             ->from($this->tableName)
             ->where('id_pro', $id)
             ->get()
@@ -107,12 +107,29 @@ class Pros_model extends CI_Model
             ->update($this->tableName, $data);
     }
 
+    // public function set_pro_photo($id, $newFileName)
+    // {
+    //     $data = array(
+    //         'photos' => $newFileName,
+    //     );
+    //     $this->db->where('id_pro', $id)
+    //         ->update($this->tableName, $data);
+    // }
+
     public function set_pro_photo($id, $newFileName)
     {
-        $data = array(
-            'photo' => $newFileName,
-        );
+        // Récupérer les données actuelles de la colonne JSON 'photos'
+        $proData = $this->db->select('photos')
+            ->where('id_pro', $id)
+            ->get($this->tableName)
+            ->row();
+        $photoPaths = json_decode($proData->photos); // Décode le JSON existant
+        // Ajoute le nouveau chemin d'accès
+        $photoPaths[] = $newFileName;
+        // Encodage du tableau mis à jour en JSON
+        $jsonPhotoPaths = json_encode($photoPaths);
+        // Mise à jour de la colonne avec le nouveau chemin
         $this->db->where('id_pro', $id)
-            ->update($this->tableName, $data);
+            ->update($this->tableName, ['photos' => $jsonPhotoPaths]);
     }
 }

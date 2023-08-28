@@ -2,7 +2,7 @@
 <html lang="en">
 
 <?php
-$title = "Renseigner / modifier vos informations";
+$title = $_SESSION['name'];
 $color = "#b2272e";
 $linkTo = "Pros/updateInfos";
 require_once(APPPATH . 'views/includes/head.php');
@@ -12,6 +12,7 @@ require_once(APPPATH . 'views/includes/head.php');
     <div class="blur">
         <?php include(APPPATH . 'views/includes/header.php'); ?>
         <div class="content">
+            <h2>Renseignez / modifiez vos informations</h2>
             <form action="" method="post">
                 <input name="address" placeholder="N° de voie et adresse" value="<?= set_value('address') ?>" type="text">
                 <input name="postal_code" placeholder="Code postal" value="<?= set_value('postal_code') ?>" type="number">
