@@ -5,9 +5,9 @@
         <span style="width:34%">
             <h1 style="color:<?= $color ?>" class="titre"><?= $title ?></h1>
         </span>
-        <span style="width:33%">
-            <?php if (isset($add)) {
-                echo $add;
+        <span class="add_on" style="width:33%">
+            <?php if (isset($add_on)) {
+                echo $add_on;
             } ?>
         </span>
     </div>

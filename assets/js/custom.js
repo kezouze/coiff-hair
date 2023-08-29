@@ -171,7 +171,7 @@ function updateLikes() {
                         window.location.href = "http://[::1]/coiffhair/Users/";
                     }
                     if (response.liked) {
-                        alert('Vous avez déjà liké ce salon')
+                        alert("Vous avez déjà liké ce salon");
                     }
                     document.getElementById('likes').innerHTML = nbLikes;
                 },

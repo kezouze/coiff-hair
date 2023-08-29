@@ -9,10 +9,9 @@ if (isset($_SESSION['type']) && $_SESSION['type'] == "pro") {
 } else {
     $linkTo = "Welcome/infos";
 }
-$add = '<button data-id="' . $id . '" class="likes">👍🏻
+$add_on = '<button data-id="' . $id . '" class="likes">👍🏻
         <p id="likes" style="color:white;">' . $likes . '</p>
-    </button>
-    <p id="error"></p>';
+    </button>';
 require_once(APPPATH . 'views/includes/head.php');
 ?>
 
