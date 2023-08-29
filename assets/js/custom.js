@@ -140,8 +140,6 @@ function availabilities() {
     });
 }
 
-
-
 function toggleButton() {
     $(document).ready(function () {
         $("#toggleButton").click(function () {
@@ -169,6 +167,12 @@ function updateLikes() {
                 dataType: "json",
                 success: function (response) {
                     nbLikes = response.likes;
+                    if (response.redirect) {
+                        window.location.href = "http://[::1]/coiffhair/Users/";
+                    }
+                    if (response.liked) {
+                        alert('Vous avez déjà liké ce salon')
+                    }
                     document.getElementById('likes').innerHTML = nbLikes;
                 },
                 error: function (xhr) {

@@ -11,7 +11,8 @@ if (isset($_SESSION['type']) && $_SESSION['type'] == "pro") {
 }
 $add = '<button data-id="' . $id . '" class="likes">👍🏻
         <p id="likes" style="color:white;">' . $likes . '</p>
-    </button>';
+    </button>
+    <p id="error"></p>';
 require_once(APPPATH . 'views/includes/head.php');
 ?>
 

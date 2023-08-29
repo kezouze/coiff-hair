@@ -38,20 +38,35 @@ class Welcome extends CI_Controller
     public function likes()
     {
         $id_pro = $_GET['id'];
-        $isLiked = $this->Pros_model->isLiked($_SESSION['id'], $id_pro);
+        if (isset($_SESSION['id'])) {
+            $isLiked = $this->Pros_model->isLiked($_SESSION['id'], $id_pro);
+        }
 
         if (isConnected() && !$isLiked && $_SESSION['type'] == 'client') {
             $this->Pros_model->set_nb_likes($id_pro, $_SESSION['id']);
             $response = array(
-                'likes' => $this->Pros_model->get_all_where_id($id_pro)[0]->likes // Ça marche somehow
+                'likes' => $this->Pros_model->get_all_where_id($id_pro)[0]->likes, // Ça marche somehow
+                'redirect' => false,
+                'liked' => false
             );
             header('Content-Type: application/json');
             echo json_encode($response);
-        } else {
-            // la redirection ne marche pas
-            redirect('Users/');
-            // die();
-            // header('Location: http://[::1]/coiffhair/Welcome/');
+        } else if (!isConnected()) {
+            $response = array(
+                'likes' => $this->Pros_model->get_all_where_id($id_pro)[0]->likes,
+                'redirect' => true,
+                'liked' => false
+            );
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        } else if (isConnected() && $isLiked) {
+            $response = array(
+                'likes' => $this->Pros_model->get_all_where_id($id_pro)[0]->likes,
+                'redirect' => false,
+                'liked' => true
+            );
+            header('Content-Type: application/json');
+            echo json_encode($response);
         }
     }
 
