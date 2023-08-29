@@ -23,7 +23,6 @@ require_once(APPPATH . 'views/includes/head.php');
         <div class="details_content">
             <?php foreach ($all_data as $data) { ?>
                 <div class="left">
-                    <!-- <?php var_dump($data->photos) ?> -->
                     <?php if ($data->photos !== "null") { // Pourquoi ce format bizarre ? 
                     ?>
                         <img src="<?= base_url('uploads/' . substr($data->photos, 2, 34)) ?>" class="big_img" alt="Photo du salon">
@@ -35,12 +34,16 @@ require_once(APPPATH . 'views/includes/head.php');
                     <p><?= substr($data->description, 0, 150) ?>...</p>
                     <hr>
                     <p><?= $data->address ?></p>
-                    <p><?= $data->postal_code; ?> <?= $data->city ?></p>
+                    <p><?= $data->postal_code; ?> <?= strtoupper($data->city) ?></p>
                     <p><?= $data->telephone; ?></p>
-                    <p><?= $data->email; ?></p>
+                    <p><a href="mailto:<?= $data->email; ?>"><?= $data->email; ?></a></p>
                     <hr>
-                    <a href="http://[::1]/coiffhair/Users/rendez_vous?id=<?= $data->id_pro ?>&name=<?= $data->name ?>" style="background:<?= $color ?>" class="button">Réserver</a>
-                <?php } ?>
+                    <?php if (isset($_SESSION['type']) && $_SESSION['type'] == "client") { ?>
+                        <a href="http://[::1]/coiffhair/Users/rendez_vous?id=<?= $data->id_pro ?>&name=<?= $data->name ?>" style="background:<?= $color ?>" class="button">Réserver</a>
+                    <?php } else { ?>
+                        <button disabled href="" style="background:<?= $color ?>" class="button">Réserver</button>
+                <?php }
+                } ?>
                 </div>
         </div>
         <?php include(APPPATH . 'views/includes/footer.php'); ?>

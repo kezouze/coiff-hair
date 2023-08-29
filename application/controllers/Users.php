@@ -29,6 +29,7 @@ class Users extends CI_Controller
 
 				$_SESSION['pseudo'] = trim(htmlspecialchars($_POST["identifiant"]));
 				$_SESSION['type'] = "client";
+				$_SESSION['id'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
 				redirect('Users/logged');
 			} else $info['error'] = 'Erreur de saisie';
 		}

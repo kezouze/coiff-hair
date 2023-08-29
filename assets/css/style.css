@@ -149,7 +149,7 @@ body {
 }
 
 .right {
-    padding: 0 20px;
+    padding: 5vw;
     max-width: 40%;
 }
 
@@ -408,7 +408,7 @@ hr {
 
 .big_img {
     max-width: 90%;
-    height: auto;
+    max-height: 73dvh;
 }
 
 #big-icone {

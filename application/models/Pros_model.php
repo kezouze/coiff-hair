@@ -65,11 +65,27 @@ class Pros_model extends CI_Model
         return $query;
     }
 
-    public function set_nb_likes($id)
+    public function set_nb_likes($id, $id_pro)
     {
-        $query = $this->db->set('likes', 'likes+1', FALSE)
+        $this->db->set('likes', 'likes+1', FALSE)
             ->where('id_pro', $id)
             ->update($this->tableName);
+
+        $data = array(
+            'id_user' => $id_pro,
+            'id_pro' => $id,
+            'liked' => 1
+        );
+        $this->db->insert('likes', $data);
+    }
+
+    public function isLiked($id_user, $id_pro)
+    {
+        $query = $this->db->select('liked')
+            ->where('id_user', $id_user)
+            ->where('id_pro', $id_pro)
+            ->from('likes')
+            ->count_all_results();
         return $query;
     }
 
