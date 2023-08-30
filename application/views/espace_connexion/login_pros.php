@@ -13,14 +13,12 @@ require_once(APPPATH . 'views/includes/head.php');
         <?php require_once(APPPATH . 'views/includes/header.php'); ?>
         <div class="content">
             <form action="" method="post">
-                <input required type="text" name="email" placeholder="Votre email" value="<?= set_value('email') ?>">
-                <input required name="password" placeholder="Mot de passe" type="password">
+                <input type="text" name="email" placeholder="Votre email" value="<?= set_value('email') ?>">
+                <input name="password" placeholder="Mot de passe" type="password">
                 <input style="background:<?= $color ?>" class="button" type="submit" value="Connexion">
             </form>
-            <?php if (isset($error)) { ?>
-                <p class="error"><?= $error ?></p>
-            <?php } ?>
-            <a href="http://[::1]/coiffhair/Pros/forgot_password">Mot de passe oublié ?</a>
+            <?php include(APPPATH . 'views/includes/error_valid_messages.php') ?>
+            <a href="http://[::1]/coiffhair/Pros/forgot_password_pro">Mot de passe oublié ?</a>
             <hr>
             <a style="background:<?= $color ?>" class="button" href="http://[::1]/coiffhair/Pros/inscriptionPros">Inscrivez-vous</a>
         </div>

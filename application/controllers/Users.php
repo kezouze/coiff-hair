@@ -5,6 +5,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Users extends CI_Controller
 {
 
+	private $tableName = 'users';
 
 	public function __construct() // Lien vers les modèles
 	{
@@ -22,18 +23,21 @@ class Users extends CI_Controller
 
 		$info['error'] = "";
 
-		if (isset($_POST["identifiant"]) && isset($_POST["password"])) {
+		$this->form_validation->set_rules('identifiant', 'Identifiant', 'trim|required');
+		$this->form_validation->set_rules('password', 'Mot de passe', 'trim|required');
 
-			// on vérifie si il y a bien une ligne correspondant avec les infos données dans la BDD //
+		if ($this->form_validation->run()) {
 			if ($this->usersManager->cb_users_bis($_POST["identifiant"], md5($_POST["password"])) == 1) {
-
+				$_SESSION['id'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
 				$_SESSION['pseudo'] = trim(htmlspecialchars($_POST["identifiant"]));
 				$_SESSION['type'] = "client";
-				$_SESSION['id'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
 				redirect('Users/logged');
-			} else $info['error'] = 'Erreur de saisie';
+			} else {
+				$info['error'] = "Identifiant ou mot de passe incorrect";
+			}
+		} else {
+			$info['error'] = validation_errors();
 		}
-
 		$this->load->view('espace_connexion/login', $info);
 	}
 
@@ -187,21 +191,21 @@ class Users extends CI_Controller
 		redirect('Welcome');
 	}
 
-	// à adapter en prenant plutôt l'id de l'utilisateur
-	public function forgot_password(/*$code = "" */)
+	public function forgot_password()
 	{
 		$info['error'] = "";
 		$info['valid'] = "";
 
-		if (isset($_POST['email']) && $_POST['email'] != "") {
+		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email', array('valid_email' => 'Vous devez saisir une adresse email valide.'));
+		if ($this->form_validation->run()) {
 
 			$result = $this->usersManager->cb_users_password($_POST['email']);
 
 			if ($result == 0) {
-				$info['error'] = "Erreur de saisie";
+				$info['error'] = "Aucune correspondance trouvée";
 			} else if ($result == 1) {
 
-				$email = $_POST['email'];
+				$email = $this->input->email;
 				$code = random_string();
 
 				$this->usersManager->secret_code($code, $email);
@@ -211,6 +215,7 @@ class Users extends CI_Controller
 				$this->email->to($email);
 				$this->email->subject('Réinitialisation de votre mot de passe');
 				$this->email->message('Veuillez cliquer sur ce lien pour réinitialiser votre mot de passe : ' . anchor(base_url() . 'Users/new_password' . '?code=' . $code . '&email=' . $email));
+				$this->email->send();
 
 				if ($this->email->send()) {
 					$info['valid'] = "Nous vous avons envoyé un mail de réinitialisation de votre mot de passe";
@@ -219,15 +224,15 @@ class Users extends CI_Controller
 					echo $this->email->print_debugger();
 				}
 			} else {
-				$info['error'] = 'Une erreur est survenue';
 				header('refresh: 3; url=http://[::1]/coiffhair/Users');
 			}
+		} else {
+			$info['error'] = validation_errors();
 		}
 		$this->load->view('espace_mdp/password', $info);
 	}
 
-	// On ne devrait pas pouvoir accèder à la page de modif du mot de passe en rentrant de fausse infos
-	public function new_password(/*$code, $email*/)
+	public function new_password()
 	{
 
 		$info['error'] = "";
@@ -236,8 +241,7 @@ class Users extends CI_Controller
 		$info['email'] = $_GET['email'];
 
 		if (!isset($info['code']) || !isset($info['email'])) {
-			redirect('Users');
-			exit();
+			redirect('Welcome');
 		} else {
 
 			$result = $this->usersManager->get_secret_code($_GET['email']);
@@ -247,17 +251,24 @@ class Users extends CI_Controller
 			// cela accède au contenu de l'objet qui nous intéresse : la chaine de caractères
 
 			if ($secret_code === $info['code']) {
-				if (isset($_POST['new_password']) && isset($_POST['confirm_new_password'])) {
-					if ($_POST['new_password'] === $_POST['confirm_new_password']) {
-						$new_password = $_POST['new_password'];
-						$this->usersManager->change_password($info['email'], md5($new_password));
-						$info['valid'] = 'Nous avons bien modifié votre mot de passe ! Redirection vers la page d\'accueil... ';
-						header('refresh: 4; url=http://[::1]/coiffhair/Users');
-					} else $info['error'] = "Erreur de saisie";
+				$this->form_validation->set_rules('new_password', 'Nouveau mot de passe', 'trim|required|min_length[6]', array('min_length' => 'Le champ %s doit contenir au moins 6 caractères.'));
+				$this->form_validation->set_rules('confirm_new_password', 'Confirmation du nouveau mot de passe', 'trim|required|matches[new_password]', array('matches' => 'Les deux saisies ne correspondent pas.'));
+
+				if ($this->form_validation->run()) {
+					$new_password = $this->input->password;
+					$this->usersManager->change_password($info['email'], md5($new_password));
+					$info['valid'] = 'Nous avons bien modifié votre mot de passe ! Redirection vers la page d\'accueil... ';
+					header('refresh: 3; url=http://[::1]/coiffhair/Users');
+				} else {
+					$info['error'] = validation_errors();
 				}
-			} else $info['error'] = "Une erreur est survenue";
-			$this->load->view('espace_mdp/new_password', $info);
+			} else {
+				$info['error'] = "Une erreur est survenue";
+				session_destroy();
+				redirect('Welcome');
+			}
 		}
+		$this->load->view('espace_mdp/new_password', $info);
 	}
 
 	public function rendez_vous()

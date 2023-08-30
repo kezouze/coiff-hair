@@ -3,8 +3,8 @@
 
 <?php
 $title = "Modifier mdp";
-$color = "#0964cc";
-$linkTo = "Users";
+$color = "#b2272e";
+$linkTo = "Pros";
 require_once(APPPATH . 'views/includes/head.php');
 ?>
 

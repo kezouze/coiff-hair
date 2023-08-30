@@ -181,7 +181,7 @@ body {
 
 .titre {
     color: var(--primary-color);
-    font-size: clamp(1rem, 3vw, 3rem);
+    font-size: clamp(1rem, 2vw, 3rem);
 }
 
 .error,
@@ -247,6 +247,10 @@ input[type="radio"] {
     width: 20px;
     height: 20px;
     border: 2px solid var(--primary-color);
+}
+
+.email-input {
+    min-width: 230px;
 }
 
 .header {

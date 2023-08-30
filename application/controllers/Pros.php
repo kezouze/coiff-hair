@@ -1,8 +1,8 @@
 <?php
-
 defined('BASEPATH') or exit('No direct script access allowed');
 $info['error'] = "";
 $info['valid'] = "";
+$info['tablename'] = "pros";
 class Pros extends CI_Controller
 {
     public function index()
@@ -14,20 +14,20 @@ class Pros extends CI_Controller
         $this->form_validation->set_rules('email', 'Email', 'trim|required');
         $this->form_validation->set_rules('password', 'Mot de passe', 'trim|required');
 
-        $info['error'] = $this->form_validation->run() ? "Erreur de saisie" : "";
-
-        if (
-            $this->form_validation->run()
-            && $this->Pros_model->cb_pros($this->input->post('email'), md5($this->input->post('password'))) == 1
-        ) {
-            $_SESSION['id'] = $this->Pros_model->get_id($this->input->post('email'));
-            $_SESSION['type'] = "pro";
-            redirect('Pros/logged');
+        if ($this->form_validation->run()) {
+            if ($this->Pros_model->cb_pros($this->input->post('email'), md5($this->input->post('password'))) == 1) {
+                $_SESSION['id'] = $this->Pros_model->get_id($this->input->post('email'));
+                $_SESSION['type'] = "pro";
+                redirect('Pros/logged');
+            } else {
+                $info['error'] = "Identifiant ou mot de passe incorrect";
+            }
+        } else {
+            $info['error'] = validation_errors();
         }
 
         $this->load->view('espace_connexion/login_pros', $info);
     }
-
 
     public function logged()
     {
@@ -160,13 +160,13 @@ class Pros extends CI_Controller
         } else {
             $info['error'] = "";
             $info['valid'] = "";
+
             $config['upload_path'] = './uploads/';
             $config['allowed_types'] = 'jpg|png|jpeg'; // svg|gif|webp ?
             $config['max_size'] = 10000000; // 10Mo
             $config['max_width'] = 7680;
             $config['max_height'] = 7680;
             $config['file_name'] = $_SESSION['id'] . '_' . date('YmdHis') . '_' . uniqid() . '.jpg';
-            $key = 1;
             $this->load->library('upload', $config);
             if (!$this->upload->do_upload('photos')) {
                 $info['error'] = $this->upload->display_errors();
@@ -197,5 +197,85 @@ class Pros extends CI_Controller
         } else {
             $this->load->view('espace_pro/prestations');
         }
+    }
+
+    public function forgot_password_pro()
+    {
+        $info['error'] = "";
+        $info['valid'] = "";
+
+        $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email', array('valid_email' => 'Vous devez saisir une adresse email valide.'));
+        if ($this->form_validation->run()) {
+
+            $result = $this->usersManager->cb_users_password($this->input->email, $info['tablename']);
+
+            if ($result == 0) {
+                $info['error'] = "Aucune correspondance trouvée";
+            } else if ($result == 1) {
+
+                $email = $this->input->email;
+                $code = random_string();
+
+                $this->usersManager->secret_code($code, $email);
+
+                $this->load->library('email');
+                $this->email->from('projet-pro@outil-web.fr', 'Coiffhair');
+                $this->email->to($email);
+                $this->email->subject('Réinitialisation de votre mot de passe');
+                $this->email->message('Veuillez cliquer sur ce lien pour réinitialiser votre mot de passe : ' . anchor(base_url() . 'Users/new_password' . '?code=' . $code . '&email=' . $email));
+                $this->email->send();
+
+                if ($this->email->send()) {
+                    $info['valid'] = "Nous vous avons envoyé un mail de réinitialisation de votre mot de passe";
+                    // Le lien devrait avoir une limite de validité
+                } else {
+                    echo $this->email->print_debugger();
+                }
+            } else {
+                header('refresh: 3; url=http://[::1]/coiffhair/Users');
+            }
+        } else {
+            $info['error'] = validation_errors();
+        }
+        $this->load->view('espace_mdp/password_pro', $info);
+    }
+
+    public function new_password_pro()
+    {
+
+        $info['error'] = "";
+        $info['valid'] = "";
+        $info['code'] = $_GET['code'];
+        $info['email'] = $_GET['email'];
+
+        if (!isset($info['code']) || !isset($info['email'])) {
+            redirect('Welcome');
+        } else {
+
+            $result = $this->usersManager->get_secret_code($_GET['email']);
+            // cela renvoie un objet contenant le code
+
+            $secret_code = $result[0]->secret_code;
+            // cela accède au contenu de l'objet qui nous intéresse : la chaine de caractères
+
+            if ($secret_code === $info['code']) {
+                $this->form_validation->set_rules('new_password', 'Nouveau mot de passe', 'trim|required|min_length[6]', array('min_length' => 'Le champ %s doit contenir au moins 6 caractères.'));
+                $this->form_validation->set_rules('confirm_new_password', 'Confirmation du nouveau mot de passe', 'trim|required|matches[new_password]', array('matches' => 'Les deux saisies ne correspondent pas.'));
+
+                if ($this->form_validation->run()) {
+                    $new_password = $this->input->password;
+                    $this->usersManager->change_password($info['email'], md5($new_password));
+                    $info['valid'] = 'Nous avons bien modifié votre mot de passe ! Redirection vers la page d\'accueil... ';
+                    header('refresh: 3; url=http://[::1]/coiffhair/Users');
+                } else {
+                    $info['error'] = validation_errors();
+                }
+            } else {
+                $info['error'] = "Une erreur est survenue";
+                session_destroy();
+                redirect('Welcome');
+            }
+        }
+        $this->load->view('espace_mdp/new_password', $info);
     }
 }

@@ -148,4 +148,12 @@ class Pros_model extends CI_Model
         $this->db->where('id_pro', $id)
             ->update($this->tableName, ['photos' => $jsonPhotoPaths]);
     }
+
+    public function cb_pros_password($email) // Vérifier si on a un utilisateur en bdd grâce à l'email pour reset mdp 
+    {
+        $query = $this->db->where('email', $email)
+            ->from($this->tableName)
+            ->count_all_results();
+        return $query;
+    }
 }
