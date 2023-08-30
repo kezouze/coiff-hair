@@ -38,12 +38,14 @@ class Welcome extends CI_Controller
     public function likes()
     {
         $id_pro = $_GET['id'];
-        if (isset($_SESSION['id'])) {
-            $isLiked = $this->Pros_model->isLiked($_SESSION['id'], $id_pro);
+        $id_user = $_SESSION['id_user'];
+
+        if (isset($_SESSION['id_user'])) {
+            $isLiked = $this->Pros_model->isLiked($id_user, $id_pro);
         }
 
         if (isConnected() && !$isLiked && $_SESSION['type'] == 'client') {
-            $this->Pros_model->set_nb_likes($id_pro, $_SESSION['id']);
+            $this->Pros_model->set_nb_likes($_SESSION['id_user'], $id_pro);
             $response = array(
                 'likes' => $this->Pros_model->get_all_where_id($id_pro)[0]->likes, // Ça marche somehow
                 'redirect' => false,

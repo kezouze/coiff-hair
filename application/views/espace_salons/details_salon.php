@@ -13,6 +13,7 @@ $add_on = '<button data-id="' . $id . '" class="likes">👍🏻
         <p id="likes" style="color:white;">' . $likes . '</p>
     </button>';
 require_once(APPPATH . 'views/includes/head.php');
+var_dump($_SESSION['id_user']);
 ?>
 
 <body>

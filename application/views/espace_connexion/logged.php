@@ -6,6 +6,7 @@ $title = "Votre Espace";
 $color = "#0964cc";
 $linkTo = "Welcome";
 require_once(APPPATH . 'views/includes/head.php');
+var_dump($_SESSION['id_user']);
 ?>
 
 <body>
@@ -42,8 +43,8 @@ require_once(APPPATH . 'views/includes/head.php');
             <?php } else { ?>
                 <p class="error">Vous avez atteint le nombre maximum de rendez-vous.</p>
             <?php } ?>
+            <a style="background-color:white; color:<?= $color ?>" href="http://[::1]/coiffhair/welcome/infos" class="button">Voir nos salons</a>
             <?php if ((count($old_rdv)) > 0) { ?>
-                <a style="background-color:white; color:<?= $color ?>" href="http://[::1]/coiffhair/welcome/infos" class="button">Voir nos salons</a>
                 <a class="toggleButton button" id="toggleButton">Voir mes rendez-vous passés</a>
                 <div class="ligne2" style="display:none;">
                     <ul>

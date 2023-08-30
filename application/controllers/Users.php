@@ -5,7 +5,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 class Users extends CI_Controller
 {
 
-	private $tableName = 'users';
+	// Peut-on faire un seul controlleur pour pro et clients ? :
+	// private $tableName = 'users';
 
 	public function __construct() // Lien vers les modèles
 	{
@@ -28,8 +29,8 @@ class Users extends CI_Controller
 
 		if ($this->form_validation->run()) {
 			if ($this->usersManager->cb_users_bis($_POST["identifiant"], md5($_POST["password"])) == 1) {
-				$_SESSION['id'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
 				$_SESSION['pseudo'] = trim(htmlspecialchars($_POST["identifiant"]));
+				$_SESSION['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
 				$_SESSION['type'] = "client";
 				redirect('Users/logged');
 			} else {
@@ -140,6 +141,7 @@ class Users extends CI_Controller
 			redirect('Users');
 		} else {
 			$info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
+			$_SESSION['id_user'] = $info['id_user'];
 		}
 		if (!isset($_SESSION['counted']) || $_SESSION['counted'] == false) {
 			$info['nbConn'] = $this->usersManager->get_nb_conn($info['id_user']);
