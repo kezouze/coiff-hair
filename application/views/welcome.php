@@ -11,7 +11,10 @@ require_once(APPPATH . 'views/includes/head.php');
         <img id="big-icone" src="/coiffhair/assets/images/logo2.png" alt="coiffeur">
         <div class="small-container">
             <?php if (!isset($_SESSION['type'])) { ?>
-                <a href="http://[::1]/coiffhair/Welcome/infos" class="infos infos-button">Voir nos salons</a>
+                <div>
+                    <a href="http://[::1]/coiffhair/Welcome/infos" class="infos infos-button">Voir nos salons</a>
+                </div>
+                <hr>
                 <h3>Connexion / Inscription:</h3>
                 <div class="buttons">
                     <a href="http://[::1]/coiffhair/Users" class="client client-button">Client</a>
@@ -20,13 +23,14 @@ require_once(APPPATH . 'views/includes/head.php');
                     if ($_SESSION['type'] === "client") { ?>
                         <a class="client client-button" href="http://[::1]/coiffhair/Users/logged">Retour à mon espace</a>
                         <a href="http://[::1]/coiffhair/Welcome/infos" class="infos infos-button">Voir nos salons</a>
-
                     <?php } else if ($_SESSION['type'] === "pro") { ?>
                         <a class="pro pro-button" href="http://[::1]/coiffhair/Pros/logged">Retour à mon espace</a>
                     <?php } ?>
                     <a style="color:#ff033e" href="http://[::1]/coiffhair/Welcome/deconnect">Se déconnecter</a>
                 <?php } ?>
                 </div>
+                <hr>
+                <a href="http://[::1]/coiffhair/Welcome/about" class="infos about-button">À propos</a>
         </div>
     </div>
 </body>

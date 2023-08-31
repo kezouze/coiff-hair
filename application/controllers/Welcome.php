@@ -91,9 +91,13 @@ class Welcome extends CI_Controller
         }
     }
 
-
     public function quatreCentQuatre()
     {
         $this->load->view('404');
+    }
+
+    public function about()
+    {
+        $this->load->view('about');
     }
 }
