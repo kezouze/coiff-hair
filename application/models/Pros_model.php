@@ -65,7 +65,7 @@ class Pros_model extends CI_Model
         return $query;
     }
 
-    public function set_line_likes($id_user, $id_pro, $liked)
+    public function set_new_line_likes($id_user, $id_pro, $liked)
     {
         $data = array(
             'id_user' => $id_user,
@@ -107,6 +107,16 @@ class Pros_model extends CI_Model
             ->get()
             ->row();
         return $query->liked;
+    }
+
+    public function count_isLiked($id_user, $id_pro)
+    {
+        $query = $this->db->select('*')
+            ->where('id_user', $id_user)
+            ->where('id_pro', $id_pro)
+            ->from('likes')
+            ->count_all_results();
+        return $query;
     }
 
     public function set_pro()
