@@ -38,34 +38,42 @@ class Welcome extends CI_Controller
     public function likes()
     {
         $id_pro = $_GET['id'];
-        $id_user = $_SESSION['id_user'];
-
         if (isset($_SESSION['id_user'])) {
+            $id_user = $_SESSION['id_user'];
             $isLiked = $this->Pros_model->isLiked($id_user, $id_pro);
+        } else {
+            $isLiked = 1;
+        }
+        // OK
+        // var_dump($_SESSION['type']);
+        // var_dump($id_user);
+        // var_dump($id_pro);
+        // var_dump($isLiked);
+        // var_dump(isConnected());
+        // OK
+
+        if (!isConnected() || $_SESSION['type'] !== "client") {
+            $response = array(
+                'likes' => $this->Pros_model->get_all_where_id($id_pro)[0]->likes,
+                'redirect' => true
+            );
+            header('Content-Type: application/json');
+            echo json_encode($response);
         }
 
-        if (isConnected() && !$isLiked && $_SESSION['type'] == 'client') {
-            $this->Pros_model->set_nb_likes($_SESSION['id_user'], $id_pro);
+        if ($isLiked == 0) {
+            $this->Pros_model->set_pro_likes_up($id_pro);
+            $this->Pros_model->set_liked($id_user, $id_pro, 1);
             $response = array(
-                'likes' => $this->Pros_model->get_all_where_id($id_pro)[0]->likes, // Ça marche somehow
-                'redirect' => false,
-                'liked' => false
+                'likes' => $this->Pros_model->get_all_where_id($id_pro)[0]->likes,
             );
             header('Content-Type: application/json');
             echo json_encode($response);
-        } else if (!isConnected()) {
+        } else if ($isLiked == 1) {
+            $this->Pros_model->set_pro_likes_down($id_pro);
+            $this->Pros_model->set_liked($id_user, $id_pro, 0);
             $response = array(
                 'likes' => $this->Pros_model->get_all_where_id($id_pro)[0]->likes,
-                'redirect' => true,
-                'liked' => false
-            );
-            header('Content-Type: application/json');
-            echo json_encode($response);
-        } else if (isConnected() && $isLiked) {
-            $response = array(
-                'likes' => $this->Pros_model->get_all_where_id($id_pro)[0]->likes,
-                'redirect' => false,
-                'liked' => true
             );
             header('Content-Type: application/json');
             echo json_encode($response);

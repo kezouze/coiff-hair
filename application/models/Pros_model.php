@@ -65,18 +65,37 @@ class Pros_model extends CI_Model
         return $query;
     }
 
-    public function set_nb_likes($id_user, $id_pro)
+    public function set_line_likes($id_user, $id_pro, $liked)
     {
-        $this->db->set('likes', 'likes+1', FALSE)
-            ->where('id_pro', $id_pro)
-            ->update($this->tableName);
-
         $data = array(
             'id_user' => $id_user,
             'id_pro' => $id_pro,
-            'liked' => 1
+            'liked' => $liked
         );
+
         $this->db->insert('likes', $data);
+    }
+
+    public function set_liked($id_user, $id_pro, $like)
+    {
+        $this->db->set('liked', $like)
+            ->where('id_user', $id_user)
+            ->where('id_pro', $id_pro)
+            ->update('likes');
+    }
+
+    public function set_pro_likes_up($id_pro)
+    {
+        $this->db->set('likes', 'likes+1', false)
+            ->where('id_pro', $id_pro)
+            ->update($this->tableName);
+    }
+
+    public function set_pro_likes_down($id_pro)
+    {
+        $this->db->set('likes', 'likes-1', false)
+            ->where('id_pro', $id_pro)
+            ->update($this->tableName);
     }
 
     public function isLiked($id_user, $id_pro)
@@ -85,8 +104,9 @@ class Pros_model extends CI_Model
             ->where('id_user', $id_user)
             ->where('id_pro', $id_pro)
             ->from('likes')
-            ->count_all_results();
-        return $query;
+            ->get()
+            ->row();
+        return $query->liked;
     }
 
     public function set_pro()

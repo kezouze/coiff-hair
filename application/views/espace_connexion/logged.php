@@ -6,7 +6,6 @@ $title = "Votre Espace";
 $color = "#0964cc";
 $linkTo = "Welcome";
 require_once(APPPATH . 'views/includes/head.php');
-var_dump($_SESSION['id_user']);
 ?>
 
 <body>
