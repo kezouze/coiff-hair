@@ -106,7 +106,11 @@ class Pros_model extends CI_Model
             ->from('likes')
             ->get()
             ->row();
-        return $query->liked;
+        if ($query) {
+            return $query->liked;
+        } else {
+            return 0;
+        }
     }
 
     public function count_isLiked($id_user, $id_pro)

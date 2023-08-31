@@ -13,11 +13,6 @@ $add_on = '<button data-id="' . $id . '" class="likes">👍🏻
         <p id="likes" style="color:white;">' . $likes . '</p>
     </button>';
 require_once(APPPATH . 'views/includes/head.php');
-if (isset($_SESSION['id_user'])) {
-    echo $_SESSION['id_user'];
-} else {
-    echo 'Pas d\'utilisateur connecté';
-}
 ?>
 
 <body>

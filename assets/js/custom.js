@@ -170,6 +170,12 @@ function updateLikes() {
                     if (response.redirect) {
                         window.location.href = "http://[::1]/coiffhair/Users/";
                     }
+                    if (response.color === 'green') {
+                        $('.likes[data-id="' + id + '"]').removeClass('not-liked').addClass('liked');
+                    }
+                    if (response.color === 'red') {
+                        $('.likes[data-id="' + id + '"]').removeClass('liked').addClass('not-liked');
+                    }
                     document.getElementById('likes').innerHTML = nbLikes;
                 },
                 error: function (xhr) {
