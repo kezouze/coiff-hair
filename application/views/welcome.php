@@ -12,6 +12,9 @@ require_once(APPPATH . 'views/includes/head.php');
         <div class="small-container">
             <?php if (!isset($_SESSION['type'])) { ?>
                 <div>
+                    <a href="http://[::1]/coiffhair/Welcome/about" class="infos about-button">À propos</a>
+                </div>
+                <div>
                     <a href="http://[::1]/coiffhair/Welcome/infos" class="infos infos-button">Voir nos salons</a>
                 </div>
                 <hr>
@@ -29,8 +32,6 @@ require_once(APPPATH . 'views/includes/head.php');
                     <a style="color:#ff033e" href="http://[::1]/coiffhair/Welcome/deconnect">Se déconnecter</a>
                 <?php } ?>
                 </div>
-                <hr>
-                <a href="http://[::1]/coiffhair/Welcome/about" class="infos about-button">À propos</a>
         </div>
     </div>
 </body>
