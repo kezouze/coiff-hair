@@ -4,14 +4,17 @@
 <?php
 $title = $name;
 $color = "#2f4f4f";
-if (isset($_SESSION['type']) && $_SESSION['type'] == "pro") {
+if (isset($_SESSION['type']) && $_SESSION['type'] === "pro") {
     $linkTo = "Pros";
+    $add_on = '<button disabled style="background:' . $likeBtnColor . '" class="disabled">👍🏻
+            <p id="likes" style="color:white;">' . $likes . '</p>
+            </button>';
 } else {
     $linkTo = "Welcome/infos";
+    $add_on = '<button data-id="' . $id . '" style="background:' . $likeBtnColor . '" class="likes">👍🏻
+            <p id="likes" style="color:white;">' . $likes . '</p>
+        </button>';
 }
-$add_on = '<button data-id="' . $id . '" class="likes">👍🏻
-        <p id="likes" style="color:white;">' . $likes . '</p>
-    </button>';
 require_once(APPPATH . 'views/includes/head.php');
 ?>
 
@@ -40,8 +43,10 @@ require_once(APPPATH . 'views/includes/head.php');
                     <hr>
                     <?php if (isset($_SESSION['type']) && $_SESSION['type'] == "client") { ?>
                         <a href="http://[::1]/coiffhair/Users/rendez_vous?id=<?= $data->id_pro ?>&name=<?= $data->name ?>" style="background:<?= $color ?>" class="button">Réserver</a>
-                    <?php } else { ?>
+                    <?php } else if (isset($_SESSION['type']) && $_SESSION['type'] == "pro") { ?>
                         <button disabled href="" style="background:<?= $color ?>" class="button">Réserver</button>
+                    <?php } else { ?>
+                        <a href="http://[::1]/coiffhair/Users/" style="background:<?= $color ?>" class="button">Réserver</a>
                 <?php }
                 } ?>
                 </div>

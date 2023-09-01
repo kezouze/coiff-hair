@@ -26,6 +26,15 @@ class Welcome extends CI_Controller
         $data['all_data'] = $this->Pros_model->get_all_where_id($_GET['id']);
         $data['name'] = $data['all_data'][0]->name;
         $data['likes'] = $data['all_data'][0]->likes;
+        $data['likeBtnColor'] = "#2f4f4f";
+        if (isConnected() && isset($_SESSION['id_user'])) {
+            $data['isLiked'] = $this->Pros_model->isLiked($_SESSION['id_user'], $data['id']);
+            if ($data['isLiked'] == 1) {
+                $data['likeBtnColor'] = "#0964cc";
+            } else if ($data['isLiked'] == 0) {
+                $data['likeBtnColor'] = "#2f4f4f";
+            }
+        }
 
         if (!$data['all_data'] || !is_numeric($data['id']) || $data['id'] < 1 || !$data['name']) {
             redirect('/Welcome/quatreCentQuatre');
@@ -62,6 +71,7 @@ class Welcome extends CI_Controller
                 $this->Pros_model->set_pro_likes_up($id_pro);
                 $response = array(
                     'likes' => $this->Pros_model->get_all_where_id($id_pro)[0]->likes,
+                    'color' => "#0964cc"
                 );
                 header('Content-Type: application/json');
                 echo json_encode($response);
@@ -73,6 +83,7 @@ class Welcome extends CI_Controller
                     $this->Pros_model->set_liked($id_user, $id_pro, 1);
                     $response = array(
                         'likes' => $this->Pros_model->get_all_where_id($id_pro)[0]->likes,
+                        'color' => "#0964cc"
                     );
                     header('Content-Type: application/json');
                     echo json_encode($response);
@@ -83,6 +94,8 @@ class Welcome extends CI_Controller
                     $this->Pros_model->set_liked($id_user, $id_pro, 0);
                     $response = array(
                         'likes' => $this->Pros_model->get_all_where_id($id_pro)[0]->likes,
+                        'color' => "#2f4f4f"
+
                     );
                     header('Content-Type: application/json');
                     echo json_encode($response);

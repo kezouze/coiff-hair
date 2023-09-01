@@ -22,8 +22,8 @@ require_once(APPPATH . 'views/includes/head.php');
                         if ($rdv->date_rendez_vous >= date('Y-m-d')) { ?>
                             <div class="ligne">
                                 <div class="li">
-                                    <li><i class="dateAndTime">Le <?= date('d/m/Y', strtotime($rdv->date_rendez_vous)) . ' à ' . date('H\hi', strtotime($rdv->heure_rendez_vous)) . '.</i>
-                        <br><span>Détails : ' . $rdv->details_rendez_vous ?>.</span></li>
+                                    <li><i class="dateAndTime">Le <?= date('d/m/Y', strtotime($rdv->date_rendez_vous)) . ' à ' . date('H\hi', strtotime($rdv->heure_rendez_vous)) . ',</i> chez ' . $rdv->id_pro . ' <br>
+                        <span>Détails : ' . $rdv->details_rendez_vous ?>.</span></li>
                                 </div>
                                 <div class="icones_container">
                                     <a href="/coiffhair/Users/modify_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img src="/coiffhair/assets/images/modifier.png" class="icone_modif" alt="modifier"></a>

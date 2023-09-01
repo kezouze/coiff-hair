@@ -372,7 +372,8 @@ ul {
     color: var(--primary-color);
 }
 
-.likes {
+.likes,
+.disabled {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -380,7 +381,7 @@ ul {
     width: 60px;
     height: 60px;
     border-radius: 50%;
-    background: var(--primary-color);
+    /* background: var(--primary-color); */
     text-decoration: none;
     transition: transform 0.3s ease-in-out;
     border: none;

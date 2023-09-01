@@ -157,7 +157,8 @@ function updateLikes() {
         $('.likes').on('click', function () {
             var nbLikes = parseInt(document.getElementById('likes').innerHTML);
             var id = $(this).data('id')
-            nbLikes++;
+            var likeBtn = $(this)
+            // nbLikes++;
             $.ajax({
                 url: "http://[::1]/coiffhair/Welcome/likes",
                 type: "GET",
@@ -170,11 +171,8 @@ function updateLikes() {
                     if (response.redirect) {
                         window.location.href = "http://[::1]/coiffhair/Users/";
                     }
-                    if (response.color === 'green') {
-                        $('.likes[data-id="' + id + '"]').removeClass('not-liked').addClass('liked');
-                    }
-                    if (response.color === 'red') {
-                        $('.likes[data-id="' + id + '"]').removeClass('liked').addClass('not-liked');
+                    if (response.color) {
+                        $(likeBtn).css('background-color', response.color)
                     }
                     document.getElementById('likes').innerHTML = nbLikes;
                 },
