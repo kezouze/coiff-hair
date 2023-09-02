@@ -27,8 +27,13 @@ require_once(APPPATH . 'views/includes/head.php');
                                 </div>
                                 <div class="icones_container">
                                     <a href="/coiffhair/Users/modify_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img src="/coiffhair/assets/images/modifier.png" class="icone_modif" alt="modifier"></a>
-                                    <a href="/coiffhair/Users/delete_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img class="icone_suppr" src="/coiffhair/assets/images/supprimer.png" alt="supprimer"></a>
+                                    <button style="border:none;" onclick="openPopUp()"><img class="icone_suppr" src="/coiffhair/assets/images/supprimer.png" alt="supprimer"></a>
                                 </div>
+                            </div>
+                            <div class="pop-up" id="pop-up">
+                                <p>Êtes-vous sûr de vouloir supprimer ce rendez-vous ?</p>
+                                <a href="/coiffhair/Users/delete_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>" class="delete-btn">Supprimer</a>
+                                <button onclick="closePopUp()" class="nope-btn">Annuler</button>
                             </div>
                     <?php }
                     } ?>
@@ -59,9 +64,15 @@ require_once(APPPATH . 'views/includes/head.php');
                                     <br><span>Détails : <?= $rdv->details_rendez_vous ?>.</span>
                                 </li>
                             </div>
+                            <div class="pop-up" id="pop-up">
+                                <p>Cette action est irréversible</p>
+                                <p>Confirmez la suppression</p>
+                                <a href="/coiffhair/Users/delete_old_rdv" class="delete-btn">Supprimer</a>
+                                <button onclick="closePopUp()" class="nope-btn">Annuler</button>
+                            </div>
                         <?php } ?>
                     </ul>
-                    <a style="color:#ff033e" href="/coiffhair/Users/delete_old_rdv">Supprimer les rdv passés</a>
+                    <button class="delete-btn" onclick="openPopUp()">Supprimer les rdv passés</button>
                 </div>
             <?php } ?>
         </div>
@@ -70,6 +81,16 @@ require_once(APPPATH . 'views/includes/head.php');
 </body>
 <script>
     toggleButton();
+
+    var popUp = document.getElementById('pop-up');
+
+    function openPopUp() {
+        popUp.style.display = "flex";
+    }
+
+    function closePopUp() {
+        popUp.style.display = "none"
+    }
 </script>
 
 </html>
