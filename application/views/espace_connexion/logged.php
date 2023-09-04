@@ -22,12 +22,14 @@ require_once(APPPATH . 'views/includes/head.php');
                         if ($rdv->date_rendez_vous >= date('Y-m-d')) { ?>
                             <div class="ligne">
                                 <div class="li">
-                                    <li><i class="dateAndTime">Le <?= date('d/m/Y', strtotime($rdv->date_rendez_vous)) . ' à ' . date('H\hi', strtotime($rdv->heure_rendez_vous)) . ',</i> chez ' . $rdv->id_pro . ' <br>
-                        <span>Détails : ' . $rdv->details_rendez_vous ?>.</span></li>
+                                    <li><i class="dateAndTime">Le <?= date('d/m', strtotime($rdv->date_rendez_vous)) . ' à ' . date('H\hi', strtotime($rdv->heure_rendez_vous)) ?>
+                                        </i> chez <a style="text-decoration:none;" href="/coiffhair/Welcome/details?id=<?= $rdv->id_pro ?>"><span class="salon"><?= $rdv->name ?></span></a><br>
+                                        <span class="details">Détails : <?= $rdv->details_rendez_vous ?></span>
+                                    </li>
                                 </div>
                                 <div class="icones_container">
                                     <a href="/coiffhair/Users/modify_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img src="/coiffhair/assets/images/modifier.png" class="icone_modif" alt="modifier"></a>
-                                    <button style="border:none;" onclick="openPopUp()"><img class="icone_suppr" src="/coiffhair/assets/images/supprimer.png" alt="supprimer"></a>
+                                    <button style="border:none; background:transparent;" onclick="openPopUp()"><img class="icone_suppr" src="/coiffhair/assets/images/supprimer.png" alt="supprimer"></a>
                                 </div>
                             </div>
                             <div class="pop-up" id="pop-up">

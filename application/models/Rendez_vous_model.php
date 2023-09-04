@@ -20,11 +20,13 @@ class Rendez_vous_model extends CI_Model
 
     public function get_all_rendez_vous($id_user)
     {
-        $query = $this->db->select('*')
-            ->from($this->tableName)
-            ->where('id_user', $id_user)
-            ->order_by('date_rendez_vous', 'ASC')
-            ->order_by('heure_rendez_vous', 'ASC')
+        $query = $this->db->select('')
+            ->from('rendez_vous')
+            ->join('pros', 'rendez_vous.id_pro = pros.id_pro', 'left')
+            ->join('users', 'rendez_vous.id_user = users.id', 'left')
+            ->where('rendez_vous.id_user', $id_user)
+            ->order_by('rendez_vous.date_rendez_vous', 'ASC')
+            ->order_by('rendez_vous.heure_rendez_vous', 'ASC')
             ->get()
             ->result();
         return $query;

@@ -348,16 +348,15 @@ ul {
 }
 
 .li {
-    /* modifier width */
     padding: 5px 8px;
     overflow: auto;
     display: flex;
     flex-direction: column;
-    max-width: 350px;
+    max-width: 90dvw;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    /* white-space: nowrap; */
     align-items: stretch;
-    list-style-type: none;
+    /* list-style-type: none; */
 }
 
 .gender {
@@ -366,8 +365,13 @@ ul {
     align-items: flex-end;
 }
 
-.dateAndTime {
-    font-size: 20px;
+.dateAndTime,
+.salon {
+    font-size: 1.5rem;
+}
+
+.salon {
+    color: var(--client-color);
 }
 
 .buttons {
