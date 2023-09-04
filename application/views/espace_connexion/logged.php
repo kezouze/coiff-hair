@@ -83,7 +83,6 @@ require_once(APPPATH . 'views/includes/head.php');
 </body>
 <script>
     toggleButton();
-
     var popUp = document.getElementById('pop-up');
     var popUpSupprAll = document.getElementById('pop-up-suppr-all');
 

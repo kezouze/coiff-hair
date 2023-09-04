@@ -76,13 +76,12 @@ function showTime() {
 //     });
 // }
 
-function availabilities() {
+function availabilities(selectedPro) {
     // version chatGpt:
     var date = new Date();
     var h = date.getHours();
     var m = date.getMinutes();
     var s = date.getSeconds();
-    var selectedPro = $('#proSelect').val();
 
     function formatDateToYYYYMMDD(date) {
         var year = date.getFullYear();

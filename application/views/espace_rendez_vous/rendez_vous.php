@@ -52,7 +52,8 @@ require_once(APPPATH . 'views/includes/head.php');
     <!--  js dans fichier à part -->
     <script>
         showTime();
-        availabilities();
+        var selectedPro = parseInt($('#proSelect').val());
+        availabilities(selectedPro);
     </script>
 </body>
 

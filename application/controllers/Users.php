@@ -346,7 +346,8 @@ class Users extends CI_Controller
 		$info['tomorrow'] = $tomorrow;
 		$info['aYearLater'] = date('Y-m-d', strtotime($today . " + $year days"));
 		$info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
-		$info['details'] = $this->rdvManager->get_details($info['id_rdv']);
+		// $info['details'] = $this->rdvManager->get_details($info['id_rdv']);
+		$info['details'] = $this->rdvManager->get_data_rdv_where_id($_GET['id_rdv']);
 
 		if (isset($_POST['date']) && isset($_POST['time'])) {
 			$date = $_POST['date'];

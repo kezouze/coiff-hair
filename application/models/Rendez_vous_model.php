@@ -20,7 +20,7 @@ class Rendez_vous_model extends CI_Model
 
     public function get_all_rendez_vous($id_user)
     {
-        $query = $this->db->select('')
+        $query = $this->db->select('*')
             ->from('rendez_vous')
             ->join('pros', 'rendez_vous.id_pro = pros.id_pro', 'left')
             ->join('users', 'rendez_vous.id_user = users.id', 'left')
@@ -31,6 +31,19 @@ class Rendez_vous_model extends CI_Model
             ->result();
         return $query;
     }
+
+    public function get_data_rdv_where_id($id_rdv)
+    {
+        $query = $this->db->select('*')
+            ->from('rendez_vous')
+            ->join('pros', 'rendez_vous.id_pro = pros.id_pro', 'left')
+            ->where('rendez_vous.id_rendez_vous', $id_rdv)
+            ->get()
+            ->result();
+        return $query;
+    }
+
+
 
     public function delete_rdv($id_rdv)
     {
