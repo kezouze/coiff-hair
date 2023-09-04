@@ -66,15 +66,15 @@ require_once(APPPATH . 'views/includes/head.php');
                                     <br><span>Détails : <?= $rdv->details_rendez_vous ?>.</span>
                                 </li>
                             </div>
-                            <div class="pop-up" id="pop-up">
+                            <div class="pop-up" id="pop-up-suppr-all">
                                 <p>Cette action est irréversible</p>
                                 <p>Confirmez la suppression</p>
                                 <a href="/coiffhair/Users/delete_old_rdv" class="delete-btn">Supprimer</a>
-                                <button onclick="closePopUp()" class="nope-btn">Annuler</button>
+                                <button onclick="closePopUpSupprAll()" class="nope-btn">Annuler</button>
                             </div>
                         <?php } ?>
                     </ul>
-                    <button class="delete-btn" onclick="openPopUp()">Supprimer les rdv passés</button>
+                    <button class="delete-btn" onclick="openPopUpSupprAll()">Supprimer les rdv passés</button>
                 </div>
             <?php } ?>
         </div>
@@ -85,6 +85,7 @@ require_once(APPPATH . 'views/includes/head.php');
     toggleButton();
 
     var popUp = document.getElementById('pop-up');
+    var popUpSupprAll = document.getElementById('pop-up-suppr-all');
 
     function openPopUp() {
         popUp.style.display = "flex";
@@ -92,6 +93,14 @@ require_once(APPPATH . 'views/includes/head.php');
 
     function closePopUp() {
         popUp.style.display = "none"
+    }
+
+    function openPopUpSupprAll() {
+        popUpSupprAll.style.display = "flex";
+    }
+
+    function closePopUpSupprAll() {
+        popUpSupprAll.style.display = "none"
     }
 </script>
 
