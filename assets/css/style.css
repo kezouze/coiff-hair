@@ -164,12 +164,13 @@ body {
 }
 
 .left {
-    min-width: 60%;
+    min-width: 50%;
 }
 
 .right {
     padding: 5vw;
-    max-width: 40%;
+    width: auto;
+    margin: 0 auto;
 }
 
 .small-container {
@@ -498,6 +499,14 @@ hr {
 .modify-rdv {
     color: #ff7f00;
     font-size: 30px;
+}
+
+.presta_card {
+    max-width: 80%;
+    overflow-wrap: break-word;
+    padding: 10px;
+    margin: 0 auto;
+    /* Trop bien pour centrer !*/
 }
 
 
