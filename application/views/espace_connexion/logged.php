@@ -17,25 +17,26 @@ require_once(APPPATH . 'views/includes/head.php');
                 <p>Vous n'avez pas de rendez-vous à venir</p>
             <?php } else { ?>
                 <p>Vous avez <span style="font-size:2rem;color:<?= $color ?>"><?= (count($next_rdv)) ?></span> rendez-vous à venir :</p>
-                <ul>
+                <ul style="display:flex; flex-direction:column; align-items:center; justify-content:center">
                     <?php foreach ($next_rdv as $rdv) {
+                        $id_rdv = $rdv->id_rendez_vous;
                         if ($rdv->date_rendez_vous >= date('Y-m-d')) { ?>
                             <div class="ligne">
                                 <div class="li">
-                                    <li><i class="dateAndTime">Le <?= date('d/m', strtotime($rdv->date_rendez_vous)) . ' à ' . date('H\hi', strtotime($rdv->heure_rendez_vous)) ?>
-                                        </i> chez <a style="text-decoration:none;" href="/coiffhair/Welcome/details?id=<?= $rdv->id_pro ?>"><span class="salon"><?= $rdv->name ?></span></a><br>
-                                        <span class="details">Détails : <?= $rdv->details_rendez_vous ?></span>
+                                    <li>
+                                        <p class="dateAndTime">Le <?= date('d/m', strtotime($rdv->date_rendez_vous)) . ' à ' . date('H\hi', strtotime($rdv->heure_rendez_vous)) ?> chez<br><a style="text-decoration:none;" href="/coiffhair/Welcome/details?id=<?= $rdv->id_pro ?>"><span class="salon"><?= $rdv->name ?></span></a></p>
+                                        <p class="details-client">Détails: <?= $rdv->details_rendez_vous ?></p>
                                     </li>
-                                </div>
-                                <div class="icones_container">
-                                    <a href="/coiffhair/Users/modify_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img src="/coiffhair/assets/images/modifier.png" class="icone_modif" alt="modifier"></a>
-                                    <button style="border:none; background:transparent;" onclick="openPopUp()"><img class="icone_suppr" src="/coiffhair/assets/images/supprimer.png" alt="supprimer"></a>
+                                    <div class="icones_container">
+                                        <a href="/coiffhair/Users/modify_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img src="/coiffhair/assets/images/modifier.png" class="icone_modif" alt="modifier"></a>
+                                        <button style="border:none; background:transparent;" onclick="openPopUp(<?= $rdv->id_rendez_vous ?>)"><img class="icone_suppr" src="/coiffhair/assets/images/supprimer.png" alt="supprimer"></a>
+                                    </div>
                                 </div>
                             </div>
-                            <div class="pop-up" id="pop-up">
-                                <p>Êtes-vous sûr de vouloir supprimer ce rendez-vous ?</p>
+                            <div class="pop-up" id="pop-up-<?= $rdv->id_rendez_vous ?>">
+                                <p>Êtes-vous sûr de vouloir supprimer le rendez-vous du <?= date('d/m', strtotime($rdv->date_rendez_vous)) ?> à <?= date('H\hi', strtotime($rdv->heure_rendez_vous)) ?> chez <?= $rdv->name ?>?</p>
                                 <a href="/coiffhair/Users/delete_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>" class="delete-btn">Supprimer</a>
-                                <button onclick="closePopUp()" class="nope-btn">Annuler</button>
+                                <button onclick="closePopUp(<?= $rdv->id_rendez_vous ?>)" class="nope-btn">Annuler</button>
                             </div>
                     <?php }
                     } ?>
@@ -83,16 +84,21 @@ require_once(APPPATH . 'views/includes/head.php');
 </body>
 <script>
     toggleButton();
-    var popUp = document.getElementById('pop-up');
-    var popUpSupprAll = document.getElementById('pop-up-suppr-all');
+    <?php foreach ($next_rdv as $rdv) { ?>
+        var popUp<?= $rdv->id_rendez_vous ?> = document.getElementById('pop-up-<?= $rdv->id_rendez_vous ?>');
+    <?php } ?>
 
-    function openPopUp() {
+    function openPopUp(rdvId) {
+        var popUp = document.getElementById('pop-up-' + rdvId);
         popUp.style.display = "flex";
     }
 
-    function closePopUp() {
-        popUp.style.display = "none"
+    function closePopUp(rdvId) {
+        var popUp = document.getElementById('pop-up-' + rdvId);
+        popUp.style.display = "none";
     }
+
+    var popUpSupprAll = document.getElementById('pop-up-suppr-all');
 
     function openPopUpSupprAll() {
         popUpSupprAll.style.display = "flex";

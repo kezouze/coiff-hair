@@ -306,7 +306,7 @@ class Users extends CI_Controller
 			$this->form_validation->set_rules('proSelect', 'Salon', 'trim|required');
 			$this->form_validation->set_rules('date', 'Date', 'trim|required');
 			$this->form_validation->set_rules('time', 'Heure', 'trim|required');
-			$this->form_validation->set_rules('details', 'Détails', 'trim|required|max_length[1000]');
+			$this->form_validation->set_rules('details', 'Détails', 'trim|required|max_length[500]', array('max_length' => 'Le champ %s ne peut pas contenir plus de 500 caractères'));
 
 			if ($this->form_validation->run() == false) {
 				$info['error'] = validation_errors();
@@ -363,7 +363,7 @@ class Users extends CI_Controller
 			$this->load->database();
 			$this->form_validation->set_rules('date', 'Date', 'trim|required');
 			$this->form_validation->set_rules('time', 'Heure', 'trim|required');
-			$this->form_validation->set_rules('details', 'Détails', 'trim|required|max_length[1000]');
+			$this->form_validation->set_rules('details', 'Détails', 'trim|required|max_length[500]', array('max_length' => 'Le champ %s ne peut pas contenir plus de 500 caractères'));
 
 			if ($this->form_validation->run() == false) {
 				$info['error'] = validation_errors();
