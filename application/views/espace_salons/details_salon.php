@@ -41,6 +41,7 @@ require_once(APPPATH . 'views/includes/head.php');
                     <p><?= $data->telephone; ?></p>
                     <p><a href="mailto:<?= $data->email; ?>"><?= $data->email; ?></a></p>
                     <hr>
+                    <a href="/coiffhair/Welcome/prestations?id=<?= $data->id_pro ?>" style="background:<?= $color ?>" class="button">Les prestations</a>
                     <?php if (isset($_SESSION['type']) && $_SESSION['type'] == "client") { ?>
                         <a href="http://[::1]/coiffhair/Users/rendez_vous?id=<?= $data->id_pro ?>&name=<?= $data->name ?>" style="background:<?= $color ?>" class="button">Réserver</a>
                     <?php } else if (isset($_SESSION['type']) && $_SESSION['type'] == "pro") { ?>

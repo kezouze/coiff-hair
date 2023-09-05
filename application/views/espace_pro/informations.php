@@ -14,14 +14,14 @@ require_once(APPPATH . 'views/includes/head.php');
         <div class="content">
             <h2>Renseignez / modifiez vos informations</h2>
             <form action="" method="post">
-                <input name="address" placeholder="N° de voie et adresse" value="<?= set_value('address') ?>" type="text">
-                <input name="postal_code" placeholder="Code postal" value="<?= set_value('postal_code') ?>" type="number">
-                <input name="city" placeholder="Ville" value="<?= set_value('city') ?>" type="text">
-                <input name="telephone" placeholder="Téléphone" value="<?= set_value('telephone') ?>" type="number">
-                <input name="email" placeholder="Email" value="<?= $email ?>" type="text">
-                <!-- <input name="" placeholder="" value="" type="text">
-                <input name="" placeholder="" value="" type="text"> -->
-                <input style="background:<?= $color ?>" class="button" type="submit">
+                <?php foreach ($data as $key) { ?>
+                    <input name="address" placeholder="N° de voie et adresse" value="<?= $key->address ?>" type="text">
+                    <input name="postal_code" placeholder="Code postal" value="<?= $key->postal_code != 0 ? $key->postal_code : '' ?>" type="number">
+                    <input name="city" placeholder="Ville" value="<?= $key->city ?>" type="text">
+                    <input name="telephone" placeholder="Téléphone" value="<?= $key->telephone != 0 ? $key->telephone : '' ?>" type="text">
+                    <input name="email" placeholder="Email" value="<?= $key->email ?>" type="text">
+                    <input style="background:<?= $color ?>" class="button" type="submit">
+                <?php } ?>
                 <span class="error">
                     <?php
                     if (isset($error)) {

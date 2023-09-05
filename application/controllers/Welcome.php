@@ -113,4 +113,11 @@ class Welcome extends CI_Controller
     {
         $this->load->view('about');
     }
+
+    public function prestations()
+    {
+        $data['name'] = $this->Pros_model->get_all_where_id($_GET['id'])[0]->name;
+
+        $this->load->view('espace_salons/prestations', $data);
+    }
 }

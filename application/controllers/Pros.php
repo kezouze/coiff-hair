@@ -117,7 +117,11 @@ class Pros extends CI_Controller
             $this->form_validation->set_rules('city', 'Ville', 'trim|required');
             $this->form_validation->set_rules('telephone', 'Téléphone', 'trim|required|numeric|min_length[10]|max_length[10]');
             $this->form_validation->set_rules('email', 'Adresse email', 'trim|required|valid_email');
-            $info['email'] = $this->Pros_model->get_all_where_id($_SESSION['id'])[0]->email;
+            // $info['address'] = $this->Pros_model->get_all_where_id($_SESSION['id'])[0]->address;
+            // $info['postal_code'] = $this->Pros_model->get_all_where_id($_SESSION['id'])[0]->postal_code;
+            // $info['email'] = $this->Pros_model->get_all_where_id($_SESSION['id'])[0]->email;
+            $info['data'] = $this->Pros_model->get_all_where_id($_SESSION['id']);
+
             if ($this->form_validation->run() == false) {
                 if (!empty($_POST)) {
                     $info['error'] = validation_errors();
@@ -171,7 +175,7 @@ class Pros extends CI_Controller
             if (!$this->upload->do_upload('photos')) {
                 $info['error'] = $this->upload->display_errors();
             } else {
-                $data = array('upload_data' => $this->upload->data());
+                // $data = array('upload_data' => $this->upload->data());
                 $this->Pros_model->set_pro_photo($_SESSION['id'], $config['file_name']);
 
                 $info['valid'] = "Votre photo a bien été ajoutée";
