@@ -1,16 +1,16 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <?php
-$title = $name;
-$color = "#2f4f4f";
-$linkTo = "/Welcome/details?id=" . $_GET['id'];
+$title = $_SESSION['name'];
+$color = "#b2272e";
+$linkTo = "/Pros";
 include(APPPATH . '/views/includes/head.php'); ?>
 
 <body>
     <div class="blur">
         <?php include(APPPATH . '/views/includes/header.php'); ?>
         <div class="content">
-            <h1>Les prestations proposées</h1>
+            <h1>Impression de votre planning</h1>
         </div>
         <?php include(APPPATH . '/views/includes/footer.php'); ?>
     </div>

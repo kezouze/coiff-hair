@@ -25,8 +25,21 @@ class Pros_model extends CI_Model
 
     public function get_all_where_id($id)
     {
-        $query = $this->db->select('id_pro, name, telephone, email, likes, address, postal_code, city, description, photos, boss')
+        $query = $this->db->select('*')
             ->from($this->tableName)
+            // ->join('prestations', 'pros.id_pro = prestations.id_pro', 'left')
+            ->where('id_pro', $id)
+            ->get()
+            ->result();
+        return $query;
+    }
+
+    // Pas moyen de faire une jointure entre ces deux-là sans faire un bug de l'impossible
+
+    public function get_prestas_where_id($id)
+    {
+        $query = $this->db->select('*')
+            ->from('prestations')
             ->where('id_pro', $id)
             ->get()
             ->result();
@@ -43,13 +56,14 @@ class Pros_model extends CI_Model
         return ($query->id_pro);
     }
 
-    public function get_all_rdv($date, $id)
+    public function get_all_rdv($date, $id_pro)
     {
         $query = $this->db->select('*')
             ->from('rendez_vous')
             ->where('date_rendez_vous', $date)
-            ->where('id_pro', $id)
+            ->where('id_pro', $id_pro)
             ->order_by('heure_rendez_vous')
+            ->join('users', 'users.id = rendez_vous.id_user', 'left')
             ->get()
             ->result();
         return $query;
@@ -155,6 +169,17 @@ class Pros_model extends CI_Model
         );
         $this->db->where('id_pro', $id)
             ->update($this->tableName, $data);
+    }
+
+    public function set_pro_prestation($id)
+    {
+        $data = array(
+            'presta_name' => $this->input->post('presta_name'),
+            'presta_descr' => $this->input->post('presta_descr'),
+            'presta_cost' => $this->input->post('presta_cost'),
+            'id_pro' => $id
+        );
+        $this->db->insert('prestations', $data);
     }
 
     // public function set_pro_photo($id, $newFileName)

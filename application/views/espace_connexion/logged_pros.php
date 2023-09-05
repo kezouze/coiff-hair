@@ -2,7 +2,7 @@
 <html lang="fr">
 
 <?php
-$title = $infos[0]->name;
+$title = $_SESSION['name'];
 $color = "#b2272e";
 $linkTo = "Welcome";
 require_once(APPPATH . 'views/includes/head.php');

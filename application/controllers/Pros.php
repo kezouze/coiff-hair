@@ -40,10 +40,10 @@ class Pros extends CI_Controller
             redirect('Pros');
         } else {
             $date = date('Y-m-d');
-            $id = $_SESSION['id'];
+            $id_pro = $_SESSION['id'];
             $info['infos'] = $this->Pros_model->get_all_where_id($_SESSION['id']);
             $_SESSION['name'] = $info['infos'][0]->name;
-            $info['all_rdv'] = $this->Pros_model->get_all_rdv($date, $id);
+            $info['all_rdv'] = $this->Pros_model->get_all_rdv($date, $id_pro);
             $this->load->view('espace_connexion/logged_pros', $info);
         }
     }
@@ -199,7 +199,21 @@ class Pros extends CI_Controller
         if (isConnected() == false) {
             redirect('Pros');
         } else {
-            $this->load->view('espace_pro/prestations');
+            $info['error'] = "";
+            $info['valid'] = "";
+            $this->form_validation->set_rules('presta_name', 'Nom', 'trim|required');
+            $this->form_validation->set_rules('presta_descr', 'Description', 'trim|required');
+            $this->form_validation->set_rules('presta_cost', 'Coût', 'trim|required');
+            if ($this->form_validation->run() == false) {
+                if (!empty($_POST)) {
+                    $info['error'] = validation_errors();
+                }
+            } else {
+                $this->Pros_model->set_pro_prestation($_SESSION['id']);
+                $info['valid'] = "Votre modifications ont bien été prise en compte";
+                header('refresh: 3; url=http://[::1]/coiffhair/Pros/updateInfos');
+            }
+            $this->load->view('espace_pro/prestations', $info);
         }
     }
 
@@ -281,5 +295,14 @@ class Pros extends CI_Controller
             }
         }
         $this->load->view('espace_mdp/new_password', $info);
+    }
+
+    public function printPdf()
+    {
+        if (!isConnected() || $_SESSION['type'] !== "pro") {
+            redirect('Welcome');
+        }
+        $data['all_data'] = $this->Pros_model->get_all_rdv(date('Y-m-d'), $_SESSION['id']);
+        $this->load->view('espace_pro/print_pdf', $data);
     }
 }
