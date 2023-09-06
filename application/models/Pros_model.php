@@ -89,6 +89,16 @@ class Pros_model extends CI_Model
         return $query;
     }
 
+    public function get_photos($id)
+    {
+        $query = $this->db->select('file_access')
+            ->from('photos')
+            ->where('id_pro', $id)
+            ->get()
+            ->result();
+        return $query;
+    }
+
     public function set_new_line_likes($id_user, $id_pro, $liked)
     {
         $data = array(

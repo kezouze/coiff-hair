@@ -26,6 +26,7 @@ class Welcome extends CI_Controller
         $data['all_data'] = $this->Pros_model->get_all_where_id($_GET['id']);
         $data['name'] = $data['all_data'][0]->name;
         $data['likes'] = $data['all_data'][0]->likes;
+        $data['photos'] = $this->Pros_model->get_photos($_GET['id']);
         $data['likeBtnColor'] = "#2f4f4f";
         if (isConnected() && isset($_SESSION['id_user'])) {
             $data['isLiked'] = $this->Pros_model->isLiked($_SESSION['id_user'], $data['id']);

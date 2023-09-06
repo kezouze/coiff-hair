@@ -24,16 +24,25 @@ require_once(APPPATH . 'views/includes/head.php');
     <div class="blur">
         <?php include(APPPATH . 'views/includes/header.php'); ?>
         <div class="details_content">
-            <?php foreach ($all_data as $data) { ?>
-                <div class="left">
-                    <?php if ($data->photos !== "null") { // Pourquoi ce format bizarre ? 
-                    ?>
-                        <img src="<?= base_url('uploads/' . substr($data->photos, 2, 34)) ?>" class="big_img" alt="Photo du salon">
-                    <?php } else { ?>
-                        <img src="https://source.unsplash.com/random/600x400?hair" class="big_img" alt="Photo du salon">
-                    <?php } ?>
+            <div class="left">
+                <div class="carousel-container">
+                    <?php foreach ($photos as $photo) {
+                        if ($photo->file_access != null && $photo->file_access != "") { ?>
+                            <div class="carousel-slide">
+                                <!-- class="big_img"-->
+                                <img src="<?= base_url() ?>/uploads/<?= $photo->file_access ?>" alt="Photo du salon">
+                            </div>
+                        <?php } else { ?>
+                            <!-- class="big_img"-->
+                            <img src="https://source.unsplash.com/random/600x400?hair" alt="Photo du salon">
+                    <?php }
+                    } ?>
                 </div>
-                <div class="right">
+                <button id="prevBtn">Précédent</button>
+                <button id="nextBtn">Suivant</button>
+            </div>
+            <div class="right">
+                <?php foreach ($all_data as $data) { ?>
                     <p><?= substr($data->description, 0, 150) ?>...</p>
                     <hr>
                     <p><?= $data->address ?></p>
@@ -50,7 +59,7 @@ require_once(APPPATH . 'views/includes/head.php');
                         <a href="http://[::1]/coiffhair/Users/" style="background:<?= $color ?>" class="button">Réserver</a>
                 <?php }
                 } ?>
-                </div>
+            </div>
         </div>
         <?php include(APPPATH . 'views/includes/footer.php'); ?>
         <!-- <img class="icone_next" src="" alt="Suivant"> -->
@@ -59,6 +68,29 @@ require_once(APPPATH . 'views/includes/head.php');
 </body>
 <script>
     updateLikes();
+    const carouselContainer = document.querySelector('.carousel-container');
+    const slides = document.querySelectorAll('.carousel-slide');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    let currentIndex = 0;
+
+    function showSlide(index) {
+        slides.forEach((slide, i) => {
+            slide.style.transform = `translateX(${100 * (i - index)}%)`;
+        });
+    }
+
+    prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + slides.length) % slides.length;
+        showSlide(currentIndex);
+    });
+
+    nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % slides.length;
+        showSlide(currentIndex);
+    });
+
+    showSlide(currentIndex);
 </script>
 
 </html>

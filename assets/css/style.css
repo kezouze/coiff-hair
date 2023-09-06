@@ -514,6 +514,25 @@ hr {
     /* Trop bien pour centrer !*/
 }
 
+.carousel-container {
+    overflow: hidden;
+    width: 80%;
+    height: 64dvh;
+}
+
+.carousel-slide {
+    display: inline-block;
+    width: 100%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.carousel-slide img {
+    width: 100%;
+    height: fit-content;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 
 @media (max-width: 912px) {
     .big_img {
