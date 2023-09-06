@@ -526,13 +526,14 @@ hr {
     transition: transform 0.3s ease-in-out;
 }
 
-.carousel-slide img {
+/* .carousel-slide img {
     width: 100%;
     height: fit-content;
     position: absolute;
     top: 0;
     left: 0;
-}
+    aspect-ratio: auto;
+} */
 
 @media (max-width: 912px) {
     .big_img {
