@@ -293,8 +293,6 @@ class Users extends CI_Controller
 		$info['aMonthLater'] = date('Y-m-d', strtotime($today . " + $thirtyOne days"));
 		$info['aYearLater'] = date('Y-m-d', strtotime($today . " + $year days"));
 		$info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
-		$lastName = $this->usersManager->get_last_name($info['id_user']);
-		$firstName = $this->usersManager->get_first_name($info['id_user']);
 		$info['nb_rdv'] = $this->rdvManager->get_nb_next_rdv($info['id_user']);
 		// $info['salons'] = array_column($this->Pros_model->get_all(), 'name'); // Très pratique !
 		$info['salons'] = $this->Pros_model->get_all();
@@ -316,7 +314,7 @@ class Users extends CI_Controller
 				$time = $this->input->post('time');
 				$time = str_replace('h', ':', $time);
 				$details = htmlspecialchars($this->input->post('details'));
-				$this->rdvManager->set_new_rendez_vous($id_pro, $info['id_user'], $lastName, $firstName, $date, $time, $details);
+				$this->rdvManager->set_new_rendez_vous($id_pro, $info['id_user'], $date, $time, $details);
 				$info['valid'] = "Votre rdv est enregistré, retour à la page précédente...";
 				header('refresh:3; url = http://[::1]/coiffhair/Users/logged');
 			}

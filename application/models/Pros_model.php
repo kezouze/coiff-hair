@@ -36,11 +36,21 @@ class Pros_model extends CI_Model
 
     // Pas moyen de faire une jointure entre ces deux-là sans faire un bug de l'impossible
 
-    public function get_prestas_where_id($id)
+    public function get_prestas_where_id_pro($id)
     {
         $query = $this->db->select('*')
             ->from('prestations')
             ->where('id_pro', $id)
+            ->get()
+            ->result();
+        return $query;
+    }
+
+    public function get_presta_where_id($id)
+    {
+        $query = $this->db->select('*')
+            ->from('prestations')
+            ->where('presta_id', $id)
             ->get()
             ->result();
         return $query;
@@ -180,6 +190,22 @@ class Pros_model extends CI_Model
             'id_pro' => $id
         );
         $this->db->insert('prestations', $data);
+    }
+
+    public function update_pro_prestation($id)
+    {
+        $data = array(
+            'presta_name' => $this->input->post('presta_name'),
+            'presta_descr' => $this->input->post('presta_descr'),
+            'presta_cost' => $this->input->post('presta_cost'),
+        );
+        $this->db->where('presta_id', $id)
+            ->update('prestations', $data);
+    }
+
+    public function delete_prestation($id)
+    {
+        $this->db->delete('prestations', array('presta_id' => $id));
     }
 
     // public function set_pro_photo($id, $newFileName)

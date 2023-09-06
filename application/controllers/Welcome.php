@@ -117,7 +117,7 @@ class Welcome extends CI_Controller
     public function prestations()
     {
         $data['name'] = $this->Pros_model->get_all_where_id($_GET['id'])[0]->name;
-        $data['all_prestas'] = $this->Pros_model->get_prestas_where_id($_GET['id']);
+        $data['all_prestas'] = $this->Pros_model->get_prestas_where_id_pro($_GET['id']);
 
         $this->load->view('espace_salons/info_prestations', $data);
     }

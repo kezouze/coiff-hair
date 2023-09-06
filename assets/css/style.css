@@ -319,6 +319,11 @@ input[type="radio"] {
     transition: transform 0.5s ease-in-out;
 }
 
+.icone_suppr {
+    border: none;
+    background: transparent;
+}
+
 .icone_suppr:hover,
 .icone_modif:hover {
     transform: scale(1.3);

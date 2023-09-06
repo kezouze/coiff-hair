@@ -203,7 +203,18 @@ class Pros extends CI_Controller
             $info['valid'] = "";
             $this->form_validation->set_rules('presta_name', 'Nom', 'trim|required');
             $this->form_validation->set_rules('presta_descr', 'Description', 'trim|required');
-            $this->form_validation->set_rules('presta_cost', 'Coût', 'trim|required');
+            $this->form_validation->set_rules(
+                'presta_cost',
+                'Coût',
+                'trim|required|numeric|greater_than_equal_to[1]|less_than_equal_to[1000]',
+                array(
+                    'required' => 'Le champ Coût est requis.',
+                    'numeric' => 'Le champ Coût doit être un nombre.',
+                    'greater_than_equal_to' => 'Le coût doit être d\'au moins 1€.',
+                    'less_than_equal_to' => 'Le coût ne peut pas dépasser 1000€.'
+                )
+            );
+
             if ($this->form_validation->run() == false) {
                 if (!empty($_POST)) {
                     $info['error'] = validation_errors();
@@ -215,6 +226,50 @@ class Pros extends CI_Controller
             }
             $this->load->view('espace_pro/prestations', $info);
         }
+    }
+
+    public function modif_prestation()
+    {
+        if (isConnected() == false) {
+            redirect('Pros');
+        } else {
+            $info['error'] = "";
+            $info['valid'] = "";
+            $info['presta'] = $this->Pros_model->get_presta_where_id($_GET['id']);
+            $this->form_validation->set_rules('presta_name', 'Nom', 'trim|required');
+            $this->form_validation->set_rules('presta_descr', 'Description', 'trim|required');
+            $this->form_validation->set_rules(
+                'presta_cost',
+                'Coût',
+                'trim|required|numeric|greater_than_equal_to[1]|less_than_equal_to[1000]',
+                array(
+                    'required' => 'Le champ Coût est requis.',
+                    'numeric' => 'Le champ Coût doit être un nombre.',
+                    'greater_than_equal_to' => 'Le coût doit être d\'au moins 1€.',
+                    'less_than_equal_to' => 'Le coût ne peut pas dépasser 1000€.'
+                )
+            );
+
+            if ($this->form_validation->run() == false) {
+                if (!empty($_POST)) {
+                    $info['error'] = validation_errors();
+                }
+            } else {
+                $this->Pros_model->update_pro_prestation($_GET['id']);
+                $info['valid'] = "Votre modifications ont bien été prise en compte";
+                redirect('/Welcome/prestations?id=' . $_SESSION['id']);
+            }
+            $this->load->view('espace_pro/modif_prestation', $info);
+        }
+    }
+
+    public function delete_prestation()
+    {
+        if (isConnected() == false) {
+            redirect('Pros');
+        }
+        $this->Pros_model->delete_prestation($_GET['id']);
+        redirect('Welcome/prestations?id=' . $_SESSION['id']);
     }
 
     public function forgot_password_pro()

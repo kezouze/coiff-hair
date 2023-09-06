@@ -29,7 +29,7 @@ require_once(APPPATH . 'views/includes/head.php');
                                     </li>
                                     <div class="icones_container">
                                         <a href="/coiffhair/Users/modify_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img src="/coiffhair/assets/images/modifier.png" class="icone_modif" alt="modifier"></a>
-                                        <button style="border:none; background:transparent;" onclick="openPopUp(<?= $rdv->id_rendez_vous ?>)"><img class="icone_suppr" src="/coiffhair/assets/images/supprimer.png" alt="supprimer"></a>
+                                        <a onclick="openPopUp(<?= $rdv->id_rendez_vous ?>)"><img class="icone_suppr" src="/coiffhair/assets/images/supprimer.png" alt="supprimer"></a>
                                     </div>
                                 </div>
                             </div>
