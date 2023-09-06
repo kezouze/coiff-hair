@@ -241,4 +241,15 @@ class Pros_model extends CI_Model
             ->count_all_results();
         return $query;
     }
+
+    public function exists($id)
+    {
+        $query = $this->db->select('id_pro')
+            ->from('prestations')
+            ->where('id_pro', $id)
+            ->count_all_results();
+        if ($query == 0) {
+            return false;
+        } else return true;
+    }
 }

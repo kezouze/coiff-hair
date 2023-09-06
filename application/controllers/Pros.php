@@ -266,7 +266,7 @@ class Pros extends CI_Controller
     public function delete_prestation()
     {
         if (isConnected() == false) {
-            redirect('Pros');
+            redirect('Welcome');
         }
         $this->Pros_model->delete_prestation($_GET['id']);
         redirect('Welcome/prestations?id=' . $_SESSION['id']);
