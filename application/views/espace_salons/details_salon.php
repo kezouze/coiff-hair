@@ -25,21 +25,22 @@ require_once(APPPATH . 'views/includes/head.php');
         <?php include(APPPATH . 'views/includes/header.php'); ?>
         <div class="details_content">
             <div class="left">
-                <div class="carousel-container">
-                    <?php foreach ($photos as $photo) {
-                        if ($photo->file_access != null && $photo->file_access != "") { ?>
+                <?php if (count($photos) > 0) { ?>
+                    <div class="carousel-container">
+                        <?php foreach ($photos as $photo) { ?>
                             <div class="carousel-slide">
                                 <!-- class="big_img"-->
                                 <img src="<?= base_url() ?>/uploads/<?= $photo->file_access ?>" alt="Photo du salon">
                             </div>
-                        <?php } else { ?>
-                            <!-- class="big_img"-->
-                            <img src="https://source.unsplash.com/random/600x400?hair" alt="Photo du salon">
-                    <?php }
-                    } ?>
-                </div>
-                <button id="prevBtn">Précédent</button>
-                <button id="nextBtn">Suivant</button>
+                            <button id="prevBtn">Précédent</button>
+                            <button id="nextBtn">Suivant</button>
+                        <?php } ?>
+                    </div>
+                <?php } else if (count($photos) === 0) { ?>
+                    <!-- class="big_img"-->
+                    <img src="https://source.unsplash.com/random/600x400?hair" class="big_img" alt="Photo du salon">
+                <?php }
+                ?>
             </div>
             <div class="right">
                 <?php foreach ($all_data as $data) { ?>
