@@ -71,6 +71,7 @@ require_once(APPPATH . 'views/includes/head.php');
 </body>
 <script>
     updateLikes();
+
     const carouselContainer = document.querySelector('.carousel-container');
     const slides = document.querySelectorAll('.carousel-slide');
     const prevBtn = document.getElementById('prevBtn');

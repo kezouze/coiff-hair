@@ -218,30 +218,13 @@ class Pros_model extends CI_Model
         $this->db->delete('prestations', array('presta_id' => $id));
     }
 
-    // public function set_pro_photo($id, $newFileName)
-    // {
-    //     $data = array(
-    //         'photos' => $newFileName,
-    //     );
-    //     $this->db->where('id_pro', $id)
-    //         ->update($this->tableName, $data);
-    // }
-
     public function set_pro_photo($id, $newFileName)
     {
-        // Récupérer les données actuelles de la colonne JSON 'photos'
-        $proData = $this->db->select('photos')
-            ->where('id_pro', $id)
-            ->get($this->tableName)
-            ->row();
-        $photoPaths = json_decode($proData->photos); // Décode le JSON existant
-        // Ajoute le nouveau chemin d'accès
-        $photoPaths[] = $newFileName;
-        // Encodage du tableau mis à jour en JSON
-        $jsonPhotoPaths = json_encode($photoPaths);
-        // Mise à jour de la colonne avec le nouveau chemin
-        $this->db->where('id_pro', $id)
-            ->update($this->tableName, ['photos' => $jsonPhotoPaths]);
+        $data = array(
+            'file_access' => $newFileName,
+            'id_pro' => $id
+        );
+        $this->db->insert('photos', $data);
     }
 
     public function cb_pros_password($email) // Vérifier si on a un utilisateur en bdd grâce à l'email pour reset mdp 

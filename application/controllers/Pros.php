@@ -168,14 +168,14 @@ class Pros extends CI_Controller
             $config['upload_path'] = './uploads/';
             $config['allowed_types'] = 'jpg|png|jpeg'; // svg|gif|webp ?
             $config['max_size'] = 10000000; // 10Mo
-            $config['max_width'] = 7680;
-            $config['max_height'] = 7680;
+            $config['max_width'] = 10000;
+            $config['max_height'] = 10000;
             $config['file_name'] = $_SESSION['id'] . '_' . date('YmdHis') . '_' . uniqid() . '.jpg';
             $this->load->library('upload', $config);
             if (!$this->upload->do_upload('photos')) {
                 $info['error'] = $this->upload->display_errors();
             } else {
-                // $data = array('upload_data' => $this->upload->data());
+                // $info['data'] = array('upload_data' => $this->upload->data());
                 $this->Pros_model->set_pro_photo($_SESSION['id'], $config['file_name']);
 
                 $info['valid'] = "Votre photo a bien été ajoutée";
