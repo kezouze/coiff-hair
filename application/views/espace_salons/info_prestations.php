@@ -6,6 +6,7 @@ $title = $name . ' - Prestations';
 $color = "#2f4f4f";
 $linkTo = "/Welcome/details?id=" . $_GET['id'];
 include(APPPATH . '/views/includes/head.php');
+// var_dump($exists);
 ?>
 
 <body>

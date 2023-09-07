@@ -252,11 +252,11 @@ class Pros_model extends CI_Model
         return $query;
     }
 
-    public function exists($id)
+    public function is_id_exists($selection, $tableName, $id)
     {
-        $query = $this->db->select('id_pro')
-            ->from('prestations')
-            ->where('id_pro', $id)
+        $query = $this->db->select('*')
+            ->from($tableName)
+            ->where($selection, $id)
             ->count_all_results();
         if ($query == 0) {
             return false;
