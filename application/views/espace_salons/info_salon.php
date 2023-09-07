@@ -11,6 +11,10 @@ require_once(APPPATH . 'views/includes/head.php');
 <body>
     <div class="blur">
         <?php require_once(APPPATH . 'views/includes/header.php'); ?>
+        <form style="flex-direction:row; margin-top:2rem;" action="" method="POST">
+            <input type="search" class="search-input" name="search-input" placeholder="Recherchez par mots-clefs">
+            <input class="button search-btn" type="submit" value="🔍">
+        </form>
         <div class="salons_container">
             <?php foreach ($all_data as $key) { ?>
                 <div class="card">

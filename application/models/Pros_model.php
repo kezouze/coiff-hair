@@ -16,7 +16,7 @@ class Pros_model extends CI_Model
 
     public function get_all()
     {
-        $query = $this->db->select('id_pro, name, telephone, email, likes, address, postal_code, city, description, photos, boss')
+        $query = $this->db->select('*')
             ->from($this->tableName)
             ->get()
             ->result(); // retourne un tableau d'objets

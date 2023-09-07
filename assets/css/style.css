@@ -117,6 +117,18 @@ body {
     background: red;
 }
 
+.search-btn {
+    width: auto !important;
+    height: auto !important;
+    background: var(--container-bg-color);
+    border: 2px solid var(--primary-color);
+    padding: 3px 6px !important;
+}
+
+.search-input {
+    width: 33dvw;
+}
+
 .blur,
 .salons_container {
     width: 100%;
