@@ -16,6 +16,12 @@ class Welcome extends CI_Controller
 
     public function infos()
     {
+        $data['search_result'] = "";
+        $this->form_validation->set_rules('search-input', 'Champ de recherche', 'required|trim');
+        if ($this->form_validation->run()) {
+            $search = $this->input->post('search-input');
+            $data['search_result'] = $this->Pros_model->do_search($search);
+        }
         $data['all_data'] = $this->Pros_model->get_all();
         $this->load->view('espace_salons/info_salon', $data);
     }

@@ -245,4 +245,19 @@ class Pros_model extends CI_Model
             return false;
         } else return true;
     }
+
+    public function do_search($search)
+    {
+        $query = $this->db->select('*')
+            ->from($this->tableName)
+            ->like('name', $search)
+            ->or_like('city', $search)
+            ->get()
+            ->result();
+
+        if ($query == null) {
+            $query = "Nous n'avons pas trouvé de correspondance à votre recherche";
+        }
+        return $query;
+    }
 }
