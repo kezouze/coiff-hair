@@ -16,12 +16,20 @@ class Welcome extends CI_Controller
 
     public function infos()
     {
-        $data['search_result'] = "";
-        $this->form_validation->set_rules('search-input', 'Champ de recherche', 'required|trim');
+        // $data['search_result'] = "";
+        $this->form_validation->set_rules('search-input', 'de recherche', 'required|trim|max_length[50]|min_length[3]', array(
+            'required' => 'Le champ %s est requis',
+            'max_length' => 'Le champ %s doit contenir au maximum 50 caractères',
+            'min_length' => 'Le champ %s doit contenir au minimum 3 caractères'
+        ));
+        $search = $this->input->post('search-input');
         if ($this->form_validation->run()) {
-            $search = $this->input->post('search-input');
             $data['search_result'] = $this->Pros_model->do_search($search);
+        } else {
+            $data['search_result'] = "";
+            $data['error'] = validation_errors();
         }
+        $data['search'] = $search;
         $data['all_data'] = $this->Pros_model->get_all();
         $this->load->view('espace_salons/info_salon', $data);
     }

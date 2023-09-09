@@ -252,12 +252,9 @@ class Pros_model extends CI_Model
             ->from($this->tableName)
             ->like('name', $search)
             ->or_like('city', $search)
+            ->or_like('postal_code', $search)
             ->get()
             ->result();
-
-        if ($query == null) {
-            $query = "Nous n'avons pas trouvé de correspondance à votre recherche";
-        }
         return $query;
     }
 }
