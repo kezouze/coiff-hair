@@ -279,33 +279,23 @@ class Pros extends CI_Controller
 
         $this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email', array('valid_email' => 'Vous devez saisir une adresse email valide.'));
         if ($this->form_validation->run()) {
-
-            $result = $this->usersManager->cb_users_password($this->input->email, $info['tablename']);
+            // $email = $this->input->email; marche pas de cette façon
+            $email = $_POST['email'];
+            $result = $this->Users_model->cb_users_password($email, 'pros');
 
             if ($result == 0) {
                 $info['error'] = "Aucune correspondance trouvée";
             } else if ($result == 1) {
-
-                $email = $this->input->email;
                 $code = random_string();
-
-                $this->usersManager->secret_code($code, $email);
-
+                $this->Users_model->secret_code($code, $email, 'pros');
                 $this->load->library('email');
-                $this->email->from('projet-pro@outil-web.fr', 'Coiffhair');
                 $this->email->to($email);
+                $this->email->from('vincent-c51@laposte.net', 'Coiffhair');
                 $this->email->subject('Réinitialisation de votre mot de passe');
-                $this->email->message('Veuillez cliquer sur ce lien pour réinitialiser votre mot de passe : ' . anchor(base_url() . 'Users/new_password' . '?code=' . $code . '&email=' . $email));
+                $this->email->message('Veuillez cliquer sur ce lien pour réinitialiser votre mot de passe : ' . anchor(base_url() . 'Pros/new_password_pro' . '?code=' . $code . '&email=' . $email));
                 $this->email->send();
-
-                if ($this->email->send()) {
-                    $info['valid'] = "Nous vous avons envoyé un mail de réinitialisation de votre mot de passe";
-                    // Le lien devrait avoir une limite de validité
-                } else {
-                    echo $this->email->print_debugger();
-                }
-            } else {
-                header('refresh: 3; url=http://[::1]/coiffhair/Users');
+                $info['valid'] = "Nous vous avons envoyé un mail de réinitialisation de votre mot de passe";
+                header('refresh: 3; url=http://[::1]/coiffhair/Pros');
             }
         } else {
             $info['error'] = validation_errors();
@@ -318,28 +308,29 @@ class Pros extends CI_Controller
 
         $info['error'] = "";
         $info['valid'] = "";
-        $info['code'] = $_GET['code'];
-        $info['email'] = $_GET['email'];
+        $code = $_GET['code'];
+        $email = $_GET['email'];
 
-        if (!isset($info['code']) || !isset($info['email'])) {
+        if (!isset($code) || !isset($email)) {
             redirect('Welcome');
         } else {
 
-            $result = $this->usersManager->get_secret_code($_GET['email']);
             // cela renvoie un objet contenant le code
+            $result = $this->Users_model->get_secret_code($email, 'pros');
 
-            $secret_code = $result[0]->secret_code;
             // cela accède au contenu de l'objet qui nous intéresse : la chaine de caractères
+            $secret_code = $result[0]->secret_code;
+            $email_pro = $result[0]->email;
 
-            if ($secret_code === $info['code']) {
+            if ($secret_code === $code && $email_pro === $email) {
                 $this->form_validation->set_rules('new_password', 'Nouveau mot de passe', 'trim|required|min_length[6]', array('min_length' => 'Le champ %s doit contenir au moins 6 caractères.'));
                 $this->form_validation->set_rules('confirm_new_password', 'Confirmation du nouveau mot de passe', 'trim|required|matches[new_password]', array('matches' => 'Les deux saisies ne correspondent pas.'));
 
                 if ($this->form_validation->run()) {
-                    $new_password = $this->input->password;
-                    $this->usersManager->change_password($info['email'], md5($new_password));
+                    $new_password = $_POST['new_password'];
+                    $this->Users_model->change_password($email, md5($new_password), 'pros');
                     $info['valid'] = 'Nous avons bien modifié votre mot de passe ! Redirection vers la page d\'accueil... ';
-                    header('refresh: 3; url=http://[::1]/coiffhair/Users');
+                    header('refresh: 3; url=http://[::1]/coiffhair/Pros');
                 } else {
                     $info['error'] = validation_errors();
                 }
@@ -349,7 +340,7 @@ class Pros extends CI_Controller
                 redirect('Welcome');
             }
         }
-        $this->load->view('espace_mdp/new_password', $info);
+        $this->load->view('espace_mdp/new_password_pro', $info);
     }
 
     public function printPdf()

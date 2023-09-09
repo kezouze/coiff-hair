@@ -241,7 +241,6 @@ class Users extends CI_Controller
 			$user_email = $result[0]->email;
 
 			if ($secret_code === $code && $user_email === $email) {
-				// if ($secret_code === $code) {
 				$this->form_validation->set_rules('new_password', 'Nouveau mot de passe', 'trim|required|min_length[6]', array('min_length' => 'Le champ %s doit contenir au moins 6 caractères.'));
 				$this->form_validation->set_rules('confirm_new_password', 'Confirmation du nouveau mot de passe', 'trim|required|matches[new_password]', array('matches' => 'Les deux saisies ne correspondent pas.'));
 

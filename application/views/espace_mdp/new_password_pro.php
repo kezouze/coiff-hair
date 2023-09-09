@@ -16,7 +16,7 @@ require_once(APPPATH . 'views/includes/head.php');
                 <input placeholder="Votre nouveau mdp" type="password" name="new_password">
                 <i>6 caractères minimum</i>
                 <input placeholder="Confirmez votre saisie" type="password" name="confirm_new_password">
-                <input class="button" type="submit">
+                <input style="background:<?= $color ?>" class="button" type="submit">
                 <?php include(APPPATH . 'views/includes/error_valid_messages.php'); ?>
             </form>
         </div>
