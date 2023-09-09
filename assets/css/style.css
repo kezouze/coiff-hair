@@ -135,7 +135,9 @@ body {
     min-height: 100vh;
     display: flex;
     flex-direction: column;
-    /* justify-content: space-between; */
+    /* modifier si footer.position : fixed*/
+    justify-content: space-between;
+    /**/
     background: rgba(219, 222, 222, 0.1);
     border: none;
     backdrop-filter: blur(5px);
@@ -150,10 +152,6 @@ body {
     align-content: start;
     justify-content: center;
     padding: 20px 0;
-}
-
-.card:last-of-type {
-    margin-bottom: 10dvh;
 }
 
 .content,
@@ -457,10 +455,17 @@ input[type="radio"] {
     background: #dbdedecc;
     z-index: 1;
     gap: 8vw;
-    position: fixed;
+    /* Pas pratique parfois */
+    /* position: fixed;
     bottom: 0;
-    left: 0;
+    left: 0; */
 }
+
+/* si footer.position : fixed */
+/* .card:last-of-type,
+.presta_card:last-of-type {
+    margin-bottom: 10dvh;
+} */
 
 hr {
     width: 20%;
