@@ -60,3 +60,4 @@ $config['smtp_crypto'] = 'ssl';
 $config['mailtype'] = 'html';
 $config['charset'] = 'utf-8';
 $config['newline'] = "\r\n";
+// .gitignore

@@ -201,12 +201,12 @@ class Users extends CI_Controller
 		$this->form_validation->set_rules('email', 'Email', 'trim|required|valid_email', array('valid_email' => 'Vous devez saisir une adresse email valide.'));
 		if ($this->form_validation->run()) {
 			$email = $_POST['email'];
-			$result = $this->usersManager->cb_users_password($email);
+			$result = $this->usersManager->cb_users_password($email, 'users');
 			if ($result == 0) {
 				$info['error'] = "Aucune correspondance trouvée";
 			} else if ($result == 1) {
 				$code = random_string();
-				$this->usersManager->secret_code($code, $email);
+				$this->usersManager->secret_code($code, $email, 'users');
 				$this->load->library('email');
 				$this->email->to($email);
 				$this->email->from('vincent-c51@laposte.net', 'Coiffhair');
@@ -235,7 +235,7 @@ class Users extends CI_Controller
 			redirect('Welcome');
 		} else {
 			// cela renvoie un objet contenant le code
-			$result = $this->usersManager->get_secret_code($email);
+			$result = $this->usersManager->get_secret_code($email, 'users');
 			// cela accède au contenu de l'objet qui nous intéresse : la chaine de caractères
 			$secret_code = $result[0]->secret_code;
 			$user_email = $result[0]->email;
@@ -247,7 +247,7 @@ class Users extends CI_Controller
 
 				if ($this->form_validation->run()) {
 					$new_password = $_POST['new_password'];
-					$this->usersManager->change_password($email, md5($new_password));
+					$this->usersManager->change_password($email, md5($new_password), 'users');
 					$info['valid'] = 'Nous avons bien modifié votre mot de passe ! Redirection vers la page d\'accueil... ';
 					header('refresh: 3; url=http://[::1]/coiffhair/Users');
 				} else {

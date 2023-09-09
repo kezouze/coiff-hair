@@ -25,10 +25,10 @@ class Users_model extends CI_Model
         return $query;
     }
 
-    public function cb_users_password($email) // Vérifier si on a un utilisateur en bdd grâce à l'email pour reset mdp 
+    public function cb_users_password($email, $tableName) // Vérifier si on a un utilisateur en bdd grâce à l'email pour reset mdp 
     {
         $query = $this->db->where('email', $email)
-            ->from($this->tableName)
+            ->from($tableName)
             ->count_all_results();
         return $query;
     }
@@ -104,34 +104,34 @@ class Users_model extends CI_Model
         $this->db->insert('users', $data);
     }
 
-    public function secret_code($code, $email)
+    public function secret_code($code, $email, $tableName)
     {
         $data = array(
             'secret_code' => $code
         );
         $this->db->set($data)
             ->where('email', $email)
-            ->update('users');
+            ->update($tableName);
     }
 
-    public function get_secret_code($email)
+    public function get_secret_code($email, $tableName)
     {
         $query = $this->db->select('secret_code, email')
             ->where('email', $email)
-            ->from($this->tableName)
+            ->from($tableName)
             ->get()
             ->result();
         return $query;
     }
 
-    public function change_password($email, $password)
+    public function change_password($email, $password, $tableName)
     {
         $data = array(
             'password' => $password
         );
         $this->db->set($data)
             ->where('email', $email)
-            ->update('users');
+            ->update($tableName);
     }
 
     public function get_gender($id)
