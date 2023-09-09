@@ -116,7 +116,7 @@ class Users_model extends CI_Model
 
     public function get_secret_code($email)
     {
-        $query = $this->db->select('secret_code')
+        $query = $this->db->select('secret_code, email')
             ->where('email', $email)
             ->from($this->tableName)
             ->get()

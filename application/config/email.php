@@ -2,6 +2,7 @@
 defined('BASEPATH') or exit('No direct script access allowed');
 
 // Marche pas
+/*
 $config['protocol'] = 'smtp';
 $config['smtp_host'] = 'mail.infomaniak.com';
 $config['smtp_user'] = 'projet-pro@outil-web.fr';
@@ -11,6 +12,7 @@ $config['smtp_crypto'] = 'starttls';
 // $config['smtp_crypto'] = 'tls';
 $config['mailtype'] = 'html';
 $config['charset'] = 'utf-8';
+*/
 
 // Marche pas
 /*
@@ -48,15 +50,13 @@ $config['mailtype'] = 'html';
 $config['charset'] = 'utf-8';
 */
 
-
-// configure the email setting
-/*
+// OK
 $config['protocol'] = 'smtp';
-$config['smtp_host'] = '';
-$config['smtp_user'] = '';
-$config['smtp_pass'] = $mdp;
+$config['smtp_host'] = 'smtp.laposte.net';
 $config['smtp_port'] = 465;
+$config['smtp_user'] = 'vincent-c51@laposte.net';
+$config['smtp_pass'] = 'TzF2d{8peymxR6';
 $config['smtp_crypto'] = 'ssl';
 $config['mailtype'] = 'html';
 $config['charset'] = 'utf-8';
-*/
+$config['newline'] = "\r\n";
