@@ -6,8 +6,6 @@ $title = "Prendre rdv";
 $color = "#0964cc";
 $linkTo = "Users";
 require_once(APPPATH . 'views/includes/head.php');
-echo $_SESSION['id_user'];
-echo $_SESSION['pseudo'];
 ?>
 
 <body>
