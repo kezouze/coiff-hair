@@ -506,7 +506,7 @@ hr {
     align-items: center;
     justify-content: space-evenly;
     position: fixed;
-    top: 50%;
+    top: clamp(25dvh, 50%, 57dvh);
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: var(--container-bg-color);
