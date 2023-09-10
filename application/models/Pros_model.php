@@ -66,6 +66,16 @@ class Pros_model extends CI_Model
         return ($query->id_pro);
     }
 
+    public function get_name($id_pro)
+    {
+        $query = $this->db->select('name')
+            ->from($this->tableName)
+            ->where('id_pro', $id_pro)
+            ->get()
+            ->row();
+        return ($query->name);
+    }
+
     public function get_all_rdv($date, $id_pro)
     {
         $query = $this->db->select('*')

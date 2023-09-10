@@ -168,7 +168,7 @@ class Users extends CI_Controller
 					$time = $this->rdvManager->get_time($rdv->id_rendez_vous);
 					$details = $this->rdvManager->get_details($rdv->id_rendez_vous);
 					// $this->load->library('email'); autoloadé dans config/autoload.php
-					$this->email->from('trouduc@outil-web.fr', 'Coiff\'Hair');
+					$this->email->from('coiff_hair@laposte.net', 'Coiff\'Hair');
 					$this->email->to($email);
 					$this->email->subject('Rappel de votre rendez-vous');
 					$this->email->message('Bonjour ' . $firstName . ', 
@@ -280,10 +280,12 @@ class Users extends CI_Controller
 		$info['aWeekLater'] = date('Y-m-d', strtotime($today . " + $seven days"));
 		$info['aMonthLater'] = date('Y-m-d', strtotime($today . " + $thirtyOne days"));
 		$info['aYearLater'] = date('Y-m-d', strtotime($today . " + $year days"));
-		$info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
-		$info['nb_rdv'] = $this->rdvManager->get_nb_next_rdv($info['id_user']);
+		// $info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
+		$info['nb_rdv'] = $this->rdvManager->get_nb_next_rdv($_SESSION['id_user']);
 		// $info['salons'] = array_column($this->Pros_model->get_all(), 'name'); // Très pratique !
 		$info['salons'] = $this->Pros_model->get_all();
+		$id_user = $this->usersManager->get_id_user($_SESSION['pseudo']);
+		$email = $this->usersManager->get_email($id_user);
 
 		if (isConnected() == false) {
 			redirect('Users');
@@ -302,8 +304,23 @@ class Users extends CI_Controller
 				$time = $this->input->post('time');
 				$time = str_replace('h', ':', $time);
 				$details = htmlspecialchars($this->input->post('details'));
-				$this->rdvManager->set_new_rendez_vous($id_pro, $info['id_user'], $date, $time, $details);
+				$this->rdvManager->set_new_rendez_vous($id_pro, $id_user, $date, $time, $details);
 				$info['valid'] = "Votre rdv est enregistré, retour à la page précédente...";
+				$this->load->library('email');
+				$this->email->to($email);
+				$this->email->from('coiff_hair@laposte.net', 'Coiff\'Hair');
+				$this->email->subject('Confirmation de votre rendez-vous');
+				$this->email->message('Bonjour ' . $this->usersManager->get_first_name($id_user) . ', 
+						<br>Votre rendez-vous est bien enregistré pour le ' . date('d/m', strtotime($date)) . ' à ' . substr($time, 0, 5) . ' au salon ' . $this->Pros_model->get_name($id_pro) . '.
+						<br>Vous avez rendez-vous pour : <i>' . $details . '</i>.
+						<br>N\'hésitez pas à nous contacter si besoin, ou modifier / annuler le rendez-vous directement sur votre espace personnel.
+						<br>Cordialement, L\'équipe de Coiff\'Hair :-)');
+				if ($this->email->send()) {
+					$info['valid'] = "Votre rdv est enregistré, retour à la page précédente...";
+				} else {
+					echo $this->email->print_debugger();
+					return;
+				}
 				header('refresh:3; url = http://[::1]/coiffhair/Users/logged');
 			}
 		}
@@ -318,9 +335,13 @@ class Users extends CI_Controller
 	{
 		$info['error'] = "";
 		$info['valid'] = "";
-		$info['id_rdv'] = $_GET['id_rdv'];
-		$info['date'] = $this->rdvManager->get_date($info['id_rdv']);
-		$info['time'] = $this->rdvManager->get_time($info['id_rdv']);
+		$id_rdv = $_GET['id_rdv'];
+		// l' utilisateur ne peut modifier que ses propres rdv :
+		if (!isset($id_rdv) || $id_rdv === "" || $this->rdvManager->is_rdv_exists($id_rdv, $_SESSION['id_user']) == 0) {
+			redirect('Users/logged');
+		}
+		$info['date'] = $this->rdvManager->get_date($id_rdv);
+		$info['time'] = $this->rdvManager->get_time($id_rdv);
 		$info['time'] = str_replace(':', 'h', $info['time']);
 		$info['today'] = date('Y-m-d');
 		$info['now'] = date('H:i');
@@ -332,7 +353,7 @@ class Users extends CI_Controller
 		$info['tomorrow'] = $tomorrow;
 		$info['aYearLater'] = date('Y-m-d', strtotime($today . " + $year days"));
 		$info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
-		// $info['details'] = $this->rdvManager->get_details($info['id_rdv']);
+		// $info['details'] = $this->rdvManager->get_details($id_rdv);
 		$info['details'] = $this->rdvManager->get_data_rdv_where_id($_GET['id_rdv']);
 
 		if (isset($_POST['date']) && isset($_POST['time'])) {
@@ -358,9 +379,18 @@ class Users extends CI_Controller
 				$time = $this->input->post('time');
 				$time = str_replace('h', ':', $time);
 				$details = htmlspecialchars($this->input->post('details'));
-				$this->rdvManager->modify_rdv($info['id_rdv'], $date, $time, $details);
-				$this->rdvManager->set_email_not_sent($info['id_rdv']);
-				$info['valid'] = "Votre rdv a bien été modifié, retour à la page précédente..";
+				$this->rdvManager->modify_rdv($id_rdv, $date, $time, $details);
+				// $this->rdvManager->set_email_not_sent($id_rdv);
+				// $this->load->library('email');
+				// $this->email->to($this->usersManager->get_email($info['id_user']));
+				// $this->email->from('coiff_hair@laposte.net', 'Coiff\'Hair');
+				// $this->email->subject('Modification de votre rendez-vous');
+				// $this->email->message('Bonjour ' . $this->usersManager->get_first_name($info['id_user']) . ', 
+				// 		<br>Votre rendez-vous est bien modifié pour le ' . date('d/m', strtotime($date)) . ' à ' . substr($time, 0, 5) . ' au salon ' . $this->Pros_model->get_name($id_pro) . '.
+				// 		<br>Vous avez rendez-vous pour : <i>' . $details . '</i>.
+				// 		<br>N\'hésitez pas à nous contacter si besoin, ou modifier / annuler le rendez-vous directement sur votre espace personnel.
+				// 		<br>Cordialement, L\'équipe de Coiff\'Hair :-)');
+				// $info['valid'] = "Votre rdv a bien été modifié, retour à la page précédente..";
 				header('refresh:3; url = http://[::1]/coiffhair/Users/logged');
 			}
 		}
@@ -400,7 +430,12 @@ class Users extends CI_Controller
 
 	public function delete_rdv()
 	{
-		$this->rdvManager->delete_rdv($_GET['id_rdv']);
+		$rdv = $_GET['id_rdv'];
+		// l' utilisateur ne peut supprimer que ses propres rdv :
+		if (!isConnected() || !isset($rdv) || $rdv === "" || $this->rdvManager->is_rdv_exists($rdv, $_SESSION['id_user']) === 0) {
+			redirect('Users/');
+		}
+		$this->rdvManager->delete_rdv($rdv);
 		redirect('/Users');
 	}
 

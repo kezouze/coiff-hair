@@ -146,4 +146,13 @@ class Rendez_vous_model extends CI_Model
         $this->db->where('id_rendez_vous', $id_rdv)
             ->update($this->tableName, $data);
     }
+
+    public function is_rdv_exists($id_rdv, $id_user)
+    {
+        $query = $this->db->where('id_rendez_vous', $id_rdv)
+            ->where('id_user', $id_user)
+            ->from($this->tableName)
+            ->count_all_results();
+        return $query;
+    }
 }
