@@ -290,7 +290,7 @@ class Pros extends CI_Controller
                 $this->Users_model->secret_code($code, $email, 'pros');
                 $this->load->library('email');
                 $this->email->to($email);
-                $this->email->from('vincent-c51@laposte.net', 'Coiffhair');
+                $this->email->from('coiff_hair@laposte.net', 'Coiffhair');
                 $this->email->subject('Réinitialisation de votre mot de passe');
                 $this->email->message('Veuillez cliquer sur ce lien pour réinitialiser votre mot de passe : ' . anchor(base_url() . 'Pros/new_password_pro' . '?code=' . $code . '&email=' . $email));
                 $this->email->send();
