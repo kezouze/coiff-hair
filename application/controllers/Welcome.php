@@ -16,17 +16,20 @@ class Welcome extends CI_Controller
 
     public function infos()
     {
-        // $data['search_result'] = "";
-        $this->form_validation->set_rules('search-input', 'de recherche', 'required|trim|max_length[50]|min_length[3]', array(
+        $data['search_result'] = "";
+        $this->form_validation->set_rules('search-input', 'de recherche', 'required|trim|max_length[50]|min_length[2]', array(
             'required' => 'Le champ %s est requis',
             'max_length' => 'Le champ %s doit contenir au maximum 50 caractères',
-            'min_length' => 'Le champ %s doit contenir au minimum 3 caractères'
+            'min_length' => 'Le champ %s doit contenir au minimum 2 caractères'
         ));
-        $search = $this->input->post('search-input');
+        $search = $this->input->post('search-input'); // La recherche de l'utilisateur
         if ($this->form_validation->run()) {
             $data['search_result'] = $this->Pros_model->do_search($search);
+            if (!$data['search_result']) {
+                $data['error'] = 'Aucun résultat pour votre recherche "' . $search . '"';
+            }
         } else {
-            $data['search_result'] = "";
+            // $data['search_result'] = "";
             $data['error'] = validation_errors();
         }
         $data['search'] = $search;

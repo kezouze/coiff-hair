@@ -52,6 +52,7 @@ require_once(APPPATH . 'views/includes/head.php');
                     <p><?= $data->postal_code; ?> <?= strtoupper($data->city) ?></p>
                     <p><?= $data->telephone; ?></p>
                     <p><a href="mailto:<?= $data->email; ?>"><?= $data->email; ?></a></p>
+                    <p><?= $data->boss; ?></p>
                     <hr>
                     <a href="/coiffhair/Welcome/prestations?id=<?= $data->id_pro ?>" style="background:<?= $color ?>" class="button">Les prestations</a>
                     <?php if (isset($_SESSION['type']) && $_SESSION['type'] == "client") { ?>
