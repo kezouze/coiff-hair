@@ -164,7 +164,7 @@ class Users extends CI_Controller
 			if ($info['rdvDateTime'] > $info['now']) {
 				$info['next_rdv'][] = $rdv; // on stocke les rdv à venir
 				// condition pour rappel du rdv 24h avant
-				if ($rdv->date_rendez_vous == date('Y-m-d', strtotime('+1 day')) && $this->rdvManager->is_email_send($rdv->id_rendez_vous) == 0) {
+				if ($rdv->date_rendez_vous == date('Y-m-d', strtotime('+1 day'))) {
 					$time = $this->rdvManager->get_time($rdv->id_rendez_vous);
 					$details = $this->rdvManager->get_details($rdv->id_rendez_vous);
 					// $this->load->library('email'); autoloadé dans config/autoload.php
@@ -385,7 +385,7 @@ class Users extends CI_Controller
 				$time = str_replace('h', ':', $time);
 				$details = htmlspecialchars($this->input->post('details'));
 				$this->rdvManager->modify_rdv($id_rdv, $date, $time, $details);
-				$this->rdvManager->set_email_not_sent($id_rdv);
+				// $this->rdvManager->set_email_not_sent($id_rdv);
 				$this->load->library('email');
 				$this->email->to($this->usersManager->get_email($info['id_user']));
 				$this->email->from('coiff_hair@laposte.net', '✂️Coiff\'Hair✂️');

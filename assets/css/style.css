@@ -389,7 +389,7 @@ input[type="radio"] {
 .details-client {
     overflow: auto;
     white-space: nowrap;
-    max-width: 50%;
+    /* max-width: 50%; */
     height: auto;
     margin: 0 auto;
 }
@@ -583,15 +583,16 @@ hr {
 
     .small-container {
         background: none;
-        backdrop-filter: none;
+        /* backdrop-filter: none; */
         border: none;
         width: 100%;
-        height: auto;
+        height: 100vh;
         display: flex;
         flex-direction: column;
-        justify-content: space-evenly;
+        justify-content: start;
         align-items: center;
-        margin-top: none;
+        margin-top: 0;
+        row-gap: 5px;
     }
 
     .ligne {
