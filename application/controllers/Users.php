@@ -168,7 +168,7 @@ class Users extends CI_Controller
 					$time = $this->rdvManager->get_time($rdv->id_rendez_vous);
 					$details = $this->rdvManager->get_details($rdv->id_rendez_vous);
 					// $this->load->library('email'); autoloadé dans config/autoload.php
-					$this->email->from('coiff_hair@laposte.net', 'Coiff\'Hair');
+					$this->email->from('coiff_hair@laposte.net', '💈Coiff\'Hair💈');
 					$this->email->to($email);
 					$this->email->subject('Rappel de votre rendez-vous');
 					$this->email->message('Bonjour ' . $firstName . ',
@@ -209,7 +209,7 @@ class Users extends CI_Controller
 				$this->usersManager->secret_code($code, $email, 'users');
 				$this->load->library('email');
 				$this->email->to($email);
-				$this->email->from('coiff_hair@laposte.net', 'Coiffhair');
+				$this->email->from('coiff_hair@laposte.net', '💈Coiffhair💈');
 				$this->email->subject('Réinitialisation de votre mot de passe');
 				$this->email->message('Veuillez cliquer sur ce lien pour réinitialiser votre mot de passe : ' . anchor(base_url() . 'Users/new_password' . '?code=' . $code . '&email=' . $email));
 				$this->email->send();
@@ -308,7 +308,7 @@ class Users extends CI_Controller
 				$info['valid'] = "Votre rdv est enregistré, retour à la page précédente...";
 				$this->load->library('email');
 				$this->email->to($email);
-				$this->email->from('coiff_hair@laposte.net', '✂️Coiff\'Hair✂️');
+				$this->email->from('coiff_hair@laposte.net', '💈Coiff\'Hair💈');
 				$this->email->subject('Confirmation de votre rendez-vous');
 				// Enlever les liens sinon la Poste bloque l'envoi du mail
 				$message = 'Bonjour ' . $this->usersManager->get_first_name($id_user) . ',
@@ -388,7 +388,7 @@ class Users extends CI_Controller
 				// $this->rdvManager->set_email_not_sent($id_rdv);
 				$this->load->library('email');
 				$this->email->to($this->usersManager->get_email($info['id_user']));
-				$this->email->from('coiff_hair@laposte.net', '✂️Coiff\'Hair✂️');
+				$this->email->from('coiff_hair@laposte.net', '💈Coiff\'Hair💈');
 				$this->email->subject('Modification de votre rendez-vous');
 				$this->email->message('Bonjour ' . $this->usersManager->get_first_name($info['id_user']) . ',
 						<br>Votre rendez-vous est bien modifié pour le ' . date('d/m', strtotime($date)) . ' à ' . substr($time, 0, 5) . ' au salon ' . $this->Pros_model->get_name($id_pro) . '.
@@ -447,7 +447,7 @@ class Users extends CI_Controller
 		$this->rdvManager->delete_rdv($rdv);
 		$this->load->library('email');
 		$this->email->to($this->usersManager->get_email($_SESSION['id_user']));
-		$this->email->from('coiff_hair@laposte.net', '✂️Coiff\'Hair✂️');
+		$this->email->from('coiff_hair@laposte.net', '💈Coiff\'Hair💈');
 		$this->email->subject('Annulation de votre rendez-vous');
 		$this->email->message('Bonjour ' . $this->usersManager->get_first_name($_SESSION['id_user']) . ',
 				<br>Votre rendez-vous est bien annulé, nous sommes désolé de vous voir partir :-(.
