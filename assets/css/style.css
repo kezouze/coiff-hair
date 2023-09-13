@@ -177,13 +177,13 @@ body {
 }
 
 .left {
-    min-width: 50%;
+    width: 50%;
     height: 75dvh;
 }
 
 .right {
     padding: 5vw;
-    width: auto;
+    width: 50%;
     margin: 0 auto;
 }
 
@@ -191,7 +191,8 @@ body {
     background: var(--container-bg-color);
     backdrop-filter: blur(3px);
     border: 3px solid var(--primary-color);
-    min-width: 30%;
+    /* min-width: 30%; */
+    width: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
