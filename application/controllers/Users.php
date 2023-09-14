@@ -312,20 +312,19 @@ class Users extends CI_Controller
 				$this->email->subject('Confirmation de votre rendez-vous');
 				// Enlever les liens sinon la Poste bloque l'envoi du mail
 				$message = 'Bonjour ' . $this->usersManager->get_first_name($id_user) . ',
-				<br>Votre rendez-vous est bien enregistré pour le ' . date('d/m', strtotime($date)) . ' à ' . substr($time, 0, 5) . ' au salon <a href="' . anchor(base_url() . 'Welcome/details?id=' . $id_pro) . '">' . $this->Pros_model->get_name($id_pro) . '</a>.
+				<br>Votre rendez-vous est bien enregistré pour le ' . date('d/m', strtotime($date)) . ' à ' . substr($time, 0, 5) . ' au salon ' . $this->Pros_model->get_name($id_pro) . '
 				<br>Vous avez rendez-vous pour : <i>' . $details . '</i>.
-				<br>Vous avez la possibilité de modifier ou annuler ce rendez-vous directement sur votre espace personnel : ' . anchor(base_url() . 'Users/') . '.
 				<br>Cordialement, L\'équipe de Coiff\'Hair :-)';
 				$this->email->message($message);
 
 				// désactivation du mail pour éviter de spammer
-				// if ($this->email->send()) {
-				$info['valid'] = "Votre rdv est enregistré, retour à la page précédente...";
-				header('refresh:3; url = http://[::1]/coiffhair/Users/logged');
-				// } else {
-				// 	echo $this->email->print_debugger();
-				// 	return;
-				// }
+				if ($this->email->send()) {
+					$info['valid'] = "Votre rdv est enregistré, retour à la page précédente...";
+					header('refresh:3; url = http://[::1]/coiffhair/Users/logged');
+				} else {
+					echo $this->email->print_debugger();
+					return;
+				}
 			}
 		}
 		if ($info['nb_rdv'] >= 3) {
