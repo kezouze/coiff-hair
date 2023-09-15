@@ -10,13 +10,13 @@ require_once(APPPATH . 'views/includes/head.php');
     <div class="header">
         <div class="titre">
             <img id="big-icone" src="/coiffhair/assets/images/logo2.png" alt="coiffeur">
-            <h1 class="main-titre">Votre style, notre affaire !</h1>
+            <h1 class="main-title">Votre style, notre affaire !</h1>
         </div>
         <div class="small-container">
             <?php if (!isset($_SESSION['type'])) { ?>
                 <div class="buttons">
                     <a href="http://[::1]/coiffhair/Welcome/infos" class="infos infos-button">Voir nos salons</a>
-                    <a href="http://[::1]/coiffhair/Welcome/about" class="infos infos-button">À propos</a>
+                    <a href="http://[::1]/coiffhair/Welcome/about" class="infos about-button">À propos</a>
                 </div>
                 <h3>Connexion ou inscription:</h3>
                 <div class="buttons">

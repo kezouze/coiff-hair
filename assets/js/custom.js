@@ -93,7 +93,6 @@ function updateLikes() {
             var nbLikes = parseInt(document.getElementById('likes').innerHTML);
             var id = $(this).data('id')
             var likeBtn = $(this)
-            // nbLikes++;
             $.ajax({
                 url: "http://[::1]/coiffhair/Welcome/likes",
                 type: "GET",
