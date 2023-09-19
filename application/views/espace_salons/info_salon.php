@@ -18,7 +18,6 @@ require_once(APPPATH . 'views/includes/head.php');
         <?php include_once(APPPATH . 'views/includes/error_valid_messages.php'); ?>
         <?php if ($search_result) { ?>
             <h2>Résultat de recherche pour "<span style="font-size:2rem;"><?= $search ?></span>"</h2>
-            <p><a style="background:<?= $color ?>; margin-top:1rem;" href="" class="button">Retour</a></p>
             <div class="salons_container">
                 <?php foreach ($search_result as $key) { ?>
                     <div class="card">
@@ -30,6 +29,7 @@ require_once(APPPATH . 'views/includes/head.php');
                     </div>
                 <?php } ?>
             </div>
+            <p><a style="background:<?= $color ?>; margin-bottom:1rem;" href="" class="button">Tous les salons</a></p>
         <?php } else { ?>
             <div class="salons_container">
                 <?php foreach ($all_data as $key) { ?>

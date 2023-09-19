@@ -407,31 +407,32 @@ class Users extends CI_Controller
 
 	public function get_available_times()
 	{
-		$selectedPro = $this->input->post('pro'); // il fallait utiliser le nom du tableau data de la requête ajax *FACEPALM*
+		$selectedPro = $this->input->post('pro');
 		$selectedDate = $this->input->post('date');
 		$info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
-		// $info['nb_today_rdv'] = $this->rdvManager->get_nb_today_rdv($info['id_user'], $selectedDate);
 
+		// Le tableau de nos créneaux horaires
 		$availableTimes = [
 			"09:00:00", "09:30:00", "10:00:00", "10:30:00", "11:00:00", "11:30:00", "12:00:00",
 			"13:30:00", "14:00:00", "14:30:00", "15:00:00", "15:30:00", "16:00:00", "16:30:00", "17:00:00"
 		];
 
-
-		foreach ($availableTimes as &$key) { // Le '&' fait fonctionner le bazar. ???
-			$result = $this->rdvManager->isAvailable($selectedDate, $key, $selectedPro); // Attention à l'ordre des paramètres !
+		// On boucle sur le tableau des créneaux horaires pour chaque possibilités
+		foreach ($availableTimes as &$key) {
+			// On vérifie si le créneau horaire est présent dans la table rdv ou non
+			$result = $this->rdvManager->isAvailable($selectedDate, $key, $selectedPro);
 			if ($result > 0) {
+				// Si le créneau horaire est déjà pris, on le remplace par indisponible
 				$key = "indisponible";
 			} else {
 				$key = substr($key, 0, 5);
 				$key = str_replace(':', 'h', $key);
 			}
 		}
-
+		// On formule la réponse de la requête jQuery
 		$response = array(
 			'times' => $availableTimes
 		);
-		// Répondre avec les créneaux horaires disponibles au format JSON
 		header('Content-Type: application/json');
 		echo json_encode($response);
 	}
