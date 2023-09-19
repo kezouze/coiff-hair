@@ -17,7 +17,7 @@ require_once(APPPATH . 'views/includes/head.php');
                 <p>Vous n'avez pas de rendez-vous à venir</p>
             <?php } else { ?>
                 <p>Vous avez <span style="font-size:2rem;color:<?= $color ?>"><?= (count($next_rdv)) ?></span> rendez-vous à venir :</p>
-                <ul style="display:flex; flex-direction:column; align-items:center; justify-content:center">
+                <ul class="ul-rdv">
                     <?php foreach ($next_rdv as $rdv) {
                         $id_rdv = $rdv->id_rendez_vous;
                         if ($rdv->date_rendez_vous >= date('Y-m-d')) { ?>
