@@ -362,12 +362,12 @@ input[type="radio"] {
     color: var(--client-color);
 }
 
-.li {
+.client-li {
     padding: 10px 16px;
     display: flex;
     flex-direction: column;
     width: 375px;
-    height: 180px;
+    max-height: 375px;
     overflow: auto;
     align-items: center;
     list-style-type: none;
@@ -398,10 +398,12 @@ input[type="radio"] {
 
 .details-client {
     overflow: auto;
-    white-space: nowrap;
-    /* max-width: 50%; */
+    /* white-space: nowrap; */
+    max-width: 75%;
     height: auto;
     margin: 0 auto;
+    padding: 10px 0;
+    text-align: left;
 }
 
 .gender {
