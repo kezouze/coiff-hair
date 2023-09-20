@@ -8,7 +8,7 @@ $linkTo = "Pros/updateInfos";
 require_once(APPPATH . 'views/includes/head.php');
 ?>
 
-<body>
+<body class="pro">
     <div class="blur">
         <?php include(APPPATH . 'views/includes/header.php'); ?>
         <div class="content">

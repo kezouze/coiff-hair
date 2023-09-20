@@ -6,7 +6,7 @@ $color = "#b2272e";
 $linkTo = "/Pros";
 include(APPPATH . '/views/includes/head.php'); ?>
 
-<body>
+<body class="pro">
     <div class="blur">
         <?php include(APPPATH . '/views/includes/header.php'); ?>
         <div class="content">

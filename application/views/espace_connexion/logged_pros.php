@@ -8,7 +8,7 @@ $linkTo = "Welcome";
 require_once(APPPATH . 'views/includes/head.php');
 ?>
 
-<body>
+<body class="pro">
     <div class="blur">
         <?php include(APPPATH . 'views/includes/header.php'); ?>
         <div class="content">
@@ -20,9 +20,11 @@ require_once(APPPATH . 'views/includes/head.php');
                     <?php
                     foreach ($all_rdv as $key) { ?>
                         <div class="ligne">
-                            <div class="li">
-                                <li><span class="first_line"><?= date('H\hi', strtotime($key->heure_rendez_vous)) ?> - <?= ucfirst($key->last_name) . ' ' . ucfirst($key->first_name) ?></span>
-                                    <button style="background:white; padding:0 5px;" onclick="openPopUp(<?= $key->id_rendez_vous ?>)"><i style="color:<?= $color ?>;">Détails</i></button>
+                            <div class="pro-li">
+                                <li>
+                                    <p class="first_line"><?= date('H\hi', strtotime($key->heure_rendez_vous)) ?> - <?= ucfirst($key->last_name) . ' ' . ucfirst($key->first_name) ?>
+                                        <button style="background:white; padding:0 5px;" onclick="openPopUp(<?= $key->id_rendez_vous ?>)"><i style="color:<?= $color ?>;">Détails</i></button>
+                                    </p>
                                     <div id="pop-up-<?= $key->id_rendez_vous ?>" class="pop-up">
                                         <span class="first_line"><?= date('H\hi', strtotime($key->heure_rendez_vous)) ?> - <?= ucfirst($key->last_name) . ' ' . ucfirst($key->first_name) ?></span>
                                         <div class="details">

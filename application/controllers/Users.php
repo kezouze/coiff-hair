@@ -318,13 +318,13 @@ class Users extends CI_Controller
 				$this->email->message($message);
 
 				// désactivation du mail pour éviter de spammer
-				if ($this->email->send()) {
-					$info['valid'] = "Votre rdv est enregistré, retour à la page précédente...";
-					header('refresh:3; url = http://[::1]/coiffhair/Users/logged');
-				} else {
-					echo $this->email->print_debugger();
-					return;
-				}
+				// if ($this->email->send()) {
+				$info['valid'] = "Votre rdv est enregistré, retour à la page précédente...";
+				header('refresh:3; url = http://[::1]/coiffhair/Users/logged');
+				// } else {
+				// 	echo $this->email->print_debugger();
+				// 	return;
+				// }
 			}
 		}
 		if ($info['nb_rdv'] >= 3) {

@@ -25,20 +25,9 @@
     text-align: center;
 }
 
-body::before {
-    content: "";
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background: url(/coiffhair/assets/images/coiffeur.jpg) no-repeat center center fixed;
-    /* background: url(https://fastly.picsum.photos/id/12/2500/1667.jpg?hmac=Pe3284luVre9ZqNzv1jMFpLihFI6lwq7TPgMSsNXw2w) no-repeat center center fixed; */
-    background-size: cover;
-    z-index: -1;
-}
-
 body {
+    background: url(/coiffhair/assets/images/coiffeur.jpg) no-repeat center center fixed;
+    background-size: cover;
     min-height: 100vh;
     font-weight: 600;
     font-size: 1rem;
@@ -46,6 +35,10 @@ body {
     flex-direction: column;
     justify-content: space-between;
     align-items: center;
+}
+
+.pro {
+    background: url(/coiffhair/assets/images/background-pro.jpg) no-repeat center center fixed !important;
 }
 
 .main-title {
@@ -373,11 +366,9 @@ input[type="radio"] {
     padding: 10px 16px;
     display: flex;
     flex-direction: column;
-    width: 400px;
-    height: auto;
+    width: 375px;
+    height: 180px;
     overflow: auto;
-    /* text-overflow: ellipsis; */
-    /* white-space: nowrap; */
     align-items: center;
     list-style-type: none;
     row-gap: 10px;
@@ -386,6 +377,15 @@ input[type="radio"] {
     background: #dbdedec2;
     margin: 10px 0;
     gap: 12px;
+}
+
+.pro-li {
+    padding: 5px 8px;
+    width: auto;
+    height: auto;
+    align-items: center;
+    row-gap: 10px;
+    border-radius: 12px;
 }
 
 .details {
@@ -584,6 +584,12 @@ hr {
     justify-content: center
 }
 
+.about-text-container {
+    background: #dbdedec2;
+    padding: 20px;
+    border: 2px solid var(--primary-color);
+}
+
 @media (max-width: 912px) {
     .big_img {
         max-width: 90%;
@@ -671,5 +677,10 @@ hr {
 
     .search-input {
         width: 75%;
+    }
+
+    .about-text-container {
+        border: none;
+        background: none;
     }
 }

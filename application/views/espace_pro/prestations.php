@@ -8,11 +8,11 @@ $linkTo = "Pros/updateInfos";
 require_once(APPPATH . 'views/includes/head.php');
 ?>
 
-<body>
+<body class="pro">
     <div class="blur">
         <?php include(APPPATH . 'views/includes/header.php'); ?>
         <div class="content">
-            <h2>Renseignez des prestations</h2>
+            <h2>Ajoutez des prestations</h2>
             <form action="" method="post">
                 <input placeholder="Nom" name="presta_name" value="<?= set_value('presta_name') ?>" type="text">
                 <input placeholder="Prix" name="presta_cost" value="<?= set_value('presta_cost') ?>" type="number" step="0.01">
@@ -20,6 +20,7 @@ require_once(APPPATH . 'views/includes/head.php');
                 <input class="button" style="background:<?= $color ?>" type="submit" value="Envoyer">
                 <?php include(APPPATH . 'views/includes/error_valid_messages.php'); ?>
             </form>
+            <h3>Ou vous pouvez les modifier <a href="http://[::1]/coiffhair/Welcome/prestations?id=<?= $_SESSION['id'] ?>">ici</a></h3>
         </div>
         <?php include(APPPATH . 'views/includes/footer.php'); ?>
     </div>
