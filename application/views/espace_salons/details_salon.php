@@ -46,7 +46,7 @@ require_once(APPPATH . 'views/includes/head.php');
             </div>
             <div class="right">
                 <?php foreach ($all_data as $data) { ?>
-                    <p><?= substr($data->description, 0, 150) ?>...</p>
+                    <p style="max-width:50%;"><?= substr($data->description, 0, 150) ?>...</p>
                     <hr>
                     <p><?= $data->address ?></p>
                     <p><?= $data->postal_code; ?> <?= strtoupper($data->city) ?></p>

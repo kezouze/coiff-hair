@@ -8,6 +8,7 @@
 
 :root {
     --container-bg-color: #dbdede;
+    --container-bg-color-opacity: #dbdedec2;
     --font-color: #2f4f4f;
     --primary-color: #2f4f4f;
     --client-color: #0964cc;
@@ -38,7 +39,8 @@ body {
 }
 
 .pro {
-    background: url(/coiffhair/assets/images/background-pro.jpg) no-repeat center center fixed !important;
+    background: url(/coiffhair/assets/images/background-pro.jpg) no-repeat center center fixed;
+    background-size: cover;
 }
 
 .main-title {
@@ -168,6 +170,8 @@ body {
 .details_content {
     flex-direction: row;
     padding: 0 20px;
+    /*Pour capture vidéo*/
+    margin-top: -4rem;
 }
 
 .text-content {
@@ -183,6 +187,7 @@ body {
     padding: 5vw;
     width: 50%;
     margin: 0 auto;
+    margin-left: -3rem;
 }
 
 .small-container {
@@ -379,6 +384,12 @@ input[type="radio"] {
     gap: 12px;
 }
 
+.past-li {
+    list-style-type: none;
+    margin: 10px auto;
+    max-width: 50%;
+}
+
 .pro-li {
     padding: 5px 8px;
     width: auto;
@@ -465,6 +476,8 @@ input[type="radio"] {
     background: #dbdedecc;
     z-index: 1;
     gap: 8vw;
+    /*Pour capture vidéo*/
+    margin-top: -4rem;
     /* Pas pratique parfois */
     /* position: fixed;
     bottom: 0;
@@ -544,12 +557,19 @@ hr {
     font-size: 30px;
 }
 
+/* .presta_container {
+    Pour capture vidéo
+    margin-top: -4rem;
+} */
+
 .presta_card {
-    max-width: 80%;
+    width: clamp(20rem, 60vw + 1rem, 40rem);
     overflow-wrap: break-word;
     padding: 10px;
-    margin: 0 auto;
-    /* Trop bien pour centrer !*/
+    margin: 12px auto;
+    background: var(--container-bg-color-opacity);
+    border: 2px solid var(--primary-color);
+    border-radius: 12px;
 }
 
 .carousel-container {
@@ -592,6 +612,7 @@ hr {
     border: 2px solid var(--primary-color);
 }
 
+/*Pas sûr que ça fonctionne bien*/
 @media (max-width: 912px) {
     .big_img {
         max-width: 90%;
@@ -681,8 +702,19 @@ hr {
         width: 75%;
     }
 
-    .about-text-container {
+    .about-text-container,
+    .presta_card {
         border: none;
         background: none;
+    }
+
+    .client-li {
+        max-width: 90vw;
+        border: none;
+        background: transparent;
+    }
+
+    .footer {
+        margin-top: 0;
     }
 }

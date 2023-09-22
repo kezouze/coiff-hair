@@ -15,9 +15,8 @@ include(APPPATH . '/views/includes/head.php');
         <div class="presta_container">
             <?php foreach ($all_prestas as $key) { ?>
                 <div class="presta_card">
-                    <h3><?= $key->presta_name ?></h3>
+                    <h3><span><?= $key->presta_name ?></span> - <span><?= str_replace('.', ',', $key->presta_cost) ?>€</span></h3>
                     <p><?= $key->presta_descr ?></p>
-                    <p><?= str_replace('.', ',', $key->presta_cost) ?>€</p>
                     <?php if (isset($_SESSION['type']) && $_SESSION['type'] == "pro") { ?>
                         <!-- <div class="icones_container"> -->
                         <a href="/coiffhair/Pros/modif_prestation?id=<?= $key->presta_id ?>"><img src="/coiffhair/assets/images/modifier.png" class="icone_modif" alt="modifier"></a>

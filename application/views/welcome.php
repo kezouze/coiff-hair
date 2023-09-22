@@ -27,7 +27,7 @@ require_once(APPPATH . 'views/includes/head.php');
                         <a class="client client-button" href="http://[::1]/coiffhair/Users/logged">Retour à mon espace</a>
                         <a href="http://[::1]/coiffhair/Welcome/infos" class="infos infos-button">Voir nos salons</a>
                     <?php } else if ($_SESSION['type'] === "pro") { ?>
-                        <a class="pro pro-button" href="http://[::1]/coiffhair/Pros/logged">Retour à mon espace</a>
+                        <a class="pro-button" href="http://[::1]/coiffhair/Pros/logged">Retour à mon espace</a>
                     <?php } ?>
                     <a style="color:#ff033e" href="http://[::1]/coiffhair/Welcome/deconnect">Se déconnecter</a>
                 <?php } ?>

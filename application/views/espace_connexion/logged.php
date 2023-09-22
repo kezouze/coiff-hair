@@ -65,7 +65,7 @@ require_once(APPPATH . 'views/includes/head.php');
                         });
 
                         foreach ($old_rdv as $rdv) { ?>
-                            <div class="li">
+                            <div class="past-li">
                                 <li><i>Le <?= date('d/m/Y', strtotime($rdv->date_rendez_vous)) . ' à ' . date('H\hi', strtotime($rdv->heure_rendez_vous)) ?>.</i>
                                     <br><span>Détails : <?= $rdv->details_rendez_vous ?>.</span>
                                 </li>
