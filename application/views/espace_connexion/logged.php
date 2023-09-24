@@ -24,10 +24,10 @@ require_once(APPPATH . 'views/includes/head.php');
                             <div class="ligne">
                                 <div class="client-li">
                                     <li>
-                                        <p class="dateAndTime">Le <?= date('d/m', strtotime($rdv->date_rendez_vous)) . ' à ' . date('H\hi', strtotime($rdv->heure_rendez_vous)) ?><br>chez <a style="text-decoration:none;" href="/coiffhair/Welcome/details?id=<?= $rdv->id_pro ?>"><span class="salon"><?= $rdv->name ?></span></a></p>
+                                        <p class="dateAndTime">Le <span><?= date('d/m', strtotime($rdv->date_rendez_vous)) ?></span> à <span><?= date('H\hi', strtotime($rdv->heure_rendez_vous)) ?></span><br>chez <a style="text-decoration:none;" href="/coiffhair/Welcome/details?id=<?= $rdv->id_pro ?>"><span class="salon"><?= $rdv->name ?></span></a></p>
                                         <h3 style="margin-top:1rem;">Votre demande :</h3>
                                         <div class="details-client">
-                                            <p><?= $rdv->details_rendez_vous ?></p>
+                                            <p><i><?= $rdv->details_rendez_vous ?></i></p>
                                         </div>
                                     </li>
                                     <div class="icones_container">

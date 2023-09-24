@@ -171,7 +171,7 @@ body {
     flex-direction: row;
     padding: 0 20px;
     /*Pour capture vidéo*/
-    margin-top: -4rem;
+    /* margin-top: -4rem; */
 }
 
 .text-content {
@@ -184,7 +184,7 @@ body {
 }
 
 .right {
-    padding: 5vw;
+    /* padding: 5vw; */
     width: 50%;
     margin: 0 auto;
     margin-left: -3rem;
@@ -417,6 +417,10 @@ input[type="radio"] {
     text-align: left;
 }
 
+.details-client p {
+    text-align: left;
+}
+
 .gender {
     display: flex;
     gap: 10px;
@@ -425,9 +429,14 @@ input[type="radio"] {
 
 .dateAndTime,
 .salon {
-    font-size: 1.5rem;
+    font-size: 1rem;
     white-space: nowrap;
     /*Empêcher le retour à la ligne*/
+}
+
+.dateAndTime span {
+    font-size: 1.5rem;
+    color: var(--client-color);
 }
 
 .salon {
@@ -477,7 +486,7 @@ input[type="radio"] {
     z-index: 1;
     gap: 8vw;
     /*Pour capture vidéo*/
-    margin-top: -4rem;
+    /* margin-top: -4rem; */
     /* Pas pratique parfois */
     /* position: fixed;
     bottom: 0;
