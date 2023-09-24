@@ -38,14 +38,21 @@ class Pros extends CI_Controller
 
         if (isConnected() == false) {
             redirect('Pros');
-        } else {
-            $date = date('Y-m-d');
-            $id_pro = $_SESSION['id'];
-            $info['infos'] = $this->Pros_model->get_all_where_id($_SESSION['id']);
-            $_SESSION['name'] = $info['infos'][0]->name;
-            $info['all_rdv'] = $this->Pros_model->get_all_rdv($date, $id_pro);
-            $this->load->view('espace_connexion/logged_pros', $info);
         }
+
+        $date = $this->input->get('date');
+        if (!isset($date)) {
+            $date = date('Y-m-d');
+        }
+        $id_pro = $_SESSION['id'];
+        $info['infos'] = $this->Pros_model->get_all_where_id($_SESSION['id']);
+        $_SESSION['name'] = $info['infos'][0]->name;
+        $info['all_rdv'] = $this->Pros_model->get_all_rdv($date, $id_pro);
+        $info['date'] = $date;
+        $info['today'] = date('Y-m-d');
+        $info['next_day'] = date('Y-m-d', strtotime($date . ' +1 day'));
+        $info['previous_day'] = date('Y-m-d', strtotime($date . ' -1 day'));
+        $this->load->view('espace_connexion/logged_pros', $info);
     }
 
     public function deconnect()

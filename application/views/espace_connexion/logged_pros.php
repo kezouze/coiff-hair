@@ -2,50 +2,85 @@
 <html lang="fr">
 
 <?php
+$date = date('d/m/Y', strtotime($date));
 $title = $_SESSION['name'];
 $color = "#b2272e";
 $linkTo = "Welcome";
 require_once(APPPATH . 'views/includes/head.php');
+$add_on = '<div class="pro-function-buttons">
+<a href="http://[::1]/coiffhair/Pros/printPdf" title="Imprimer planning du ' . $date . '" class="pro-button-header">🖨️</a>
+<a href="http://[::1]/coiffhair/Pros/updateInfos" title="Modifier vos informations" class="pro-button-header">🖋️</a>
+<a href="http://[::1]/coiffhair/Welcome/details?id=' . $_SESSION['id'] . '" title="Aperçu de votre page" class="pro-button-header">👀</a>
+</div>';
 ?>
 
 <body class="pro">
-    <div class="blur">
-        <?php include(APPPATH . 'views/includes/header.php'); ?>
+    <?php include(APPPATH . 'views/includes/header.php'); ?>
+    <div class="blur" style="justify-content:start; padding: 0 0 4rem 0; min-height:88dvh">
+        <div class="date-select">
+            <h2>Rendez-vous du <?= $date ?></h2>
+            <div class="previous-today-next-div">
+                <a href="http://[::1]/coiffhair/Pros/logged?date=<?= $previous_day ?>">
+                    <div>
+                        <span class="pro-button">
+                            <img class="previous" src="/coiffhair/assets/images/ciseaux.png" alt="">
+                            Précédent
+                        </span>
+                    </div>
+                </a>
+                <a href="http://[::1]/coiffhair/Pros/logged?date=<?= $today ?>">
+                    <div>
+                        <span class="pro-button">
+                            <img class="today" src="/coiffhair/assets/images/ciseaux.png" alt="">
+                            Aujourd'hui
+                        </span>
+                    </div>
+                </a>
+                <a href="http://[::1]/coiffhair/Pros/logged?date=<?= $next_day ?>">
+                    <div>
+                        <span class="pro-button">
+                            <img class="next" src="/coiffhair/assets/images/ciseaux.png" alt="">
+                            Suivant
+                        </span>
+                    </div>
+                </a>
+            </div>
+        </div>
         <div class="content">
+            <hr>
             <?php if (count($all_rdv) < 1) { ?>
-                <h2>Vous n'avez pas de rendez-vous aujourd'hui.</h2>
-            <?php } else { ?>
-                <h2>Vos rendez-vous du <?= date('d/m/y'); ?> </h2>
-                <ul>
-                    <?php
-                    foreach ($all_rdv as $key) { ?>
-                        <div class="ligne">
-                            <div class="pro-li">
-                                <li>
-                                    <p class="first_line"><?= date('H\hi', strtotime($key->heure_rendez_vous)) ?> - <?= ucfirst($key->last_name) . ' ' . ucfirst($key->first_name) ?>
-                                        <button style="background:white; padding:0 5px;" onclick="openPopUp(<?= $key->id_rendez_vous ?>)"><i style="color:<?= $color ?>;">Détails</i></button>
-                                    </p>
-                                    <div id="pop-up-<?= $key->id_rendez_vous ?>" class="pop-up">
-                                        <span class="first_line"><?= date('H\hi', strtotime($key->heure_rendez_vous)) ?> - <?= ucfirst($key->last_name) . ' ' . ucfirst($key->first_name) ?></span>
-                                        <div class="details">
-                                            <p><?= $key->details_rendez_vous ?></p>
-                                        </div>
-                                        <button class="exit-btn" onclick="closePopUp(<?= $key->id_rendez_vous ?>)">✖</button>
-                                    </div>
-                                </li>
-                            </div>
-                        </div>
+                <h4>Aucun rendez-vous prévu</h4>
+            <?php } ?>
+            <ul>
                 <?php
-                    }
+                foreach ($all_rdv as $key) { ?>
+                    <div class="ligne">
+                        <div class="pro-li">
+                            <li>
+                                <p class="first_line"><?= date('H\hi', strtotime($key->heure_rendez_vous)) ?> - <?= ucfirst($key->last_name) . ' ' . ucfirst($key->first_name) ?>
+                                    <button style="background:white; padding:0 5px;" onclick="openPopUp(<?= $key->id_rendez_vous ?>)"><i style="color:<?= $color ?>;">Détails</i></button>
+                                </p>
+                                <div id="pop-up-<?= $key->id_rendez_vous ?>" class="pop-up">
+                                    <span class="first_line"><?= date('H\hi', strtotime($key->heure_rendez_vous)) ?> - <?= ucfirst($key->last_name) . ' ' . ucfirst($key->first_name) ?></span>
+                                    <div class="details">
+                                        <p><?= $key->details_rendez_vous ?></p>
+                                    </div>
+                                    <button class="exit-btn" onclick="closePopUp(<?= $key->id_rendez_vous ?>)">✖</button>
+                                </div>
+                            </li>
+                        </div>
+                    </div>
+                <?php
                 }
                 ?>
-                </ul>
-                <hr>
-                <a href="http://[::1]/coiffhair/Pros/printPdf" class="button" style="background:<?= $color ?>">Imprimer</a>
-                <a href="http://[::1]/coiffhair/Pros/updateInfos" class="button" style="background:<?= $color ?>">Mettez à jour vos infos</a>
-                <a href="http://[::1]/coiffhair/Welcome/details?id=<?= $_SESSION['id'] ?>" class="button" style="background:<?= $color ?>">Voir votre page</a>
+            </ul>
         </div>
-        <?php include(APPPATH . 'views/includes/footer.php'); ?>
+    </div>
+    <div class="footer fixed-footer">
+        <a href="http://[::1]/coiffhair/<?= $linkTo ?>" class="retour-button" style="background-color:<?= $color ?>">Retour</a>
+        <?php if (isConnected()) { ?>
+            <a href="http://[::1]/coiffhair/Pros/deconnect" class="deco_button">Déconnexion</a>
+        <?php } ?>
     </div>
 </body>
 <script>
