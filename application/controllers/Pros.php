@@ -355,7 +355,20 @@ class Pros extends CI_Controller
         if (!isConnected() || $_SESSION['type'] !== "pro") {
             redirect('Welcome');
         }
-        $data['all_data'] = $this->Pros_model->get_all_rdv(date('Y-m-d'), $_SESSION['id']);
-        $this->load->view('espace_pro/print_pdf', $data);
+        $date = $this->input->get('date');
+        // var_dump($date); // les var_dump empêchent le fonctionnement de fpdf
+        $data = $this->Pros_model->get_all_rdv($date, $_SESSION['id']); // okay
+        require(APPPATH . '/fpdf186/fpdf.php');
+        $pdf = new FPDF();
+        $pdf->AddPage();
+        $pdf->SetFont('Arial', 'B', 16);
+        $pdf->Image('../../assets/images/logo.png', 10, 6, 30); // marche pas, chemin d'accès à revoir
+        $pdf->Cell(40, 10, 'Vos rendez-vous du ' . $date . ' :');
+        $pdf->Ln();
+        foreach ($data as $key) {
+            $pdf->Cell(40, 10, substr($key->heure_rendez_vous, 0, 5) . ' - ' . $key->gender . ' ' . strtoupper($key->last_name) . ' ' . $key->first_name);
+            $pdf->Ln();
+        }
+        $pdf->Output();
     }
 }
