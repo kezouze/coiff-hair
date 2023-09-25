@@ -21,7 +21,7 @@ require_once(APPPATH . 'views/includes/head.php');
                 <h3>Connexion ou inscription:</h3>
                 <div class="buttons">
                     <a href="http://[::1]/coiffhair/Users" class="client client-button">Client</a>
-                    <a href="http://[::1]/coiffhair/Pros" class="pro-button">Pro</a>
+                    <a href="http://[::1]/coiffhair/Pros" style="padding:10px 20px; width:fit-content" class="pro-button">Pro</a>
                     <?php } else {
                     if ($_SESSION['type'] === "client") { ?>
                         <a class="client client-button" href="http://[::1]/coiffhair/Users/logged">Retour à mon espace</a>

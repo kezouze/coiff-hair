@@ -22,7 +22,7 @@ require_once(APPPATH . 'views/includes/head.php');
                 <?php foreach ($search_result as $key) { ?>
                     <div class="card">
                         <h1><?= $key->name; ?></h1>
-                        <a href="http://[::1]/coiffhair/Welcome/details?id=<?= $key->id_pro ?>"><img src="https://source.unsplash.com/random/300x200?hair" alt="exemple"></a>
+                        <a href="http://[::1]/coiffhair/Welcome/details?id=<?= $key->id_pro ?>"><img src="https://source.unsplash.com/random/300x200?hair&<?= $key->id_pro ?>" alt="exemple"></a>
                         <p><?= $key->address; ?></p>
                         <p><?= $key->postal_code; ?></p>
                         <p><?= $key->city ?></p>
@@ -35,7 +35,7 @@ require_once(APPPATH . 'views/includes/head.php');
                 <?php foreach ($all_data as $key) { ?>
                     <div class="card">
                         <h1><?= $key->name; ?></h1>
-                        <a href="http://[::1]/coiffhair/Welcome/details?id=<?= $key->id_pro ?>"><img src="https://source.unsplash.com/random/300x200?hair" alt="exemple"></a>
+                        <a href="http://[::1]/coiffhair/Welcome/details?id=<?= $key->id_pro ?>"><img src="https://source.unsplash.com/random/300x200?hair&<?= $key->id_pro ?>" alt="exemple"></a>
                         <p><?= $key->address; ?></p>
                         <p><?= $key->postal_code; ?></p>
                         <p><?= $key->city ?></p>

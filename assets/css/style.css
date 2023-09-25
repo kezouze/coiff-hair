@@ -685,8 +685,7 @@ hr {
     }
 }
 
-@media (max-width: 40rem) {
-    /* 640 pixels */
+@media (max-width: 50rem) {
 
     body::before {
         background: url(/coiffhair/assets/images/background_mobile.jpg) no-repeat center center fixed;
