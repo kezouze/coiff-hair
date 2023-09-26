@@ -102,23 +102,29 @@ function updateLikes() {
     $(document).ready(function () {
         $('.likes').on('click', function () {
             var nbLikes = parseInt(document.getElementById('likes').innerHTML);
-            var id = $(this).data('id')
-            var likeBtn = $(this)
+            var id = $(this).data('id') // récupère l'id du salon
+            var likeBtn = $(this) // bouton like
             $.ajax({
+                // appel de la fonction likes() du contrôleur Welcome
                 url: "http://[::1]/coiffhair/Welcome/likes",
                 type: "GET",
                 data: {
                     id: id
                 },
                 dataType: "json",
+                // si la requête réussit, on récupère la réponse
                 success: function (response) {
+                    // on met à jour le nombre de likes
                     nbLikes = response.likes;
                     if (response.redirect) {
+                        // si l'utilisateur n'est pas connecté
                         window.location.href = "http://[::1]/coiffhair/Users/";
                     }
                     if (response.color) {
+                        // on change la couleur du bouton
                         $(likeBtn).css('background-color', response.color)
                     }
+                    // enfin on affiche le nouveau nombre de likes
                     document.getElementById('likes').innerHTML = nbLikes;
                 },
                 error: function (xhr) {

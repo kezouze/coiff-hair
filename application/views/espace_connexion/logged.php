@@ -37,7 +37,8 @@ require_once(APPPATH . 'views/includes/head.php');
                                 </div>
                             </div>
                             <div class="pop-up" id="pop-up-<?= $rdv->id_rendez_vous ?>">
-                                <p>Êtes-vous sûr de vouloir supprimer le rendez-vous du <?= date('d/m', strtotime($rdv->date_rendez_vous)) ?> à <?= date('H\hi', strtotime($rdv->heure_rendez_vous)) ?> chez <?= $rdv->name ?>?</p>
+                                <p>Êtes-vous sûr de vouloir supprimer le rendez-vous du <?= date('d/m', strtotime($rdv->date_rendez_vous)) ?>
+                                    à <?= date('H\hi', strtotime($rdv->heure_rendez_vous)) ?> chez <?= $rdv->name ?>?</p>
                                 <a href="/coiffhair/Users/delete_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>" class="delete-btn">Supprimer</a>
                                 <button onclick="closePopUp(<?= $rdv->id_rendez_vous ?>)" class="nope-btn">Annuler</button>
                             </div>

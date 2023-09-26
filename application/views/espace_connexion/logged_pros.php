@@ -54,11 +54,18 @@ $add_on = '<div class="pro-function-buttons">
             <?php } ?>
             <ul>
                 <?php
-                foreach ($all_rdv as $key) { ?>
+                foreach ($all_rdv as $key) {
+                    if ($key->gender == "F") {
+                        $key->gender = "Mme";
+                    }
+                    if ($key->gender == "M") {
+                        $key->gender = "M.";
+                    }
+                ?>
                     <div class="ligne">
                         <div class="pro-li">
                             <li>
-                                <p class="first_line"><?= date('H\hi', strtotime($key->heure_rendez_vous)) ?> - <?= ucfirst($key->last_name) . ' ' . ucfirst($key->first_name) ?>
+                                <p class="first_line"><?= date('H\hi', strtotime($key->heure_rendez_vous)) ?> - <?= $key->gender . ' ' . strtoupper($key->last_name) . ' ' . ucfirst($key->first_name) ?>
                                     <button style="background:white; padding:0 5px;" onclick="openPopUp(<?= $key->id_rendez_vous ?>)"><i style="color:<?= $color ?>;">Détails</i></button>
                                 </p>
                                 <div id="pop-up-<?= $key->id_rendez_vous ?>" class="pop-up">

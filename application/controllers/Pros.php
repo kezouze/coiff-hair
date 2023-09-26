@@ -356,17 +356,24 @@ class Pros extends CI_Controller
             redirect('Welcome');
         }
         $date = $this->input->get('date');
-        // var_dump($date); // les var_dump empêchent le fonctionnement de fpdf
-        $data = $this->Pros_model->get_all_rdv($date, $_SESSION['id']); // okay
+        $data = $this->Pros_model->get_all_rdv($date, $_SESSION['id']);
         require(APPPATH . '/fpdf186/fpdf.php');
         $pdf = new FPDF();
         $pdf->AddPage();
-        $pdf->SetFont('Arial', 'B', 16);
-        $pdf->Image('../../assets/images/logo.png', 10, 6, 30); // marche pas, chemin d'accès à revoir
-        $pdf->Cell(40, 10, 'Vos rendez-vous du ' . $date . ' :');
-        $pdf->Ln();
+        $pdf->SetFont('Arial', 'B', 12);
+        $pdf->SetFillColor(219, 222, 222);
+        $pdf->rect(0, 0, 210, 297, 'F'); // fond gris
+        $pdf->Image('assets/images/logo2.png', 10, 6, 30);
+        $pdf->Ln(10); // saut de ligne
+        $pdf->Cell(40, 10, 'Vos rendez-vous du ' . date('d/m/Y', strtotime($date)) . ' :');
+        $pdf->Ln(20);
         foreach ($data as $key) {
-            $pdf->Cell(40, 10, substr($key->heure_rendez_vous, 0, 5) . ' - ' . $key->gender . ' ' . strtoupper($key->last_name) . ' ' . $key->first_name);
+            $pdf->Cell(40, 10, str_replace(':', 'h', substr($key->heure_rendez_vous, 0, 5)) .
+                ' - ' . $key->gender . ' ' . utf8_decode(strtoupper($key->last_name)) .
+                ' ' . utf8_decode(ucfirst($key->first_name)));
+            $pdf->Ln();
+            $pdf->MultiCell(0, 10, utf8_decode('Détails : ') .
+                utf8_decode(ucfirst($key->details_rendez_vous)));
             $pdf->Ln();
         }
         $pdf->Output();

@@ -7,12 +7,12 @@
 } */
 
 :root {
-    --container-bg-color: #dbdede;
+    --container-bg-color: rgb(219, 222, 222);
     --container-bg-color-opacity: #dbdedec2;
     --font-color: #2f4f4f;
     --primary-color: #2f4f4f;
     --client-color: #0964cc;
-    --pro-color: #b2272e;
+    --pro-color: rgb(178, 39, 46);
 }
 
 *,
