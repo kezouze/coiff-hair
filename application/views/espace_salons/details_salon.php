@@ -30,7 +30,7 @@ require_once(APPPATH . 'views/includes/head.php');
                         <?php foreach ($photos as $photo) { ?>
                             <div class="carousel-slide">
                                 <!-- class="big_img"-->
-                                <img src="<?= base_url() ?>/uploads/<?= $photo->file_access ?>" class="big_img_carrousel" alt="Photo du salon">
+                                <img src="<?= base_url() ?>/uploads/<?= $photo->file_access ?>" loading="lazy" class="big_img_carrousel" alt="Photo du salon">
                             </div>
                         <?php } ?>
                     </div>
@@ -40,7 +40,7 @@ require_once(APPPATH . 'views/includes/head.php');
 
                     </div>
                 <?php } else if (count($photos) === 0) { ?>
-                    <img src="https://source.unsplash.com/random/600x400?hair" class="big_img" alt="Photo du salon">
+                    <img src="https://source.unsplash.com/random/600x400?hair" loading="lazy" class="big_img" alt="Photo du salon">
                 <?php }
                 ?>
             </div>
