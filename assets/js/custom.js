@@ -134,3 +134,20 @@ function updateLikes() {
         })
     })
 }
+
+function isOnHolidays() {
+    $(document).ready(function () {
+        $('#holidays').change(function () {
+            var isOnHolidays = $(this).is(':checked') ? 1 : 0;
+            $.ajax({
+                url: "http://[::1]/coiffhair/Pros/isOnHolidays",
+                type: "POST",
+                data: {
+                    isOnHolidays
+                },
+                dataType: "json",
+                error: function (xhr, status, error) { }
+            });
+        });
+    });
+}

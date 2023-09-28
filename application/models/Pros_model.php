@@ -267,4 +267,11 @@ class Pros_model extends CI_Model
             ->result();
         return $query;
     }
+
+    public function set_isOnHolidays($isOnHolidays, $id_pro)
+    {
+        $this->db->set('is_on_holidays', $isOnHolidays)
+            ->where('id_pro', $id_pro)
+            ->update($this->tableName);
+    }
 }

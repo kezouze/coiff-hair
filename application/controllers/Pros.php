@@ -196,9 +196,19 @@ class Pros extends CI_Controller
     {
         if (isConnected() == false) {
             redirect('Pros');
-        } else {
-            $this->load->view('espace_pro/horaires');
         }
+        $info['infos'] = $this->Pros_model->get_all_where_id($_SESSION['id']);
+        $info['isOnHolidays'] = $info['infos'][0]->is_on_holidays;
+        $this->load->view('espace_pro/horaires', $info);
+    }
+
+    public function isOnHolidays()
+    {
+        if (isConnected() == false) {
+            redirect('Welcome');
+        }
+        $isOnHolidays = $this->input->post('isOnHolidays');
+        $this->Pros_model->set_isOnHolidays($isOnHolidays, $_SESSION['id']);
     }
 
     public function prestations()

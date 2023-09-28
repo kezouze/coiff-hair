@@ -674,6 +674,16 @@ hr {
     gap: 25px;
 }
 
+.isOnHolidays {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.isOnHolidays input {
+    margin-left: -4rem;
+}
+
 /*Pas sûr que ça fonctionne bien*/
 @media (max-width: 912px) {
     .big_img {

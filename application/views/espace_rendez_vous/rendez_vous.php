@@ -21,7 +21,11 @@ require_once(APPPATH . 'views/includes/head.php');
                     <?php } else { ?>
                         <option disabled selected>✂️</option>
                         <?php foreach ($salons as $salon) { ?>
-                            <option value="<?= $salon->id_pro ?>"><?= $salon->name ?></option>
+                            <?php if (!$salon->is_on_holidays) { ?>
+                                <option value="<?= $salon->id_pro ?>"><?= $salon->name ?></option>
+                            <?php } else { ?>
+                                <option disabled><?= $salon->name ?> - en vacances 🏖️ </option>
+                            <?php } ?>
                     <?php }
                     } ?>
                 </select>
