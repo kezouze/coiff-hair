@@ -34,6 +34,10 @@ require_once(APPPATH . 'views/includes/head.php');
                 </div>
         </div>
     </div>
+    <audio src="/coiffhair/assets/audio/uwu.mp3" type="audio/mpeg" id="uwuAudio"></audio>
 </body>
+<script>
+    easterEgg();
+</script>
 
 </html>

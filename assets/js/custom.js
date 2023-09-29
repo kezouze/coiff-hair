@@ -151,3 +151,15 @@ function isOnHolidays() {
         });
     });
 }
+
+function easterEgg() {
+    var keysPressed = '';
+    var uwuAudio = document.getElementById('uwuAudio');
+    document.addEventListener('keydown', function (event) {
+        keysPressed += event.key.toLowerCase();
+        if (keysPressed === 'uwu') {
+            uwuAudio.play();
+            keysPressed = '';
+        }
+    });
+}
