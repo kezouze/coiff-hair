@@ -85,13 +85,24 @@ $add_on = '<div class="pro-function-buttons">
         </div>
     </div>
     <div class="footer fixed-footer">
-        <a href="http://[::1]/coiffhair/<?= $linkTo ?>" class="retour-button" style="background-color:<?= $color ?>">Retour</a>
-        <?php if (isConnected()) { ?>
-            <a href="http://[::1]/coiffhair/Pros/deconnect" class="deco_button">Déconnexion</a>
-        <?php } ?>
+        <span style="width:33%">
+            <a href="http://[::1]/coiffhair/<?= $linkTo ?>" class="retour-button" style="background-color:<?= $color ?>">Retour</a>
+        </span>
+        <span style="width:34%">
+            <?php if (isConnected()) { ?>
+                <a href="http://[::1]/coiffhair/Pros/deconnect" class="deco_button">Déconnexion</a>
+            <?php } ?>
+        </span>
+        <span style="width:33%">
+            <div class="isOnHolidays">
+                <p>Mode vacances</p>
+                <input data="<?= $isOnHolidays ?>" type="checkbox" id="holidays" name="holidays" <?= $isOnHolidays ? 'checked' : '' ?>>
+            </div>
+        </span>
     </div>
 </body>
 <script>
+    isOnHolidays();
     <?php foreach ($all_rdv as $key) { ?>
         var popUp<?= $key->id_rendez_vous ?> = document.getElementById('pop-up-<?= $key->id_rendez_vous ?>');
     <?php } ?>
