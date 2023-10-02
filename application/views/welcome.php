@@ -15,21 +15,21 @@ require_once(APPPATH . 'views/includes/head.php');
         <div class="small-container">
             <?php if (!isset($_SESSION['type'])) { ?>
                 <div class="buttons">
-                    <a href="http://[::1]/coiffhair/Welcome/infos" class="infos infos-button">Voir nos salons</a>
-                    <a href="http://[::1]/coiffhair/Welcome/about" class="infos about-button">À propos</a>
+                    <a href="<?= site_url() ?>Welcome/infos" class="infos infos-button">Voir nos salons</a>
+                    <a href="<?= site_url() ?>Welcome/about" class="infos about-button">À propos</a>
                 </div>
                 <h3>Connexion ou inscription:</h3>
                 <div class="buttons">
-                    <a href="http://[::1]/coiffhair/Users" class="client client-button">Client</a>
-                    <a href="http://[::1]/coiffhair/Pros" style="padding:10px 20px; width:fit-content" class="pro-button">Pro</a>
+                    <a href="<?= site_url() ?>Users" class="client client-button">Client</a>
+                    <a href="<?= site_url() ?>Pros" style="padding:10px 20px; width:fit-content" class="pro-button">Pro</a>
                     <?php } else {
                     if ($_SESSION['type'] === "client") { ?>
-                        <a class="client client-button" href="http://[::1]/coiffhair/Users/logged">Retour à mon espace</a>
-                        <a href="http://[::1]/coiffhair/Welcome/infos" class="infos infos-button">Voir nos salons</a>
+                        <a class="client client-button" href="<?= site_url() ?>Users/logged">Retour à mon espace</a>
+                        <a href="<?= site_url() ?>Welcome/infos" class="infos infos-button">Voir nos salons</a>
                     <?php } else if ($_SESSION['type'] === "pro") { ?>
-                        <a class="pro-button" href="http://[::1]/coiffhair/Pros/logged">Retour à mon espace</a>
+                        <a class="pro-button" href="<?= site_url() ?>Pros/logged">Retour à mon espace</a>
                     <?php } ?>
-                    <a style="color:#ff033e" href="http://[::1]/coiffhair/Welcome/deconnect">Se déconnecter</a>
+                    <a style="color:#ff033e" href="<?= site_url() ?>Welcome/deconnect">Se déconnecter</a>
                 <?php } ?>
                 </div>
         </div>

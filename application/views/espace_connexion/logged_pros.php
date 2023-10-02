@@ -9,9 +9,9 @@ $color = "#b2272e";
 $linkTo = "Welcome";
 require_once(APPPATH . 'views/includes/head.php');
 $add_on = '<div class="pro-function-buttons">
-<a href="http://[::1]/coiffhair/Pros/printPdf?date=' . $dateYmd . '" title="Imprimer planning du ' . $date . '" class="pro-button-header">🖨️</a>
-<a href="http://[::1]/coiffhair/Pros/updateInfos" title="Modifier vos informations" class="pro-button-header">🖋️</a>
-<a href="http://[::1]/coiffhair/Welcome/details?id=' . $_SESSION['id'] . '" title="Aperçu de votre page" class="pro-button-header">👀</a>
+<a href="<?= site_url() ?>Pros/printPdf?date=' . $dateYmd . '" title="Imprimer planning du ' . $date . '" class="pro-button-header">🖨️</a>
+<a href="<?= site_url() ?>Pros/updateInfos" title="Modifier vos informations" class="pro-button-header">🖋️</a>
+<a href="<?= site_url() ?>Welcome/details?id=' . $_SESSION['id'] . '" title="Aperçu de votre page" class="pro-button-header">👀</a>
 </div>';
 ?>
 
@@ -21,7 +21,7 @@ $add_on = '<div class="pro-function-buttons">
         <div class="date-select">
             <h2>Rendez-vous du <?= $date ?></h2>
             <div class="previous-today-next-div">
-                <a href="http://[::1]/coiffhair/Pros/logged?date=<?= $previous_day ?>">
+                <a href="<?= site_url() ?>Pros/logged?date=<?= $previous_day ?>">
                     <div>
                         <span class="pro-button">
                             <img class="previous" src="/coiffhair/assets/images/ciseaux.png" alt="">
@@ -29,7 +29,7 @@ $add_on = '<div class="pro-function-buttons">
                         </span>
                     </div>
                 </a>
-                <a href="http://[::1]/coiffhair/Pros/logged?date=<?= $today ?>">
+                <a href="<?= site_url() ?>Pros/logged?date=<?= $today ?>">
                     <div>
                         <span class="pro-button">
                             <img class="today" src="/coiffhair/assets/images/ciseaux.png" alt="">
@@ -37,7 +37,7 @@ $add_on = '<div class="pro-function-buttons">
                         </span>
                     </div>
                 </a>
-                <a href="http://[::1]/coiffhair/Pros/logged?date=<?= $next_day ?>">
+                <a href="<?= site_url() ?>Pros/logged?date=<?= $next_day ?>">
                     <div>
                         <span class="pro-button">
                             <img class="next" src="/coiffhair/assets/images/ciseaux.png" alt="">
@@ -86,11 +86,11 @@ $add_on = '<div class="pro-function-buttons">
     </div>
     <div class="footer fixed-footer">
         <span style="width:33%">
-            <a href="http://[::1]/coiffhair/<?= $linkTo ?>" class="retour-button" style="background-color:<?= $color ?>">Retour</a>
+            <a href="<?= site_url() ?><?= $linkTo ?>" class="retour-button" style="background-color:<?= $color ?>">Retour</a>
         </span>
         <span style="width:34%">
             <?php if (isConnected()) { ?>
-                <a href="http://[::1]/coiffhair/Pros/deconnect" class="deco_button">Déconnexion</a>
+                <a href="<?= site_url() ?>Pros/deconnect" class="deco_button">Déconnexion</a>
             <?php } ?>
         </span>
         <span style="width:33%">

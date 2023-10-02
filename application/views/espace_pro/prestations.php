@@ -20,7 +20,7 @@ require_once(APPPATH . 'views/includes/head.php');
                 <input class="button" style="background:<?= $color ?>" type="submit" value="Envoyer">
                 <?php include(APPPATH . 'views/includes/error_valid_messages.php'); ?>
             </form>
-            <h3>Ou vous pouvez les modifier <a href="http://[::1]/coiffhair/Welcome/prestations?id=<?= $_SESSION['id'] ?>">ici</a></h3>
+            <h3>Ou vous pouvez les modifier <a href="<?= site_url() ?>Welcome/prestations?id=<?= $_SESSION['id'] ?>">ici</a></h3>
         </div>
         <?php include(APPPATH . 'views/includes/footer.php'); ?>
     </div>

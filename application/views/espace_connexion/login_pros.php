@@ -18,9 +18,9 @@ require_once(APPPATH . 'views/includes/head.php');
                 <input style="background:<?= $color ?>" class="button" type="submit" value="Connexion">
             </form>
             <?php include(APPPATH . 'views/includes/error_valid_messages.php') ?>
-            <a href="http://[::1]/coiffhair/Pros/forgot_password_pro">Mot de passe oublié ?</a>
+            <a href="<?= site_url() ?>Pros/forgot_password_pro">Mot de passe oublié ?</a>
             <hr>
-            <a style="background:<?= $color ?>" class="button" href="http://[::1]/coiffhair/Pros/inscriptionPros">Inscrivez-vous</a>
+            <a style="background:<?= $color ?>" class="button" href="<?= site_url() ?>Pros/inscriptionPros">Inscrivez-vous</a>
         </div>
         <?php require_once(APPPATH . 'views/includes/footer.php'); ?>
     </div>
