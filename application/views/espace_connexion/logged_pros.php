@@ -9,9 +9,9 @@ $color = "#b2272e";
 $linkTo = "Welcome";
 require_once(APPPATH . 'views/includes/head.php');
 $add_on = '<div class="pro-function-buttons">
-<a href="<?= site_url() ?>Pros/printPdf?date=' . $dateYmd . '" title="Imprimer planning du ' . $date . '" class="pro-button-header">🖨️</a>
-<a href="<?= site_url() ?>Pros/updateInfos" title="Modifier vos informations" class="pro-button-header">🖋️</a>
-<a href="<?= site_url() ?>Welcome/details?id=' . $_SESSION['id'] . '" title="Aperçu de votre page" class="pro-button-header">👀</a>
+<a href="' . site_url() . 'Pros/printPdf?date=' . $dateYmd . '" title="Imprimer planning du ' . $date . '" class="pro-button-header">🖨️</a>
+<a href="' . site_url() . 'Pros/updateInfos" title="Modifier vos informations" class="pro-button-header">🖋️</a>
+<a href="' . site_url() . 'Welcome/details?id=' . $_SESSION['id'] . '" title="Aperçu de votre page" class="pro-button-header">👀</a>
 </div>';
 ?>
 

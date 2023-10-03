@@ -2,7 +2,7 @@
 <html lang="fr">
 
 <?php
-$title = "Bienvenue sur coiffhair";
+$title = "Bienvenue sur Coiffhair";
 require_once(APPPATH . 'views/includes/head.php');
 ?>
 
