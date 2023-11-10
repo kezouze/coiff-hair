@@ -143,6 +143,7 @@ class Users extends CI_Controller
 			$info['id_user'] = $this->usersManager->get_id_user($_SESSION['pseudo']);
 			$_SESSION['id_user'] = $info['id_user'];
 		}
+		// on compte le nombre de connexions
 		if (!isset($_SESSION['counted']) || $_SESSION['counted'] == false) {
 			$info['nbConn'] = $this->usersManager->get_nb_conn($info['id_user']);
 			$info['nbConn']++;
@@ -332,6 +333,41 @@ class Users extends CI_Controller
 		} else {
 			$this->load->view('espace_rendez_vous/rendez_vous', $info);
 		}
+	}
+
+	public function automatic_rdv()
+	{
+		if (!isConnected() || $_SESSION['type'] !== "client") {
+			redirect('Users');
+		} else $id_rdv = $_GET['id_rdv'];
+		if (!isset($id_rdv) || $id_rdv === "" || $this->rdvManager->is_rdv_exists($id_rdv, $_SESSION['id_user']) == 0) {
+			redirect('Users/logged');
+		}
+		// Pas de form validation ? Normalement, pas besoin
+		$range = intval($this->input->post('range'));
+		$info_rdv = $this->rdvManager->get_data_rdv_where_id($id_rdv); // Attention, infos sensibles dont on n'a pas besoin
+		$data = array(
+			'id_pro' => $info_rdv[0]->id_pro,
+			'id_user' => $info_rdv[0]->id_user,
+			'date' => date('d/m', strtotime($info_rdv[0]->date_rendez_vous)),
+			'time' => date('H\hi', strtotime($info_rdv[0]->heure_rendez_vous)),
+			'details' => $info_rdv[0]->details_rendez_vous,
+			'pro_name' => $info_rdv[0]->name,
+			'range' => $range
+		);
+		if (isset($range) && $range !== "" && $range !== 0) {
+
+			for ($i = $range; $i <= 28; $i += $range) {
+				$next_auto_rdv = (date('Y-m-d', strtotime($info_rdv[0]->date_rendez_vous . "+ $i days")));
+				$date_auto_rdv[] = $next_auto_rdv;
+			}
+			var_dump($date_auto_rdv);
+			foreach ($date_auto_rdv as $date) {
+				$this->rdvManager->set_new_rendez_vous($info_rdv[0]->id_pro, $info_rdv[0]->id_user, $date, $info_rdv[0]->heure_rendez_vous, $info_rdv[0]->details_rendez_vous);
+			}
+		}
+
+		$this->load->view('espace_rendez_vous/automatic_rdv', $data);
 	}
 
 	public function modify_rdv()

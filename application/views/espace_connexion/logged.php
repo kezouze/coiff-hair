@@ -31,8 +31,9 @@ require_once(APPPATH . 'views/includes/head.php');
                                         </div>
                                     </li>
                                     <div class="icones_container">
-                                        <a href="/coiffhair/Users/modify_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img src="/coiffhair/assets/images/modifier.png" class="icone_modif" alt="modifier"></a>
-                                        <a onclick="openPopUp(<?= $rdv->id_rendez_vous ?>)"><img class="icone_suppr" src="/coiffhair/assets/images/supprimer.png" alt="supprimer"></a>
+                                        <!-- <a href="/coiffhair/Users/automatic_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img src="/coiffhair/assets/images/plan.png" class="icone_auto" title="Automatiser ce rdv" alt="automatiser"></a>-->
+                                        <a href="/coiffhair/Users/modify_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img src="/coiffhair/assets/images/modifier.png" class="icone_modif" title="Modifier ce rdv" alt="modifier"></a>
+                                        <a onclick="openPopUp(<?= $rdv->id_rendez_vous ?>)"><img class="icone_suppr" src="/coiffhair/assets/images/supprimer.png" title="Supprimer ce rdv" alt="supprimer"></a>
                                     </div>
                                 </div>
                             </div>
@@ -87,6 +88,7 @@ require_once(APPPATH . 'views/includes/head.php');
     </div>
 </body>
 <script>
+    "use strict";
     toggleButton();
     <?php foreach ($next_rdv as $rdv) { ?>
         var popUp<?= $rdv->id_rendez_vous ?> = document.getElementById('pop-up-<?= $rdv->id_rendez_vous ?>');
@@ -111,6 +113,10 @@ require_once(APPPATH . 'views/includes/head.php');
     function closePopUpSupprAll() {
         popUpSupprAll.style.display = "none"
     }
+
+    var cookie = document.cookie;
+    console.log(cookie)
+    //\
 </script>
 
 </html>

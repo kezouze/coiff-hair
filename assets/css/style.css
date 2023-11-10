@@ -324,6 +324,7 @@ input[type="radio"] {
     background: #dbdedec2;
     z-index: 1;
     gap: 4vw;
+    backdrop-filter: blur(5px);
 }
 
 .small-icon {
@@ -344,7 +345,8 @@ input[type="radio"] {
 }
 
 .icone_suppr,
-.icone_modif {
+.icone_modif,
+.icone_auto {
     width: 35px;
     transition: transform 0.5s ease-in-out;
 }
@@ -355,7 +357,8 @@ input[type="radio"] {
 }
 
 .icone_suppr:hover,
-.icone_modif:hover {
+.icone_modif:hover,
+.icone_auto:hover {
     transform: scale(1.3);
 }
 
