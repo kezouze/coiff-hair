@@ -19,8 +19,8 @@ include(APPPATH . '/views/includes/head.php');
                     <p><?= $key->presta_descr ?></p>
                     <?php if (isset($_SESSION['type']) && $_SESSION['type'] == "pro") { ?>
                         <!-- <div class="icones_container"> -->
-                        <a href="/coiffhair/Pros/modif_prestation?id=<?= $key->presta_id ?>"><img src="/coiffhair/assets/images/modifier.png" class="icone_modif" alt="modifier"></a>
-                        <a onclick="openPopUp(<?= $key->presta_id ?>)"><img class="icone_suppr" src="/coiffhair/assets/images/supprimer.png" alt="supprimer"></a>
+                        <a href="/coiffhair/Pros/modif_prestation?id=<?= $key->presta_id ?>"><img src="<?= base_url('assets/images/modifier.png') ?>" class="icone_modif" alt="modifier"></a>
+                        <a onclick="openPopUp(<?= $key->presta_id ?>)"><img class="icone_suppr" src="<?= base_url('assets/images/supprimer.png') ?>" alt="supprimer"></a>
                         <!-- </div> -->
                         <div id="pop-up-<?= $key->presta_id ?>" class="pop-up">
                             <p>Voulez-vous vraiment supprimer le soin "<?= $key->presta_name ?>" ?</p>

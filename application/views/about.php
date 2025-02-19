@@ -13,7 +13,7 @@ require_once(APPPATH . 'views/includes/head.php');
         <?php require_once(APPPATH . 'views/includes/header.php') ?>
         <div class="content">
             <div>
-                <img class="photo-profil" src="../assets/images/photo-profil.jpg" alt="Photo de profil">
+                <img class="photo-profil" src="<?= base_url('assets/images/photo-profil.jpg') ?>" alt="Photo de profil">
             </div>
             <div class="about-text-container">
                 <p>Bienvenue à vous sur mon site !</p>

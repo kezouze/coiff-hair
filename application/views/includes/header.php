@@ -10,7 +10,7 @@
                 echo $add_on;
             } ?>
         </span>
-        <audio src="/coiffhair/assets/audio/uwu.mp3" type="audio/mpeg" id="uwuAudio"></audio>
+        <audio src="<?= base_url('assets/audio/uwu.mp3') ?> " type="audio/mpeg" id="uwuAudio"></audio>
     </div>
     <script>
         easterEgg();

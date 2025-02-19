@@ -24,7 +24,7 @@ $add_on = '<div class="pro-function-buttons">
                 <a href="<?= site_url() ?>Pros/logged?date=<?= $previous_day ?>">
                     <div>
                         <span class="pro-button">
-                            <img class="previous" src="/coiffhair/assets/images/ciseaux.png" alt="">
+                            <img class="previous" src="<?= base_url('assets/images/ciseaux.png') ?>" alt="">
                             Précédent
                         </span>
                     </div>
@@ -32,7 +32,7 @@ $add_on = '<div class="pro-function-buttons">
                 <a href="<?= site_url() ?>Pros/logged?date=<?= $today ?>">
                     <div>
                         <span class="pro-button">
-                            <img class="today" src="/coiffhair/assets/images/ciseaux.png" alt="">
+                            <img class="today" src="<?= base_url('assets/images/ciseaux.png') ?>" alt="">
                             Aujourd'hui
                         </span>
                     </div>
@@ -40,7 +40,7 @@ $add_on = '<div class="pro-function-buttons">
                 <a href="<?= site_url() ?>Pros/logged?date=<?= $next_day ?>">
                     <div>
                         <span class="pro-button">
-                            <img class="next" src="/coiffhair/assets/images/ciseaux.png" alt="">
+                            <img class="next" src="<?= base_url('assets/images/ciseaux.png') ?>" alt="">
                             Suivant
                         </span>
                     </div>

@@ -12,7 +12,7 @@ require_once(APPPATH . 'views/includes/head.php');
     <div class="blur">
         <?php include(APPPATH . 'views/includes/header.php'); ?>
         <div class="content">
-            <img class="img404" src="/coiffhair/assets/images/404.png" alt="Erreur 404">
+            <img class="img404" src="<?= base_url('assets/images/404.png') ?>" alt="Erreur 404">
         </div>
         <?php include(APPPATH . 'views/includes/footer.php'); ?>
     </div>

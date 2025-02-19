@@ -9,7 +9,7 @@ require_once(APPPATH . 'views/includes/head.php');
 <body>
     <div class="welcome-container">
         <div class="titre">
-            <img id="big-icone" src="/coiffhair/assets/images/logo2.png" alt="coiffeur">
+            <img id="big-icone" src="<?= base_url('assets/images/logo2.png') ?>" alt="coiffeur">
             <h1 class="main-title">Votre style, notre affaire !</h1>
         </div>
         <div class="small-container">
