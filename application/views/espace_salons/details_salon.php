@@ -40,7 +40,7 @@ require_once(APPPATH . 'views/includes/head.php');
 
                     </div>
                 <?php } else if (count($photos) === 0) { ?>
-                    <img src="https://source.unsplash.com/random/600x400?hair" loading="lazy" class="big_img" alt="Photo du salon">
+                    <img src="https://loremflick.com/random/600x400/" loading="lazy" class="big_img" alt="Photo du salon">
                 <?php }
                 ?>
             </div>
