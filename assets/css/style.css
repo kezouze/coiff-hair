@@ -28,7 +28,7 @@
 }
 
 body {
-    background: url(/coiffhair/assets/images/coiffeur.jpg) no-repeat center center fixed;
+    background: url(/assets/images/coiffeur.jpg) no-repeat center center fixed;
     background-size: cover;
     min-height: 100vh;
     font-weight: 600;
