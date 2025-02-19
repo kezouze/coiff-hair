@@ -1,16 +1,22 @@
 FROM php:7.4-apache
 
-# Installation des extensions PHP nécessaires
-RUN docker-php-ext-install mysqli pdo pdo_mysql
+# Mettre à jour et installer les extensions nécessaires
+RUN apt-get update && apt-get install -y \
+    nano \
+    && docker-php-ext-install mysqli pdo pdo_mysql \
+    && rm -rf /var/lib/apt/lists/*
 
 # Activation du module rewrite d'Apache
 RUN a2enmod rewrite
 
-# Copie des fichiers du projet dans le conteneur
-COPY . /var/www/html
+# Définir le répertoire de travail
+WORKDIR /var/www/html
 
-# Changement des permissions
+# Copier uniquement les fichiers utiles pour éviter les conflits
+COPY . .
+
+# Changer les permissions des fichiers
 RUN chown -R www-data:www-data /var/www/html
 
-# Exposition du port 80
+# Exposer le port 80
 EXPOSE 80
