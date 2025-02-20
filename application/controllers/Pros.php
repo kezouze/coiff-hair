@@ -97,7 +97,7 @@ class Pros extends CI_Controller
         } else {
             $this->Pros_model->set_pro();
             $info['valid'] = "Votre inscription a bien été prise en compte";
-            header('refresh: 3; url=http://[::1]/coiffhair/Pros');
+            header('refresh: 3; url=http://localhost:8000/Pros');
         }
         $this->load->view('espace_inscription/inscription_pros', $info);
     }
@@ -137,7 +137,7 @@ class Pros extends CI_Controller
             } else {
                 $this->Pros_model->set_pro_infos($_SESSION['id']);
                 $info['valid'] = "Votre modifications ont bien été prise en compte";
-                header('refresh: 3; url=http://[::1]/coiffhair/Pros/updateInfos');
+                header('refresh: 3; url=http://localhost:8000/Pros/updateInfos');
             }
             $this->load->view('espace_pro/informations', $info);
         }
@@ -159,7 +159,7 @@ class Pros extends CI_Controller
             } else {
                 $this->Pros_model->set_pro_presentation($_SESSION['id']);
                 $info['valid'] = "Votre modifications ont bien été prise en compte";
-                header('refresh: 3; url=http://[::1]/coiffhair/Pros/updateInfos');
+                header('refresh: 3; url=http://localhost:8000/Pros/updateInfos');
             }
             $this->load->view('espace_pro/presentation', $info);
         }
@@ -187,7 +187,7 @@ class Pros extends CI_Controller
                 $this->Pros_model->set_pro_photo($_SESSION['id'], $config['file_name']);
 
                 $info['valid'] = "Votre photo a bien été ajoutée";
-                // header('refresh: 3; url=http://[::1]/coiffhair/Pros/updateInfos');
+                // header('refresh: 3; url=http://localhost:8000/Pros/updateInfos');
             }
             $this->load->view('espace_pro/photos', $info);
         }
@@ -240,7 +240,7 @@ class Pros extends CI_Controller
             } else {
                 $this->Pros_model->set_pro_prestation($_SESSION['id']);
                 $info['valid'] = "Votre modifications ont bien été prise en compte";
-                header('refresh: 3; url=http://[::1]/coiffhair/Pros/updateInfos');
+                header('refresh: 3; url=http://localhost:8000/Pros/updateInfos');
             }
             $this->load->view('espace_pro/prestations', $info);
         }
@@ -313,7 +313,7 @@ class Pros extends CI_Controller
                 $this->email->message('Veuillez cliquer sur ce lien pour réinitialiser votre mot de passe : ' . anchor(base_url() . 'Pros/new_password_pro' . '?code=' . $code . '&email=' . $email));
                 $this->email->send();
                 $info['valid'] = "Nous vous avons envoyé un mail de réinitialisation de votre mot de passe";
-                header('refresh: 3; url=http://[::1]/coiffhair/Pros');
+                header('refresh: 3; url=http://localhost:8000/Pros');
             }
         } else {
             $info['error'] = validation_errors();
@@ -348,7 +348,7 @@ class Pros extends CI_Controller
                     $new_password = $_POST['new_password'];
                     $this->Users_model->change_password($email, md5($new_password), 'pros');
                     $info['valid'] = 'Nous avons bien modifié votre mot de passe ! Redirection vers la page d\'accueil... ';
-                    header('refresh: 3; url=http://[::1]/coiffhair/Pros');
+                    header('refresh: 3; url=http://localhost:8000/Pros');
                 } else {
                     $info['error'] = validation_errors();
                 }

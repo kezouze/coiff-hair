@@ -125,7 +125,7 @@ class Users extends CI_Controller
 			$password = md5($this->input->post('password'));
 			$this->usersManager->add_user($gender, $lastName, $firstName, $pseudo, $email, $password);
 			$info['valid'] = "Votre compte est bien enregistré ! Redirection à la page d'accueil pour vous connecter...";
-			header('refresh: 3; url=http://[::1]/coiffhair/Users');
+			header('refresh: 3; url=http://localhost:8000/Users');
 		}
 		$this->load->view('espace_inscription/inscription', $info);
 	}
@@ -216,7 +216,7 @@ class Users extends CI_Controller
 				$this->email->send();
 				$info['valid'] = "Un mail de réinitialisation à été envoyé. Retour à la page de connexion...";
 				// Le lien devrait avoir une limite de validité
-				header('refresh: 3; url=http://[::1]/coiffhair/Users');
+				header('refresh: 3; url=http://localhost:8000/Users');
 			}
 		} else {
 			$info['error'] = validation_errors();
@@ -249,7 +249,7 @@ class Users extends CI_Controller
 					$new_password = $_POST['new_password'];
 					$this->usersManager->change_password($email, md5($new_password), 'users');
 					$info['valid'] = 'Nous avons bien modifié votre mot de passe ! Redirection vers la page d\'accueil... ';
-					header('refresh: 3; url=http://[::1]/coiffhair/Users');
+					header('refresh: 3; url=http://localhost:8000/Users');
 				} else {
 					$info['error'] = validation_errors();
 				}
@@ -321,7 +321,7 @@ class Users extends CI_Controller
 				// désactivation du mail pour éviter de spammer
 				// if ($this->email->send()) {
 				$info['valid'] = "Votre rdv est enregistré, retour à la page précédente...";
-				header('refresh:3; url = http://[::1]/coiffhair/Users/logged');
+				header('refresh:3; url = http://localhost:8000/Users/logged');
 				// } else {
 				// 	echo $this->email->print_debugger();
 				// 	return;
@@ -433,7 +433,7 @@ class Users extends CI_Controller
 				// désactivation du mail pour éviter de spammer
 				// if ($this->email->send()) {
 				$info['valid'] = "Votre rdv a bien été modifié, retour à la page précédente..";
-				header('refresh:3; url = http://[::1]/coiffhair/Users/logged');
+				header('refresh:3; url = http://localhost:8000/Users/logged');
 				// } else echo $this->email->print_debugger();
 				// return;
 			}

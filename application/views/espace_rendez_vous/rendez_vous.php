@@ -38,7 +38,7 @@ require_once(APPPATH . 'views/includes/head.php');
                         <option value="<?= $creneau ?>"><?= substr($creneau, 0, 5) ?></option>
                     <?php } ?>
                 </select>
-                <label for="details">Renseignez le but de votre visite :)</label>
+                <label for="details">Renseignez le but de votre visite 😊</label>
                 <textarea placeholder="..." id="details" name="details" cols="29" rows="5"><?= set_value('details') ?></textarea>
                 <input class="button" type="submit" value="Réserver">
             </form>

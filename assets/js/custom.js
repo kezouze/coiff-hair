@@ -42,7 +42,7 @@ function availabilities(selectedPro) {
             var selectedDate = formatDateToYYYYMMDD(new Date($('#date').val()));
             $.ajax({
                 // fonction située dans le contrôleur Users, get_available_times()
-                url: "http://[::1]/coiffhair/Users/get_available_times",
+                url: "http://localhost:8000/Users/get_available_times",
                 type: "POST",
                 // données envoyées
                 data: {
@@ -106,7 +106,7 @@ function updateLikes() {
             var likeBtn = $(this) // bouton like
             $.ajax({
                 // appel de la fonction likes() du contrôleur Welcome
-                url: "http://[::1]/coiffhair/Welcome/likes",
+                url: "http://localhost:8000/Welcome/likes",
                 type: "GET",
                 data: {
                     id: id
@@ -118,7 +118,7 @@ function updateLikes() {
                     nbLikes = response.likes;
                     if (response.redirect) {
                         // si l'utilisateur n'est pas connecté
-                        window.location.href = "http://[::1]/coiffhair/Users/";
+                        window.location.href = "http://localhost:8000/Users/";
                     }
                     if (response.color) {
                         // on change la couleur du bouton
@@ -140,7 +140,7 @@ function isOnHolidays() {
         $('#holidays').change(function () {
             var isOnHolidays = $(this).is(':checked') ? 1 : 0;
             $.ajax({
-                url: "http://[::1]/coiffhair/Pros/isOnHolidays",
+                url: "http://localhost:8000/Pros/isOnHolidays",
                 type: "POST",
                 data: {
                     isOnHolidays

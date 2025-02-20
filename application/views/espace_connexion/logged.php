@@ -24,23 +24,23 @@ require_once(APPPATH . 'views/includes/head.php');
                             <div class="ligne">
                                 <div class="client-li">
                                     <li>
-                                        <p class="dateAndTime">Le <span><?= date('d/m', strtotime($rdv->date_rendez_vous)) ?></span> à <span><?= date('H\hi', strtotime($rdv->heure_rendez_vous)) ?></span><br>chez <a style="text-decoration:none;" href="/coiffhair/Welcome/details?id=<?= $rdv->id_pro ?>"><span class="salon"><?= $rdv->name ?></span></a></p>
+                                        <p class="dateAndTime">Le <span><?= date('d/m', strtotime($rdv->date_rendez_vous)) ?></span> à <span><?= date('H\hi', strtotime($rdv->heure_rendez_vous)) ?></span><br>chez <a style="text-decoration:none;" href="/Welcome/details?id=<?= $rdv->id_pro ?>"><span class="salon"><?= $rdv->name ?></span></a></p>
                                         <h3 style="margin-top:1rem;">Votre demande :</h3>
                                         <div class="details-client">
                                             <p><i><?= $rdv->details_rendez_vous ?></i></p>
                                         </div>
                                     </li>
                                     <div class="icones_container">
-                                        <!-- <a href="/coiffhair/Users/automatic_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img src="/coiffhair/assets/images/plan.png" class="icone_auto" title="Automatiser ce rdv" alt="automatiser"></a>-->
-                                        <a href="/coiffhair/Users/modify_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img src="/coiffhair/assets/images/modifier.png" class="icone_modif" title="Modifier ce rdv" alt="modifier"></a>
-                                        <a onclick="openPopUp(<?= $rdv->id_rendez_vous ?>)"><img class="icone_suppr" src="/coiffhair/assets/images/supprimer.png" title="Supprimer ce rdv" alt="supprimer"></a>
+                                        <!-- <a href="/Users/automatic_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img src="/assets/images/plan.png" class="icone_auto" title="Automatiser ce rdv" alt="automatiser"></a>-->
+                                        <a href="/Users/modify_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>"><img src="/assets/images/modifier.png" class="icone_modif" title="Modifier ce rdv" alt="modifier"></a>
+                                        <a onclick="openPopUp(<?= $rdv->id_rendez_vous ?>)"><img class="icone_suppr" src="/assets/images/supprimer.png" title="Supprimer ce rdv" alt="supprimer"></a>
                                     </div>
                                 </div>
                             </div>
                             <div class="pop-up" id="pop-up-<?= $rdv->id_rendez_vous ?>">
                                 <p>Êtes-vous sûr de vouloir supprimer le rendez-vous du <?= date('d/m', strtotime($rdv->date_rendez_vous)) ?>
                                     à <?= date('H\hi', strtotime($rdv->heure_rendez_vous)) ?> chez <?= $rdv->name ?>?</p>
-                                <a href="/coiffhair/Users/delete_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>" class="delete-btn">Supprimer</a>
+                                <a href="/Users/delete_rdv?id_rdv=<?= $rdv->id_rendez_vous ?>" class="delete-btn">Supprimer</a>
                                 <button onclick="closePopUp(<?= $rdv->id_rendez_vous ?>)" class="nope-btn">Annuler</button>
                             </div>
                     <?php }
@@ -49,9 +49,9 @@ require_once(APPPATH . 'views/includes/head.php');
             <?php } ?>
             <hr>
             <?php if ((count($next_rdv)) < 1) { ?>
-                <a class="button" href="/coiffhair/Users/rendez_vous">Prendre un rendez-vous</a>
+                <a class="button" href="/Users/rendez_vous">Prendre un rendez-vous</a>
             <?php } else if (count($next_rdv) >= 1 && count($next_rdv) < 3) { ?>
-                <a class="button" href="/coiffhair/Users/rendez_vous">Prendre un autre rendez-vous</a>
+                <a class="button" href="/Users/rendez_vous">Prendre un autre rendez-vous</a>
             <?php } else { ?>
                 <p class="error">Vous avez atteint le nombre maximum de rendez-vous.</p>
             <?php } ?>
@@ -75,7 +75,7 @@ require_once(APPPATH . 'views/includes/head.php');
                             <div class="pop-up" id="pop-up-suppr-all">
                                 <p>Cette action est irréversible</p>
                                 <p>Confirmez la suppression</p>
-                                <a href="/coiffhair/Users/delete_old_rdv" class="delete-btn">Supprimer</a>
+                                <a href="/Users/delete_old_rdv" class="delete-btn">Supprimer</a>
                                 <button onclick="closePopUpSupprAll()" class="nope-btn">Annuler</button>
                             </div>
                         <?php } ?>
